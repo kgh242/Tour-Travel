@@ -8,6 +8,6 @@
 </head>
 <body>
 관리자 계정 생성
-
+<input>
 </body>
 </html>
