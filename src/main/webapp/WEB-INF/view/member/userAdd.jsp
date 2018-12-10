@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-일반회원 회원 가입 창
+일반회원 회원 가입 창여
 <form action = "/" method = "post" enctype="multipart/form-data">
 <table>
 	<tr>
