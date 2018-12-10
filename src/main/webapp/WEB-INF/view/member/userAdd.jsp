@@ -9,9 +9,7 @@
 <body>
 <<<<<<< HEAD
 일반회원 회원 가입 창여
-=======
-일반회원 회원 가입  창...
->>>>>>> branch 'master' of https://github.com/kgh242/Tour-Travel.git
+
 <form action = "/" method = "post" enctype="multipart/form-data">
 <table>
 	<tr>
