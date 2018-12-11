@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.travel.member.company.dto.CompanyDTO;
 import com.travel.member.company.dto.CompanyImgDTO;
-import com.travel.member.company.dto.CompanyRequestDTO;
 import com.travel.member.company.mapper.CompanyMapper;
 
 @Service
@@ -20,42 +19,36 @@ public class CompanyService {
 	@Autowired
 	private CompanyMapper companyMapper;
 
-	public int companyAdd(CompanyRequestDTO companyRequestDTO) {
-		CompanyDTO companyDTO = new CompanyDTO();
-		companyDTO.setCompany_id(companyRequestDTO.getCompany_id());
-		companyDTO.setCompany_pw(companyRequestDTO.getCompany_pw());
-		companyDTO.setCompany_name(companyRequestDTO.getCompany_name());
-		companyDTO.setCompany_tell1(companyRequestDTO.getCompany_tell1());
-		companyDTO.setCompany_tell2(companyRequestDTO.getCompany_tell2());
-		companyDTO.setCompany_address(companyRequestDTO.getCompany_address());
-		companyDTO.setCompany_business_no(companyRequestDTO.getCompany_business_no());
-		companyDTO.setCompany_branch_tell(companyRequestDTO.getCompany_branch_tell());
-		companyDTO.setCompany_head_tell(companyRequestDTO.getCompany_head_tell());
+	public int companyAdd(CompanyDTO companyDTO, CompanyImgDTO companyImgDTO) {
 		companyMapper.insertCompany(companyDTO);
 		
-		CompanyImgDTO companyImgDTO = new CompanyImgDTO();
-		MultipartFile multipartFile = companyRequestDTO.getMultipartFile();
+		MultipartFile multipartFile = companyImgDTO.getCompany_img();
 		
 		companyImgDTO.setCompany_id(companyDTO.getCompany_id());
 		
 		File f = new File("");
 		String path = f.getAbsolutePath();
 		companyImgDTO.setCompany_img_path(path);
+		f.delete();
 		
-		String originalFileName = multipartFile.getOriginalFilename();
-		companyImgDTO.setCompany_img_true_name(originalFileName);
-		String ext = originalFileName.substring(0);
-		companyImgDTO.setCompany_img_ext(ext);
-		
+		String trueName = multipartFile.getOriginalFilename();
+		companyImgDTO.setCompany_img_true_name(trueName);
+
 		String fileName = UUID.randomUUID().toString();
 		companyImgDTO.setCompany_img_false_name(fileName);
 		
+		String originalFileName = multipartFile.getOriginalFilename();
+		String ext = originalFileName.substring(originalFileName.lastIndexOf("."));
+		companyImgDTO.setCompany_img_ext(ext);
+		
 		companyImgDTO.setCompany_img_size(multipartFile.getSize());
 		
-		File file = new File(path+File.separator+"uploads");
+		companyMapper.insertCompanyImg(companyImgDTO);
+		
+		File file = new File(path+File.separator+"uploads"+File.separator+"companyImg");
 		if(file.exists()) {
 				try {
-					multipartFile.transferTo(new File(path+File.separator+"uploads"+File.separator+fileName+"."+ext));
+					multipartFile.transferTo(new File(path+File.separator+"uploads"+File.separator+"companyImg"+File.separator+fileName+"."+ext));
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -64,14 +57,14 @@ public class CompanyService {
 		} else {
 			file.mkdirs();
 			try {
-				multipartFile.transferTo(new File(path+File.separator+"uploads"+File.separator+fileName+"."+ext));
+				multipartFile.transferTo(new File(path+File.separator+"uploads"+File.separator+"companyImg"+File.separator+fileName+"."+ext));
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		return companyMapper.insertCompanyImg(companyImgDTO);
+		return 0;
 	}
 
 }

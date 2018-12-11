@@ -21,7 +21,6 @@ public class CompanyDTO {
 	private String admin_id;
 	private String company_check_date;
 	private String company_auth_date;
-	private CompanyImgDTO companyImgDTO;
 	
 	@Override
 	public String toString() {
@@ -146,12 +145,5 @@ public class CompanyDTO {
 	public void setCompany_auth_date(String company_auth_date) {
 		this.company_auth_date = company_auth_date;
 	}
-	public CompanyImgDTO getCompanyImgDTO() {
-		return companyImgDTO;
-	}
-	public void setCompanyImgDTO(CompanyImgDTO companyImgDTO) {
-		this.companyImgDTO = companyImgDTO;
-	}
-	
 
 }

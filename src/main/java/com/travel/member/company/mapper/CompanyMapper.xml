@@ -4,22 +4,30 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="com.travel.member.company.mapper.CompanyMapper">
+ 	
  	<insert id="insertCompany" parameterType="com.travel.member.company.dto.CompanyDTO">
+ 		<selectKey resultType="String" keyProperty="company_no" order="BEFORE">
+ 			SELECT MAX(CONVERT(SUBSTR((company_no), 8), UNSIGNED)+1) FROM member_company
+ 		</selectKey>
  		INSERT INTO member_company
  		(company_no, company_id, company_pw, company_name, company_tell1, company_tell2
  		, company_address, company_business_no, company_branch_tell, company_head_tell
  		, company_auth)
  		VALUES
- 		(#{company_},#{company_})
- 		
- 		<selectKey>
- 			SELECT
- 		</selectKey>
- 	
+ 		(concat("company", #{company_no}), #{company_id}, #{company_pw}, #{company_name}, #{company_tell1}, #{company_tell2}
+ 		, #{company_address}, #{company_business_no}, #{company_branch_tell}, #{company_head_tell}, 0);
  	</insert>
- 
- 
- 
- 
- 
+ 	
+ 	<insert id="insertCompanyImg" parameterType="com.travel.member.company.dto.CompanyImgDTO">
+ 		<selectKey resultType="String" keyProperty="company_img_no" order="BEFORE">
+ 			SELECT MAX(CONVERT(SUBSTR((company_img_no), 12), UNSIGNED)+1) FROM member_company_img
+ 		</selectKey>
+ 		INSERT INTO member_company_img
+ 		(company_img_no, company_id, company_img_path, company_img_true_name, company_img_false_name
+ 		, company_img_ext, company_img_size, company_img_date)
+ 		VALUES
+ 		(concat("company_img", #{company_img_no}), #{company_id}, #{company_img_path}, #{company_img_true_name}
+ 		, #{company_img_false_name}, #{company_img_ext}, #{company_img_size}, now());
+ 	</insert>
+ 	
  </mapper>

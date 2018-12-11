@@ -49,11 +49,11 @@
 </head>
 <body>
 여행사 회원 가입 신청
-<form action = "/member/companyAdd"  id="companyAdd" name="companyAdd" enctype="multipart/form-data" method="post">
+<form action = "/companyAdd" enctype="multipart/form-data" method="post">
 	<table border="1">
 		<tr>
 			<td>필수 : 아이디</td>
-			<td><input type="text" id="company_id" name="company_id" /></td>
+		<td><input type = "text" id = "company_id" name = "company_id"></td>
 		</tr>
 		<tr>
 			<td>필수 : 비밀번호</td>
@@ -97,7 +97,7 @@
 		</tr>
 		<tr>
 			<td>등록신청</td>
-			<td><input type="button" id="submit" value="완료"></td>
+			<td><input type="submit" id="submit" value="완료"></td>
 		</tr>
 	</table>
 </form>

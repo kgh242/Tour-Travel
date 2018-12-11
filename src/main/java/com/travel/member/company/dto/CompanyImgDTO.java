@@ -1,5 +1,7 @@
 package com.travel.member.company.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class CompanyImgDTO {
 	private String company_img_no;
 	private String company_id;
@@ -9,6 +11,7 @@ public class CompanyImgDTO {
 	private String company_img_ext;
 	private long company_img_size;
 	private String company_img_date;
+	private MultipartFile company_img;
 	
 	@Override
 	public String toString() {
@@ -68,6 +71,11 @@ public class CompanyImgDTO {
 	public void setCompany_img_date(String company_img_date) {
 		this.company_img_date = company_img_date;
 	}
-	
+	public MultipartFile getCompany_img() {
+		return company_img;
+	}
+	public void setCompany_img(MultipartFile company_img) {
+		this.company_img = company_img;
+	}
 	
 }

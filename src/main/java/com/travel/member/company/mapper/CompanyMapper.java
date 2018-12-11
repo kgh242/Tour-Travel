@@ -10,5 +10,4 @@ import com.travel.member.company.dto.CompanyImgDTO;
 public interface CompanyMapper {
 	int insertCompany(CompanyDTO companyDTO);
 	int insertCompanyImg(CompanyImgDTO companyImgDTO);
-	CompanyDTO selectCompanyImgName(String company_id);
 }
