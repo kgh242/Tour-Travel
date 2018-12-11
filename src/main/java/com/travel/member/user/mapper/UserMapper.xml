@@ -14,8 +14,13 @@
     </insert>
     
     <update id="userImgUpdate" parameterType="com.travel.member.user.dto.UserDTO">    	 
-    	UPDATE member_user SET (user_img_path = #{user_img_path}, user_img_true_name = #{user_img_true_name}, user_img_false_name = #{user_img_false_name}, user_img_ext = #{user_img_ext}, user_img_size = #user_img_size{}, user_img_date = #{user_img_date})
+    	UPDATE member_user SET user_img_path = #{user_img_path}, user_img_true_name = #{user_img_true_name}, user_img_false_name = #{user_img_false_name}, user_img_ext = #{user_img_ext}, user_img_size = #{user_img_size}, user_img_date = now()
     	 WHERE user_id = #{user_id}
     </update>
+    
+    <select id="userLogin" parameterType="com.travel.member.user.dto.UserDTO" resultType="java.lang.Integer">
+    	SELECT count(user_no) FROM member_user WHERE user_id=#{user_id} AND user_pw=#{user_pw}
+    </select>
+
 
 </mapper>
