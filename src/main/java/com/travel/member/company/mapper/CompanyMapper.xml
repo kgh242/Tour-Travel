@@ -1,1 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.travel.member.company.mapper.CompanyMapper">
+ 	<insert id="insertCompany" parameterType="com.travel.member.company.dto.CompanyDTO">
+ 		INSERT INTO member_company
+ 		(company_no, company_id, company_pw, company_name, company_tell1, company_tell2
+ 		, company_address, company_business_no, company_branch_tell, company_head_tell
+ 		, company_auth)
+ 		VALUES
+ 		(#{company_},#{company_})
+ 		
+ 		<selectKey>
+ 			SELECT
+ 		</selectKey>
+ 	
+ 	</insert>
+ 
+ 
+ 
+ 
+ 
+ </mapper>

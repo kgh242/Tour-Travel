@@ -4,16 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>packAdd</title>
-	<script>
-		$(document).ready(function(){
-			$("input").click(funcion(){
-				$(this).next().show();
-				$(this).next().hide();
-			});
-		});
-		var d = new Date();
-		document.getElementById("pack_info_apply_date").innerHTML = d;
-	</script>
+
 </head>
 <body>
 <h1>패키지 상품 등록</h1>
