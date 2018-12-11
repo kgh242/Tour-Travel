@@ -9,4 +9,6 @@ import com.travel.member.admin.dto.AdminDTO;
 public interface AdminMapper {
 	int adminInsert(AdminDTO adminDTO);
 	int adminLogin(AdminDTO adminDTO);
+	AdminDTO adminSelectOne(String loginId);
+	int adminUpdate(AdminDTO adminDTO);
 }

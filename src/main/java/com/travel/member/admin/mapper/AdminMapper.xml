@@ -34,13 +34,13 @@
     <update id="adminUpdate" parameterType="com.travel.member.admin.dto.AdminDTO">
     	UPDATE member_admin
     	   SET admin_pw = #{admin_pw}
-    		  ,admin_level = #{admin_level}	 
-    		  ,admin_team = #{admin_team}
-    		  ,admin_employee_no = #{admin_employee_no}
-    		  ,admin_employee_tell = #{admin_employee_tell}
-		WHERE admin_no = #{admin_id}
+    		  ,admin_level =#{admin_level}
+    		  ,admin_team =#{admin_team}
+    		  ,admin_employee_no =#{admin_employee_no}
+    		  ,admin_employee_tell =#{admin_employee_tell}
+		WHERE admin_id = #{admin_id}
     </update>
-    <select id="adminSelectOne" parameterType="com.travel.member.admin.dto.AdminDTO" resultType="com.travel.member.admin.dto.AdminDTO">
+    <select id="adminSelectOne" parameterType="String" resultType="com.travel.member.admin.dto.AdminDTO">
     	SELECT admin_id
     		  ,admin_pw
     		  ,admin_level
@@ -48,6 +48,6 @@
     		  ,admin_employee_no
     		  ,admin_employee_tell
     	 FROM member_admin
-    	WHERE #{admin_id} 	
+    	WHERE admin_id=#{loginId}	
     </select>
 </mapper>

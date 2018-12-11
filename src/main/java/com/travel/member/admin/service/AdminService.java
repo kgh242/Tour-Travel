@@ -30,4 +30,15 @@ public class AdminService {
 		System.out.println("AdminService.java.adminLogin()");
 		return adminMapper.adminLogin(adminDTO);
 	}
+	// 관리자 수정을위한 select
+	public AdminDTO adminSelectOne(String loginId) {
+		System.out.println("AdminService.java.adminSelectOne()");
+		return adminMapper.adminSelectOne(loginId);
+	}
+	// 관리자 수정
+	public int adminUpdate(AdminDTO adminDTO) {
+		System.out.println("AdminService.java.adminUpdate()");
+		return adminMapper.adminUpdate(adminDTO);
+	}
+
 }

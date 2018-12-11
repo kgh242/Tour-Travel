@@ -4,8 +4,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.travel.member.admin.dto.AdminDTO;
 import com.travel.member.admin.service.AdminService;
@@ -54,8 +56,32 @@ public class AdminController {
 			return "member/adminLogin";
 		}
 	}
+	@RequestMapping(value= "/adminUpdate", method = RequestMethod.GET)
+	public String adminUpdate(Model model,@RequestParam(value="LOGINID")String loginId) {
+		System.out.println("AdminController.java.adminUpdate().get");
+		AdminDTO adminDTO = new AdminDTO();
+		System.out.println(loginId+"<--loginId");
+		adminDTO = adminService.adminSelectOne(loginId);
+		System.out.println(adminDTO);
+		model.addAttribute("admin",adminDTO);
+		return "member/adminUpdate";
+	}
+	@RequestMapping(value = "/adminUpdate", method = RequestMethod.POST)
+	public String adminUpdate(AdminDTO adminDTO) {
+		System.out.println("AdminController.java.adminUpdate().post");
+		int result = adminService.adminUpdate(adminDTO);
+		if(result == 1) {
+			System.out.println("수정성공");
+		}else {
+			System.out.println("수정실패");
+		}
+		return "main/index";
+	}
+
+
+
 	
-/*	@RequestMapping(value= "/userLogout", method = RequestMethod.GET)
+	/*	@RequestMapping(value= "/userLogout", method = RequestMethod.GET)
 	public String userLogout(HttpSession session) {
 		System.out.println("user 로그아웃 액션......userLogout.java");
 		session.invalidate();
