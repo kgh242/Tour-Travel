@@ -20,15 +20,16 @@ public class UserService {
 
 	@Autowired
 	private UserMapper userMapper;
+	
 
-
+	// 회원가입 서비스
 	public int userAdd(UserDTO userDTO) {
 		
-		System.out.println("userAdd 메서드......UserService.java");
+		System.out.println("userAdd 서비스 계층......UserService.java");
 		MultipartFile multipartFile = null;
 
 		int result = 0; // 0은 둘다 입력안됨, 1 계정만입력, 2 계정이미지까지 입력
-
+		
 		if (userDTO.getUser_img().isEmpty()) {
 			try {
 				
@@ -48,37 +49,41 @@ public class UserService {
 			
 			System.out.println("이미지업로드 실행");
 			multipartFile = userDTO.getUser_img();
+			UserDTO userImgDTO = new UserDTO();
 
+			System.out.println("유저 아이디 세팅");
+			userImgDTO.setUser_id(userDTO.getUser_id());
+			
 			System.out.println("이미지 패스 추출");
 			File f = new File("");
 			String path = f.getAbsolutePath();
-			userDTO.setUser_img_path(path);
+			userImgDTO.setUser_img_path(path);
 			f.delete();
 			System.out.println(path);
 
 			System.out.println("이미지 파일 본칭");
 			String trueName = multipartFile.getOriginalFilename();
-			userDTO.setUser_img_true_name(trueName);
+			userImgDTO.setUser_img_true_name(trueName);
 			System.out.println(trueName);
 
 			System.out.println("이미지 파일 가칭");
 			String falseName = UUID.randomUUID().toString();
-			userDTO.setUser_img_false_name(falseName);
+			userImgDTO.setUser_img_false_name(falseName);
 			System.out.println(falseName);
 
 			System.out.println("이미지 확장자 추출");
 			String originalFileName = multipartFile.getOriginalFilename();
 			String ext = originalFileName.substring(0);
-			userDTO.setUser_img_ext(ext);
+			userImgDTO.setUser_img_ext(ext);
 			System.out.println(ext);
 
 			System.out.println("이미지 파일 크기");
-			userDTO.setUser_img_size(multipartFile.getSize());
+			userImgDTO.setUser_img_size(multipartFile.getSize());
 			System.out.println(multipartFile.getSize());
 			System.out.println(multipartFile.getSize());
 			
 			userMapper.userInsert(userDTO);
-			userMapper.userImgUpdate(userDTO);
+			userMapper.userImgUpdate(userImgDTO);
 			result = 2;
 
 			File file = new File(path + File.separator + "uploads" + File.separator + "userImg");
@@ -110,6 +115,12 @@ public class UserService {
 
 		}
 		return result;
+	}
+	
+	// 유저 로그인
+	public int userLogin(UserDTO userDTO) {
+		System.out.println("userLogin 서비스 계층......UserService.java");
+		return userMapper.userLogin(userDTO);
 	}
 
 }

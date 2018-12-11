@@ -11,6 +11,6 @@ public interface UserMapper {
 	
 	int userInsert(UserDTO userDTO);
 	int userImgUpdate(UserDTO userDTO);
-
+	int userLogin(UserDTO userDTO);
 	
 }

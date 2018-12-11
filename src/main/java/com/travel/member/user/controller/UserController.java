@@ -1,5 +1,7 @@
 package com.travel.member.user.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,10 +35,36 @@ public class UserController {
 			} else if(result == 2) {
 				System.out.println("회원가입성공 (이미지있음)");
 			}
-			return "index";
+			return "main/index";
 		}
 	}
 	
+	@RequestMapping(value= "/userLogin", method = RequestMethod.GET)
+	public String userLogin() {
+		System.out.println("user 로그인창으로 이동......userLogin.java");
+		return "member/userLogin";
+	}
 	
+	@RequestMapping(value= "/userLogin", method = RequestMethod.POST)
+	public String userLogin(HttpSession session, UserDTO userDTO) {
+		System.out.println("user 로그인 액션......userLogin.java");
+		
+		int result = userService.userLogin(userDTO);
+		if(result == 1) {
+			System.out.println("로그인 성공......userLogin.java");
+			session.setAttribute("LOGINID", userDTO.getUser_id());
+			return "main/index"; 
+		}else {
+			System.out.println("로그인 실패");
+			return "member/userLogin";
+		}
+	}
+	
+	@RequestMapping(value= "/userLogout", method = RequestMethod.GET)
+	public String userLogout(HttpSession session) {
+		System.out.println("user 로그아웃 액션......userLogout.java");
+		session.invalidate();
+		return "main/index";
+	}
 
 }
