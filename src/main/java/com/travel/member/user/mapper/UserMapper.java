@@ -12,5 +12,9 @@ public interface UserMapper {
 	int userInsert(UserDTO userDTO);
 	int userImgUpdate(UserDTO userDTO);
 	int userLogin(UserDTO userDTO);
+	int userInterestInsert(String user_id, String user_interest);
+	int userLanguageInsert(String user_id, String user_language);
+	int userLocationInsert(String user_id, String user_location);	
+	UserDTO userGetInfo(String user_id);
 	
 }

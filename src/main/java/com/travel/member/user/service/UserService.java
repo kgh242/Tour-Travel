@@ -23,22 +23,33 @@ public class UserService {
 	
 
 	// 회원가입 서비스
-	public int userAdd(UserDTO userDTO) {
+	public int userAdd(UserDTO userDTO, String[] interest, String[] language, String[] location) {
 		
 		System.out.println("userAdd 서비스 계층......UserService.java");
 		MultipartFile multipartFile = null;
 
 		int result = 0; // 0은 둘다 입력안됨, 1 계정만입력, 2 계정이미지까지 입력
-		
 		if (userDTO.getUser_img().isEmpty()) {
+
 			try {
-				
+
 				userMapper.userInsert(userDTO);
+				
+				for(String val : interest) {
+					userMapper.userInterestInsert(userDTO.getUser_id(), val);
+				}
+				for(String val : language) {
+					userMapper.userLanguageInsert(userDTO.getUser_id(), val);
+				}
+				for(String val : location) {
+					userMapper.userLocationInsert(userDTO.getUser_id(), val);
+				}
+
 				result = 1;
 				
-			} catch (Exception e) {
+			} catch (Error e) {
 				
-				System.out.println("userInsert 예외발생");
+				System.out.println("userInsert 에러발생");
 				System.out.println("userInsert Error : " + e);
 				
 			}
@@ -82,33 +93,53 @@ public class UserService {
 			System.out.println(multipartFile.getSize());
 			System.out.println(multipartFile.getSize());
 			
-			userMapper.userInsert(userDTO);
-			userMapper.userImgUpdate(userImgDTO);
-			result = 2;
-
-			File file = new File(path + File.separator + "uploads" + File.separator + "userImg");
-			if (file.exists()) {
-				System.out.println("transferTo" + path + "......UserService.java");
-				try {
-					multipartFile.transferTo(
-							new File(path + File.separator + "uploads" + File.separator + "userImg" + File.separator + falseName + "." + ext));
-				} catch (IllegalStateException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
+			
+			try {
+				
+				userMapper.userInsert(userDTO);
+				userMapper.userImgUpdate(userImgDTO);
+				for(String val : interest) {
+					userMapper.userInterestInsert(userDTO.getUser_id(), val);
 				}
-			} else {
-				System.out.println("transferTo" + path + "......UserService.java");
-				file.mkdirs();
-				try {
-					multipartFile.transferTo(
-							new File(path + File.separator + "uploads" + File.separator + "userImg" + File.separator + falseName + "." + ext));
-				} catch (IllegalStateException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
+				for(String val : language) {
+					userMapper.userLanguageInsert(userDTO.getUser_id(), val);
 				}
-
+				for(String val : location) {
+					userMapper.userLocationInsert(userDTO.getUser_id(), val);
+				}
+	
+				result = 2;
+	
+				File file = new File(path + File.separator + "uploads" + File.separator + "userImg");
+				if (file.exists()) {
+					System.out.println("transferTo" + path + "......UserService.java");
+					try {
+						multipartFile.transferTo(
+								new File(path + File.separator + "uploads" + File.separator + "userImg" + File.separator + falseName + "." + ext));
+					} catch (IllegalStateException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} else {
+					System.out.println("transferTo" + path + "......UserService.java");
+					file.mkdirs();
+					try {
+						multipartFile.transferTo(
+								new File(path + File.separator + "uploads" + File.separator + "userImg" + File.separator + falseName + "." + ext));
+					} catch (IllegalStateException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+	
+				}
+				
+			} catch (Error e) {
+				
+				System.out.println("userInsert 에러발생");
+				System.out.println("userInsert Error : " + e);
+				
 			}
 
 			
@@ -121,6 +152,17 @@ public class UserService {
 	public int userLogin(UserDTO userDTO) {
 		System.out.println("userLogin 서비스 계층......UserService.java");
 		return userMapper.userLogin(userDTO);
+	}
+	
+	// 유저 내 정보보기
+	public UserDTO userGetInfo(String user_id) {
+		System.out.println("userGetInfo 서비스 계층......userGetInfo.java");
+		
+		UserDTO userImg = new UserDTO();
+		userImg = userMapper.userGetInfo(user_id);
+		//(userImg.getUser_img_path() + + userImg.getUser_img_false_name() + + userImg.getUser_img_ext());
+		
+		return userMapper.userGetInfo(user_id);
 	}
 
 }

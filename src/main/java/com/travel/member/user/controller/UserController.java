@@ -1,11 +1,15 @@
 package com.travel.member.user.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.travel.member.user.dto.UserDTO;
 import com.travel.member.user.service.UserService;
@@ -23,9 +27,10 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/userAdd", method = RequestMethod.POST)
-	public String userAdd(UserDTO userDTO) {
+	public String userAdd(UserDTO userDTO, @RequestParam(value = "interest") String[] interest, @RequestParam(value = "language") String[] language, @RequestParam(value = "location") String[] location) {
 		System.out.println("user 회원가입 액션......UserController.java");
-		int result = userService.userAdd(userDTO);
+		int result = userService.userAdd(userDTO, interest, language, location);
+
 		if(result==0) {
 			System.out.println("회원가입실패");
 			return "member/userAdd";
@@ -39,19 +44,19 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value= "/userLogin", method = RequestMethod.GET)
+	@RequestMapping(value = "/userLogin", method = RequestMethod.GET)
 	public String userLogin() {
-		System.out.println("user 로그인창으로 이동......userLogin.java");
+		System.out.println("user 로그인창으로 이동......UserController.java");
 		return "member/userLogin";
 	}
 	
-	@RequestMapping(value= "/userLogin", method = RequestMethod.POST)
+	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
 	public String userLogin(HttpSession session, UserDTO userDTO) {
-		System.out.println("user 로그인 액션......userLogin.java");
+		System.out.println("user 로그인 액션......UserController.java");
 		
 		int result = userService.userLogin(userDTO);
 		if(result == 1) {
-			System.out.println("로그인 성공......userLogin.java");
+			System.out.println("로그인 성공......UserController.java");
 			session.setAttribute("LOGINID", userDTO.getUser_id());
 			return "main/index"; 
 		}else {
@@ -60,11 +65,23 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value= "/userLogout", method = RequestMethod.GET)
+	@RequestMapping(value = "/userLogout", method = RequestMethod.GET)
 	public String userLogout(HttpSession session) {
-		System.out.println("user 로그아웃 액션......userLogout.java");
+		System.out.println("user 로그아웃 액션......UserController.java");
 		session.invalidate();
 		return "main/index";
+	}
+	
+	@RequestMapping(value = "/userGetInfo", method = RequestMethod.GET)
+	public String userGetInfo(HttpSession session, Model model) {
+		System.out.println("user 내정보 보기......UserController.java");
+		String user_id = session.getAttribute("LOGINID").toString();
+		model.addAttribute("userDTO", userService.userGetInfo(user_id));
+		return "member/userGetInfo";
+		
+		
+		
+		
 	}
 
 }
