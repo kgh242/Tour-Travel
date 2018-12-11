@@ -64,7 +64,7 @@ public class CompanyService {
 				e.printStackTrace();
 			}
 		}
-		return 0;
+		return 1;
 	}
 
 }

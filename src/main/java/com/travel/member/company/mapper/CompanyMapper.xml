@@ -7,7 +7,7 @@
  	
  	<insert id="insertCompany" parameterType="com.travel.member.company.dto.CompanyDTO">
  		<selectKey resultType="String" keyProperty="company_no" order="BEFORE">
- 			SELECT MAX(CONVERT(SUBSTR((company_no), 8), UNSIGNED)+1) FROM member_company
+ 			SELECT IFNULL(MAX(CONVERT(SUBSTR((company_no), 8), UNSIGNED)+1), 0) FROM member_company
  		</selectKey>
  		INSERT INTO member_company
  		(company_no, company_id, company_pw, company_name, company_tell1, company_tell2
@@ -20,7 +20,7 @@
  	
  	<insert id="insertCompanyImg" parameterType="com.travel.member.company.dto.CompanyImgDTO">
  		<selectKey resultType="String" keyProperty="company_img_no" order="BEFORE">
- 			SELECT MAX(CONVERT(SUBSTR((company_img_no), 12), UNSIGNED)+1) FROM member_company_img
+ 			SELECT IFNULL(MAX(CONVERT(SUBSTR((company_img_no), 12), UNSIGNED)+1), 0) FROM member_company_img
  		</selectKey>
  		INSERT INTO member_company_img
  		(company_img_no, company_id, company_img_path, company_img_true_name, company_img_false_name
