@@ -1,5 +1,7 @@
 package com.travel.member.user.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 // 고객 정보 DTO
 
 public class UserDTO {
@@ -30,11 +32,13 @@ public class UserDTO {
 	private String user_img_true_name;
 	private String user_img_false_name;
 	private String user_img_ext;
-	private String user_img_size;
+	private long user_img_size;
 	private String user_img_date;
 	private int user_escate;
+	private MultipartFile user_img;
 	
 	
+
 	@Override
 	public String toString() {
 		return "UserDTO [user_no=" + user_no + ", user_id=" + user_id + ", user_pw=" + user_pw + ", user_pw_check="
@@ -215,10 +219,10 @@ public class UserDTO {
 	public void setUser_img_ext(String user_img_ext) {
 		this.user_img_ext = user_img_ext;
 	}
-	public String getUser_img_size() {
+	public long getUser_img_size() {
 		return user_img_size;
 	}
-	public void setUser_img_size(String user_img_size) {
+	public void setUser_img_size(long user_img_size) {
 		this.user_img_size = user_img_size;
 	}
 	public String getUser_img_date() {
@@ -233,7 +237,12 @@ public class UserDTO {
 	public void setUser_escate(int user_escate) {
 		this.user_escate = user_escate;
 	}
-
+	public MultipartFile getUser_img() {
+		return user_img;
+	}
+	public void setUser_img(MultipartFile user_img) {
+		this.user_img = user_img;
+	}
 
 
 
