@@ -8,5 +8,6 @@
 <body>
 관리자 페이지 
 <a href="/adminUpdate?LOGINID=${LOGINID}"> ${LOGINID}</a> 님 로그인중 .. 
+<a href="/adminList">관리자조회</a>
 </body>
 </html>

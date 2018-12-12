@@ -1,5 +1,8 @@
 package com.travel.member.admin.controller;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +80,16 @@ public class AdminController {
 		}
 		return "main/index";
 	}
-
+	@RequestMapping(value= "/adminList", method = RequestMethod.GET)
+	public String adminList(@RequestParam(value="currentPage", defaultValue = "1") int currentPage, Model model) {
+		System.out.println("AdminController.java.adminList().get");
+		HashMap<String, Integer> pagingInfo = new HashMap<String, Integer>();
+		List<AdminDTO> adminList;
+		adminList = adminService.adminSelectAll(pagingInfo, currentPage, 10, 10);
+		model.addAttribute("adminList", adminList);
+		model.addAttribute("pagingInfo", pagingInfo);
+		return "member/adminList";
+	}
 
 
 	

@@ -25,7 +25,7 @@
 			,#{admin_employee_tell}
 			,now())	
 	</insert>
-    <select id="adminLogin" parameterType="com.travel.member.admin.dto.AdminDTO" resultType="java.lang.Integer">
+    <select id="adminLogin" parameterType="com.travel.member.admin.dto.AdminDTO" resultType="int">
     	SELECT count(admin_no) 
     	  FROM member_admin 
     	 WHERE admin_id=#{admin_id} 
@@ -49,5 +49,22 @@
     		  ,admin_employee_tell
     	 FROM member_admin
     	WHERE admin_id=#{loginId}	
+    </select>
+    <select id="adminSelectAll" parameterType="int" resultType="com.travel.member.admin.dto.AdminDTO">
+    	SELECT admin_no
+    		  ,admin_id
+    		  ,admin_level
+    		  ,admin_team
+    		  ,admin_employee_no
+    		  ,admin_employee_tell
+    		  ,admin_date
+          FROM member_admin
+      ORDER BY admin_no
+    	  DESC
+    	 LIMIT #{startRow},#{rowPerPage}
+    </select>
+    <select id="adminSelectCount" resultType="int">
+    	SELECT count(*)
+    	  FROM member_admin
     </select>
 </mapper>
