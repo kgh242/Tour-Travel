@@ -2,6 +2,7 @@ package com.travel.member.company.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,16 @@ public class CompanyService {
 			}
 		}
 		return 1;
+	}
+	
+	public List<CompanyDTO> companyList(){
+		List<CompanyDTO> list = companyMapper.companyList();
+		return list;
+	}
+	
+	public int companyAuth(CompanyDTO companyDTO) {
+		companyMapper.companyAuth(companyDTO);
+		return 0;
 	}
 
 }
