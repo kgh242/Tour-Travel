@@ -6,11 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>companyList</title>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	$("#company_auth1").prop("checked", true)
+	$("#company_auth0").prop("checked", true)
+</script>
 </head>
 <body>
 여행사 회원등록 신청 리스트
 <form action="/companyAuth" method="post">
-	<table border="1">
+	<table border="1" width="150%">
 		<tr>
 			<th>여행사번호</th>
 			<th>아이디</th>
@@ -56,8 +61,8 @@
 				<input type="text" id="company_check_address" value="${row.company_check_address}">
 			</td>
 			<td>
-				<input type="radio" name="company_check_" value="1">승인<br>
-				<input type="radio" name="company_check_" value="0">미승인
+				<input type="radio" id="company_auth1" name="company_auth" value="1" checked="checked">승인<br>
+				<input type="radio" id="company_auth0" name="company_auth" value="0">미승인
 			</td>
 			<td>
 				<input type="submit" id="submit" value="저장">

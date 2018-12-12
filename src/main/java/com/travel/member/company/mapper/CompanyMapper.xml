@@ -42,4 +42,12 @@
  			company_no;
  	</select>
  	
+ 	<update id="companyAuth" parameterType="com.travel.member.company.dto.CompanyDTO">
+ 		UPDATE member_company SET
+ 			company_check_tell = ${company_check_tell}, company_check_business_no = ${company_check_business_no}
+ 			, company_check_ceo = ${company_check_ceo}, company_check_address = ${company_check_address}
+ 			, company_auth = ${company_auth}
+ 		WHERE company_id = #{company_id}
+ 	</update>
+ 	
  </mapper>
