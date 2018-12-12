@@ -1,14 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+	function auth() {
+		if (confirm("ì¸ì¦ì„ ì‹ ì²­í•˜ì‹œê² ìŠµë‹ˆê¹Œ?")) {
+			location.href = "/userAuth?user_id=${userDTO.user_id}";
+		} else {
+			alert('ì·¨ì†Œí•˜ì…¨ìŠµë‹ˆë‹¤');
+		}
+	}
+	
+	function dlt() {
+		if (confirm("íƒˆí‡´í•˜ì‹œê² ìŠµë‹ˆê¹Œ??")) {
+			location.href = "/userDelete?user_id=${userDTO.user_id}";
+		} else {
+			alert('ì·¨ì†Œí•˜ì…¨ìŠµë‹ˆë‹¤');
+		}
+	}
+</script>
 </head>
 <body>
 	<c:if test="${LOGINID == null}">
-		·Î±×ÀÎ ÈÄ »ç¿ëÇØÁÖ¼¼¿ä
+		ë¡œê·¸ì¸ í›„ ì‚¬ìš©í•´ì£¼ì„¸ìš”
 	</c:if>
 	<c:if test="${LOGINID != null}">
 		${LOGINID}!! LOGIN <br>
@@ -17,32 +35,54 @@
 	<table>
 		<thead>
 			<tr>
-				<td>¾ÆÀÌµğ</td>
-				<td>´Ğ³×ÀÓ</td>
-				<td>ÁÖ¼Ò</td>
-				<td>ÀÌ¸ŞÀÏ</td>
-				<td>¿¬¶ôÃ³</td>
-				<td>ÀÚ±â¼Ò°³</td>
-				<td>È¸¿øÇÁ·ÎÇÊ»çÁø</td>
-				<td>ÀÎÁõ½ÅÃ»</td>
-				<td>¼öÁ¤</td>
-				<td>Å»Åğ</td>
+				<td>ì•„ì´ë””</td>
+				<td>ë‹‰ë„¤ì„</td>
+				<td>ì£¼ì†Œ</td>
+				<td>ì´ë©”ì¼</td>
+				<td>ì—°ë½ì²˜</td>
+				<td>ìê¸°ì†Œê°œ</td>
+				<td>íšŒì›í”„ë¡œí•„ì‚¬ì§„</td>
+				<td>ì¸ì¦ì‹ ì²­</td>
+				<td>ìˆ˜ì •</td>
+				<td>íƒˆí‡´</td>
 				
 			</tr>
 		</thead>
 		<tbody>
-
+			<c:if test="${LOGINID != null}">
 			<tr>
-				<td></td>
+				<td>${userDTO.user_id}</td>
 				<td>${userDTO.user_nickname}</td>
 				<td>${userDTO.user_address}</td>
 				<td>${userDTO.user_email}</td>
 				<td>${userDTO.user_tell}</td>
 				<td>${userDTO.user_introduction}</td>
+				<td></td>
+				<td>
+					<a href="#" onclick="auth();">íšŒì›ì¸ì¦ì‹ ì²­</a>
+				</td>
+				<td>
+					<form name="userUpdate" action="/userUpdate" method="POST">
+						<input type="hidden" name="user_id" value="${userDTO.user_id}" />
+						<input type="hidden" name="user_nickname" value="${userDTO.user_nickname}" />
+						<input type="hidden" name="user_address" value="${userDTO.user_address}" />
+						<input type="hidden" name="user_email" value="${userDTO.user_email}" />
+						<input type="hidden" name="user_tell" value="${userDTO.user_tell}" />
+						<input type="hidden" name="user_introduction" value="${userDTO.user_introduction}" />
+					</form>
+					<a href="#" onclick="javascript:document.userUpdate.submit();">ìˆ˜ì •</a>
+				</td>
+				<td>
+					<a href="#" onclick="dlt();">íƒˆí‡´</a>
+				</td>
+
+</div>
+
 			</tr>
+			</c:if>
 
 		</tbody>
 	</table>
-
+<img src="" width='100' height='100'/>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.travel.member.user.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +74,8 @@ public class UserService {
 			System.out.println(path);
 
 			System.out.println("이미지 파일 본칭");
-			String trueName = multipartFile.getOriginalFilename();
+			String originalFileName = multipartFile.getOriginalFilename();
+			String trueName = originalFileName.substring(0, originalFileName.lastIndexOf('.'));
 			userImgDTO.setUser_img_true_name(trueName);
 			System.out.println(trueName);
 
@@ -83,8 +85,7 @@ public class UserService {
 			System.out.println(falseName);
 
 			System.out.println("이미지 확장자 추출");
-			String originalFileName = multipartFile.getOriginalFilename();
-			String ext = originalFileName.substring(0);
+			String ext = originalFileName.substring(originalFileName.lastIndexOf(".")+1);
 			userImgDTO.setUser_img_ext(ext);
 			System.out.println(ext);
 
@@ -165,4 +166,29 @@ public class UserService {
 		return userMapper.userGetInfo(user_id);
 	}
 
+	// 유저 업데이트
+	public int userUpdate(UserDTO userDTO) {
+		System.out.println("userUpdate 서비스 계층......UserService.java");
+		return userMapper.userUpdate(userDTO);
+	}
+	
+	// 유저 인증신청
+	public int userAuth(String user_id) {
+		System.out.println("userAuth 서비스 계층......UserService.java");
+		return userMapper.userAuth(user_id);
+	}
+	
+	// 유저 탈퇴
+	public int userDelete(String user_id) {
+		System.out.println("userDelete 서비스 계층......UserService.java");
+		//부가정보 CASCADE 삭제
+		return userMapper.userDelete(user_id);
+	}
+	
+	// 모든 유저 조회
+	public List<UserDTO> userList() {
+		System.out.println("userList 서비스 계층......UserService.java");
+		return userMapper.userList();
+	}
+	
 }

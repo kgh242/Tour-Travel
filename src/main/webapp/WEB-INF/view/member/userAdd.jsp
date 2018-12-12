@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <body>
 
 	일반회원 회원 가입 창여
 
-	<form action="/userAdd" method="post" enctype="multipart/form-data">
+	<form name = "addInfo" onsubmit="return addInfoSubmit()" action="/userAdd" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>아이디</td>
@@ -59,6 +62,10 @@
 				<td><input type="text" id="user_tell" name="user_tell"></td>
 			</tr>
 			<tr>
+				<td>자기소개</td>
+				<td><input type="text" id="user_introduction" name ="user_introduction"></td>
+			</tr>
+			<tr>
 				<td>이미지</td>
 				<td><input type="file" id="user_img" name="user_img"></td>
 			</tr>
@@ -98,4 +105,45 @@
 	</form>
 
 </body>
+<script type = "text/javascript">
+function addInfoSubmit() {
+    var myform = document.forms['addInfo'];
+    if( myform['user_id'].value.length < 1) {
+        alert( '아이디를 입력하세요');
+        return false;
+    }
+    if( myform['user_pw'].value.length < 1) {
+        alert( '패스워드를 입력하세요');
+        return false;
+    }
+    if( myform['user_nickname'].value.length < 1) {
+    	alert( '닉네임을 입력하세요');
+    	return false;
+    }
+    if( myform['user_birth'].value.length < 1) {
+    	alret( '생년월일를 입력하세요');
+    	return false;
+    }	    
+    if( myform['user_gender'].value.length < 1) {
+    	alret( '성별을 입력하세요');
+    	return false;
+    }	
+    if( myform['user_address'].value.length < 1) {
+    	alret( '주소를 입력하세요');
+    	return false;
+    }	
+    if( myform['user_email'].value.length < 1) {
+    	alert( '이메일을 입력하세요');
+    	return false;
+    }
+    
+    if( myform['user_tell'].value.length < 1) {
+        alert( '연락처를 입력하세요');
+        return false;
+    }
+
+    return true;
+}
+</script>
+
 </html>

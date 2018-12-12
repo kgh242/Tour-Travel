@@ -1,6 +1,7 @@
 package com.travel.member.user.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -78,10 +79,57 @@ public class UserController {
 		String user_id = session.getAttribute("LOGINID").toString();
 		model.addAttribute("userDTO", userService.userGetInfo(user_id));
 		return "member/userGetInfo";
+	}
 		
-		
-		
-		
+	@RequestMapping(value = "/userUpdate", method = RequestMethod.POST)
+	public String userUpdate(Model model, UserDTO userDTO) {
+		System.out.println("user 업데이트 이동......UserController.java");
+		model.addAttribute("userDTO", userDTO);
+		return "member/userUpdate";
+	}
+	
+	@RequestMapping(value = "/userUpdateAction", method = RequestMethod.POST)
+	public String userUpdateAction(UserDTO userDTO) {
+		System.out.println("user 업데이트 액션......UserController.java");
+		int result = userService.userUpdate(userDTO);
+		if(result==1) {
+			System.out.println("user 업데이트성공 ......UserController.java");
+		}else {
+			System.out.println("user 업데이트실패 ......UserController.java");
+		}
+		return "member/userGetInfo";
+	}
+	
+	@RequestMapping(value = "/userAuth", method = RequestMethod.GET)
+	public String userAuth(@RequestParam(value = "user_id") String user_id) {
+		System.out.println("user 인증신청......UserController.java");
+		int result = userService.userAuth(user_id);
+		if(result==1) {
+			System.out.println("user 인증신청성공 ......UserController.java");
+		}else {
+			System.out.println("user 인증신청실패 ......UserController.java");
+		}
+		return "redirect:/userGetInfo";
+	}
+
+	@RequestMapping(value = "/userDelete", method = RequestMethod.GET)
+	public String userDelete(@RequestParam(value = "user_id") String user_id) {
+		System.out.println("user 탈퇴......UserController.java");
+		int result = userService.userDelete(user_id);
+		if(result==1) {
+			System.out.println("user 탈퇴성공 ......UserController.java");
+		}else {
+			System.out.println("user 탈퇴실패 ......UserController.java");
+		}
+		return "redirect:/main/index";
+	}
+	
+	@RequestMapping(value = "/userList", method = RequestMethod.GET)
+	public String userList(Model model) {
+		System.out.println("user 회원리스트......UserController.java");
+		List<UserDTO> userList = userService.userList();
+		model.addAttribute("userList", userList);
+		return "member/userList";
 	}
 
 }

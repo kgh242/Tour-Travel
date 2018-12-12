@@ -34,7 +34,7 @@ public class UserDTO {
 	private String user_img_ext;
 	private long user_img_size;
 	private String user_img_date;
-	private int user_escate;
+	private int user_escape;
 	private MultipartFile user_img;
 	
 	
@@ -51,7 +51,7 @@ public class UserDTO {
 				+ ", user_auth_date=" + user_auth_date + ", user_auth=" + user_auth + ", user_point=" + user_point
 				+ ", user_img_path=" + user_img_path + ", user_img_true_name=" + user_img_true_name
 				+ ", user_img_false_name=" + user_img_false_name + ", user_img_ext=" + user_img_ext + ", user_img_size="
-				+ user_img_size + ", user_img_date=" + user_img_date + ", user_escate=" + user_escate + "]";
+				+ user_img_size + ", user_img_date=" + user_img_date + ", user_escate=" + user_escape + "]";
 	}
 	public UserDTO() {
 		super();
@@ -231,11 +231,11 @@ public class UserDTO {
 	public void setUser_img_date(String user_img_date) {
 		this.user_img_date = user_img_date;
 	}
-	public int getUser_escate() {
-		return user_escate;
+	public int getUser_escape() {
+		return user_escape;
 	}
-	public void setUser_escate(int user_escate) {
-		this.user_escate = user_escate;
+	public void setUser_escape(int user_escate) {
+		this.user_escape = user_escate;
 	}
 	public MultipartFile getUser_img() {
 		return user_img;
