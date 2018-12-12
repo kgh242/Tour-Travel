@@ -20,34 +20,34 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService adminService;
-	
+	//관리자회원가입화면
 	@RequestMapping(value = "/adminAdd", method = RequestMethod.GET)
 	public String adminAdd() {
-		System.out.println("AdminController.java.userAdd().get");
+		System.out.println("AdminController.java.userAdd().GET");
 		return "member/adminAdd";
 	}
-
+	// 관리자 회원가입
 	@RequestMapping(value = "/adminAdd", method = RequestMethod.POST)
 	public String adminAdd(AdminDTO adminDTO) {
-		System.out.println("AdminController.java.userAdd().post");
+		System.out.println("AdminController.java.userAdd().POST");
 		int result = adminService.adminAdd(adminDTO);
 		if(result == 1) {
 			System.out.println("입력성공");
 		}else {
 			System.out.println("입력실패");
 		}
-		return "main/index";
+		return "main/admin";
 	}
-
+	// 관리자 로그인화면
 	@RequestMapping(value= "/adminLogin", method = RequestMethod.GET)
 	public String adminLogin() {
-		System.out.println("AdminController.java.adminLogin().get");
+		System.out.println("AdminController.java.adminLogin().GET");
 		return "member/adminLogin";
 	}
-	
+	//관리자 로그인
 	@RequestMapping(value= "/adminLogin", method = RequestMethod.POST)
 	public String adminLogin(HttpSession session, AdminDTO adminDTO) {
-		System.out.println("AdminController.java.adminLogin().post");
+		System.out.println("AdminController.java.adminLogin().POST");
 		
 		int result = adminService.adminLogin(adminDTO);
 		if(result == 1) {
@@ -59,9 +59,10 @@ public class AdminController {
 			return "member/adminLogin";
 		}
 	}
+	// 관리자 수정화면
 	@RequestMapping(value= "/adminUpdate", method = RequestMethod.GET)
 	public String adminUpdate(Model model,@RequestParam(value="LOGINID")String loginId) {
-		System.out.println("AdminController.java.adminUpdate().get");
+		System.out.println("AdminController.java.adminUpdate().GET");
 		AdminDTO adminDTO = new AdminDTO();
 		System.out.println(loginId+"<--loginId");
 		adminDTO = adminService.adminSelectOne(loginId);
@@ -69,20 +70,22 @@ public class AdminController {
 		model.addAttribute("admin",adminDTO);
 		return "member/adminUpdate";
 	}
+	// 관리자 수정
 	@RequestMapping(value = "/adminUpdate", method = RequestMethod.POST)
 	public String adminUpdate(AdminDTO adminDTO) {
-		System.out.println("AdminController.java.adminUpdate().post");
+		System.out.println("AdminController.java.adminUpdate().POST");
 		int result = adminService.adminUpdate(adminDTO);
 		if(result == 1) {
 			System.out.println("수정성공");
 		}else {
 			System.out.println("수정실패");
 		}
-		return "main/index";
+		return "main/admin";
 	}
+	//관리자 리스트
 	@RequestMapping(value= "/adminList", method = RequestMethod.GET)
 	public String adminList(@RequestParam(value="currentPage", defaultValue = "1") int currentPage, Model model) {
-		System.out.println("AdminController.java.adminList().get");
+		System.out.println("AdminController.java.adminList().GET");
 		HashMap<String, Integer> pagingInfo = new HashMap<String, Integer>();
 		List<AdminDTO> adminList;
 		adminList = adminService.adminSelectAll(pagingInfo, currentPage, 10, 10);
@@ -90,13 +93,11 @@ public class AdminController {
 		model.addAttribute("pagingInfo", pagingInfo);
 		return "member/adminList";
 	}
-
-
-	
-	/*	@RequestMapping(value= "/userLogout", method = RequestMethod.GET)
-	public String userLogout(HttpSession session) {
-		System.out.println("user 로그아웃 액션......userLogout.java");
+	//관리자 로그아웃
+	@RequestMapping(value= "/adminLogout", method = RequestMethod.GET)
+	public String adminLogout(HttpSession session) {
+		System.out.println("AdminController.java.adminLogout().GET");
 		session.invalidate();
-		return "main/index";
-	}*/
+		return "redirect:/adminLogin";
+	}
 }

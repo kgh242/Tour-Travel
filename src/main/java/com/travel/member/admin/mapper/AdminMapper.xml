@@ -59,7 +59,7 @@
     		  ,admin_employee_tell
     		  ,admin_date
           FROM member_admin
-      ORDER BY admin_no
+      ORDER BY admin_date
     	  DESC
     	 LIMIT #{startRow},#{rowPerPage}
     </select>
