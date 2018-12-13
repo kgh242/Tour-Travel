@@ -42,6 +42,10 @@
 		</td>
 
 	</tr>
+	<tr>
+		<td>이름</td>
+		<td><input type = "text" id = "user_name" name = "user_name" value = "${userDTO.user_name}"></td>
+	</tr>
 
 	<tr>
 		<td>주소</td>

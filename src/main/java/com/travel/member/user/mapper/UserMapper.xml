@@ -11,8 +11,8 @@
 	   				SELECT IFNULL(MAX(CONVERT(SUBSTR((user_no), 5), UNSIGNED)+1), 0) FROM member_user
 	   		</selectKey>
 
-    			INSERT INTO member_user (user_no, user_id, user_pw, user_nickname, user_birth, user_gender, user_address, user_email, user_tell, user_join_date, user_email_check, user_sns_check, user_introduction, user_point, user_escape)
-				 VALUES (concat("user", #{user_no}), #{user_id}, #{user_pw}, #{user_nickname}, #{user_birth}, #{user_gender}, #{user_address}, #{user_email}, #{user_tell}, now(), #{user_email_check}, #{user_sns_check}, #{user_introduction}, '100', '0');
+    			INSERT INTO member_user (user_no, user_id, user_pw, user_nickname, user_name, user_birth, user_gender, user_address, user_email, user_tell, user_join_date, user_email_check, user_sns_check, user_introduction, user_point, user_escape)
+				 VALUES (concat("user", #{user_no}), #{user_id}, #{user_pw}, #{user_nickname}, #{user_name}, #{user_birth}, #{user_gender}, #{user_address}, #{user_email}, #{user_tell}, now(), #{user_email_check}, #{user_sns_check}, #{user_introduction}, '100', '0');
 
     </insert>
     
@@ -41,11 +41,11 @@
     </select>
     
     <select id="userGetInfo" parameterType="java.lang.String" resultType="com.travel.member.user.dto.UserDTO">
-    	SELECT user_id, user_nickname, user_address, user_email, user_tell, user_introduction FROM member_user WHERE user_id=#{user_id}
+    	SELECT user_id, user_nickname, user_address, user_email, user_tell, user_introduction, user_img_path, user_img_true_name, user_img_false_name, user_img_ext, user_img_size, user_img_date FROM member_user WHERE user_id=#{user_id}
     </select>
     
     <update id="userUpdate" parameterType="com.travel.member.user.dto.UserDTO">
-    	UPDATE member_user SET user_pw = #{user_pw}, user_nickname = #{user_nickname}, user_address = #{user_address}, user_email = #{user_email}, user_tell = #{user_tell}, user_introduction = #{user_introduction}
+    	UPDATE member_user SET user_pw = #{user_pw}, user_nickname = #{user_nickname}, user_name = #{user_name}, user_address = #{user_address}, user_email = #{user_email}, user_tell = #{user_tell}, user_introduction = #{user_introduction}
     	 WHERE user_id = #{user_id}
     </update>
 
@@ -61,4 +61,6 @@
 	<select id="userList" resultType="com.travel.member.user.dto.UserDTO">
 		SELECT * FROM member_user
 	</select>
+
+	
 </mapper>

@@ -1,6 +1,6 @@
 package com.travel.img.dto;
 
-//이미지 DTO
+//이미지 DTO ,,, 프로젝트 종료시까지 미사용시 삭제
 
 public class ImgDTO {
 	private String img_no;

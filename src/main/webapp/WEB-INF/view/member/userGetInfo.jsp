@@ -37,6 +37,7 @@
 			<tr>
 				<td>아이디</td>
 				<td>닉네임</td>
+				<td>이름</td>
 				<td>주소</td>
 				<td>이메일</td>
 				<td>연락처</td>
@@ -53,6 +54,7 @@
 			<tr>
 				<td>${userDTO.user_id}</td>
 				<td>${userDTO.user_nickname}</td>
+				<td>${userDTO.user_name}</td>
 				<td>${userDTO.user_address}</td>
 				<td>${userDTO.user_email}</td>
 				<td>${userDTO.user_tell}</td>

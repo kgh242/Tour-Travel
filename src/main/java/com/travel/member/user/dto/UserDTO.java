@@ -9,6 +9,7 @@ public class UserDTO {
 	private String user_id;
 	private String user_pw;
 	private String user_pw_check;
+	private String user_name;
 	private String user_nickname;
 	private String user_birth;
 	private String user_gender;
@@ -36,26 +37,31 @@ public class UserDTO {
 	private String user_img_date;
 	private int user_escape;
 	private MultipartFile user_img;
-	
-	
 
 	@Override
 	public String toString() {
 		return "UserDTO [user_no=" + user_no + ", user_id=" + user_id + ", user_pw=" + user_pw + ", user_pw_check="
-				+ user_pw_check + ", user_nickname=" + user_nickname + ", user_birth=" + user_birth + ", user_gender="
-				+ user_gender + ", user_address=" + user_address + ", user_email=" + user_email + ", user_tell="
-				+ user_tell + ", user_join_date=" + user_join_date + ", user_update_date=" + user_update_date
-				+ ", user_pw_date=" + user_pw_date + ", user_email_check=" + user_email_check + ", user_sns_check="
-				+ user_sns_check + ", user_introduction=" + user_introduction + ", user_check_path=" + user_check_path
-				+ ", user_filename=" + user_filename + ", user_date=" + user_date + ", admin_id=" + admin_id
-				+ ", user_auth_date=" + user_auth_date + ", user_auth=" + user_auth + ", user_point=" + user_point
-				+ ", user_img_path=" + user_img_path + ", user_img_true_name=" + user_img_true_name
-				+ ", user_img_false_name=" + user_img_false_name + ", user_img_ext=" + user_img_ext + ", user_img_size="
-				+ user_img_size + ", user_img_date=" + user_img_date + ", user_escate=" + user_escape + "]";
+				+ user_pw_check + ", user_name=" + user_name + ", user_nickname=" + user_nickname + ", user_birth="
+				+ user_birth + ", user_gender=" + user_gender + ", user_address=" + user_address + ", user_email="
+				+ user_email + ", user_tell=" + user_tell + ", user_join_date=" + user_join_date + ", user_update_date="
+				+ user_update_date + ", user_pw_date=" + user_pw_date + ", user_email_check=" + user_email_check
+				+ ", user_sns_check=" + user_sns_check + ", user_introduction=" + user_introduction
+				+ ", user_check_path=" + user_check_path + ", user_filename=" + user_filename + ", user_date="
+				+ user_date + ", admin_id=" + admin_id + ", user_auth_date=" + user_auth_date + ", user_auth="
+				+ user_auth + ", user_point=" + user_point + ", user_img_path=" + user_img_path
+				+ ", user_img_true_name=" + user_img_true_name + ", user_img_false_name=" + user_img_false_name
+				+ ", user_img_ext=" + user_img_ext + ", user_img_size=" + user_img_size + ", user_img_date="
+				+ user_img_date + ", user_escape=" + user_escape + ", user_img=" + user_img + "]";
 	}
 	public UserDTO() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
 	}
 	public String getUser_no() {
 		return user_no;

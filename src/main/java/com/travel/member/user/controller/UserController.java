@@ -1,6 +1,5 @@
 package com.travel.member.user.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -28,7 +27,10 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/userAdd", method = RequestMethod.POST)
-	public String userAdd(UserDTO userDTO, @RequestParam(value = "interest") String[] interest, @RequestParam(value = "language") String[] language, @RequestParam(value = "location") String[] location) {
+	public String userAdd(UserDTO userDTO, 
+			@RequestParam(value = "interest", required=false) String[] interest, 
+			@RequestParam(value = "language", required=false) String[] language, 
+			@RequestParam(value = "location", required=false) String[] location) {
 		System.out.println("user 회원가입 액션......UserController.java");
 		int result = userService.userAdd(userDTO, interest, language, location);
 

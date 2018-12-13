@@ -19,6 +19,10 @@
 		<td>${UserDTO.user_nickname}</td>
 	</tr>
 	<tr>
+		<td>이름</td>
+		<td>${UserDTO.user_name}</td>
+	</tr>
+	<tr>
 		<td>생일</td>
 		<td>${UserDTO.user_birth}</td>
 	</tr>

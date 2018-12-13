@@ -15,6 +15,7 @@
 			<td>번호</td>
 			<td>아이디</td>
 			<td>닉네임</td>
+			<td>이름</td>
 			<td>생일</td>
 			<td>성별</td>
 			<td>주소</td>
@@ -37,6 +38,7 @@
 				<td>${user.user_no}</td>
 				<td>${user.user_id}</td>
 				<td>${user.user_nickname}</td>
+				<td>${user.user_name}</td>
 				<td>${user.user_birth}</td>
 				<td>${user.user_gender}</td>
 				<td>${user.user_address}</td>

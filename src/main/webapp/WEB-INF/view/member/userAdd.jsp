@@ -39,6 +39,10 @@
 
 			</tr>
 			<tr>
+				<td>이름</td>
+				<td><input type="text" id="user_name" name="user_name"></td>
+			</tr>
+			<tr>
 				<td>생일</td>
 				<td><input type="date" id="user_birth" name="user_birth"></td>
 			</tr>
