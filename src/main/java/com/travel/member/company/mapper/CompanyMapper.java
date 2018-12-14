@@ -13,5 +13,6 @@ public interface CompanyMapper {
 	int insertCompany(CompanyDTO companyDTO);
 	int insertCompanyImg(CompanyImgDTO companyImgDTO);
 	List<CompanyDTO> companyList();
+	CompanyDTO companyAuthInfo(String company_id);
 	int companyAuth(CompanyDTO companyDTO);
 }

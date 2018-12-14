@@ -32,14 +32,14 @@ public class CompanyService {
 		companyImgDTO.setCompany_img_path(path);
 		f.delete();
 		
-		String trueName = multipartFile.getOriginalFilename();
+		String originalFileName = multipartFile.getOriginalFilename();
+		String trueName = originalFileName.substring(0, originalFileName.lastIndexOf('.'));
 		companyImgDTO.setCompany_img_true_name(trueName);
 
 		String fileName = UUID.randomUUID().toString();
 		companyImgDTO.setCompany_img_false_name(fileName);
 		
-		String originalFileName = multipartFile.getOriginalFilename();
-		String ext = originalFileName.substring(originalFileName.lastIndexOf("."));
+		String ext = originalFileName.substring(originalFileName.lastIndexOf(".")+1);
 		companyImgDTO.setCompany_img_ext(ext);
 		
 		companyImgDTO.setCompany_img_size(multipartFile.getSize());
@@ -69,13 +69,15 @@ public class CompanyService {
 	}
 	
 	public List<CompanyDTO> companyList(){
-		List<CompanyDTO> list = companyMapper.companyList();
-		return list;
+		return companyMapper.companyList();
+	}
+	
+	public CompanyDTO companyAuthInfo(String company_id) {
+		return companyMapper.companyAuthInfo(company_id);
 	}
 	
 	public int companyAuth(CompanyDTO companyDTO) {
-		companyMapper.companyAuth(companyDTO);
-		return 0;
+		return companyMapper.companyAuth(companyDTO);
 	}
 
 }
