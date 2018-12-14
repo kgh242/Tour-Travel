@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.member.admin.mapper.AdminMapper">
+	<insert id="adminInsert" parameterType="com.travel.member.admin.dto.AdminDTO">
+		<selectKey resultType="String" keyProperty="admin_no" order="BEFORE">
+   			SELECT IFNULL(MAX(CONVERT(SUBSTR((admin_no), 6), UNSIGNED)+1), 0) FROM member_admin
+   		</selectKey>
+		INSERT INTO member_admin (
+			 admin_no
+			,admin_id
+			,admin_pw
+			,admin_level
+			,admin_team
+			,admin_employee_no
+			,admin_employee_tell
+			,admin_date)
+		VALUES (concat("admin", #{admin_no})
+			,#{admin_id}
+			,#{admin_pw}
+			,#{admin_level}
+			,#{admin_team}
+			,#{admin_employee_no}
+			,#{admin_employee_tell}
+			,now())	
+	</insert>
+    <select id="adminLogin" parameterType="com.travel.member.admin.dto.AdminDTO" resultType="int">
+    	SELECT count(admin_no) 
+    	  FROM member_admin 
+    	 WHERE admin_id=#{admin_id} 
+    	   AND admin_pw=#{admin_pw}
+    </select>
+    <update id="adminUpdate" parameterType="com.travel.member.admin.dto.AdminDTO">
+    	UPDATE member_admin
+    	   SET admin_pw = #{admin_pw}
+    		  ,admin_level =#{admin_level}
+    		  ,admin_team =#{admin_team}
+    		  ,admin_employee_no =#{admin_employee_no}
+    		  ,admin_employee_tell =#{admin_employee_tell}
+		WHERE admin_id = #{admin_id}
+    </update>
+    <select id="adminSelectOne" parameterType="String" resultType="com.travel.member.admin.dto.AdminDTO">
+    	SELECT admin_id
+    		  ,admin_pw
+    		  ,admin_level
+    		  ,admin_team
+    		  ,admin_employee_no
+    		  ,admin_employee_tell
+    	 FROM member_admin
+    	WHERE admin_id=#{loginId}	
+    </select>
+    <select id="adminSelectAll" parameterType="int" resultType="com.travel.member.admin.dto.AdminDTO">
+    	SELECT admin_no
+    		  ,admin_id
+    		  ,admin_level
+    		  ,admin_team
+    		  ,admin_employee_no
+    		  ,admin_employee_tell
+    		  ,admin_date
+          FROM member_admin
+      ORDER BY admin_date
+    	  DESC
+    	 LIMIT #{startRow},#{rowPerPage}
+    </select>
+    <select id="adminSelectCount" resultType="int">
+    	SELECT count(*)
+    	  FROM member_admin
+    </select>
+</mapper>
