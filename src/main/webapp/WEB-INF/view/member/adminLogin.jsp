@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action = "/adminLogin" method="post">
+	<form action = "/Travel/adminLogin" method="post">
 		<input type = "text" id = "admin_id" name = "admin_id" placeholder="아이디를 입력해주세요">
 		<input type = "password" id = "admin_pw" name = "admin_pw" placeholder="비밀번호를 입력해주세요">
 		<input type = "submit" value = "로그인">

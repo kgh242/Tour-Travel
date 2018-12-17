@@ -8,7 +8,7 @@
 </head>
 <body>
 	여행사 회원등록 리스트
-<form action="/companyAuth" method="post">
+<form action="/Travel/companyAuth" method="post">
 	<table border="1">
 		<tr>
 			<th>여행사번호</th>

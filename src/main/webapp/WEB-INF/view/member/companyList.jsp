@@ -37,7 +37,7 @@
 				<td>${company.company_head_tell}</td>
 				<td>${company.company_check_date}</td>
 				<!---->
-				<td><a href="/companyAuthInfo?company_id=${company.company_id}">승인</a></td>
+				<td><a href="/Travel/companyAuthInfo?company_id=${company.company_id}">승인</a></td>
 			</tr>
 		</c:forEach>
 	</table>

@@ -30,7 +30,7 @@
 	</c:if>
 	<c:if test="${LOGINID != null}">
 		${LOGINID}!! LOGIN <br>
-		<a href="/userLogout">LOGOUT</a>
+		<a href="/Travel/userLogout">LOGOUT</a>
 	</c:if>
 	<table>
 		<thead>

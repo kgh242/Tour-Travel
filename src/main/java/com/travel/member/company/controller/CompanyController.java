@@ -16,6 +16,7 @@ import com.travel.member.company.dto.CompanyImgDTO;
 import com.travel.member.company.service.CompanyService;
 
 @Controller
+@RequestMapping(value = "/Travel")
 public class CompanyController {
 	@Autowired
 	private CompanyService companyService;
@@ -43,15 +44,33 @@ public class CompanyController {
 	}
 
 	@RequestMapping(value = "/companyAuthInfo", method = RequestMethod.GET)
+<<<<<<< HEAD
 	public String companyAuthInfo(@RequestParam(value="company_id") String company_id, Model model) {
 		System.out.println("CompanyController.java.companyAuthInfo()");
+=======
+	public String companyAuthInfo(@RequestParam(value="company_id") String company_id, Model model) {
+
+		System.out.println("CompanyController.java.companyAuthInfo()");
+
+		System.out.println("companyAuth.GET");
+
+>>>>>>> branch 'master' of https://github.com/kgh242/Tour-Travel.git
 		model.addAttribute("companyDTO", companyService.companyAuthInfo(company_id));
 		return "member/companyAuthInfo";
 	}
 	
 	@RequestMapping(value = "/companyAuth", method = RequestMethod.POST)
+<<<<<<< HEAD
 	public String companyAuth(CompanyDTO companyDTO) {
 		System.out.println("CompanyController.java.companyAuth().POST");
+=======
+	public String companyAuth(CompanyDTO companyDTO) {
+
+		System.out.println("CompanyController.java.companyAuth().POST");
+
+		System.out.println("companyAuth.Post");
+
+>>>>>>> branch 'master' of https://github.com/kgh242/Tour-Travel.git
 		companyService.companyAuth(companyDTO);
 		return "member/companyList";
 	}

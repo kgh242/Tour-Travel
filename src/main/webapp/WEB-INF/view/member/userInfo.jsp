@@ -8,7 +8,7 @@
 </head>
 <body>
 일반회원 내 정보 보기
-<form action = "/" method = "post" enctype="multipart/form-data">
+<form action = "/Travel/" method = "post" enctype="multipart/form-data">
 <table>
 	<tr>
 		<td>아이디</td>

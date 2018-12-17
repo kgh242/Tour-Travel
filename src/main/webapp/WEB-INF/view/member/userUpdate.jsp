@@ -17,7 +17,7 @@
 <body>
 일반회원 정보 수정
 
-<form name = "updateInfo" onsubmit="return updateInfoSubmit()" action = "/userUpdateAction" method = "post" enctype="multipart/form-data">
+<form name = "updateInfo" onsubmit="return updateInfoSubmit()" action = "/Travel/userUpdateAction" method = "post" enctype="multipart/form-data">
 <table>
 	<tr>
 		<td>아이디</td>

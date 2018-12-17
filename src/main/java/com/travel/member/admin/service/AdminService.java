@@ -60,7 +60,6 @@ public class AdminService {
         pageMaker.setStartPage();
         pageMaker.setEndPage();
         // 이전 페이지와 다음 페이지를 컨트롤하는 조건문
-  
         if(pageMaker.getCurrentBlock() != pageMaker.getLastBlock() && pageMaker.getCurrentBlock() >1){
         	pageMaker.setPrevPage(true);
             pageMaker.setNextPage(true);
