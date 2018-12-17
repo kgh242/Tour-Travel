@@ -50,11 +50,13 @@ public class AdminController {
 	@RequestMapping(value= "/adminLogin", method = RequestMethod.POST)
 	public String adminLogin(HttpSession session, AdminDTO adminDTO) {
 		System.out.println("AdminController.java.adminLogin().POST");
-		
-		int result = adminService.adminLogin(adminDTO);
-		if(result == 1) {
+	
+		adminDTO = adminService.adminLogin(adminDTO);
+		if(adminDTO.getAdmin_level().equals("관리자") || adminDTO.getAdmin_level().equals("최고관리자")) {
 			System.out.println("로그인 성공......userLogin.java");
+			System.out.println(adminDTO.getAdmin_level()+"<- admin level");
 			session.setAttribute("LOGINID", adminDTO.getAdmin_id());
+			session.setAttribute("LEVEL", adminDTO.getAdmin_level());
 			return "main/admin"; 
 		}else {
 			System.out.println("로그인 실패");
@@ -63,11 +65,9 @@ public class AdminController {
 	}
 	// 관리자 수정화면
 	@RequestMapping(value= "/adminUpdate", method = RequestMethod.GET)
-	public String adminUpdate(Model model,@RequestParam(value="LOGINID")String loginId) {
+	public String adminUpdate(Model model,AdminDTO adminDTO) {
 		System.out.println("AdminController.java.adminUpdate().GET");
-		AdminDTO adminDTO = new AdminDTO();
-		System.out.println(loginId+"<--loginId");
-		adminDTO = adminService.adminSelectOne(loginId);
+		adminDTO = adminService.adminSelectOne(adminDTO);
 		System.out.println(adminDTO);
 		model.addAttribute("admin",adminDTO);
 		return "member/adminUpdate";
@@ -106,6 +106,18 @@ public class AdminController {
 	public String adminLogout(HttpSession session) {
 		System.out.println("AdminController.java.adminLogout().GET");
 		session.invalidate();
-		return "redirect:/adminLogin";
+		return "redirect:/Travel/adminLogin";
+	}
+	// 관리자 탈퇴 
+	@RequestMapping(value= "/adminDelete", method = RequestMethod.GET)
+	public String adminDelete(AdminDTO adminDTO) {
+		System.out.println("AdminController.java.adminDelete().GET");
+		int result = adminService.adminDelete(adminDTO);
+		if(result == 1) {
+			System.out.println("삭제성공");
+		}else {
+			System.out.println("삭제실패");
+		}
+		return "redirect:/Travel/adminList";
 	}
 }

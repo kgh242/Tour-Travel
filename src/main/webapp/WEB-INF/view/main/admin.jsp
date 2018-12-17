@@ -9,8 +9,10 @@
 <body>
 	<c:if test="${LOGINID != null}">
 		관리자 페이지 
-		<a href="/Travel/adminUpdate?LOGINID=${LOGINID}"> ${LOGINID}</a> 님 로그인중 .. 
-		<a href="/Travel/adminList">관리자조회</a><br><br>
+		<a href="/Travel/adminUpdate?admin_id=${LOGINID}"> ${LOGINID}</a> 님 로그인중 .. 
+		<c:if test="${LEVEL == '최고관리자'}">
+			<a href="/Travel/adminList">관리자조회</a><br><br>
+		</c:if>
 		<a href="/Travel/userList">회원조회</a>
 		<a href="/Travel/companyList">여행사조회</a>
 		<a href="/Travel/adminLogout">로그아웃</a>

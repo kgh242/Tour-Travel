@@ -25,10 +25,6 @@
 				<td><input type = "password" id = "admin_pw_check" name = "admin_pw_check"></td>
 			</tr>
 			<tr>
-				<td>권한</td>
-				<td><input type = "text" id = "admin_level" name = "admin_level"></td>
-			</tr>
-			<tr>
 				<td>담당부서</td>
 				<td><input type = "text" id = "admin_team" name = "admin_team"></td>
 			</tr>

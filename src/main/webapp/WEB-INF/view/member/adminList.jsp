@@ -17,9 +17,11 @@
 			<td>admin_employee_no</td>
 			<td>admin_employee_tell</td>
 			<td>admin_date</td>
+			<td>수정<td>
+			<td>삭제<td>
 		</tr>
 		 <c:forEach var="admin" items="${adminList}">
-		<tr>
+			<tr>
      			<td>${admin.admin_no}</td>
                	<td>${admin.admin_id}</td>
                	<td>${admin.admin_level}</td>
@@ -27,8 +29,10 @@
                	<td>${admin.admin_employee_no}</td>
                	<td>${admin.admin_employee_tell}</td>
                	<td>${admin.admin_date}</td>
-         </tr>    
-          	</c:forEach>
+               	<td><a href="${pageContext.request.contextPath}/Travel/adminUpdate?admin_id=${admin.admin_id}">수정</a></td>
+               	<td><a href="${pageContext.request.contextPath}/Travel/adminDelete?admin_id=${admin.admin_id}">삭제</a></td>
+        	</tr>
+         </c:forEach>    
    </table>
       <div class="text-center">
         <ul class="pagination justify-content-center">

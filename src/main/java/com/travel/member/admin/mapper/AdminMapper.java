@@ -13,13 +13,15 @@ public interface AdminMapper {
 	// 관리자 회원가입
 	int adminInsert(AdminDTO adminDTO);
 	// 관리자 로그인
-	int adminLogin(AdminDTO adminDTO);
+	AdminDTO adminLogin(AdminDTO adminDTO);
 	// 관리자 수정을 위한 조회
-	AdminDTO adminSelectOne(String loginId);
+	AdminDTO adminSelectOne(AdminDTO adminDTO);
 	// 관리자 수정
 	int adminUpdate(AdminDTO adminDTO);
 	// 전체관리자 조회
 	List<AdminDTO> adminSelectAll(PageMaker pageMaker);
 	// 페이징처리를위한
 	int adminSelectCount();
+	// 관리자 삭제
+	int adminDelete(AdminDTO adminDTO);
 }
