@@ -14,6 +14,7 @@ import com.travel.member.company.dto.CompanyImgDTO;
 import com.travel.member.company.service.CompanyService;
 
 @Controller
+@RequestMapping(value = "/Travel")
 public class CompanyController {
 	@Autowired
 	private CompanyService companyService;
