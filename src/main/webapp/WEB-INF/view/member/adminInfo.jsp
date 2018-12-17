@@ -8,7 +8,7 @@
 </head>
 <body>
 관리자 내 정보 보기
-		<form action = "/adminUpdate" method = "post" >
+		<form action = "/Travel/adminUpdate" method = "post" >
 		<table>
 			<tr>
 				<td>아이디</td>

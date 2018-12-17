@@ -15,6 +15,7 @@ import com.travel.member.user.dto.UserDTO;
 import com.travel.member.user.service.UserService;
 
 @Controller
+@RequestMapping(value = "/Travel")
 public class UserController {
 	
 	@Autowired
@@ -43,7 +44,7 @@ public class UserController {
 			} else if(result == 2) {
 				System.out.println("회원가입성공 (이미지있음)");
 			}
-			return "main/index";
+			return "thymeleaf/index";
 		}
 	}
 	
@@ -61,7 +62,7 @@ public class UserController {
 		if(result == 1) {
 			System.out.println("로그인 성공......UserController.java");
 			session.setAttribute("LOGINID", userDTO.getUser_id());
-			return "main/index"; 
+			return "thymeleaf/index"; 
 		}else {
 			System.out.println("로그인 실패");
 			return "member/userLogin";
@@ -72,7 +73,7 @@ public class UserController {
 	public String userLogout(HttpSession session) {
 		System.out.println("user 로그아웃 액션......UserController.java");
 		session.invalidate();
-		return "main/index";
+		return "thymeleaf/index";
 	}
 	
 	@RequestMapping(value = "/userGetInfo", method = RequestMethod.GET)
@@ -123,7 +124,7 @@ public class UserController {
 		}else {
 			System.out.println("user 탈퇴실패 ......UserController.java");
 		}
-		return "redirect:/main/index";
+		return "redirect:/thymeleaf/index";
 	}
 	
 	@RequestMapping(value = "/userList", method = RequestMethod.GET)

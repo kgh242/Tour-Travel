@@ -6,7 +6,7 @@
 <title>admin add</title>
 </head>
 <body>
-	<form action = "/adminAdd" method = "post" >
+	<form action = "/Travel/adminAdd" method = "post" >
 		<table>
 			<tr>
 				<td>아이디</td>

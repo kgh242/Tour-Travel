@@ -13,7 +13,7 @@
 
 	일반회원 회원 가입 창여
 
-	<form name = "addInfo" onsubmit="return addInfoSubmit()" action="/userAdd" method="post" enctype="multipart/form-data">
+	<form name = "addInfo" onsubmit="return addInfoSubmit()" action="/Travel/userAdd" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>아이디</td>

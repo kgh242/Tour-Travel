@@ -16,6 +16,7 @@ import com.travel.member.admin.dto.AdminDTO;
 import com.travel.member.admin.service.AdminService;
 
 @Controller
+@RequestMapping(value = "/Travel")
 public class AdminController {
 	
 	@Autowired

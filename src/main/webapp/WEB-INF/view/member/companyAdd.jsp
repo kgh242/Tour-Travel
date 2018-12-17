@@ -49,7 +49,7 @@
 </head>
 <body>
 여행사 회원 가입 신청
-<form action = "/companyAdd" enctype="multipart/form-data" method="post">
+<form action = "/Travel/companyAdd" enctype="multipart/form-data" method="post">
 	<table border="1">
 		<tr>
 			<td>필수 : 아이디</td>
