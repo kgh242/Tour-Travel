@@ -15,4 +15,5 @@ public interface CompanyMapper {
 	List<CompanyDTO> companyList();
 	CompanyDTO companyAuthInfo(String company_id);
 	int companyAuth(CompanyDTO companyDTO);
+	int companyLogin(CompanyDTO companyDTO);
 }

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -8,7 +7,7 @@
 <title>companyList</title>
 </head>
 <body>
-	여행사 회원등록 리스트
+여행사 회원등록 리스트
 	<table border="1">
 		<tr>
 			<th>여행사번호</th>

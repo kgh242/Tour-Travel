@@ -30,7 +30,7 @@ public class CompanyController {
 	public String companyAdd(CompanyDTO companyDTO, CompanyImgDTO companyImgDTO) {
 		int result = companyService.companyAdd(companyDTO, companyImgDTO);
 		if (result == 1) {
-			return "index";
+			return "thymeleaf/index";
 		} else {
 			return "member/companyAdd";
 		}
@@ -57,5 +57,20 @@ public class CompanyController {
 		System.out.println(companyDTO.getAdmin_id() + "<<<LOGINID");
 		companyService.companyAuth(companyDTO);
 		return "redirect:/Travel/companyList";
+	}
+	
+	@RequestMapping(value = "/companyLogin", method = RequestMethod.GET)
+	public String companyLogin() {
+		System.out.println("companyLogin.GET");
+		return "member/companyLogin";
+	}
+	
+	@RequestMapping(value = "/companyLogin", method = RequestMethod.POST)
+	public String companyLogin(HttpSession session, CompanyDTO companyDTO) {
+		System.out.println("companyLogin.POST");
+		int result = companyService.companyLogin(companyDTO);
+		session.setAttribute("LOGINID", companyDTO.getCompany_id());
+		System.out.println(companyDTO.getCompany_id() + "<--LOGINID");
+		return "thymeleaf/index";
 	}
 }

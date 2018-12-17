@@ -80,4 +80,8 @@ public class CompanyService {
 		return companyMapper.companyAuth(companyDTO);
 	}
 
+	public int companyLogin(CompanyDTO companyDTO) {
+		return companyMapper.companyLogin(companyDTO);
+	}
+
 }
