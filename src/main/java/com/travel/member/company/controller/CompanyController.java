@@ -45,22 +45,22 @@ public class CompanyController {
 
 	@RequestMapping(value = "/companyAuthInfo", method = RequestMethod.GET)
 	public String companyAuthInfo(@RequestParam(value="company_id") String company_id, Model model) {
-<<<<<<< HEAD
+
 		System.out.println("CompanyController.java.companyAuthInfo()");
-=======
+
 		System.out.println("companyAuth.GET");
->>>>>>> branch 'master' of https://github.com/kgh242/Tour-Travel.git
+
 		model.addAttribute("companyDTO", companyService.companyAuthInfo(company_id));
 		return "member/companyAuthInfo";
 	}
 	
 	@RequestMapping(value = "/companyAuth", method = RequestMethod.POST)
 	public String companyAuth(CompanyDTO companyDTO) {
-<<<<<<< HEAD
+
 		System.out.println("CompanyController.java.companyAuth().POST");
-=======
+
 		System.out.println("companyAuth.Post");
->>>>>>> branch 'master' of https://github.com/kgh242/Tour-Travel.git
+
 		companyService.companyAuth(companyDTO);
 		return "member/companyList";
 	}
