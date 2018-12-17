@@ -2,6 +2,8 @@ package com.travel.member.company.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import com.travel.member.company.dto.CompanyImgDTO;
 import com.travel.member.company.service.CompanyService;
 
 @Controller
+@RequestMapping(value = "/Travel")
 public class CompanyController {
 	@Autowired
 	private CompanyService companyService;
@@ -48,9 +51,11 @@ public class CompanyController {
 	}
 
 	@RequestMapping(value = "/companyAuth", method = RequestMethod.POST)
-	public String companyAuth(CompanyDTO companyDTO) {
+	public String companyAuth(HttpSession session, CompanyDTO companyDTO) {
 		System.out.println("companyAuth.POST");
+		companyDTO.setAdmin_id(session.getAttribute("LOGINID").toString());
+		System.out.println(companyDTO.getAdmin_id() + "<<<LOGINID");
 		companyService.companyAuth(companyDTO);
-		return "redirect:/companyList";
+		return "redirect:/Travel/companyList";
 	}
 }

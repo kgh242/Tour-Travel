@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>companyAuth</title>
+<title>companyAuthInfo</title>
 </head>
 <body>
 	여행사 회원등록 리스트
@@ -21,7 +21,6 @@
 			<th>회사대표연락처</th>
 			<th>본사연락처</th>
 			<th>신청날짜</th>
-			<!---->
 			<th>유선번호확인</th>
 			<th>사업자번호확인</th>
 			<th>대표자확인</th>
@@ -42,16 +41,28 @@
 				<td>${companyDTO.company_branch_tell}</td>
 				<td>${companyDTO.company_head_tell}</td>
 				<td>${companyDTO.company_check_date}</td>
-				<!---->
-				<td><input type="text" name="company_check_tell" id="company_check_tell" value="${companyDTO.company_check_tell}"></td>
-				<td><input type="text" name="company_check_business_no" id="company_check_business_no" value="${companyDTO.company_check_business_no}"></td>
-				<td><input type="text" name="company_check_ceo" id="company_check_ceo" value="${companyDTO.company_check_ceo}"></td>
-				<td><input type="text" name="company_check_address" id="company_check_address"value="${companyDTO.company_check_address}"></td>
-				<td><input type="text" name="company_auth"
-					value="${companyDTO.company_auth}"></td>
-				<td><input type="submit" name="submit" id="submit" value="저장"></td>
+				<td>
+					<input type="hidden" id="company_id" name="company_id" value = "${companyDTO.company_id}">
+					<input type="text" id="company_check_tell" name="company_check_tell" value="${companyDTO.company_check_tell}">
+				</td>
+				<td>
+					<input type="text" id="company_check_business_no" name="company_check_business_no" value="${companyDTO.company_check_business_no}">
+				</td>
+				<td>
+					<input type="text" id="company_check_ceo" name="company_check_ceo" value="${companyDTO.company_check_ceo}">
+				</td>
+				<td>
+				<input type="text" id="company_check_address" name="company_check_address" value="${companyDTO.company_check_address}">
+				</td>
+				<td>
+					<input type="radio" name="company_auth" value="true" <c:if test="${companyDTO.company_auth eq 'true'}">checked="checked"</c:if>/>승인
+					<input type="radio" name="company_auth" value="false" <c:if test="${companyDTO.company_auth eq 'false'}">checked="checked"</c:if>/>미승인
+				</td>
+				<td>
+					<input type="submit" id="submit" value="저장">
+				</td>
 				<td>${companyDTO.admin_id}</td>
-				<td>${companyDTO.company_check_date}</td>
+				<td>${companyDTO.company_auth_date}</td>
 			</tr>
 	</table>
 </form>

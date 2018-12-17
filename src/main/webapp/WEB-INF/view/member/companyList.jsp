@@ -21,7 +21,6 @@
 			<th>회사대표연락처</th>
 			<th>본사연락처</th>
 			<th>신청날짜</th>
-			<!---->
 			<th>승인</th>
 		</tr>
 		<c:forEach var="company" items="${companyList}">
@@ -36,11 +35,11 @@
 				<td>${company.company_branch_tell}</td>
 				<td>${company.company_head_tell}</td>
 				<td>${company.company_check_date}</td>
-				<!---->
-				<td><a href="/Travel/companyAuthInfo?company_id=${company.company_id}">승인</a></td>
+				<td>
+					<a href="/Travel/companyAuthInfo?company_id=${company.company_id}">승인</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
-
 </body>
 </html>
