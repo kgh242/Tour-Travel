@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -44,17 +43,13 @@
 				<td>${companyDTO.company_head_tell}</td>
 				<td>${companyDTO.company_check_date}</td>
 				<!---->
-				<td><input type="text" id="company_check_tell"
-					value="${companyDTO.company_check_tell}"></td>
-				<td><input type="text" id="company_check_business_no"
-					value="${companyDTO.company_check_business_no}"></td>
-				<td><input type="text" id="company_check_ceo"
-					value="${companyDTO.company_check_ceo}"></td>
-				<td><input type="text" id="company_check_address"
-					value="${companyDTO.company_check_address}"></td>
-				<td><input type="text" id="company_auth"
+				<td><input type="text" name="company_check_tell" id="company_check_tell" value="${companyDTO.company_check_tell}"></td>
+				<td><input type="text" name="company_check_business_no" id="company_check_business_no" value="${companyDTO.company_check_business_no}"></td>
+				<td><input type="text" name="company_check_ceo" id="company_check_ceo" value="${companyDTO.company_check_ceo}"></td>
+				<td><input type="text" name="company_check_address" id="company_check_address"value="${companyDTO.company_check_address}"></td>
+				<td><input type="text" name="company_auth"
 					value="${companyDTO.company_auth}"></td>
-				<td><input type="submit" id="submit" value="저장"></td>
+				<td><input type="submit" name="submit" id="submit" value="저장"></td>
 				<td>${companyDTO.admin_id}</td>
 				<td>${companyDTO.company_check_date}</td>
 			</tr>

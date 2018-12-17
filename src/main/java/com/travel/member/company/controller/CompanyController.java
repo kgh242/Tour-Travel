@@ -44,12 +44,14 @@ public class CompanyController {
 
 	@RequestMapping(value = "/companyAuthInfo", method = RequestMethod.GET)
 	public String companyAuthInfo(@RequestParam(value="company_id") String company_id, Model model) {
+		System.out.println("CompanyController.java.companyAuthInfo()");
 		model.addAttribute("companyDTO", companyService.companyAuthInfo(company_id));
 		return "member/companyAuthInfo";
 	}
 	
 	@RequestMapping(value = "/companyAuth", method = RequestMethod.POST)
 	public String companyAuth(CompanyDTO companyDTO) {
+		System.out.println("CompanyController.java.companyAuth().POST");
 		companyService.companyAuth(companyDTO);
 		return "member/companyList";
 	}

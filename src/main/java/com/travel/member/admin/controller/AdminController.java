@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.travel.member.admin.dto.AdminDTO;
 import com.travel.member.admin.service.AdminService;
+import com.travel.paging.PageMaker;
 
 @Controller
 public class AdminController {
@@ -84,13 +85,19 @@ public class AdminController {
 	}
 	//관리자 리스트
 	@RequestMapping(value= "/adminList", method = RequestMethod.GET)
-	public String adminList(@RequestParam(value="currentPage", defaultValue = "1") int currentPage, Model model) {
+	public String adminList(@RequestParam(value="currentPage", defaultValue = "1") int currentPage, Model model,PageMaker pageMaker) {
 		System.out.println("AdminController.java.adminList().GET");
-		HashMap<String, Integer> pagingInfo = new HashMap<String, Integer>();
-		List<AdminDTO> adminList;
-		adminList = adminService.adminSelectAll(pagingInfo, currentPage, 10, 10);
+		pageMaker.setCurrentPage(currentPage);
+		List<AdminDTO> adminList = adminService.adminSelectAll(pageMaker);
 		model.addAttribute("adminList", adminList);
-		model.addAttribute("pagingInfo", pagingInfo);
+		model.addAttribute("currentPage", currentPage);
+        model.addAttribute("pagePerBlock", pageMaker.getPagePerBlock());
+        model.addAttribute("currentBlock", pageMaker.getCurrentBlock());
+        model.addAttribute("startPage", pageMaker.getStartPage());
+        model.addAttribute("endPage", pageMaker.getEndPage());
+        model.addAttribute("prevPage", pageMaker.isPrevPage());
+        model.addAttribute("nextPage", pageMaker.isNextPage());
+		//model.addAttribute("pageMaker", pageMaker);
 		return "member/adminList";
 	}
 	//관리자 로그아웃

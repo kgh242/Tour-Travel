@@ -18,8 +18,8 @@
 			<td>admin_employee_tell</td>
 			<td>admin_date</td>
 		</tr>
+		 <c:forEach var="admin" items="${adminList}">
 		<tr>
-		    <c:forEach var="admin" items="${adminList}">
      			<td>${admin.admin_no}</td>
                	<td>${admin.admin_id}</td>
                	<td>${admin.admin_level}</td>
@@ -29,26 +29,24 @@
                	<td>${admin.admin_date}</td>
          </tr>    
           	</c:forEach>
-         <tr >
-            <td>
-            	<form action="">
-            		<input type="text" />
-            	</form>
-            </td>
-            <td colspan = "6" align="center">
-                <ul class="pagination">
-	                <c:if test="${pagingInfo.currentScreen > 1}">
-	                    <li class="page-item"><a href="/adminList?currentPage=${(pagingInfo.currentScreen - 1) * pagingInfo.pagePerScreen}"><-</a></li>
-	                </c:if>
-	                <c:forEach var="i" begin="${pagingInfo.startScreenPage}" end="${pagingInfo.startScreenPage + pagingInfo.currentScreenPage - 1}" step="1">
-	                    <li class="page-item" id = "pageItem${i}"><a href="/adminList?currentPage=${i}">${i}</a></li>
-	                </c:forEach>
-	                <c:if test="${pagingInfo.currentScreen <  pagingInfo.lastScreen}">
-	                    <li class="page-item"><a href="/adminList?currentPage=${pagingInfo.currentScreen * pagingInfo.pagePerScreen + 1}">-></a></li>
-	                </c:if>
-                </ul>
-     		 </td>
-		</tr>
-	</table>
+   </table>
+      <div class="text-center">
+        <ul class="pagination justify-content-center">
+            <c:if test="${prevPage}">
+                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/adminList?currentPage=${(currentBlock - 1) * pagePerBlock}">< 이전</a></li>
+            </c:if>
+            <c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+                <c:if test="${currentPage == i}">
+                    <li class="page-item"><a class="page-link" href="#">${i}</a></li>
+                </c:if>
+                <c:if test="${currentPage != i}">
+                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/adminList?currentPage=${i}">${i}</a></li>
+                </c:if>
+            </c:forEach>
+            <c:if test="${nextPage}">
+                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/adminList?currentPage=${currentBlock * pagePerBlock + 1}">다음 ></a></li>
+            </c:if>
+        </ul>
+    </div>
 </body>
 </html>
