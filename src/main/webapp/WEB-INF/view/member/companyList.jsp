@@ -22,6 +22,7 @@
 			<th>본사연락처</th>
 			<th>신청날짜</th>
 			<th>승인</th>
+			<th>승인상태</th>
 		</tr>
 		<c:forEach var="company" items="${companyList}">
 			<tr>
@@ -37,6 +38,10 @@
 				<td>${company.company_check_date}</td>
 				<td>
 					<a href="/Travel/companyAuthInfo?company_id=${company.company_id}">승인</a>
+				</td>
+				<td>
+					<c:if test="${company.company_auth eq 'true'}">승인됨</c:if>
+					<c:if test="${company.company_auth eq 'false'}">미승인</c:if>
 				</td>
 			</tr>
 		</c:forEach>
