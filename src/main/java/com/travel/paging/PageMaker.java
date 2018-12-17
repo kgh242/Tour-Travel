@@ -13,7 +13,6 @@ public class PageMaker {
     private int endPage; // 현재 페이지 블록의 마지막페이지
     private boolean prevPage; // 이전페이지 화살표
     private boolean nextPage; // 다음페이지 화살표
-    private int startBlock;
     
 
     
@@ -116,4 +115,6 @@ public class PageMaker {
     public void setNextPage(boolean nextPage) {
         this.nextPage = nextPage;
     }
+
+    
 }
