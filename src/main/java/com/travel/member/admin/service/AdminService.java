@@ -1,7 +1,6 @@
 package com.travel.member.admin.service;
 
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,10 +72,6 @@ public class AdminService {
         	pageMaker.setPrevPage(false);
             pageMaker.setNextPage(false); 
         }
-        System.out.println(pageMaker.getLastBlock()+"<마지막블럭");
-        System.out.println(pageMaker.getCurrentBlock()+"<현재블럭");
-        System.out.println(pageMaker.isNextPage()+"<다음페이지버튼");
-        System.out.println(pageMaker.isPrevPage()+"<이전페이지버튼"); 
 	    return adminMapper.adminSelectAll(pageMaker);
 	} 
 	// 페이징 처리를위한 관리자수 조회
