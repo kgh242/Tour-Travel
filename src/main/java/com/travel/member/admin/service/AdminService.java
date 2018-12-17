@@ -60,19 +60,26 @@ public class AdminService {
         pageMaker.setStartPage();
         pageMaker.setEndPage();
         // 이전 페이지와 다음 페이지를 컨트롤하는 조건문
-        if(pageMaker.getCurrentBlock() == pageMaker.getLastBlock() && pageMaker.getAllCount()<100) {
-        	  pageMaker.setPrevPage(false);
-              pageMaker.setNextPage(false);
   
-        }else if(pageMaker.getCurrentBlock() == pageMaker.getLastBlock() && pageMaker.getAllCount()>100){
-            	pageMaker.setPrevPage(true);
-                pageMaker.setNextPage(false);        	
-        }else if(pageMaker.getCurrentBlock() < pageMaker.getLastBlock()&& pageMaker.getAllCount()<100) {
-            pageMaker.setPrevPage(false);
+        if(pageMaker.getCurrentBlock() != pageMaker.getLastBlock() && pageMaker.getCurrentBlock() >1){
+            System.out.println("true<>true");
+        	pageMaker.setPrevPage(true);
             pageMaker.setNextPage(true);
-        } else if(pageMaker.getCurrentBlock() < pageMaker.getLastBlock() && pageMaker.getAllCount()>100){
-            pageMaker.setPrevPage(true);
+  
+        }else  if(pageMaker.getCurrentBlock() != pageMaker.getLastBlock() && pageMaker.getLastBlock() != 1) {
+            System.out.println("false<>true");
+        	pageMaker.setPrevPage(false);
             pageMaker.setNextPage(true);
+      	
+        }else if(pageMaker.getCurrentBlock() <= pageMaker.getLastBlock() && pageMaker.getCurrentBlock() != 1){
+            System.out.println("true<>false");	
+        	pageMaker.setPrevPage(true);
+            pageMaker.setNextPage(false);   
+        	
+        }else if(pageMaker.getLastBlock() == 1) {
+        	System.out.println("false<>false");  
+        	pageMaker.setPrevPage(false);
+            pageMaker.setNextPage(false); 
         }
         System.out.println(pageMaker.getLastBlock()+"<마지막블럭");
         System.out.println(pageMaker.getCurrentBlock()+"<현재블럭");
