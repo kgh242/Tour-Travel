@@ -50,7 +50,7 @@
     	 FROM member_admin
     	WHERE admin_id=#{loginId}	
     </select>
-    <select id="adminSelectAll" parameterType="int" resultType="com.travel.member.admin.dto.AdminDTO">
+    <select id="adminSelectAll" parameterType="com.travel.paging.PageMaker" resultType="com.travel.member.admin.dto.AdminDTO">
     	SELECT admin_no
     		  ,admin_id
     		  ,admin_level

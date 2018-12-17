@@ -77,7 +77,10 @@ public class CompanyService {
 	}
 	
 	public int companyAuth(CompanyDTO companyDTO) {
-		return companyMapper.companyAuth(companyDTO);
+		System.out.println(companyDTO+"companyAuth()");
+		int aaa;
+		aaa = companyMapper.companyAuth(companyDTO);
+		return aaa;
 	}
 
 }
