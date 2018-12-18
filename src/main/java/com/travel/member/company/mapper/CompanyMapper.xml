@@ -42,13 +42,20 @@
  				, now());
  	</insert>
  	
- 	<select id="companyList" resultType="com.travel.member.company.dto.CompanyDTO">
+ 	<select id="companyList" parameterType="com.travel.paging.PageMaker" resultType="com.travel.member.company.dto.CompanyDTO">
  		SELECT *
+ 		FROM member_company
+ 		ORDER BY company_check_date
+ 		DESC LIMIT #{startRow}, #{rowPerPage}
+ 	</select>
+ 	
+ 	<select id="companyListCount" resultType="int">
+ 		SELECT count(*)
  		FROM member_company
  	</select>
  	
  	<select id="companyAuthInfo" parameterType="java.lang.String" resultType="com.travel.member.company.dto.CompanyDTO">
- 		SELECT * 
+ 		SELECT *
  		FROM member_company
  		WHERE company_id = #{company_id}
  	</select>
@@ -70,6 +77,12 @@
  		SELECT COUNT(company_no)
  		FROM member_company
  		WHERE company_id = #{company_id} AND company_pw = #{company_pw}
+ 	</select>
+ 	
+ 	<select id="companyLoginCheck" parameterType="com.travel.member.company.dto.CompanyDTO" resultType="java.lang.Boolean">
+ 		SELECT company_auth
+ 		FROM member_company
+ 		WHERE company_id = #{company_id}
  	</select>
  	
  </mapper>

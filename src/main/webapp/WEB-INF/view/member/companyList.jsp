@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>companyList</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 여행사 회원등록 리스트
@@ -36,7 +37,7 @@
 				<td>${company.company_head_tell}</td>
 				<td>${company.company_check_date}</td>
 				<td>
-					<a href="/Travel/companyAuthInfo?company_id=${company.company_id}">승인</a>
+					<a href="${pageContext.request.contextPath}/Travel/companyAuthInfo?company_id=${company.company_id}">승인</a>
 				</td>
 				<td>
 					<c:if test="${company.company_auth eq 'true'}">승인됨</c:if>
@@ -45,5 +46,23 @@
 			</tr>
 		</c:forEach>
 	</table>
+      <div class="text-center">
+        <ul class="pagination justify-content-center">
+            <c:if test="${prevPage}">
+                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/Travel/companyList?currentPage=${(currentBlock - 1) * pagePerBlock}">< 이전</a></li>
+            </c:if>
+            <c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+                <c:if test="${currentPage == i}">
+                    <li class="page-item"><a class="page-link" href="#">${i}</a></li>
+                </c:if>
+                <c:if test="${currentPage != i}">
+                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/Travel/companyList?currentPage=${i}">${i}</a></li>
+                </c:if>
+            </c:forEach>
+            <c:if test="${nextPage}">
+                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/Travel/companyList?currentPage=${currentBlock * pagePerBlock + 1}">다음 ></a></li>
+            </c:if>
+        </ul>
+    </div>
 </body>
 </html>

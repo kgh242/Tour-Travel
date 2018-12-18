@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.travel.member.company.dto.CompanyDTO;
 import com.travel.member.company.dto.CompanyImgDTO;
 import com.travel.member.company.mapper.CompanyMapper;
+import com.travel.paging.PageMaker;
 
 @Service
 @Transactional
@@ -68,8 +69,34 @@ public class CompanyService {
 		return 1;
 	}
 
-	public List<CompanyDTO> companyList() {
-		return companyMapper.companyList();
+	public List<CompanyDTO> companyList(PageMaker pageMaker) {
+		pageMaker.setRowPerPage(10);
+		pageMaker.setPagePerBlock(10);
+		pageMaker.setAllCount(companyMapper.companyListCount());
+		pageMaker.setStartRow();
+		pageMaker.setLastPage();
+		pageMaker.setCurrentBlock();
+		pageMaker.setLastBlock();
+		pageMaker.setStartPage();
+		pageMaker.setEndPage();
+        if(pageMaker.getCurrentBlock() != pageMaker.getLastBlock() && pageMaker.getCurrentBlock() >1){
+        	pageMaker.setPrevPage(true);
+            pageMaker.setNextPage(true);
+        }else  if(pageMaker.getCurrentBlock() != pageMaker.getLastBlock() && pageMaker.getLastBlock() != 1) {
+        	pageMaker.setPrevPage(false);
+            pageMaker.setNextPage(true);
+        }else if(pageMaker.getCurrentBlock() <= pageMaker.getLastBlock() && pageMaker.getCurrentBlock() != 1){
+        	pageMaker.setPrevPage(true);
+            pageMaker.setNextPage(false);   
+        }else if(pageMaker.getLastBlock() == 1) {
+        	pageMaker.setPrevPage(false);
+            pageMaker.setNextPage(false); 
+        }
+		return companyMapper.companyList(pageMaker);
+	}
+	
+	public int companyListCount() {
+		return companyMapper.companyListCount();
 	}
 
 	public CompanyDTO companyAuthInfo(String company_id) {
@@ -83,5 +110,8 @@ public class CompanyService {
 	public int companyLogin(CompanyDTO companyDTO) {
 		return companyMapper.companyLogin(companyDTO);
 	}
-
+	
+	public boolean companyLoginCheck(CompanyDTO companyDTO) {
+		return companyMapper.companyLoginCheck(companyDTO);
+	}
 }

@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>companyAuthInfo</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 	여행사 회원등록 리스트
