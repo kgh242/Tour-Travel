@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin - Login</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+  </head>
+
+  <body class="bg-dark">
+
+    <div class="container">
+    <div class="card card-login mx-auto mt-5">
+      <!-- Tabs -->
+      <div class="nav nav-tabs" id="loginTab" role="tablist">
+          <a class="nav-item nav-link active" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true">사용자</a>
+          <a class="nav-item nav-link" id="nav-company-tab" data-toggle="tab" href="#nav-company" role="tab" aria-controls="nav-company" aria-selected="false">여행사</a>
+      </div>
+      <!-- Tab Login -->
+      <div class="tab-content" id="nav-tabContent">
+        <!-- 사용자 로그인 -->
+        <div class="tab-pane fade show active" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
+          <div class="card-header">사용자 로그인</div>
+          <div class="card-body">
+            <form action="/Travel/userLogin" method="post">
+              <div class="form-group">
+                <div class="form-label-group">
+                  <input type="text" id="user_id" name="user_id" class="form-control" placeholder="아이디를 입력해주세요" required="required" autofocus="autofocus" value="id001">
+                  <label for="user_id">ID</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-label-group">
+                  <input type="password" id="user_pw" name="user_pw" class="form-control" placeholder="비밀번호를 입력해주세요" required="required" value="pw001">
+                  <label for="user_pw">Password</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="remember-me">
+                    	계정 정보 저장
+                  </label>
+                </div>
+              </div>
+              <input class="btn btn-primary btn-block" type="submit" value="로그인"></a>
+            </form>
+            <div class="text-center">
+              <a class="d-block small mt-3" href="/Travel/userAdd">회원가입</a>
+            </div>
+          </div>
+        </div>
+        <!-- 여행사 로그인 -->
+        <div class="tab-pane fade" id="nav-company" role="tabpanel" aria-labelledby="nav-company-tab">
+            <div class="card-header">여행사 로그인</div>
+            <div class="card-body">
+              <form action="/Travel/companyLogin" method="post">
+                <div class="form-group">
+                  <div class="form-label-group">
+                    <input type="text" id="company_id" name="company_id" class="form-control" placeholder="아이디를 입력해주세요" required="required" autofocus="autofocus" value="test001">
+                    <label for="company_id">ID</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-label-group">
+                    <input type="password" id="company_pw" name="company_pw" class="form-control" placeholder="비밀번호를 입력해주세요" required="required" value="pw001">
+                    <label for="company_pw">Password</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" value="remember-me">
+                     	계정 정보 저장
+                    </label>
+                  </div>
+                </div>
+                <input class="btn btn-primary btn-block" type=submit value="로그인"></a>
+              </form>
+              <div class="text-center">
+                <a class="d-block small mt-3" href="/companyAdd">회원가입</a>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  </body>
+
+</html>
