@@ -114,4 +114,8 @@ public class CompanyService {
 	public boolean companyLoginCheck(CompanyDTO companyDTO) {
 		return companyMapper.companyLoginCheck(companyDTO);
 	}
+	
+	public CompanyDTO companyInfo(String company_id) {
+		return companyMapper.companyInfo(company_id);
+	}
 }

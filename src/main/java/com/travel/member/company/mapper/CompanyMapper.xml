@@ -85,4 +85,18 @@
  		WHERE company_id = #{company_id}
  	</select>
  	
+ 	<select id="companyInfo" parameterType="java.lang.String" resultType="com.travel.member.company.dto.CompanyDTO">
+ 		SELECT
+ 			  company_id
+ 			, company_name
+ 			, company_tell1
+ 			, company_tell2
+ 			, company_address
+ 			, company_business_no
+ 			, company_branch_tell
+ 			, company_head_tell
+ 		FROM member_company
+ 		WHERE company_id = #{company_id}
+ 	</select>
+ 	
  </mapper>

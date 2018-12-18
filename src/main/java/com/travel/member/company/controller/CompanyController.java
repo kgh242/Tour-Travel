@@ -109,10 +109,10 @@ public class CompanyController {
 		return "thymeleaf/index";
 	}
 	
-/*	@RequestMapping(value = "/companyInfo", method = RequestMethod.GET)
+	@RequestMapping(value = "/companyInfo", method = RequestMethod.GET)
 	public String companyInfo(HttpSession session, Model model) {
 		String company_id = session.getAttribute("LOGINID").toString();
 		model.addAttribute("companyDTO", companyService.companyInfo(company_id));
 		return "member/companyInfo";
-	}*/
+	}
 }

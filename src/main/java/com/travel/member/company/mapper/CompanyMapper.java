@@ -20,4 +20,5 @@ public interface CompanyMapper {
 	int companyLogin(CompanyDTO companyDTO);
 	boolean companyLoginCheck(CompanyDTO companyDTO);
 	int companyListCount();
+	CompanyDTO companyInfo(String company_id);
 }
