@@ -3,8 +3,9 @@ package com.travel.pack.dto;
 //패키지 상품 정보 DTO
 
 public class PackDTO {
-	private String pack_info_no;
+	private int pack_info_no;
 	private String company_id;
+	private String pack_info_title;
 	private String pack_info_country;
 	private String pack_info_safe;
 	private String pack_info_air;
@@ -16,6 +17,13 @@ public class PackDTO {
 	private boolean pack_info_sale;
 	private String pack_info_apply_date;
 	
+	public PackDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+
 	@Override
 	public String toString() {
 		return "PackDTO [pack_info_no=" + pack_info_no + ", company_id=" + company_id + ", pack_info_country="
@@ -23,16 +31,21 @@ public class PackDTO {
 				+ ", pack_info_start_date=" + pack_info_start_date + ", pack_info_end_date=" + pack_info_end_date
 				+ ", pack_info_course=" + pack_info_course + ", pack_info_person_number=" + pack_info_person_number
 				+ ", pack_info_closing_date=" + pack_info_closing_date + ", pack_info_sale=" + pack_info_sale
-				+ ", pack_info_apply_date=" + pack_info_apply_date + "]";
+				+ ", pack_info_apply_date=" + pack_info_apply_date + ", pack_info_title=" + pack_info_title + "]";
 	}
-	public PackDTO() {
-		super();
-		// TODO Auto-generated constructor stub
+
+
+
+	public String getPack_info_title() {
+		return pack_info_title;
 	}
-	public String getPack_info_no() {
+	public void setPack_info_title(String pack_info_title) {
+		this.pack_info_title = pack_info_title;
+	}
+	public int getPack_info_no() {
 		return pack_info_no;
 	}
-	public void setPack_info_no(String pack_info_no) {
+	public void setPack_info_no(int pack_info_no) {
 		this.pack_info_no = pack_info_no;
 	}
 	public String getCompany_id() {

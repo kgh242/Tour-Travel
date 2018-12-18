@@ -1,1 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.travel.pack.mapper.PackMapper">
+
+    <insert id="packAdd" parameterType="com.travel.pack.dto.PackDTO">
+		INSERT INTO pack_info (
+			company_id, 
+			pack_info_title,
+			pack_info_country, 
+			pack_info_safe, 
+			pack_info_air, 
+			pack_info_start_date, 
+			pack_info_end_date, 
+			pack_info_course, 
+			pack_info_person_number, 
+			pack_info_closing_date, 
+			pack_info_sale, 
+			pack_info_apply_date)
+		 VALUES (
+		 	#{company_id}, 
+		 	#{pack_info_title},
+		 	#{pack_info_country}, 
+		 	#{pack_info_safe}, 
+		 	#{pack_info_air}, 
+		 	#{pack_info_start_date}, 
+		 	#{pack_info_end_date}, 
+		 	#{pack_info_course}, 
+		 	#{pack_info_person_number}, 
+		 	#{pack_info_closing_date}, 
+		 	#{pack_info_sale}, 
+		 	now());
+    </insert>
+    
+    <insert id="packLandMarkImgInsert" parameterType="com.travel.image.ImgDTO">
+    	INSERT INTO pack_landmark_img (
+    		pack_hotel_no, 
+    		pack_hotel_img_path, 
+    		pack_hotel_img_true_name, 
+    		pack_hotel_img_false_name, 
+    		pack_hotel_img_ext, 
+    		pack_hotel_img_size, 
+    		pack_hotel_img_date)
+    	VALUES (    		
+    		#{pack_hotel_no}, 
+    		#{pack_hotel_img_path}, 
+    		#{pack_hotel_img_true_name}, 
+    		#{pack_hotel_img_false_name}, 
+    		#{pack_hotel_img_ext}, 
+    		#{pack_hotel_img_size}, 
+    		#{pack_hotel_img_date})
+    </insert>
+    
+
+
+    <select id="packGetInfo" parameterType="int" resultType="com.travel.pack.dto.PackDTO">
+    	SELECT * FROM pack_info WHERE pack_info_no = #{pack_info_no}
+    </select>
+    
+    <select id="packList" resultType="com.travel.pack.dto.PackDTO">
+    	SELECT * FROM pack_info
+    </select>
+
+</mapper>

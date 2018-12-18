@@ -2,8 +2,8 @@ package com.travel.member.user.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +14,7 @@ import com.travel.image.ImgDTO;
 import com.travel.image.ImgHelper;
 import com.travel.member.user.dto.UserDTO;
 import com.travel.member.user.mapper.UserMapper;
+import com.travel.pack.dto.PackDTO;
 
 //고객 정보 Service
 
@@ -81,6 +82,9 @@ public class UserService {
 			userImgDTO.setUser_id(userDTO.getUser_id());
 			
 			//이미지 정보 추출
+			//추출된정보를저장할객체 = 이미지헬퍼(이미지정보추출)객체의 추출메서드(메서드호출시 넘겨받은 이미지)
+			//매퍼로담아보내기위한객체.set세팅메서드(추출된 정보를저장할객체.get)			
+			
 			imgDTO = imgHelper.imgHelper(userDTO.getUser_img());
 			userImgDTO.setUser_img_path(imgDTO.getImgPath());
 			userImgDTO.setUser_img_true_name(imgDTO.getImgTrueName());
@@ -260,7 +264,14 @@ public class UserService {
 	// 모든 유저 조회
 	public List<UserDTO> userList() {
 		System.out.println("userList 서비스 계층......UserService.java");
-		return userMapper.userList();
+		List<UserDTO> result = new ArrayList<UserDTO>();
+		
+		try {
+			result = userMapper.userList();
+		} catch (Error e) {
+			System.out.println("userList 서비스 계층......Packservice.java : " + e);
+		}
+		return result;
 	}
-	
+
 }
