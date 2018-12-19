@@ -49,18 +49,28 @@ public class PackService {
 		System.out.println(packPriceDTO.getPack_price_adult() + "서비스!!가격");
 		System.out.println(packPriceDTO.getPack_price_baby() + "서비스!!가격");
 		System.out.println(packPriceDTO.getPack_price_child() + "서비스!!가격");
-		System.out.println(hotelImgFileName[0].getOriginalFilename() + "서비스!!호텔이미지오리지널네임");
-		System.out.println(hotelImgFileName[1].getOriginalFilename() + "서비스!!호텔이미지오리지널네임");
-		System.out.println(scheduleFileName[0].getOriginalFilename() + "서비스!!스케쥴이미지오리지널네임");
-		System.out.println(scheduleFileName[1].getOriginalFilename() + "서비스!!스케쥴이미지오리지널네임");
-		System.out.println(landMarkFileName[0].getOriginalFilename() + "서비스!!관광지이미지오리지널네임");
-		System.out.println(landMarkFileName[1].getOriginalFilename() + "서비스!!관광지이미지오리지널네임");
+
 		System.out.println(packLandmarkDTO.getPack_tour_contents() + "textarea!!");
 		
 		int result = 0;
 		ImgHelper imgHelper = new ImgHelper();
+		int hotelImgCount = 0;
+		int scheduleImgCount = 0;
+		int landMarkImgCount = 0;
+	
+		for(int count = 0; !(hotelImgFileName[count].isEmpty()); count++) {
+			hotelImgCount = count;
+		}
+		for(int count = 0; !(scheduleFileName[count].isEmpty()); count++) {
+			scheduleImgCount = count;
+		}
+		for(int count = 0; !(landMarkFileName[count].isEmpty()); count++) {
+			landMarkImgCount = count;
+		}
 		
-		if(hotelImgFileName.length == 0 && scheduleFileName.length == 0 && landMarkFileName.length == 0) {
+		System.out.println(hotelImgCount+ "<<<<<<이미지개수");
+		
+		if(hotelImgCount == 0 && scheduleImgCount == 0 && landMarkImgCount == 0) {
 			System.out.println("패키지등록 이미지업로드 없음......PackService.java");
 			try {
 				result = packMapper.packAdd(packDTO);
@@ -68,6 +78,9 @@ public class PackService {
 				System.out.println("패키지등록(이미지없음) 액션 에러발생 ......Packservice.java : " + e);
 			}
 		}else {
+			System.out.println(hotelImgFileName[0].getOriginalFilename() + "서비스!!호텔이미지오리지널네임");
+			System.out.println(scheduleFileName[0].getOriginalFilename() + "서비스!!스케쥴이미지오리지널네임");
+			System.out.println(landMarkFileName[0].getOriginalFilename() + "서비스!!관광지이미지오리지널네임");
 			for(int i = 0; i < landMarkFileName.length; i ++) {
 				ImgDTO imgDTO = new ImgDTO();
 				imgDTO.setImgPath((imgHelper.imgHelper(landMarkFileName[i])).getImgPath());

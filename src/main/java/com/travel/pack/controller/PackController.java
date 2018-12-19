@@ -46,26 +46,7 @@ public class PackController {
 			@RequestParam("landMarkFileName[]") MultipartFile landMarkFileName[]
 			) {
 		System.out.println("패키지등록 액션......PackController.java");
-		System.out.println(packDTO.getPack_info_title() + "글제목");
-		System.out.println(packHotelDTO.getPack_hotel_no() + "호텔");
-		System.out.println(packHotelDTO.getPack_hotel_start_date() + "호텔");
-		System.out.println(packHotelDTO + "호텔");
-		System.out.println(packScheduleDTO + "스케줄");
-		System.out.println(packScheduleDTO.getPack_schedule_contents() + "스케줄");
-		System.out.println(packLandmarkDTO.getPack_landmark_code() + "관광지");
-		System.out.println(packLandmarkDTO.getPack_tour_date() + "관광지");
-		System.out.println(packLandmarkDTO.getPack_tour_contents() + "관광지");
-		System.out.println(packPriceDTO.getPack_price_adult() + "가격");
-		System.out.println(packPriceDTO.getPack_price_baby() + "가격");
-		System.out.println(packPriceDTO.getPack_price_child() + "가격");
-		System.out.println(hotelImgFileName[0].getOriginalFilename() + "호텔이미지오리지널네임");
-		System.out.println(hotelImgFileName[1].getOriginalFilename() + "호텔이미지오리지널네임");
-		System.out.println(scheduleFileName[0].getOriginalFilename() + "스케쥴이미지오리지널네임");
-		System.out.println(scheduleFileName[1].getOriginalFilename() + "스케쥴이미지오리지널네임");
-		System.out.println(landMarkFileName[0].getOriginalFilename() + "관광지이미지오리지널네임");
-		System.out.println(landMarkFileName[1].getOriginalFilename() + "관광지이미지오리지널네임");
-		System.out.println(packLandmarkDTO.getPack_tour_contents() + "textarea!!");
-		
+
 		packService.packAdd(packDTO, packHotelDTO, packScheduleDTO, packLandmarkDTO, packPriceDTO, hotelImgFileName, scheduleFileName, landMarkFileName);
 		return "redirect:/packList";
 	}
