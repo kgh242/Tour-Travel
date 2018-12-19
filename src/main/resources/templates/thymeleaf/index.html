@@ -60,11 +60,11 @@
                                 <li class="nav-item active">
                                     <a class="nav-link" href="index">메인 <span class="sr-only">(current)</span></a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">플랜 여행 </a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="plan">플랜 여행</a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">패키지 여행 </a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="package">패키지 여행</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact">여행 후기</a>
@@ -77,11 +77,12 @@
                             <div th:if="${session.LOGINID == null}">
 	                            <!-- Admin Signin btn -->
 	                            <div class="dorne-signin-btn">
-	                                <a href="/Travel/adminLogin">관리자</a>
+	                                <a href="/adminLogin">관리자</a>
 	                            </div>
 	                            <!-- user/company 통합 로그인  -->
 	                            <div class="dorne-add-listings-btn">
-	                                <a href="/login" class="btn dorne-btn">사용자 로그인</a>
+	                            	<a href="/login" class="btn dorne-btn">사용자 로그인</a>
+	                                <!-- <a href="/Travel/login" class="btn dorne-btn">사용자 로그인</a> -->
 	                            </div>
                             </div>
                             <div th:if="${session.LOGINID != null}">

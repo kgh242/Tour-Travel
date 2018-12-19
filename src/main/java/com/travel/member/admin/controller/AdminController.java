@@ -57,10 +57,10 @@ public class AdminController {
 			System.out.println(adminDTO.getAdmin_level()+"<- admin level");
 			session.setAttribute("LOGINID", adminDTO.getAdmin_id());
 			session.setAttribute("LEVEL", adminDTO.getAdmin_level());
-			return "main/admin"; 
+			return "thymeleaf/adminIndex"; 
 		}else {
 			System.out.println("로그인 실패");
-			return "member/adminLogin";
+			return "thymeleaf/adminLogin";
 		}
 	}
 	// 관리자 수정화면
@@ -99,7 +99,7 @@ public class AdminController {
         model.addAttribute("prevPage", pageMaker.isPrevPage());
         model.addAttribute("nextPage", pageMaker.isNextPage());
 		//model.addAttribute("pageMaker", pageMaker);
-		return "member/adminList";
+		return "thymeleaf/adminList";
 	}
 	//관리자 로그아웃
 	@RequestMapping(value= "/adminLogout", method = RequestMethod.GET)

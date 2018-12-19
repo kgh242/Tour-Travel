@@ -73,7 +73,7 @@ public class UserController {
 	public String userLogout(HttpSession session) {
 		System.out.println("user 로그아웃 액션......UserController.java");
 		session.invalidate();
-		return "thymeleaf/index";
+		return "redirect:/index";
 	}
 	
 	@RequestMapping(value = "/userGetInfo", method = RequestMethod.GET)
@@ -132,7 +132,7 @@ public class UserController {
 		System.out.println("user 회원리스트......UserController.java");
 		List<UserDTO> userList = userService.userList();
 		model.addAttribute("userList", userList);
-		return "member/userList";
+		return "thymeleaf/userList";
 	}
 
 }
