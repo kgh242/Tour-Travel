@@ -1,12 +1,15 @@
 package com.travel.pack.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.travel.image.ImgDTO;
@@ -25,85 +28,249 @@ public class PackService {
 	
 	@Autowired
 	private PackMapper packMapper;
-	
-	@Transactional
-	public int packAdd(
-			PackDTO packDTO, 
-			PackHotelDTO packHotelDTO,
-			PackScheduleDTO packScheduleDTO,
-			PackLandmarkDTO packLandmarkDTO,
-			PackPriceDTO packPriceDTO,
-			MultipartFile hotelImgFileName[],
-			MultipartFile scheduleFileName[],
-			MultipartFile landMarkFileName[]) {
-		System.out.println("패키지등록 액션......PackService.java");		
-		System.out.println(packDTO.getPack_info_title() + "서비스!!글제목");
-		System.out.println(packHotelDTO.getPack_hotel_no() + "서비스!!호텔");
-		System.out.println(packHotelDTO.getPack_hotel_start_date() + "서비스!!호텔");
-		System.out.println(packHotelDTO.getPack_hotel_end_date() + "서비스!!호텔");
-		System.out.println(packScheduleDTO.getPack_schedule_date() + "서비스!!스케줄");
-		System.out.println(packScheduleDTO.getPack_schedule_contents() + "서비스!!스케줄");
-		System.out.println(packLandmarkDTO.getPack_landmark_code() + "서비스!!관광지");
-		System.out.println(packLandmarkDTO.getPack_tour_date() + "서비스!!관광지");
-		System.out.println(packLandmarkDTO.getPack_tour_contents() + "서비스!!관광지");
-		System.out.println(packPriceDTO.getPack_price_adult() + "서비스!!가격");
-		System.out.println(packPriceDTO.getPack_price_baby() + "서비스!!가격");
-		System.out.println(packPriceDTO.getPack_price_child() + "서비스!!가격");
 
-		System.out.println(packLandmarkDTO.getPack_tour_contents() + "textarea!!");
-		
+	@Transactional
+	public int packAdd(PackDTO packDTO, List<PackHotelDTO> packHotelList, List<PackScheduleDTO> packScheduleList,
+			List<PackLandmarkDTO> packLandmakList, PackPriceDTO packPriceDTO, List<MultipartFile> hotelImgFileName,
+			List<MultipartFile> scheduleFileName, List<MultipartFile> landMarkFileName) {
+
+		System.out.println("패키지등록 액션......PackService.java");
+
 		int result = 0;
+
+		// 이미지 정보 추출/사용을 위한 ImgHelper/ImgDTO
 		ImgHelper imgHelper = new ImgHelper();
-		int hotelImgCount = 0;
-		int scheduleImgCount = 0;
-		int landMarkImgCount = 0;
-	
-		for(int count = 0; !(hotelImgFileName[count].isEmpty()); count++) {
-			hotelImgCount = count;
-		}
-		for(int count = 0; !(scheduleFileName[count].isEmpty()); count++) {
-			scheduleImgCount = count;
-		}
-		for(int count = 0; !(landMarkFileName[count].isEmpty()); count++) {
-			landMarkImgCount = count;
-		}
-		
-		System.out.println(hotelImgCount+ "<<<<<<이미지개수");
-		
-		if(hotelImgCount == 0 && scheduleImgCount == 0 && landMarkImgCount == 0) {
-			System.out.println("패키지등록 이미지업로드 없음......PackService.java");
-			try {
-				result = packMapper.packAdd(packDTO);
-			} catch (Error e) {
-				System.out.println("패키지등록(이미지없음) 액션 에러발생 ......Packservice.java : " + e);
+		ImgDTO imgDTO = new ImgDTO();
+
+		System.out.println(hotelImgFileName.size() + "<<호텔이미지갯수");
+		System.out.println(scheduleFileName.size() + "<<스케줄이미지갯수");
+		System.out.println(landMarkFileName.size() + "<<관광지이미지갯수");
+
+
+
+		try {
+			result = packMapper.packAdd(packDTO);
+			System.out.println(packDTO.getPack_info_no() + "<-PK value");
+
+			// 숙소정보입력
+			for (int i = 0; i < packHotelList.size(); i++) {
+				System.out.println(i + "번째 숙소정보입력......packService......jav");
+				// 숙소이름(코드), 숙박시작/종료일 입력값 누락시 입력되지않음
+				if (!packHotelList.get(i).getPack_hotel_no().equals("")
+						&& !packHotelList.get(i).getPack_hotel_start_date().equals("")
+						&& !packHotelList.get(i).getPack_hotel_end_date().equals("")) {
+					PackHotelDTO packHotelDTO = new PackHotelDTO();
+					packHotelDTO.setPack_info_no(packDTO.getPack_info_no());
+					packHotelDTO.setPack_hotel_no(packHotelList.get(i).getPack_hotel_no());
+					packHotelDTO.setPack_hotel_start_date(packHotelList.get(i).getPack_hotel_start_date());
+					packHotelDTO.setPack_hotel_end_date(packHotelList.get(i).getPack_hotel_end_date());
+					packMapper.packHotelAdd(packHotelDTO);
+				}
+
 			}
-		}else {
-			System.out.println(hotelImgFileName[0].getOriginalFilename() + "서비스!!호텔이미지오리지널네임");
-			System.out.println(scheduleFileName[0].getOriginalFilename() + "서비스!!스케쥴이미지오리지널네임");
-			System.out.println(landMarkFileName[0].getOriginalFilename() + "서비스!!관광지이미지오리지널네임");
-			for(int i = 0; i < landMarkFileName.length; i ++) {
-				ImgDTO imgDTO = new ImgDTO();
-				imgDTO.setImgPath((imgHelper.imgHelper(landMarkFileName[i])).getImgPath());
-				imgDTO.setImgTrueName((imgHelper.imgHelper(landMarkFileName[i])).getImgTrueName());
-				imgDTO.setImgFalseName((imgHelper.imgHelper(landMarkFileName[i])).getImgFalseName());
-				imgDTO.setImgExt((imgHelper.imgHelper(landMarkFileName[i])).getImgExt());
-				imgDTO.setImgSize((imgHelper.imgHelper(landMarkFileName[i])).getImgSize());
-				
-				try {
-					//for(int j = 0; j < packHotelDTO.getHotel_code().size(); j++) {
-						//packMapper.packHotelAdd(packHotelDTO);
-					//}
-					//packMapper.packAdd(packDTO);
-					//packMapper.packLandMarkImgInsert(imgDTO);
-					result = 1;
-				} catch (Error e) {
-					System.out.println("패키지등록(이미지등록) 액션 에러발생 ......PackService.java : " + e);
+
+			// 스케줄정보입력 
+			for (int i = 0; i < packScheduleList.size(); i++) {
+				System.out.println(i + "번째 스케줄정보입력......packService......jav");
+				// 스케줄해당날짜, 스케줄내용 입력값 누락시 입력되지않음
+				if (!packScheduleList.get(i).getPack_schedule_date().equals("")
+						&& !packScheduleList.get(i).getPack_schedule_contents().equals("")) {
+					PackScheduleDTO packScheduleDTO = new PackScheduleDTO();
+					packScheduleDTO.setCompany_id(packDTO.getCompany_id());
+					packScheduleDTO.setPack_info_no(packDTO.getPack_info_no());
+					packScheduleDTO.setPack_schedule_date(packScheduleList.get(i).getPack_schedule_date());
+					packScheduleDTO.setPack_schedule_contents(packScheduleList.get(i).getPack_schedule_contents());
+
+					packMapper.packScheduleAdd(packScheduleDTO);
+				}
+
+			}
+
+			
+			  //관광지정보입력  pack_landmark_code pack_tour_date pack_tour_contents
+			for (int i = 0; i < packLandmakList.size(); i++) {
+				System.out.println(i + "번째 관광지정보입력......packService......jav"); // 숙소이름(코드),
+				// 숙박시작/종료일 입력값 누락시 입력되지않음
+				if (!packLandmakList.get(i).getPack_landmark_code().equals("")
+						&& !packLandmakList.get(i).getPack_tour_date().equals("")
+						&& !packLandmakList.get(i).getPack_tour_contents().equals("")) {
+					PackLandmarkDTO packLandmarkDTO = new PackLandmarkDTO();
+					packLandmarkDTO.setPack_info_no(packDTO.getPack_info_no());
+					packLandmarkDTO.setCompany_id(packDTO.getCompany_id());
+					packLandmarkDTO.setPack_landmark_code(packLandmakList.get(i).getPack_landmark_code());
+					packLandmarkDTO.setPack_tour_date(packLandmakList.get(i).getPack_tour_date());
+					packLandmarkDTO.setPack_tour_contents(packLandmakList.get(i).getPack_tour_contents());
+					
+					packMapper.packLandmarkAdd(packLandmarkDTO);
+				}
+
+			}
+			 
+
+			// 호텔 이미지 업로드 처리.
+			for (int i = 0; i < hotelImgFileName.size(); i++) {
+
+				if (!hotelImgFileName.get(i).equals("")) {
+					
+					imgDTO = imgHelper.imgHelper(hotelImgFileName.get(i));
+					ImgDTO hotelImgDTO = new ImgDTO();
+					hotelImgDTO.setImgExt(imgDTO.getImgExt());
+					hotelImgDTO.setImgTrueName(imgDTO.getImgTrueName());
+					hotelImgDTO.setImgFalseName(imgDTO.getImgFalseName());
+					hotelImgDTO.setImgPath(imgDTO.getImgPath());
+					hotelImgDTO.setImgSize(imgDTO.getImgSize());
+
+					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("pack_info_no", packDTO.getPack_info_no());
+					map.put("imgDTO", hotelImgDTO);
+
+					int hotelImgResult = packMapper.packHotelImgAdd(map);
+
+					if (hotelImgResult == 1) {
+						File file = new File(
+								hotelImgDTO.getImgPath() + File.separator + "uploads" + File.separator + "hotelImg");
+						if (file.exists()) {
+							try {
+								hotelImgFileName.get(i)
+										.transferTo(new File(hotelImgDTO.getImgPath() + File.separator + "uploads"
+												+ File.separator + "hotelImg" + File.separator
+												+ hotelImgDTO.getImgFalseName() + "." + hotelImgDTO.getImgExt()));
+							} catch (IllegalStateException e) {
+								e.printStackTrace();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						} else {
+							file.mkdirs();
+							try {
+								hotelImgFileName.get(i)
+										.transferTo(new File(hotelImgDTO.getImgPath() + File.separator + "uploads"
+												+ File.separator + "hotelImg" + File.separator
+												+ hotelImgDTO.getImgFalseName() + "." + hotelImgDTO.getImgExt()));
+							} catch (IllegalStateException e) {
+								e.printStackTrace();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+
+						}
+					}
+
 				}
 			}
+
+			// 스케줄 이미지 업로드 처리.
+			for (int i = 0; i < scheduleFileName.size(); i++) {
+
+				if (!scheduleFileName.get(i).equals("")) {
+
+					imgDTO = imgHelper.imgHelper(scheduleFileName.get(i));
+					ImgDTO scheduleImgDTO = new ImgDTO();
+					scheduleImgDTO.setImgExt(imgDTO.getImgExt());
+					scheduleImgDTO.setImgTrueName(imgDTO.getImgTrueName());
+					scheduleImgDTO.setImgFalseName(imgDTO.getImgFalseName());
+					scheduleImgDTO.setImgPath(imgDTO.getImgPath());
+					scheduleImgDTO.setImgSize(imgDTO.getImgSize());
+
+					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("pack_info_no", packDTO.getPack_info_no());
+					map.put("imgDTO", scheduleImgDTO);
+
+					int scheduleImgResult = packMapper.packScheduleImgAdd(map);
+
+					if (scheduleImgResult == 1) {
+						File file = new File(scheduleImgDTO.getImgPath() + File.separator + "uploads" + File.separator
+								+ "scheduleImg");
+						if (file.exists()) {
+							try {
+								scheduleFileName.get(i)
+										.transferTo(new File(scheduleImgDTO.getImgPath() + File.separator + "uploads"
+												+ File.separator + "scheduleImg" + File.separator
+												+ scheduleImgDTO.getImgFalseName() + "." + scheduleImgDTO.getImgExt()));
+							} catch (IllegalStateException e) {
+								e.printStackTrace();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						} else {
+							file.mkdirs();
+							try {
+								scheduleFileName.get(i)
+										.transferTo(new File(scheduleImgDTO.getImgPath() + File.separator + "uploads"
+												+ File.separator + "scheduleImg" + File.separator
+												+ scheduleImgDTO.getImgFalseName() + "." + scheduleImgDTO.getImgExt()));
+							} catch (IllegalStateException e) {
+								e.printStackTrace();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+
+						}
+					}
+
+				}
+
+			}
+
+			// 관광지 이미지 업로드 처리.
+			for (int i = 0; i < landMarkFileName.size(); i++) {
+
+				if (!landMarkFileName.get(i).equals("")) {
+					imgDTO = imgHelper.imgHelper(landMarkFileName.get(i));
+					ImgDTO landmarkImgDTO = new ImgDTO();
+					landmarkImgDTO.setImgExt(imgDTO.getImgExt());
+					landmarkImgDTO.setImgTrueName(imgDTO.getImgTrueName());
+					landmarkImgDTO.setImgFalseName(imgDTO.getImgFalseName());
+					landmarkImgDTO.setImgPath(imgDTO.getImgPath());
+					landmarkImgDTO.setImgSize(imgDTO.getImgSize());
+
+					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("pack_info_no", packDTO.getPack_info_no());
+					map.put("imgDTO", landmarkImgDTO);
+
+					int landmarkImgResult = packMapper.packLandmarkImgAdd(map);
+
+					if (landmarkImgResult == 1) {
+						File file = new File(
+								landmarkImgDTO.getImgPath() + File.separator + "uploads" + File.separator + "landmarkImg");
+						if (file.exists()) {
+							System.out.println("transferTo" + landmarkImgDTO.getImgPath() + "......PackService.java");
+							try {
+								landMarkFileName.get(i)
+										.transferTo(new File(landmarkImgDTO.getImgPath() + File.separator + "uploads"
+												+ File.separator + "landmarkImg" + File.separator
+												+ landmarkImgDTO.getImgFalseName() + "." + landmarkImgDTO.getImgExt()));
+							} catch (IllegalStateException e) {
+								e.printStackTrace();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						} else {
+							System.out.println("transferTo" + landmarkImgDTO.getImgPath() + "......PackService.java");
+							file.mkdirs();
+							try {
+								landMarkFileName.get(i)
+										.transferTo(new File(landmarkImgDTO.getImgPath() + File.separator + "uploads"
+												+ File.separator + "landmarkImg" + File.separator
+												+ landmarkImgDTO.getImgFalseName() + "." + landmarkImgDTO.getImgExt()));
+							} catch (IllegalStateException e) {
+								e.printStackTrace();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+
+						}
+					}
+
+				}
+			}
+
+		} catch (Exception e) {
+			System.out.println("에러발생 : " + e);
 		}
 
 		return 0;
-		
+
 	}
 	
 	public List<PackDTO> packList() {

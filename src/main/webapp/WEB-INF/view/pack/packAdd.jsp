@@ -69,7 +69,7 @@
 		<tr>
 			<td>숙소이미지</td>
 			<td><!-- 배열 -->
-				<input type="file" name="hotelImgFileName[]" multiple/>
+				<input type="file" name="hotelImgFileName" />
 				<input type="button" id="MulitHotelImg" name="MulitHotelImg" onclick="MulitHotelImgRow()" value="이미지 추가 업로드">
 				<table id="multiHotelImg"></table>	
 			</td>
@@ -91,7 +91,7 @@
 		<tr>
 			<td>상세스케줄이미지</td>
 			<td><!-- 배열 -->
-				<input type="file" name="scheduleFileName[]" multiple/>
+				<input type="file" name="scheduleFileName" />
 				<input type="button" id="MultiScheduleImg" name="MultiScheduleImg" onclick="MultiScheduleImgRow()" value="이미지 추가 업로드">
 				<table id="multiScheduleImg"></table>		
 			</td>
@@ -109,7 +109,7 @@
 		<tr>
 			<td>관광지이미지</td>
 			<td><!-- 배열 -->
-				<input type="file" name="landMarkFileName[]" multiple/>
+				<input type="file" name="landMarkFileName" />
 				<input type="button" id="MultiLandmarkImg" name="MultiLandmarkImg" onclick="MultiLandmarkImgRow()" value="이미지 추가 업로드">
 				<table id="multiLandmarkImg"></table>		
 			</td>
@@ -184,7 +184,7 @@ var i = 0;
 
 			var oCell = oRow.insertCell();
 			//삽입될 Form Tag
-			var frmTag = "<input type=file name='hotelImgFileName[]' multiple/>";
+			var frmTag = "<input type=file name='hotelImgFileName' />";
 			frmTag += "<input type=button value='삭제' onClick='MultiHotelImgremoveRow()'>";
 			oCell.innerHTML = frmTag;
 		}
@@ -226,7 +226,7 @@ var i = 0;
 
 			var oCell = oRow.insertCell();
 			//삽입될 Form Tag
-			var frmTag = "<input type=file name='scheduleFileName[]' multiple/>";
+			var frmTag = "<input type=file name='scheduleFileName' />";
 			frmTag += "<input type=button value='삭제' onClick='MultiScheduleImgremoveRow()'>";
 			oCell.innerHTML = frmTag;
 		}
@@ -268,7 +268,7 @@ var i = 0;
 
 			var oCell = oRow.insertCell();
 			//삽입될 Form Tag
-			var frmTag = "<input type=file name='landMarkFileName[]' multiple/>";
+			var frmTag = "<input type=file name='landMarkFileName' />";
 			frmTag += "<input type=button value='삭제' onClick='MultiLandmarkImgremoveRow()'>";
 			oCell.innerHTML = frmTag;
 		}

@@ -126,7 +126,7 @@ public class UserService {
 				//두개를 나눈 이유는, INSERT만 사용시에 insert쿼리가 이미지 데이터가 있을떄 없을때 두가지로 만들어야함
 				//이미지 업로드 기능의 쿼리 사용하면 따로 insert쿼리 두가지를 만들지 않고 update기능이용 동시에 입력
 				userMapper.userInsert(userDTO);
-				userMapper.userImgUpdate(userImgDTO);
+				int imgresult = userMapper.userImgUpdate(userImgDTO);
 
 				if(interest!=null) {
 					for(String val : interest) {
@@ -149,31 +149,33 @@ public class UserService {
 				result = 2;
 	
 				//파일 이동을 위한 경로 설정
-				File file = new File(userImgDTO.getUser_img_path() + File.separator + "uploads" + File.separator + "userImg");
-				if (file.exists()) {
-					System.out.println("transferTo" + userImgDTO.getUser_img_path() + "......UserService.java");
-					try {
-						multipartFile.transferTo(
-								new File(userImgDTO.getUser_img_path() + File.separator + "uploads" + File.separator + "userImg" + File.separator + userImgDTO.getUser_img_false_name() + "." + userImgDTO.getUser_img_ext()));
-					} catch (IllegalStateException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
+				if(imgresult==1) 
+				{
+					File file = new File(userImgDTO.getUser_img_path() + File.separator + "uploads" + File.separator + "userImg");
+					if (file.exists()) {
+						System.out.println("transferTo" + userImgDTO.getUser_img_path() + "......UserService.java");
+						try {
+							multipartFile.transferTo(
+									new File(userImgDTO.getUser_img_path() + File.separator + "uploads" + File.separator + "userImg" + File.separator + userImgDTO.getUser_img_false_name() + "." + userImgDTO.getUser_img_ext()));
+						} catch (IllegalStateException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					} else {
+						System.out.println("transferTo" + userImgDTO.getUser_img_path() + "......UserService.java");
+						file.mkdirs();
+						try {
+							multipartFile.transferTo(
+									new File(userImgDTO.getUser_img_path() + File.separator + "uploads" + File.separator + "userImg" + File.separator + userImgDTO.getUser_img_false_name() + "." + userImgDTO.getUser_img_ext()));
+						} catch (IllegalStateException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+		
 					}
-				} else {
-					System.out.println("transferTo" + userImgDTO.getUser_img_path() + "......UserService.java");
-					file.mkdirs();
-					try {
-						multipartFile.transferTo(
-								new File(userImgDTO.getUser_img_path() + File.separator + "uploads" + File.separator + "userImg" + File.separator + userImgDTO.getUser_img_false_name() + "." + userImgDTO.getUser_img_ext()));
-					} catch (IllegalStateException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-	
 				}
-				
 			} catch (Error e) {
 				
 				System.out.println("userInsert 에러발생");

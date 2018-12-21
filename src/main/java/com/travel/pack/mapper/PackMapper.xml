@@ -32,11 +32,64 @@
 		 	#{pack_info_closing_date}, 
 		 	#{pack_info_sale}, 
 		 	now());
+		 	<selectKey resultType="integer" keyProperty="pack_info_no" order="AFTER">
+   				SELECT LAST_INSERT_ID()
+			</selectKey>
+		 	
     </insert>
     
-    <insert id="packLandMarkImgInsert" parameterType="com.travel.image.ImgDTO">
-    	INSERT INTO pack_landmark_img (
-    		pack_hotel_no, 
+    <insert id="packHotelAdd" parameterType="com.travel.pack.dto.PackHotelDTO">
+    	INSERT INTO pack_hotel (
+    		pack_info_no,
+    		pack_hotel_start_date,
+    		pack_hotel_end_date,
+    		pack_hotel_day,
+    		hotel_code,
+    		pack_hotel_name)
+    	VALUES (
+    		#{pack_info_no},
+    		#{pack_hotel_start_date},
+    		#{pack_hotel_end_date},
+    		'20180101',
+    		'가상호텔코드쿼리수정',
+    		'가상호텔이름쿼리수정'
+    		)
+    </insert>
+    
+    <insert id="packScheduleAdd" parameterType="com.travel.pack.dto.PackScheduleDTO">
+    	INSERT INTO pack_schedule (
+    		pack_info_no,
+    		company_id,
+    		pack_schedule_date,
+    		pack_schedule_contents)
+    	VALUES (
+  			#{pack_info_no},
+    		#{company_id},
+    		#{pack_schedule_date},
+    		#{pack_schedule_contents}
+    		)
+    </insert>
+
+    <insert id="packLandmarkAdd" parameterType="com.travel.pack.dto.PackLandmarkDTO">
+    	INSERT INTO pack_landmark (
+    		pack_info_no,
+    		company_id,
+    		pack_landmark_code,
+    		pack_tour_date,
+    		pack_tour_contents)
+    	VALUES (
+  			#{pack_info_no},
+    		#{company_id},
+    		#{pack_landmark_code},
+    		#{pack_tour_date},
+    		#{pack_tour_contents}
+    		)
+    </insert>
+    
+    
+    <insert id="packHotelImgAdd" parameterType="map">
+    	INSERT INTO pack_hotel_img (
+    		pack_info_no, 
     		pack_hotel_img_path, 
     		pack_hotel_img_true_name, 
     		pack_hotel_img_false_name, 
@@ -44,13 +97,51 @@
     		pack_hotel_img_size, 
     		pack_hotel_img_date)
     	VALUES (    		
-    		#{pack_hotel_no}, 
-    		#{pack_hotel_img_path}, 
-    		#{pack_hotel_img_true_name}, 
-    		#{pack_hotel_img_false_name}, 
-    		#{pack_hotel_img_ext}, 
-    		#{pack_hotel_img_size}, 
-    		#{pack_hotel_img_date})
+    		#{pack_info_no}, 
+    		#{imgDTO.imgPath}, 
+    		#{imgDTO.imgTrueName}, 
+    		#{imgDTO.imgFalseName}, 
+    		#{imgDTO.imgExt}, 
+    		#{imgDTO.imgSize}, 
+    		now())
+    </insert>
+    
+   	<insert id="packScheduleImgAdd" parameterType="map">
+    	INSERT INTO pack_schedule_img (
+    		pack_info_no, 
+    		pack_schedule_img_path, 
+    		pack_schedule_img_true_name, 
+    		pack_schedule_img_false_name, 
+    		pack_schedule_img_ext, 
+    		pack_schedule_img_size, 
+    		pack_schedule_img_date)
+    	VALUES (    		
+    		#{pack_info_no}, 
+    		#{imgDTO.imgPath}, 
+    		#{imgDTO.imgTrueName}, 
+    		#{imgDTO.imgFalseName}, 
+    		#{imgDTO.imgExt}, 
+    		#{imgDTO.imgSize}, 
+    		now())
+    </insert>
+    
+    <insert id="packLandmarkImgAdd" parameterType="map">
+    	INSERT INTO pack_landmark_img (
+    		pack_info_no, 
+    		pack_tour_img_path, 
+    		pack_tour_img_true_name, 
+    		pack_tour_img_false_name, 
+    		pack_tour_img_ext, 
+    		pack_tour_img_size, 
+    		pack_tour_img_date)
+    	VALUES (    		
+    		#{pack_info_no}, 
+    		#{imgDTO.imgPath}, 
+    		#{imgDTO.imgTrueName}, 
+    		#{imgDTO.imgFalseName}, 
+    		#{imgDTO.imgExt}, 
+    		#{imgDTO.imgSize}, 
+    		now())
     </insert>
     
 

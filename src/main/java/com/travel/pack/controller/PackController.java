@@ -1,6 +1,7 @@
 package com.travel.pack.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,19 +37,55 @@ public class PackController {
 	
 	@RequestMapping(value = "/packAdd", method = RequestMethod.POST)
 	public String packAdd(
-			PackDTO packDTO, 
-			PackHotelDTO packHotelDTO,
-			PackScheduleDTO packScheduleDTO,
-			PackLandmarkDTO packLandmarkDTO,
+			PackDTO packDTO,
+			@RequestParam(value="pack_hotel_no",required=true) List<String> pack_hotel_no, 
+			@RequestParam(value="pack_hotel_start_date",required=true) List<String> pack_hotel_start_date,
+			@RequestParam(value="pack_hotel_end_date",required=true) List<String> pack_hotel_end_date,
+			@RequestParam(value="pack_schedule_date",required=true) List<String> pack_schedule_date, 
+			@RequestParam(value="pack_schedule_contents",required=true) List<String> pack_schedule_contents,
+			@RequestParam(value="pack_landmark_code",required=true) List<String> pack_landmark_code,
+			@RequestParam(value="pack_tour_date",required=true) List<String> pack_tour_date,
+			@RequestParam(value="pack_tour_contents",required=true) List<String> pack_tour_contents,		
 			PackPriceDTO packPriceDTO,
-			@RequestParam("hotelImgFileName[]") MultipartFile hotelImgFileName[],
-			@RequestParam("scheduleFileName[]") MultipartFile scheduleFileName[],
-			@RequestParam("landMarkFileName[]") MultipartFile landMarkFileName[]
+			@RequestParam(value="hotelImgFileName",required=false) List<MultipartFile> hotelImgFileName,
+			@RequestParam(value="scheduleFileName",required=false) List<MultipartFile> scheduleFileName,
+			@RequestParam(value="landMarkFileName",required=false) List<MultipartFile> landMarkFileName
 			) {
+		
 		System.out.println("패키지등록 액션......PackController.java");
+		List<PackHotelDTO> packHotelList = new ArrayList<PackHotelDTO>();
+		List<PackScheduleDTO> packScheduleList = new ArrayList<PackScheduleDTO>();
+		List<PackLandmarkDTO> packLandmakList = new ArrayList<PackLandmarkDTO>();
 
-		packService.packAdd(packDTO, packHotelDTO, packScheduleDTO, packLandmarkDTO, packPriceDTO, hotelImgFileName, scheduleFileName, landMarkFileName);
-		return "redirect:/packList";
+		// 다중정보 객체묶기
+		for(int i = 0; i<pack_hotel_no.size(); i++) {
+			PackHotelDTO packHotelDTO = new PackHotelDTO();
+			packHotelDTO.setPack_hotel_no(pack_hotel_no.get(i));
+			packHotelDTO.setPack_hotel_start_date(pack_hotel_start_date.get(i));
+			packHotelDTO.setPack_hotel_end_date(pack_hotel_end_date.get(i));
+			packHotelList.add(i, packHotelDTO);
+		}
+		
+		for(int i = 0; i<pack_schedule_date.size(); i++) {
+			PackScheduleDTO packScheduleDTO = new PackScheduleDTO();
+			packScheduleDTO.setPack_schedule_date(pack_schedule_date.get(i));
+			packScheduleDTO.setPack_schedule_contents(pack_schedule_contents.get(i));
+			packScheduleList.add(i, packScheduleDTO);
+		}
+		
+		for(int i = 0; i<pack_landmark_code.size(); i++) {
+			PackLandmarkDTO packLandmarkDTO = new PackLandmarkDTO();
+			packLandmarkDTO.setPack_landmark_code(pack_landmark_code.get(i));
+			packLandmarkDTO.setPack_tour_date(pack_tour_date.get(i));
+			packLandmarkDTO.setPack_tour_contents(pack_tour_contents.get(i));
+			packLandmakList.add(i, packLandmarkDTO);
+		}
+		// 여기까지
+		System.out.println(scheduleFileName.size() + "<<contro");
+		
+	
+		packService.packAdd(packDTO, packHotelList, packScheduleList, packLandmakList, packPriceDTO, hotelImgFileName, scheduleFileName, landMarkFileName);
+		return "";
 	}
 	
 	@RequestMapping(value = "/packList", method = RequestMethod.GET)
