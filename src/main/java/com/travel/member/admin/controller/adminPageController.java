@@ -9,10 +9,10 @@ import com.travel.member.user.dto.UserDTO;
 
 @Controller
 public class adminPageController {
-	@RequestMapping("adminLogin")
+	@RequestMapping("admLogin")
 	public String login() {
 		System.out.println("adminLogin Page");
-		return "thymeleaf/adminLogin";
+		return "thymeleaf/admLogin";
 	}
 	@RequestMapping("adminIndex")
 	public String index(HttpSession session, UserDTO userDTO) {

@@ -36,44 +36,7 @@
         <i class="fas fa-bars"></i>
       </button>
 
-      <!-- Navbar Search 상단검색 기능 (일단  미사용 주석처리) 
-      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="button">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>	-->
-      
-      <!-- Navbar -->
       <ul class="navbar-nav ml-auto ml-md-0">
-<!--  상단 알람벨+메시지창  <li class="nav-item dropdown no-arrow mx-1">
-          <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-bell fa-fw"></i>
-            <span class="badge badge-danger">9+</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown no-arrow mx-1">
-          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-envelope fa-fw"></i>
-            <span class="badge badge-danger">7</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li> -->
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user-circle fa-fw"></i>
@@ -140,75 +103,64 @@
           </ol>
 
           <!-- Page Content -->
-          여행사 회원등록 리스트
-	<table border="1">
-		<thead>
-			<tr>
-				<th>여행사번호</th>
-				<th>아이디</th>
-				<th>해당회사(지점)</th>
-				<th>담당자 연락처1</th>
-				<th>담당자 연락처2</th>
-				<th>회사주소</th>
-				<th>사업자번호</th>
-				<th>회사대표연락처</th>
-				<th>본사연락처</th>
-				<th>신청날짜</th>
-				<th>승인</th>
-				<th>승인상태</th>
-			</tr>
-		</thead>
-		<tbody th:each="company:${companyList}">
-			<tr>
-				<td th:text="${company.company_no}"></td>
-				<td th:text="${company.company_id}"></td>
-				<td th:text="${company.company_name}"></td>
-				<td th:text="${company.company_tell1}"></td>
-				<td th:text="${company.company_tell2}"></td>
-				<td th:text="${company.company_address}"></td>
-				<td th:text="${company.company_business_no}"></td>
-				<td th:text="${company.company_branch_tell}"></td>
-				<td th:text="${company.company_head_tell}"></td>
-				<td th:text="${company.company_check_date}"></td>
-				<td >
-					<a href="${pageContext.request.contextPath}/Travel/companyAuthInfo?company_id=${company.company_id}">승인</a>
-				</td>
-				<td>
-					<span th:if="${company.company_auth eq 'true'}">승인됨</span>
-					<span th:if="${company.company_auth eq 'false'}">미승인</span>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<div class="text-center">
-        <ul class="pagination justify-content-center">
-        	<li th:if="${prevPage}">
-			<liclass="page-item"><a class="page-link" href="${pageContext.request.contextPath}/Travel/companyList?currentPage=${(currentBlock - 1) * pagePerBlock}">< 이전</a></li>
-			</li>
-            <span th:each ="i:${i}" begin="${startPage}" end="${endPage}" step="1">
-				<li th:if="${currentPage == i}">
-					<li class="page-item"><a class="page-link" href="#"><span th:text="${i}"></span></a></li>
-                </li>
-                <li th:if="${currentPage != i}">
-				<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/Travel/companyList?currentPage=${i}"><span th:text="${i}"></span></a></li>
-                </li>
-            </span>
-            <li th:if="${nextPage}">
-				<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/Travel/companyList?currentPage=${currentBlock * pagePerBlock + 1}">다음 ></a></li>
-			</li>
-        </ul>
+		<div class="card mb-3">
+		   <div class="card-header">
+         	 여행사 회원등록 리스트
+		   <div class="card-body">
+		    <div class="table-responsive">
+		     <table class="table table-bordered" id="companyTable" width="100%" cellspacing="0">
+		      <thead>
+					<tr>
+						<th>여행사번호</th>
+						<th>아이디</th>
+						<th>해당회사</th>
+						<th>담당자 연락처1</th>
+						<th>담당자 연락처2</th>
+						<th>회사주소</th>
+						<th>사업자번호</th>
+						<th>회사대표연락처</th>
+						<th>본사연락처</th>
+						<th>신청날짜</th>
+						<th>승인</th>
+						<th>승인상태</th>
+					</tr>
+				</thead>
+				<tbody th:each="company:${companyList}">
+					<tr>
+						<td th:text="${company.company_no}"></td>
+						<td th:text="${company.company_id}"></td>
+						<td th:text="${company.company_name}"></td>
+						<td th:text="${company.company_tell1}"></td>
+						<td th:text="${company.company_tell2}"></td>
+						<td th:text="${company.company_address}"></td>
+						<td th:text="${company.company_business_no}"></td>
+						<td th:text="${company.company_branch_tell}"></td>
+						<td th:text="${company.company_head_tell}"></td>
+						<td th:text="${company.company_check_date}"></td>
+						<td >
+							<a th:href="@{'/Travel/companyAuthInfo?company_id=' + ${company.company_id}}">승인</a>
+						</td>
+						<td>
+							<span th:if="${company.company_auth eq 'true'}">승인됨</span>
+							<span th:if="${company.company_auth eq 'false'}">미승인</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+      <div class="pagination-area wow fadeInUp" data-wow-delay="100ms">
+        <nav>
+            <ul class="pagination">
+                <li class="page-item" th:if="${prevPage}"><a class="page-link" th:href="@{/Travel/companyList(currentPage=${(currentBlock - 1) * pagePerBlock})}">이전</a></li>
+                <li class="page-item" th:each="i : ${#numbers.sequence(startPage, endPage)}" th:classappend="${currentPage} == ${i} ? active : null"><a class="page-link" th:href="@{/Travel/companyList(currentPage=${i})}" th:text="${i}"></a></li>
+                <li class="page-item" th:if="${nextPage}"><a class="page-link" th:href="@{/Travel/companyList(currentPage=${currentBlock * pagePerBlock + 1})}">다음</a></li>
+            </ul>
+        </nav>
+    	</div>
+       </div>
+      </div>
+     </div>
     </div>
         <!-- /.container-fluid -->
-
-        <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright © Your Website 2018</span>
-            </div>
-          </div>
-        </footer>
-
       </div>
       <!-- /.content-wrapper -->
 

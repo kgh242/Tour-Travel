@@ -58,9 +58,12 @@
 		DELETE FROM member_user WHERE user_id = #{user_id}
 	</delete>
 
-	<select id="userList" resultType="com.travel.member.user.dto.UserDTO">
-		SELECT * FROM member_user
+	<select id="userList" parameterType="com.travel.paging.PageMaker" resultType="com.travel.member.user.dto.UserDTO">
+		SELECT * FROM member_user ORDER BY user_join_date DESC LIMIT #{startRow},#{rowPerPage}
 	</select>
-
+	
+    <select id="userSelectCount" resultType="int">
+    	SELECT count(*) FROM member_user
+    </select>
 	
 </mapper>

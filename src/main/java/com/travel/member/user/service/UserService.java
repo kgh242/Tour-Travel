@@ -15,6 +15,7 @@ import com.travel.image.ImgHelper;
 import com.travel.member.user.dto.UserDTO;
 import com.travel.member.user.mapper.UserMapper;
 import com.travel.pack.dto.PackDTO;
+import com.travel.paging.PageMaker;
 
 //고객 정보 Service
 
@@ -264,16 +265,36 @@ public class UserService {
 	}
 	
 	// 모든 유저 조회
-	public List<UserDTO> userList() {
+	public List<UserDTO> userList(PageMaker pageMaker) {
 		System.out.println("userList 서비스 계층......UserService.java");
-		List<UserDTO> result = new ArrayList<UserDTO>();
-		
-		try {
-			result = userMapper.userList();
-		} catch (Error e) {
-			System.out.println("userList 서비스 계층......Packservice.java : " + e);
-		}
-		return result;
+		pageMaker.setRowPerPage(10);
+        pageMaker.setPagePerBlock(10);
+        pageMaker.setAllCount(userMapper.userSelectCount());
+        // 페이징에 필요한 값 계산하여 설정
+        pageMaker.setStartRow();
+        pageMaker.setLastPage();
+        pageMaker.setCurrentBlock();
+        pageMaker.setLastBlock();
+        pageMaker.setStartPage();
+        pageMaker.setEndPage();
+     // 이전 페이지와 다음 페이지를 컨트롤하는 조건문
+        if(pageMaker.getCurrentBlock() != pageMaker.getLastBlock() && pageMaker.getCurrentBlock() >1){
+        	pageMaker.setPrevPage(true);
+            pageMaker.setNextPage(true);
+        }else  if(pageMaker.getCurrentBlock() != pageMaker.getLastBlock() && pageMaker.getLastBlock() != 1) {
+        	pageMaker.setPrevPage(false);
+            pageMaker.setNextPage(true);
+        }else if(pageMaker.getCurrentBlock() <= pageMaker.getLastBlock() && pageMaker.getCurrentBlock() != 1){
+        	pageMaker.setPrevPage(true);
+            pageMaker.setNextPage(false);   
+        }else if(pageMaker.getLastBlock() == 1) {
+        	pageMaker.setPrevPage(false);
+            pageMaker.setNextPage(false); 
+        }
+	    return userMapper.userList(pageMaker);
 	}
-
+	public int userSelectCount() {
+		System.out.println("UserService.java.userSelectCount()");
+		return userMapper.userSelectCount();
+	}
 }

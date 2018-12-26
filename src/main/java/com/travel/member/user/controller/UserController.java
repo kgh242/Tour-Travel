@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.travel.member.user.dto.UserDTO;
 import com.travel.member.user.service.UserService;
+import com.travel.paging.PageMaker;
 
 @Controller
 @RequestMapping(value = "/Travel")
@@ -128,10 +129,18 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/userList", method = RequestMethod.GET)
-	public String userList(Model model) {
+	public String userList(@RequestParam(value="currentPage", defaultValue = "1") int currentPage, Model model,PageMaker pageMaker) {
 		System.out.println("user 회원리스트......UserController.java");
-		List<UserDTO> userList = userService.userList();
+		pageMaker.setCurrentPage(currentPage);
+		List<UserDTO> userList = userService.userList(pageMaker);
 		model.addAttribute("userList", userList);
+		model.addAttribute("currentPage", currentPage);
+        model.addAttribute("pagePerBlock", pageMaker.getPagePerBlock());
+        model.addAttribute("currentBlock", pageMaker.getCurrentBlock());
+        model.addAttribute("startPage", pageMaker.getStartPage());
+        model.addAttribute("endPage", pageMaker.getEndPage());
+        model.addAttribute("prevPage", pageMaker.isPrevPage());
+        model.addAttribute("nextPage", pageMaker.isNextPage());
 		return "thymeleaf/userList";
 	}
 

@@ -35,44 +35,8 @@
       <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
       </button>
-
-      <!-- Navbar Search 상단검색 기능 (일단  미사용 주석처리) 
-      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="button">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>	-->
-      
       <!-- Navbar -->
       <ul class="navbar-nav ml-auto ml-md-0">
-<!--  상단 알람벨+메시지창  <li class="nav-item dropdown no-arrow mx-1">
-          <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-bell fa-fw"></i>
-            <span class="badge badge-danger">9+</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown no-arrow mx-1">
-          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-envelope fa-fw"></i>
-            <span class="badge badge-danger">7</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
         </li> -->
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -140,96 +104,101 @@
           </ol>
 
           <!-- Page Content -->
-         	 사용자 회원등록 리스트
-			<table border="1">
-				<thead>
-					<tr>
-						<td>번호</td>
-						<td>아이디</td>
-						<td>닉네임</td>
-						<td>이름</td>
-						<td>생일</td>
-						<td>성별</td>
-						<td>주소</td>
-						<td>이메일</td>
-						<td>연락처</td>
-						<td>가입날짜</td>
-						<td>최종개인정보수정날짜</td>
-						<td>최종비밀번호수정날짜</td>
-						<td>자기소개</td>
-						<td>본인인증신청여부</td>
-						<td>본인인증신청/승인날짜</td>
-						<td>승인자아이디</td>
-						<td>보유포인트</td>
-						<td>탈주이력</td>
-					</tr>
-				</thead>
-				<tbody th:each="user:${userList}">
-					<tr>
-						<td th:text="${user.user_no}"></td>
-						<td th:text="${user.user_id}"></td>
-						<td th:text="${user.user_nickname}"></td>
-						<td th:text="${user.user_name}"></td>
-						<td th:text="${user.user_birth}"></td>
-						<td th:text="${user.user_gender}"></td>
-						<td th:text="${user.user_address}"></td>
-						<td th:text="${user.user_email}"></td>
-						<td th:text="${user.user_tell}"></td>
-						<td th:text="${user.user_join_date}"></td>
-						<td>
-							<span th:if="${user.user_update_date == null}">
-								정보없음
-							</span>
-							<span th:if="${user.user_update_date != null}" th:text="${user.user_update_date}"></span>
-						</td>
-						<td>
-							<span th:if="${user.user_pw_date == null}">
-								정보없음
-							</span>
-							<span th:if="${user.user_pw_date != null}" th:text="${user.user_pw_date}"></span>
-						</td>
-						<td th:text="${user.user_introduction}"></td>
-						<td>
-							<span th:if="${user.user_auth == null}">
-								신청정보없음
-							</span>
-							<span th:if="${user.user_auth == false}">
-								승인대기중
-							</span>
-							<span th:if="${user.user_auth == true}">
-								승인완료
-							</span>
-						</td>
-						<td>
-							<span th:if="${user.user_auth_date == null}">
-								신청정보없음
-							</span>
-							<span th:if="${user.user_auth_date != null}" th:text="${user.user_auth_date}"></span>
-						</td>
-						<td>					
-							<span th:if="${user.admin_id == null}">
-								승인자정보없음
-							</span>
-							<span th:if="${user.admin_id != null}" th:text="${user.user_auth_date}"></span>
-						</td>
-						<td th:text="${user.user_point}"></td>
-						<td th:text="${user.user_escape}"></td>
-					</tr>
-				</tbody>
+		 <div class="card mb-3">
+		  <div class="card-header">
+          	사용자 회원등록 리스트
+		   <div class="card-body">
+		    <div class="table-responsive">
+		     <table class="table table-bordered" id="userTable" width="100%" cellspacing="0">
+			  <thead>
+				<tr>
+					<td>번호</td>
+					<td>아이디</td>
+					<td>닉네임</td>
+					<td>이름</td>
+					<td>생일</td>
+					<td>성별</td>
+					<td>주소</td>
+					<td>이메일</td>
+					<td>연락처</td>
+					<td>가입날짜</td>
+					<td>최종개인정보수정날짜</td>
+					<td>최종비밀번호수정날짜</td>
+					<td>자기소개</td>
+					<td>본인인증신청여부</td>
+					<td>본인인증신청/승인날짜</td>
+					<td>승인자아이디</td>
+					<td>보유포인트</td>
+					<td>탈주이력</td>
+				</tr>
+			   </thead>
+			   <tbody th:each="user:${userList}">
+				<tr>
+					<td th:text="${user.user_no}"></td>
+					<td th:text="${user.user_id}"></td>
+					<td th:text="${user.user_nickname}"></td>
+					<td th:text="${user.user_name}"></td>
+					<td th:text="${user.user_birth}"></td>
+					<td th:text="${user.user_gender}"></td>
+					<td th:text="${user.user_address}"></td>
+					<td th:text="${user.user_email}"></td>
+					<td th:text="${user.user_tell}"></td>
+					<td th:text="${user.user_join_date}"></td>
+					<td>
+						<span th:if="${user.user_update_date == null}">
+							정보없음
+						</span>
+						<span th:if="${user.user_update_date != null}" th:text="${user.user_update_date}"></span>
+					</td>
+					<td>
+						<span th:if="${user.user_pw_date == null}">
+							정보없음
+						</span>
+						<span th:if="${user.user_pw_date != null}" th:text="${user.user_pw_date}"></span>
+					</td>
+					<td th:text="${user.user_introduction}"></td>
+					<td>
+						<span th:if="${user.user_auth == null}">
+							신청정보없음
+						</span>
+						<span th:if="${user.user_auth == false}">
+							승인대기중
+						</span>
+						<span th:if="${user.user_auth == true}">
+							승인완료
+						</span>
+					</td>
+					<td>
+						<span th:if="${user.user_auth_date == null}">
+							신청정보없음
+						</span>
+						<span th:if="${user.user_auth_date != null}" th:text="${user.user_auth_date}"></span>
+					</td>
+					<td>					
+						<span th:if="${user.admin_id == null}">
+							승인자정보없음
+						</span>
+						<span th:if="${user.admin_id != null}" th:text="${user.user_auth_date}"></span>
+					</td>
+					<td th:text="${user.user_point}"></td>
+					<td th:text="${user.user_escape}"></td>
+				</tr>
+			   </tbody>
 			</table>
-        </div>
-        <!-- /.container-fluid -->
-
-        <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright © Your Website 2018</span>
-            </div>
-          </div>
-        </footer>
-
+            <div class="pagination-area wow fadeInUp" data-wow-delay="100ms">
+        	<nav>
+             <ul class="pagination">
+                <li class="page-item" th:if="${prevPage}"><a class="page-link" th:href="@{/Travel/UserList(currentPage=${(currentBlock - 1) * pagePerBlock})}">이전</a></li>
+                <li class="page-item" th:each="i : ${#numbers.sequence(startPage, endPage)}" th:classappend="${currentPage} == ${i} ? active : null"><a class="page-link" th:href="@{/Travel/UserList(currentPage=${i})}" th:text="${i}"></a></li>
+                <li class="page-item" th:if="${nextPage}"><a class="page-link" th:href="@{/Travel/UserList(currentPage=${currentBlock * pagePerBlock + 1})}">다음</a></li>
+             </ul>
+        	</nav>
+    	</div>
+       </div>
       </div>
+     </div>
+    </div>
+        <!-- /.container-fluid -->
       <!-- /.content-wrapper -->
 
     </div>
