@@ -264,12 +264,13 @@ public class PackService {
 
 				}
 			}
-
+			result = 1;
 		} catch (Exception e) {
+			result = 0;
 			System.out.println("에러발생 : " + e);
 		}
 
-		return 0;
+		return result;
 
 	}
 	

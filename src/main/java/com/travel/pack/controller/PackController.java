@@ -81,10 +81,13 @@ public class PackController {
 			packLandmakList.add(i, packLandmarkDTO);
 		}
 		// 여기까지
-		System.out.println(scheduleFileName.size() + "<<contro");
-		
 	
-		packService.packAdd(packDTO, packHotelList, packScheduleList, packLandmakList, packPriceDTO, hotelImgFileName, scheduleFileName, landMarkFileName);
+		int result = packService.packAdd(packDTO, packHotelList, packScheduleList, packLandmakList, packPriceDTO, hotelImgFileName, scheduleFileName, landMarkFileName);
+		System.out.println(result + "<최종결과");
+		if (result == 0) {
+			//입력실패시 0 리턴
+			return "";
+		}
 		return "";
 	}
 	
