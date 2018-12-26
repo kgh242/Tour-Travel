@@ -99,7 +99,7 @@ public class AdminController {
         model.addAttribute("prevPage", pageMaker.isPrevPage());
         model.addAttribute("nextPage", pageMaker.isNextPage());
 		//model.addAttribute("pageMaker", pageMaker);
-		return "thymeleaf/adminList";
+		return "thymeleaf/list/adminList";
 	}
 	//관리자 로그아웃
 	@RequestMapping(value= "/adminLogout", method = RequestMethod.GET)

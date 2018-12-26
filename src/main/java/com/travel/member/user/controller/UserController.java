@@ -141,7 +141,7 @@ public class UserController {
         model.addAttribute("endPage", pageMaker.getEndPage());
         model.addAttribute("prevPage", pageMaker.isPrevPage());
         model.addAttribute("nextPage", pageMaker.isNextPage());
-		return "thymeleaf/userList";
+		return "thymeleaf/list/userList";
 	}
 
 }

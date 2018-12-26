@@ -52,7 +52,7 @@ public class CompanyController {
 		model.addAttribute("endPage", pageMaker.getEndPage());
 		model.addAttribute("prevPage", pageMaker.isPrevPage());
 		model.addAttribute("nextPage", pageMaker.isNextPage());
-		return "thymeleaf/companyList";
+		return "thymeleaf/list/companyList";
 	}
 
 	@RequestMapping(value = "/companyAuthInfo", method = RequestMethod.GET)
