@@ -10,6 +10,6 @@ public class LoginController {
 	@RequestMapping("login")
 	public String login() {
 		System.out.println("user,company login창");
-		return "thymeleaf/login";
+		return "thymeleaf/login/login";
 	}
 }

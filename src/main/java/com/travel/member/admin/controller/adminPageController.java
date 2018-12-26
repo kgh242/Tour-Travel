@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.travel.member.user.dto.UserDTO;
+import com.travel.member.admin.dto.AdminDTO;
 
 @Controller
 public class adminPageController {
@@ -15,9 +15,9 @@ public class adminPageController {
 		return "thymeleaf/admLogin";
 	}
 	@RequestMapping("adminIndex")
-	public String index(HttpSession session, UserDTO userDTO) {
+	public String index(HttpSession session, AdminDTO adminDTO) {
 		System.out.println("adminIndex Page");
-		session.setAttribute("LOGINID", userDTO.getUser_id());
+		session.setAttribute("LOGINID", adminDTO.getAdmin_id());
 		return "thymeleaf/adminIndex";
 	}
 }

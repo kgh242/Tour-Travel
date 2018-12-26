@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="mainLayout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>Go Travel</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link href="style.css" rel="stylesheet">
+
+    <!-- Responsive CSS -->
+    <link href="css/responsive/responsive.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="dorne-load"></div>
+    </div>
+
+    <!-- ***** Header Area Start ***** -->
+   <div th:fragment="header">
+    <header class="header_area" id="header">
+        <div class="container-fluid h-100">
+            <div class="row h-100">
+                <div class="col-12 h-100">
+                    <nav class="h-100 navbar navbar-expand-lg">
+                        <a class="navbar-brand" href="index"><img src="img/core-img/logo.png" alt=""></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dorneNav" aria-controls="dorneNav" aria-expanded="false" aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>
+                        <!-- Nav -->
+                        <div class="collapse navbar-collapse" id="dorneNav">
+                            <ul class="navbar-nav mr-auto" id="dorneMenu">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="index">메인 <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item active dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">플랜 여행<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="planAdd">플랜등록</a>
+                                        <a class="dropdown-item" href="planList">플랜찾기</a>
+                                        <a class="dropdown-item" href="#">예비</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item active dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">패키지 여행<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="companyList">패키지 찾기</a>
+                                        <a class="dropdown-item" href="#">예비</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">후기</a>
+                                </li>
+                            </ul>
+                            <div th:if="${session.LOGINID == null}">
+	                            <!-- Admin Signin btn -->
+	                            <div class="dorne-signin-btn">
+	                                <a href="/adminLogin">관리자</a>
+	                            </div>
+	                            <!-- user/company 통합 로그인  -->
+	                            <div class="dorne-add-listings-btn">
+	                            	<a href="login" class="btn dorne-btn">사용자 로그인</a>
+	                                <!-- <a href="/Travel/login" class="btn dorne-btn">사용자 로그인</a> -->
+	                            </div>
+                            </div>
+                            <div th:if="${session.LOGINID != null}">
+                            	<div class="dorne-signout-btn">
+                            		<span th:text="${session.LOGINID}" style="color:yellow"></span>
+                            		<span style="color:white">님 로그인중</span>
+                            			<a href="/Travel/userLogout">로그아웃</a>
+                            	</div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>      
+      </header>
+    </div>
+    <!-- ***** Header Area End ***** -->
+    </body>
+    </html>

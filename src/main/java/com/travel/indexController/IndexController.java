@@ -18,4 +18,10 @@ public class IndexController {
 		session.setAttribute("LOGINID", userDTO.getUser_id());
 		return "thymeleaf/index";
 	}
+	
+	@RequestMapping("header")
+	public String header() {
+		System.out.println("header");
+		return "thymeleaf/header";
+	}
 }

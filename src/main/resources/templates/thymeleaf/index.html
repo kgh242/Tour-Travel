@@ -28,24 +28,6 @@
         <div class="dorne-load"></div>
     </div>
 
-    <!-- ***** Search Form Area ***** -->
-    <div class="dorne-search-form d-flex align-items-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="search-close-btn" id="closeBtn">
-                        <i class="pe-7s-close-circle" aria-hidden="true"></i>
-                    </div>
-<!--				검색부분 (불필요 예상으로 일단 주석처리)
-					<form action="#" method="get">
-                        <input type="search" name="caviarSearch" id="search" placeholder="Search Your Desire Destinations or Events">
-                        <input type="submit" class="d-none" value="submit">
-                    </form> -->
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- ***** Header Area Start ***** -->
     <header class="header_area" id="header">
         <div class="container-fluid h-100">
@@ -60,20 +42,25 @@
                                 <li class="nav-item active">
                                     <a class="nav-link" href="index">메인 <span class="sr-only">(current)</span></a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="plan">플랜 여행</a>
+                                <li class="nav-item active dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">플랜 여행<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="planAdd">플랜등록</a>
+                                        <a class="dropdown-item" href="planList">플랜찾기</a>
+                                        <a class="dropdown-item" href="#">예비</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item active dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">패키지 여행<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="companyList">패키지 찾기</a>
+                                        <a class="dropdown-item" href="#">예비</a>
+                                    </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="package">패키지 여행</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact">여행 후기</a>
+                                    <a class="nav-link" href="#">후기</a>
                                 </li>
                             </ul>
-                            <!-- Search btn  불필요 예상으로 주석처리 
-                            <div class="dorne-search-btn">
-                                <a id="search-btn" href="#"><i class="fa fa-search" aria-hidden="true"></i> Search</a>
-                            </div> -->
                             <div th:if="${session.LOGINID == null}">
 	                            <!-- Admin Signin btn -->
 	                            <div class="dorne-signin-btn">
