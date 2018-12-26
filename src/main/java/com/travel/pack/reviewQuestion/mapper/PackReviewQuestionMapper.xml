@@ -22,4 +22,23 @@
 		SELECT * 
 		FROM pack_review_air_question
 	</select>
+	
+	<insert id="insertPackFoodQuestion" parameterType="com.travel.pack.reviewQuestion.dto.PackFoodQuestionDTO">
+		INSERT INTO pack_review_food_question
+			(pack_review_food_question_category
+			, pack_review_food_question_contents
+			, admin_id
+			, pack_review_food_question_date)
+		VALUES
+			(#{pack_review_food_question_category}
+			, #{pack_review_food_question_contents}
+			, #{admin_id}
+			, now())
+	</insert>
+	
+	<select id="packFoodQuestionList" resultType="com.travel.pack.reviewQuestion.dto.PackFoodQuestionDTO">
+		SELECT * 
+		FROM pack_review_food_question
+	</select>
+	
 </mapper>

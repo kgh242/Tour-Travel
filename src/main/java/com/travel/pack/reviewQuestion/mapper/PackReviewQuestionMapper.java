@@ -5,9 +5,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.travel.pack.reviewQuestion.dto.PackAirQuestionDTO;
+import com.travel.pack.reviewQuestion.dto.PackFoodQuestionDTO;
 
 @Mapper
 public interface PackReviewQuestionMapper {
 	int insertPackAirQuestion(PackAirQuestionDTO packAirQuestionDTO);
 	List<PackAirQuestionDTO> packAirQuestionList(PackAirQuestionDTO packAirQuestionDTO);
+	int insertPackFoodQuestion(PackFoodQuestionDTO packFoodQuestionDTO);
+	List<PackFoodQuestionDTO> packFoodQuestionList(PackFoodQuestionDTO packFoodQuestionDTO);
 }

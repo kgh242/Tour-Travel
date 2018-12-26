@@ -7,9 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.travel.pack.reviewQuestion.dto.PackAirQuestionDTO;
+import com.travel.pack.reviewQuestion.dto.PackFoodQuestionDTO;
 import com.travel.pack.reviewQuestion.mapper.PackReviewQuestionMapper;
-
-//패키지 후기 평점 문항지 관련 Service
 
 @Service
 @Transactional
@@ -24,5 +23,14 @@ public class PackReviewQuestionService {
 
 	public List<PackAirQuestionDTO> packAirQuestionList(PackAirQuestionDTO packAirQuestionDTO) {
 		return packReviewQuestionMapper.packAirQuestionList(packAirQuestionDTO);
+	}
+	
+	public int packFoodQuestionAdd(PackFoodQuestionDTO packFoodQuestionDTO) {
+		int result = packReviewQuestionMapper.insertPackFoodQuestion(packFoodQuestionDTO);
+		return result;
+	}
+
+	public List<PackFoodQuestionDTO> packFoodQuestionList(PackFoodQuestionDTO packFoodQuestionDTO) {
+		return packReviewQuestionMapper.packFoodQuestionList(packFoodQuestionDTO);
 	}
 }

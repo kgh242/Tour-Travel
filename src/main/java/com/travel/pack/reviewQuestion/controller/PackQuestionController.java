@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.travel.pack.reviewQuestion.dto.PackAirQuestionDTO;
+import com.travel.pack.reviewQuestion.dto.PackFoodQuestionDTO;
 import com.travel.pack.reviewQuestion.service.PackReviewQuestionService;
 
 @Controller
@@ -33,5 +34,21 @@ public class PackQuestionController {
 		System.out.println(packAirQuestionDTO.getAdmin_id() + "<<<LOGINID");
 		packReviewQuestionService.packAirQuestionAdd(packAirQuestionDTO);
 		return "redirect:/Travel/packAirQuestionList";
+	}
+	
+	@RequestMapping(value = "/packFoodQuestionList", method = RequestMethod.GET)
+	public String packReviewFoodQuestionAdd(Model model, PackFoodQuestionDTO packFoodQuestionDTO) {
+		List<PackFoodQuestionDTO> packFoodQuestionList = packReviewQuestionService.packFoodQuestionList(packFoodQuestionDTO);
+		model.addAttribute("packFoodQuestionList", packFoodQuestionList);
+		return "review/packFoodQuestionList";
+	}
+	
+	@RequestMapping(value = "/packFoodQuestionList", method = RequestMethod.POST)
+	public String packReviewFoodQuestionAdd(HttpSession session, PackFoodQuestionDTO packFoodQuestionDTO) {
+		System.out.println("packFoodQuestionAdd.POST");
+		packFoodQuestionDTO.setAdmin_id(session.getAttribute("LOGINID").toString());
+		System.out.println(packFoodQuestionDTO.getAdmin_id() + "<<<LOGINID");
+		packReviewQuestionService.packFoodQuestionAdd(packFoodQuestionDTO);
+		return "redirect:/Travel/packFoodQuestionList";
 	}
 }
