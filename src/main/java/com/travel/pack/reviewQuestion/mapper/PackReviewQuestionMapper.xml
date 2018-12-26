@@ -1,2 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 패키지 후기 평점 문항지 관련 Mapper xml파일 (쿼리) -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.travel.pack.reviewQuestion.mapper.PackReviewQuestionMapper">
+
+	<insert id="insertPackAirQuestion" parameterType="com.travel.pack.reviewQuestion.dto.PackAirQuestionDTO">
+		INSERT INTO pack_review_air_question
+			(pack_review_air_question_category
+			, pack_review_air_question_contents
+			, admin_id
+			, pack_review_air_question_date)
+		VALUES
+			(#{pack_review_air_question_category}
+			, #{pack_review_air_question_contents}
+			, #{admin_id}
+			, now())
+	</insert>
+	
+	<select id="packAirQuestionList" resultType="com.travel.pack.reviewQuestion.dto.PackAirQuestionDTO">
+		SELECT * 
+		FROM pack_review_air_question
+	</select>
+</mapper>
