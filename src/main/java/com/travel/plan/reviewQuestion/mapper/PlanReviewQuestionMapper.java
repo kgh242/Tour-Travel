@@ -1,7 +1,19 @@
 package com.travel.plan.reviewQuestion.mapper;
 
-//플랜 후기 평점 문항지 관련 Mapper Interface
+import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
+import com.travel.plan.reviewQuestion.dto.*;
+
+@Mapper
 public interface PlanReviewQuestionMapper {
-
+	int insertPlanFoodQuestion(PlanFoodQuestionDTO planFoodQuestionDTO);
+	List<PlanFoodQuestionDTO> planFoodQuestionList();
+	int insertPlanHotelQuestion(PlanHotelQuestionDTO planHotelQuestionDTO);
+	List<PlanHotelQuestionDTO> planHotelQuestionList();
+	int insertPlanLandmarkQuestion(PlanLandmarkQuestionDTO planLandmarkQuestionDTO);
+	List<PlanLandmarkQuestionDTO> planLandmarkQuestionList();
+	int insertPlanTrafficQuestion(PlanTrafficQuestionDTO planTrafficQuestionDTO);
+	List<PlanTrafficQuestionDTO> planTrafficQuestionList();
 }

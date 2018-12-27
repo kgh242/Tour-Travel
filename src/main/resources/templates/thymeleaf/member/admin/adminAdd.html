@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>관리자 회원가입</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+	
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	
+  </head>
+
+  <body class="bg-dark">
+
+    <div class="container">
+    <div class="card card-login mx-auto mt-5">
+      <!-- 회원가입창 -->
+	  <div class="nav nav-tabs" id="AddTab" role="tablist">
+          <a class="nav-item nav-link active" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true"></a>
+      </div>
+      <div class="tab-content" id="nav-tabContent">
+        <!-- 사용자 로그인 -->
+        <div class="tab-pane fade show active" id="nav-admin" role="tabpanel" aria-labelledby="nav-admin-tab">
+        <div class="card-header">관리자 회원가입</div>
+        <div class="card-body">
+		 <form action = "/Travel/adminAdd" enctype="multipart/form-data" method="post">
+		 	<table class="form-group">
+			<tr>
+				<td>ID</td>
+				<td class="form-group"><input type="text" id = "admin_id" name = "admin_id" class="form-control" required="required" autofocus="autofocus">
+<!-- 				<input type="button" id="user_id_check" name="user_id_check" value="중복확인">
+					/*[[${id_hepler}]]*/ </td> -->
+			</tr>
+			<tr>
+				<td>PW</td>
+				<td class="form-group"><input type="password" id = "admin_pw" name = "admin_pw" class="form-control" required="required"></td>
+			</tr>
+			<tr>
+				<td>PW check</td>
+				<td class="form-group"><input type="password" id = "admin_pw_check" name = "admin_pw_check" class="form-control" required="required"></td>
+			</tr>
+			<tr>
+			<tr>
+				<td>Department</td>
+				<td class="form-group"><input type="text" id = "admin_team" name = "admin_team" class="form-control" required="required"></td>
+			</tr>
+			<tr>
+				<td>employee No</td>
+				<td class="form-group"><input type="text" id = "admin_employee_no" name = "admin_employee_no" class="form-control" required="required"></td>
+			</tr>
+			<tr>
+				<td>Tell</td>
+				<td class="form-group"><input type="text" id = "admin_employee_tell" name = "admin_employee_tell" class="form-control" required="required"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input class="btn btn-primary btn-block" type="submit" value="입력완료"></td>
+			</tr>
+		</table>
+	   </form>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- 회원가입 JavaScript -->
+	<script type = "text/javascript" th:inline="javascript">
+	/* <![CDATA[ */
+			$(document).ready(function(){
+				$("#submit").click(function(){
+					if($('#company_id').val()==""){
+						alert("아이디를 입력하세요");
+						$('#company_id').focus();
+					} else if($('#company_pw').val()==""){
+						alert("비밀번호를 입력하세요");
+						$('#company_pw').focus();
+					} else if($('#company_pw_check').val()==""){
+						alert("비밀번호 확인을 입력하세요");
+						$('#company_pw_check').focus();
+					} else if($('#company_pw').val()!=$('#company_pw_check').val()){
+						alert("비밀번호와 비밀번호 확인이 일치하지않습니다");
+						$('#company_pw').val('');
+						$('#company_pw_check').val('');
+						$('#company_pw_same').focus();
+					} else if($('#company_name').val()==""){
+						alert("회사이름을 입력하세요");
+						$('#company_name').focus();
+					} else if($('#company_tell1').val()==""){
+						alert("담당자연락처를 입력하세요");
+						$('#company_tell1').focus();
+					} else if($('#company_address').val()==""){
+						alert("회사주소를 입력하세요");
+						$('#company_address').focus();
+					} else if($('#company_business_no').val()==""){
+						alert("사업자번호를 입력하세요");
+						$('#company_business_no').focus();
+					} else if($('#company_branch_tell').val()==""){
+						alert("회사대표연락처를 입력하세요");
+						$('#company_branch_tell').focus();
+					} else if($('#company_img').val()==""){
+						alert("이미지를 등록하세요");
+						$('#company_img').focus();
+					} else {
+						alert("신청완료");
+					}
+				});
+			});
+		/* ]]> */
+		</script>
+  </body>
+
+</html>

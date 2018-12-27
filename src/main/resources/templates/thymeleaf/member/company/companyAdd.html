@@ -30,12 +30,12 @@
     <div class="card card-login mx-auto mt-5">
       <!-- 회원가입창 -->
 	  <div class="nav nav-tabs" id="AddTab" role="tablist">
-          <a class="nav-item nav-link active" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true"></a>
+          <a class="nav-item nav-link active" id="nav-company-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true"></a>
       </div>
       <div class="tab-content" id="nav-tabContent">
         <!-- 사용자 로그인 -->
-        <div class="tab-pane fade show active" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
-        <div class="card-header">사용자 회원가입</div>
+        <div class="tab-pane fade show active" id="nav-user" role="tabpanel" aria-labelledby="nav-company-tab">
+        <div class="card-header">여행사 회원가입</div>
         <div class="card-body">
 		 <form action = "/Travel/companyAdd" enctype="multipart/form-data" method="post">
 		 	<table class="form-group">
@@ -60,7 +60,7 @@
 			</tr>
 			<tr>
 				<td>Tell 1</td>
-				<td class="form-group"><input type="date" id="company_tell1" name="company_tell1" class="form-control" required="required"></td>
+				<td class="form-group"><input type="text" id="company_tell1" name="company_tell1" class="form-control" required="required"></td>
 			</tr>
 			<tr>
 				<td>Tell 2</td>
@@ -68,7 +68,7 @@
 			</tr>
 			<tr>
 				<td>Address</td>
-				<td class="form-group"><input type="email" id="company_address" name="company_address" class="form-control" required="required"></td>
+				<td class="form-group"><input type="text" id="company_address" name="company_address" class="form-control" required="required"></td>
 			</tr>
 			<tr>
 				<td>Business No</td>
@@ -79,38 +79,14 @@
 				<td class="form-group"><input type="text" id="company_branch_tell" name="company_branch_tell" class="form-control" required="required"></td>
 			</tr>
 			<tr>
+				<td>Head tell</td>
+				<td class="form-group"><input type="text" id="company_head_tell" name="company_head_tell"></td>
+			</tr>
+			<tr>
 				<td>Image</td>
-				<td class="form-group"><input type="file" id="user_img" name="user_img"></td>
+				<td class="form-group"><input type="file" id="company_img" name="company_img" class="form-control" required="required"></td>
 			</tr>
 			<tr>
-				<td>Tendency</td>
-				<td class="form-group">
-					<input type=checkbox name='interest' value='레저'> 레저
-					<input type=checkbox name='interest' value='관광'> 관광
-					<input type=checkbox name='interest' value='휴양'> 휴양
-					<input type=checkbox name='interest' value='쇼핑'> 쇼핑
-				</td>
-			</tr>
-			<tr >
-				<td>Language</td>
-				<td class="form-group">
-					<input type=checkbox name='language' value='영어'> 영어
-					<input type=checkbox name='language' value='중국어'> 중국어
-					<input type=checkbox name='language' value='일본어'> 일본어
-					<input type=checkbox name='language' value='불어'> 불어
-				</td>
-			</tr>
-			<tr>
-				<td>Attraction Travel</td>
-				<td class="form-group">
-					<input type=checkbox name='location' value='미주'> 미주
-					<input type=checkbox name='location' value='유럽'> 유럽
-					<input type=checkbox name='location' value='동남아'> 동남아
-					<input type=checkbox name='location' value='아시아'> 아시아
-				</td>
-			</tr>
-			<tr>
-
 				<td></td>
 				<td><input class="btn btn-primary btn-block" type="submit" value="입력완료"></td>
 			</tr>
@@ -131,44 +107,45 @@
 	<!-- 회원가입 JavaScript -->
 	<script type = "text/javascript" th:inline="javascript">
 	/* <![CDATA[ */
-		function addInfoSubmit() {
-		    var myform = document.forms['addInfo'];
-		    if( myform['user_id'].value.length < 1) {
-		        alert( '아이디를 입력하세요');
-		        return false;
-		    }
-		    if( myform['user_pw'].value.length < 1) {
-		        alert( '패스워드를 입력하세요');
-		        return false;
-		    }
-		    if( myform['user_nickname'].value.length < 1) {
-		    	alert( '닉네임을 입력하세요');
-		    	return false;
-		    }
-		    if( myform['user_birth'].value.length < 1) {
-		    	alret( '생년월일를 입력하세요');
-		    	return false;
-		    }	    
-		    if( myform['user_gender'].value.length < 1) {
-		    	alret( '성별을 입력하세요');
-		    	return false;
-		    }	
-		    if( myform['user_address'].value.length < 1) {
-		    	alret( '주소를 입력하세요');
-		    	return false;
-		    }	
-		    if( myform['user_email'].value.length < 1) {
-		    	alert( '이메일을 입력하세요');
-		    	return false;
-		    }
-		    
-		    if( myform['user_tell'].value.length < 1) {
-		        alert( '연락처를 입력하세요');
-		        return false;
-		    }
-		
-		    return true;
-		}
+			$(document).ready(function(){
+				$("#submit").click(function(){
+					if($('#company_id').val()==""){
+						alert("아이디를 입력하세요");
+						$('#company_id').focus();
+					} else if($('#company_pw').val()==""){
+						alert("비밀번호를 입력하세요");
+						$('#company_pw').focus();
+					} else if($('#company_pw_check').val()==""){
+						alert("비밀번호 확인을 입력하세요");
+						$('#company_pw_check').focus();
+					} else if($('#company_pw').val()!=$('#company_pw_check').val()){
+						alert("비밀번호와 비밀번호 확인이 일치하지않습니다");
+						$('#company_pw').val('');
+						$('#company_pw_check').val('');
+						$('#company_pw_same').focus();
+					} else if($('#company_name').val()==""){
+						alert("회사이름을 입력하세요");
+						$('#company_name').focus();
+					} else if($('#company_tell1').val()==""){
+						alert("담당자연락처를 입력하세요");
+						$('#company_tell1').focus();
+					} else if($('#company_address').val()==""){
+						alert("회사주소를 입력하세요");
+						$('#company_address').focus();
+					} else if($('#company_business_no').val()==""){
+						alert("사업자번호를 입력하세요");
+						$('#company_business_no').focus();
+					} else if($('#company_branch_tell').val()==""){
+						alert("회사대표연락처를 입력하세요");
+						$('#company_branch_tell').focus();
+					} else if($('#company_img').val()==""){
+						alert("이미지를 등록하세요");
+						$('#company_img').focus();
+					} else {
+						alert("신청완료");
+					}
+				});
+			});
 		/* ]]> */
 		</script>
   </body>

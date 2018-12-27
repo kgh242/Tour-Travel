@@ -1,1 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.travel.plan.reviewQuestion.mapper.PlanReviewQuestionMapper">
+	
+	<insert id="insertPlanFoodQuestion" parameterType="com.travel.plan.reviewQuestion.dto.PlanFoodQuestionDTO">
+		INSERT INTO plan_review_food_question
+			(plan_review_food_question_category
+			, plan_review_food_question_contents
+			, admin_id
+			, plan_review_food_question_date)
+		VALUES
+			(#{plan_review_food_question_category}
+			, #{plan_review_food_question_contents}
+			, #{admin_id}
+			, now())
+	</insert>
+	<select id="planFoodQuestionList" resultType="com.travel.plan.reviewQuestion.dto.PlanFoodQuestionDTO">
+		SELECT * 
+		FROM plan_review_food_question
+	</select>
+	
+	<insert id="insertPlanHotelQuestion" parameterType="com.travel.plan.reviewQuestion.dto.PlanHotelQuestionDTO">
+		INSERT INTO plan_review_hotel_question
+			(plan_review_hotel_question_category
+			, plan_review_hotel_question_contents
+			, admin_id
+			, plan_review_hotel_question_date)
+		VALUES
+			(#{plan_review_hotel_question_category}
+			, #{plan_review_hotel_question_contents}
+			, #{admin_id}
+			, now())
+	</insert>
+	<select id="planHotelQuestionList" resultType="com.travel.plan.reviewQuestion.dto.PlanHotelQuestionDTO">
+		SELECT * 
+		FROM plan_review_hotel_question
+	</select>
+	
+	<insert id="insertPlanLandmarkQuestion" parameterType="com.travel.plan.reviewQuestion.dto.PlanLandmarkQuestionDTO">
+		INSERT INTO plan_review_landmark_question
+			(plan_review_landmark_question_category
+			, plan_review_landmark_question_contents
+			, admin_id
+			, plan_review_landmark_question_date)
+		VALUES
+			(#{plan_review_landmark_question_category}
+			, #{plan_review_landmark_question_contents}
+			, #{admin_id}
+			, now())
+	</insert>
+	<select id="planLandmarkQuestionList" resultType="com.travel.plan.reviewQuestion.dto.PlanLandmarkQuestionDTO">
+		SELECT * 
+		FROM plan_review_landmark_question
+	</select>
+	
+	<insert id="insertPlanTrafficQuestion" parameterType="com.travel.plan.reviewQuestion.dto.PlanTrafficQuestionDTO">
+		INSERT INTO plan_review_traffic_question
+			(plan_review_traffic_question_category
+			, plan_review_traffic_question_contents
+			, admin_id
+			, plan_review_traffic_question_date)
+		VALUES
+			(#{plan_review_traffic_question_category}
+			, #{plan_review_traffic_question_contents}
+			, #{admin_id}
+			, now())
+	</insert>
+	<select id="planTrafficQuestionList" resultType="com.travel.plan.reviewQuestion.dto.PlanTrafficQuestionDTO">
+		SELECT * 
+		FROM plan_review_traffic_question
+	</select>
+	
+</mapper>
