@@ -120,4 +120,12 @@ public class AdminController {
 		}
 		return "redirect:/Travel/adminList";
 	}
+	@RequestMapping(value= "/adminChat", method = RequestMethod.GET)
+	public String adminChat(Model model,@RequestParam(value="planNum", defaultValue = "") String planNum,HttpSession session) {
+		System.out.println("AdminController.java.adminChat().GET");
+		String userName = (String) session.getAttribute("LOGINID");
+		model.addAttribute("userName",userName);
+		model.addAttribute("planNum",planNum);
+		return "thymeleaf/plan/planChat";
+	}
 }
