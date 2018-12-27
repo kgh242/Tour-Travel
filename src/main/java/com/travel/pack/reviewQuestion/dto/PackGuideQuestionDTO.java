@@ -4,7 +4,7 @@ package com.travel.pack.reviewQuestion.dto;
 
 public class PackGuideQuestionDTO {
 	private String pack_review_guide_question_no;
-	private int pack_review_guide_question_category;
+	private String pack_review_guide_question_category;
 	private String pack_review_guide_question_contents;
 	private String admin_id;
 	private String pack_review_guide_question_date;
@@ -27,10 +27,10 @@ public class PackGuideQuestionDTO {
 	public void setPack_review_guide_question_no(String pack_review_guide_question_no) {
 		this.pack_review_guide_question_no = pack_review_guide_question_no;
 	}
-	public int getPack_review_guide_question_category() {
+	public String getPack_review_guide_question_category() {
 		return pack_review_guide_question_category;
 	}
-	public void setPack_review_guide_question_category(int pack_review_guide_question_category) {
+	public void setPack_review_guide_question_category(String pack_review_guide_question_category) {
 		this.pack_review_guide_question_category = pack_review_guide_question_category;
 	}
 	public String getPack_review_guide_question_contents() {

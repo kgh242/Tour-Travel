@@ -4,7 +4,7 @@ package com.travel.pack.reviewQuestion.dto;
 
 public class PackTrafficQuestionDTO {
 	private String pack_review_traffic_question_no;
-	private int pack_review_traffic_question_category;
+	private String pack_review_traffic_question_category;
 	private String pack_review_traffic_question_contents;
 	private String admin_id;
 	private String pack_review_traffic_question_date;
@@ -26,10 +26,10 @@ public class PackTrafficQuestionDTO {
 	public void setPack_review_traffic_question_no(String pack_review_traffic_question_no) {
 		this.pack_review_traffic_question_no = pack_review_traffic_question_no;
 	}
-	public int getPack_review_traffic_question_category() {
+	public String getPack_review_traffic_question_category() {
 		return pack_review_traffic_question_category;
 	}
-	public void setPack_review_traffic_question_category(int pack_review_traffic_question_category) {
+	public void setPack_review_traffic_question_category(String pack_review_traffic_question_category) {
 		this.pack_review_traffic_question_category = pack_review_traffic_question_category;
 	}
 	public String getPack_review_traffic_question_contents() {

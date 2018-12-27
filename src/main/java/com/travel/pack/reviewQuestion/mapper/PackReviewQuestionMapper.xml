@@ -17,7 +17,6 @@
 			, #{admin_id}
 			, now())
 	</insert>
-	
 	<select id="packAirQuestionList" resultType="com.travel.pack.reviewQuestion.dto.PackAirQuestionDTO">
 		SELECT * 
 		FROM pack_review_air_question
@@ -35,10 +34,111 @@
 			, #{admin_id}
 			, now())
 	</insert>
-	
 	<select id="packFoodQuestionList" resultType="com.travel.pack.reviewQuestion.dto.PackFoodQuestionDTO">
 		SELECT * 
 		FROM pack_review_food_question
+	</select>
+	
+	<insert id="insertPackGuideQuestion" parameterType="com.travel.pack.reviewQuestion.dto.PackGuideQuestionDTO">
+		INSERT INTO pack_review_guide_question
+			(pack_review_guide_question_category
+			, pack_review_guide_question_contents
+			, admin_id
+			, pack_review_guide_question_date)
+		VALUES
+			(#{pack_review_guide_question_category}
+			, #{pack_review_guide_question_contents}
+			, #{admin_id}
+			, now())
+	</insert>
+	<select id="packGuideQuestionList" resultType="com.travel.pack.reviewQuestion.dto.PackGuideQuestionDTO">
+		SELECT * 
+		FROM pack_review_guide_question
+	</select>
+	
+	<insert id="insertPackHotelQuestion" parameterType="com.travel.pack.reviewQuestion.dto.PackHotelQuestionDTO">
+		INSERT INTO pack_review_hotel_question
+			(pack_review_hotel_question_category
+			, pack_review_hotel_question_contents
+			, admin_id
+			, pack_review_hotel_question_date)
+		VALUES
+			(#{pack_review_hotel_question_category}
+			, #{pack_review_hotel_question_contents}
+			, #{admin_id}
+			, now())
+	</insert>
+	<select id="packHotelQuestionList" resultType="com.travel.pack.reviewQuestion.dto.PackHotelQuestionDTO">
+		SELECT * 
+		FROM pack_review_hotel_question
+	</select>
+	
+	<insert id="insertPackInfoQuestion" parameterType="com.travel.pack.reviewQuestion.dto.PackInfoQuestionDTO">
+		INSERT INTO pack_review_info_question
+			(pack_review_info_question_category
+			, pack_review_info_question_contents
+			, admin_id
+			, pack_review_info_question_date)
+		VALUES
+			(#{pack_review_info_question_category}
+			, #{pack_review_info_question_contents}
+			, #{admin_id}
+			, now())
+	</insert>
+	<select id="packInfoQuestionList" resultType="com.travel.pack.reviewQuestion.dto.PackInfoQuestionDTO">
+		SELECT * 
+		FROM pack_review_info_question
+	</select>
+	
+	<insert id="insertPackLandmarkQuestion" parameterType="com.travel.pack.reviewQuestion.dto.PackLandmarkQuestionDTO">
+		INSERT INTO pack_review_landmark_question
+			(pack_review_landmark_question_category
+			, pack_review_landmark_question_contents
+			, admin_id
+			, pack_review_landmark_question_date)
+		VALUES
+			(#{pack_review_landmark_question_category}
+			, #{pack_review_landmark_question_contents}
+			, #{admin_id}
+			, now())
+	</insert>
+	<select id="packLandmarkQuestionList" resultType="com.travel.pack.reviewQuestion.dto.PackLandmarkQuestionDTO">
+		SELECT * 
+		FROM pack_review_landmark_question
+	</select>
+	
+	<insert id="insertPackPriceQuestion" parameterType="com.travel.pack.reviewQuestion.dto.PackPriceQuestionDTO">
+		INSERT INTO pack_review_price_question
+			(pack_review_price_question_category
+			, pack_review_price_question_contents
+			, admin_id
+			, pack_review_price_question_date)
+		VALUES
+			(#{pack_review_price_question_category}
+			, #{pack_review_price_question_contents}
+			, #{admin_id}
+			, now())
+	</insert>
+	<select id="packPriceQuestionList" resultType="com.travel.pack.reviewQuestion.dto.PackPriceQuestionDTO">
+		SELECT * 
+		FROM pack_review_price_question
+	</select>
+	
+	<insert id="insertPackTrafficQuestion" parameterType="com.travel.pack.reviewQuestion.dto.PackTrafficQuestionDTO">
+		INSERT INTO pack_review_traffic_question
+			(pack_review_traffic_question_category
+			, pack_review_traffic_question_contents
+			, admin_id
+			, pack_review_traffic_question_date)
+		VALUES
+			(#{pack_review_traffic_question_category}
+			, #{pack_review_traffic_question_contents}
+			, #{admin_id}
+			, now())
+	</insert>
+	<select id="packTrafficQuestionList" resultType="com.travel.pack.reviewQuestion.dto.PackTrafficQuestionDTO">
+		SELECT * 
+		FROM pack_review_traffic_question
 	</select>
 	
 </mapper>
