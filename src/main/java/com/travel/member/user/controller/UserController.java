@@ -45,7 +45,7 @@ public class UserController {
 			} else if(result == 2) {
 				System.out.println("회원가입성공 (이미지있음)");
 			}
-			return "thymeleaf/index";
+			return "thymeleaf/login/login";
 		}
 	}
 	

@@ -27,7 +27,7 @@ public class CompanyController {
 
 	@RequestMapping(value = "/companyAdd", method = RequestMethod.GET)
 	public String companyAdd() {
-		return "membeer/companyAdd";
+		return "member/companyAdd";
 	}
 
 	@RequestMapping(value = "/companyAdd", method = RequestMethod.POST)
