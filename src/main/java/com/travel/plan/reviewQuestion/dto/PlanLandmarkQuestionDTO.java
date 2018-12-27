@@ -4,7 +4,7 @@ package com.travel.plan.reviewQuestion.dto;
 
 public class PlanLandmarkQuestionDTO {
 	private String plan_review_landmark_question_no;
-	private int plan_review_landmark_question_category;
+	private String plan_review_landmark_question_category;
 	private String plan_review_landmark_question_contents;
 	private String admin_id;
 	private String plan_review_landmark_question_date;
@@ -27,10 +27,10 @@ public class PlanLandmarkQuestionDTO {
 	public void setPlan_review_landmark_question_no(String plan_review_landmark_question_no) {
 		this.plan_review_landmark_question_no = plan_review_landmark_question_no;
 	}
-	public int getPlan_review_landmark_question_category() {
+	public String getPlan_review_landmark_question_category() {
 		return plan_review_landmark_question_category;
 	}
-	public void setPlan_review_landmark_question_category(int plan_review_landmark_question_category) {
+	public void setPlan_review_landmark_question_category(String plan_review_landmark_question_category) {
 		this.plan_review_landmark_question_category = plan_review_landmark_question_category;
 	}
 	public String getPlan_review_landmark_question_contents() {
