@@ -29,6 +29,18 @@ public interface PackMapper {
 	int packAfterNotice(Map<String, Object> map);
 	int packPriceInfo(PackPriceDTO packPriceDTO);
 	
+	int packUpdate(PackDTO packDTO);
+	int packHotelUpdate(PackHotelDTO packHotelDTO);
+	int packScheduleUpdate(PackScheduleDTO packScheduleDTO);
+	int packLandmarkUpdate(PackLandmarkDTO packLandmarkDTO);
+	int packBeforeNoticeUpdate(Map<String, Object> map);
+	int packAfterNoticeUpdate(Map<String, Object> map);
+	int packPriceInfoUpdate(PackPriceDTO packPriceDTO);
+	
+	int packHotelDelete(int pack_info_no);
+	int packScheduleDelete(int pack_info_no);
+	int packLandmarkDelete(int pack_info_no);
+	
 	int packDeleteBookConfirmSelect(int pack_info_no);
 	int packDeletePayConfirmSelect(int pack_info_no);
 	List<ImgDTO> packLandmarkImgConfirmSelect(int pack_info_no);

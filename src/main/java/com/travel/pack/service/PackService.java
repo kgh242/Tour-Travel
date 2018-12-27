@@ -52,13 +52,6 @@ public class PackService {
 		ImgHelper imgHelper = new ImgHelper();
 		ImgDTO imgDTO = new ImgDTO();
 
-		System.out.println(hotelImgFileName.size() + "<<호텔이미지갯수");
-		System.out.println(scheduleFileName.size() + "<<스케줄이미지갯수");
-		System.out.println(landMarkFileName.size() + "<<관광지이미지갯수");
-		System.out.println(packHotelList.get(0).getPack_hotel_name() + "<<<");
-
-
-
 		try {
 			result = packMapper.packAdd(packDTO);
 
@@ -395,6 +388,144 @@ public class PackService {
 			System.out.println("패키지 삭제 에러발생 ......Packservice.java : " + e);
 		}
 		return result;
+	}
+	
+	
+	public int packUpdate(
+			int pack_info_no
+			, PackDTO packDTO
+			, List<PackHotelDTO> packHotelList
+			, List<PackScheduleDTO> packScheduleList
+			,List<PackLandmarkDTO> packLandmakList
+			, PackPriceDTO packPriceDTO
+			, List<MultipartFile> hotelImgFileName
+			,List<MultipartFile> scheduleFileName
+			, List<MultipartFile> landMarkFileName
+			,String pack_notice_before_contents
+			,String pack_notice_after_contents) {
+		
+		System.out.println("패키지 수정......PackService.java");
+		System.out.println(hotelImgFileName.size() + "<<호텔이미지갯수");
+		System.out.println(scheduleFileName.size() + "<<스케줄이미지갯수");
+		System.out.println(landMarkFileName.size() + "<<관광지이미지갯수");
+		System.out.println(packHotelList.get(0).getPack_hotel_name() + "<<<");
+		
+		int result;
+
+/*		// 이미지 정보 추출/사용을 위한 ImgHelper/ImgDTO
+		ImgHelper imgHelper = new ImgHelper();
+		ImgDTO imgDTO = new ImgDTO();*/
+		
+		
+		try {
+			//여행 출발 전/후 정보 수정
+			try {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("pack_info_no", packDTO.getPack_info_no());
+				map.put("pack_notice_before_contents", pack_notice_before_contents);
+				map.put("pack_notice_after_contents", pack_notice_after_contents);
+				
+				packMapper.packBeforeNoticeUpdate(map); // 여행 출발 전 사전정보 수정 쿼리
+				packMapper.packAfterNoticeUpdate(map); 	// 여행 출발 후 사전정보 수정 쿼리
+				
+			} catch (Exception e) {
+				System.out.println("여행출발전후 정보 수정 에러 발생 : " + e);
+			}
+			
+			//가격 정보 수정
+			try {
+	
+				packPriceDTO.setPack_info_no(packDTO.getPack_info_no());	
+				packMapper.packPriceInfoUpdate(packPriceDTO);
+				
+			} catch (Exception e) {
+				System.out.println("가격 정보 입력 에러 발생 : " + e);
+			}
+
+			// 숙소정보 삭제 후 입력
+			try {
+				packMapper.packHotelDelete(pack_info_no);
+				for (int i = 0; i < packHotelList.size(); i++) {
+					System.out.println(i + "번째 숙소정보입력......packService......jav");
+					// 숙소이름(코드), 숙박시작/종료일 입력값 누락시 입력되지않음
+					if (!packHotelList.get(i).getPack_hotel_name().equals("")
+							&& !packHotelList.get(i).getPack_hotel_start_date().equals("")
+							&& !packHotelList.get(i).getPack_hotel_end_date().equals("")) {
+						PackHotelDTO packHotelDTO = new PackHotelDTO();
+						packHotelDTO.setPack_info_no(packDTO.getPack_info_no());
+						packHotelDTO.setPack_hotel_name(packHotelList.get(i).getPack_hotel_name());
+						packHotelDTO.setPack_hotel_start_date(packHotelList.get(i).getPack_hotel_start_date());
+						packHotelDTO.setPack_hotel_end_date(packHotelList.get(i).getPack_hotel_end_date());
+						packMapper.packHotelAdd(packHotelDTO);
+					}
+
+				}
+			} catch (Exception e) {
+				System.out.println("숙소 정보 입력 에러 발생 : " + e);
+			}
+
+			// 스케줄 삭제 후 입력
+			try {
+				packMapper.packScheduleDelete(pack_info_no);
+				for (int i = 0; i < packScheduleList.size(); i++) {
+					System.out.println(i + "번째 스케줄정보입력......packService......jav");
+					// 스케줄해당날짜, 스케줄내용 입력값 누락시 입력되지않음
+					if (!packScheduleList.get(i).getPack_schedule_date().equals("")
+							&& !packScheduleList.get(i).getPack_schedule_contents().equals("")) {
+						PackScheduleDTO packScheduleDTO = new PackScheduleDTO();
+						packScheduleDTO.setCompany_id(packDTO.getCompany_id());
+						packScheduleDTO.setPack_info_no(packDTO.getPack_info_no());
+						packScheduleDTO.setPack_schedule_date(packScheduleList.get(i).getPack_schedule_date());
+						packScheduleDTO.setPack_schedule_contents(packScheduleList.get(i).getPack_schedule_contents());
+
+						packMapper.packScheduleAdd(packScheduleDTO);
+					}
+
+				}
+			} catch (Exception e) {
+				System.out.println("스케줄 정보 입력 에러 발생 : " + e);
+			}
+
+			// 관광지 삭제 후 입력
+			try {
+				packMapper.packLandmarkDelete(pack_info_no);
+				for (int i = 0; i < packLandmakList.size(); i++) {
+					System.out.println(i + "번째 관광지정보입력......packService......jav"); // 숙소이름(코드),
+					// 숙박시작/종료일 입력값 누락시 입력되지않음
+					if (!packLandmakList.get(i).getPack_landmark_code().equals("")
+							&& !packLandmakList.get(i).getPack_tour_date().equals("")
+							&& !packLandmakList.get(i).getPack_tour_contents().equals("")) {
+						PackLandmarkDTO packLandmarkDTO = new PackLandmarkDTO();
+						packLandmarkDTO.setPack_info_no(packDTO.getPack_info_no());
+						packLandmarkDTO.setCompany_id(packDTO.getCompany_id());
+						packLandmarkDTO.setPack_landmark_code(packLandmakList.get(i).getPack_landmark_code());
+						packLandmarkDTO.setPack_tour_date(packLandmakList.get(i).getPack_tour_date());
+						packLandmarkDTO.setPack_tour_contents(packLandmakList.get(i).getPack_tour_contents());
+
+						packMapper.packLandmarkAdd(packLandmarkDTO);
+					}
+
+				}
+			} catch (Exception e) {
+				System.out.println("관광지 정보 입력 에러 발생 : " + e);
+			}
+
+
+
+			result = 1;
+		} catch (Exception e) {
+			result = 0;
+			System.out.println("에러발생 : " + e);
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		return 0;
 	}
 
 

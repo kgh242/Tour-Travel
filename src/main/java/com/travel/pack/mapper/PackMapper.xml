@@ -250,5 +250,55 @@
     <delete id="packDelete" parameterType="int">
     	DELETE FROM pack_info WHERE pack_info_no = #{pack_info_no}
     </delete>
+    
+   	<delete id="packHotelDelete" parameterType="int">
+    	DELETE FROM pack_hotel WHERE pack_info_no = #{pack_info_no}
+    </delete>
+    
+   	<delete id="packScheduleDelete" parameterType="int">
+    	DELETE FROM pack_schedule WHERE pack_info_no = #{pack_info_no}
+    </delete> 
+       
+   	<delete id="packLandmarkDelete" parameterType="int">
+    	DELETE FROM pack_landmark WHERE pack_info_no = #{pack_info_no}
+    </delete>   
+     
+    <update id="packUpdate" parameterType="com.travel.pack.dto.PackDTO">
+    </update>
+    
+    <update id="packHotelUpdate" parameterType="com.travel.pack.dto.PackHotelDTO">
+    </update>
+    
+    <update id="packScheduleUpdate" parameterType="com.travel.pack.dto.PackScheduleDTO">
+    </update>
+    
+    <update id="packLandmarkUpdate" parameterType="com.travel.pack.dto.PackLandmarkDTO">
+    </update>
+    
+    <update id="packBeforeNoticeUpdate" parameterType="Map">
+        UPDATE pack_notice_before
+    		SET 
+    			pack_notice_before_contents=#{pack_notice_before_contents} 
+    		WHERE 
+    			pack_info_no=#{pack_info_no};
+    </update>
+    
+    <update id="packAfterNoticeUpdate" parameterType="Map">
+    	UPDATE pack_notice_after 
+    		SET 
+    			pack_notice_after_contents=#{pack_notice_after_contents} 
+    		WHERE 
+    			pack_info_no=#{pack_info_no};
+    </update>
+    
+    <update id="packPriceInfoUpdate" parameterType="com.travel.pack.dto.PackPriceDTO">
+    	UPDATE pack_price
+    		SET
+    			pack_price_adult=#{pack_price_adult}
+    			, pack_price_child=#{pack_price_child}
+    			, pack_price_baby=#{pack_price_baby}
+    		WHERE
+    			pack_info_no=#{pack_info_no};
+    </update>
 
 </mapper>
