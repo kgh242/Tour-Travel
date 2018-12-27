@@ -27,14 +27,14 @@ public class CompanyController {
 
 	@RequestMapping(value = "/companyAdd", method = RequestMethod.GET)
 	public String companyAdd() {
-		return "member/companyAdd";
+		return "membeer/companyAdd";
 	}
 
 	@RequestMapping(value = "/companyAdd", method = RequestMethod.POST)
 	public String companyAdd(CompanyDTO companyDTO, CompanyImgDTO companyImgDTO) {
 		int result = companyService.companyAdd(companyDTO, companyImgDTO);
 		if (result == 1) {
-			return "thymeleaf/index";
+			return "thymeleaf/login/login";
 		} else {
 			return "member/companyAdd";
 		}
@@ -68,7 +68,7 @@ public class CompanyController {
 		companyDTO.setAdmin_id(session.getAttribute("LOGINID").toString());
 		System.out.println(companyDTO.getAdmin_id() + "<<<LOGINID");
 		companyService.companyAuth(companyDTO);
-		return "redirect:/Travel/companyList";
+		return "redirect:/thymeleaf/list/companyList";
 	}
 	
 	@RequestMapping(value = "/companyLogin", method = RequestMethod.GET)
@@ -88,7 +88,7 @@ public class CompanyController {
 		if(result == 1) {
 			if(auth == true) {
 			System.out.println("여행사 로그인 성공");
-			return "thymeleaf/index";
+			return "thymeleaf/companyIndex";
 			} else {
 				System.out.println("미승인상태");
 				response.setContentType("text/html; charset=UTF-8");

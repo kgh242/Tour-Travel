@@ -25,7 +25,7 @@ public class UserController {
 	@RequestMapping(value = "/userAdd", method = RequestMethod.GET)
 	public String userAdd() {
 		System.out.println("user 회원가입 창으로 이동......UserController.java");
-		return "member/userAdd";
+		return "thymeleaf/member/user/userAdd";
 	}
 
 	@RequestMapping(value = "/userAdd", method = RequestMethod.POST)
@@ -38,7 +38,7 @@ public class UserController {
 
 		if(result==0) {
 			System.out.println("회원가입실패");
-			return "member/userAdd";
+			return "thymeleaf/member/user/userAdd";
 		}else {
 			if(result == 1) {
 				System.out.println("회원가입성공 (이미지없음)");

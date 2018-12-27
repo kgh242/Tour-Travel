@@ -253,7 +253,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
   transform: rotate(15deg);
 }
 
-@media (min-width: 576px) {
+@media (min-width: 800px) {
   .card-columns {
     -webkit-column-count: 1;
     column-count: 1;
@@ -372,4 +372,12 @@ body.sidebar-toggled footer.sticky-footer {
   body.sidebar-toggled footer.sticky-footer {
     width: calc(100% - 90px);
   }
+  
+  	table.txc-table{
+		width:100%;
+	 	table-layout:fixed;
+	 }
+	table theda tr{
+		width:100%;
+	}
 }

@@ -12,7 +12,7 @@ public class adminPageController {
 	@RequestMapping("admLogin")
 	public String login() {
 		System.out.println("adminLogin Page");
-		return "thymeleaf/admLogin";
+		return "thymeleaf/login/admLogin";
 	}
 	@RequestMapping("adminIndex")
 	public String index(HttpSession session, AdminDTO adminDTO) {

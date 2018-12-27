@@ -42,10 +42,6 @@
 		<td>연락처</td>
 		<td>${UserDTO.user_tell}</td>
 	</tr>
-	<tr>
-		<td>이미지</td>
-		<td>??????</td>
-	</tr>
 </table>
 </form>
 
