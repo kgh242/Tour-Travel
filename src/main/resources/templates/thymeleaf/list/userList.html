@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>사용자 목록</title>
+    <title>관리자 페이지</title>
 
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,22 +22,22 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
-    
-	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
   </head>
 
   <body id="page-top">
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-      <a class="navbar-brand mr-1" href="/adminIndex">Go Travel!! 관리자 페이지</a>
+      <a class="navbar-brand mr-1" href="adminIndex">Go Travel!! 관리자 페이지</a>
 
       <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
       </button>
-      <!-- Navbar -->
+      <div th:if="${session.LOGINID != null}">
+	   	<span th:text="${session.LOGINID}" style="color:white"> </span>
+		<span style="color:white">로그인 중	</span>
       <ul class="navbar-nav ml-auto ml-md-0">
-        </li> -->
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user-circle fa-fw"></i>
@@ -50,7 +50,7 @@
           </div>
         </li>
       </ul>
-
+	 </div>
     </nav>
 
     <div id="wrapper">
@@ -58,7 +58,7 @@
       <!-- Sidebar -->
       <ul class="sidebar navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="adminIndex">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>관리자 메인페이지</span>
           </a>
@@ -70,9 +70,10 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <h6 class="dropdown-header">회원관리</h6>
-            <a class="dropdown-item" href="/userList">사용자 회원 관리</a>
-            <a class="dropdown-item" href="/companyList">여행사 회원 관리</a>
-            <a class="dropdown-item" href="/adminList">관리자 회원 관리</a>
+            <a class="dropdown-item" href="userList">사용자 회원 관리</a>
+            <a class="dropdown-item" href="companyList">여행사 회원 관리</a>
+            <a class="dropdown-item" href="adminList">관리자 회원 관리</a>
+            <a class="dropdown-item" href="/Travel/adminChat?planNum=플랜방1">채팅테스트</a>            
             <div class="dropdown-divider"></div>
             <h6 class="dropdown-header">통계 데이터</h6>
             <a class="dropdown-item" href="#">통계</a>
@@ -85,7 +86,7 @@
             <span>Charts</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/index">
+          <a class="nav-link" href="index">
             <i class="fas fa-fw fa-table"></i>
             <span>사이트로 이동</span></a>
         </li>
@@ -98,7 +99,7 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="/adminIndex">메인페이지</a>
+              <a href="adminIndex">메인페이지</a>
             </li>
             <li class="breadcrumb-item active">사용자 회원 관리</li>
           </ol>
@@ -188,19 +189,20 @@
             <div class="pagination-area wow fadeInUp" data-wow-delay="100ms">
         	<nav>
              <ul class="pagination">
-                <li class="page-item" th:if="${prevPage}"><a class="page-link" th:href="@{/Travel/UserList(currentPage=${(currentBlock - 1) * pagePerBlock})}">이전</a></li>
-                <li class="page-item" th:each="i : ${#numbers.sequence(startPage, endPage)}" th:classappend="${currentPage} == ${i} ? active : null"><a class="page-link" th:href="@{/Travel/UserList(currentPage=${i})}" th:text="${i}"></a></li>
-                <li class="page-item" th:if="${nextPage}"><a class="page-link" th:href="@{/Travel/UserList(currentPage=${currentBlock * pagePerBlock + 1})}">다음</a></li>
+                <li class="page-item" th:if="${prevPage}"><a class="page-link" th:href="@{UserList(currentPage=${(currentBlock - 1) * pagePerBlock})}">이전</a></li>
+                <li class="page-item" th:each="i : ${#numbers.sequence(startPage, endPage)}" th:classappend="${currentPage} == ${i} ? active : null"><a class="page-link" th:href="@{UserList(currentPage=${i})}" th:text="${i}"></a></li>
+                <li class="page-item" th:if="${nextPage}"><a class="page-link" th:href="@{UserList(currentPage=${currentBlock * pagePerBlock + 1})}">다음</a></li>
              </ul>
         	</nav>
-    	</div>
+           </div>
+          </div>
+         </div>
+        </div>
        </div>
       </div>
-     </div>
-    </div>
         <!-- /.container-fluid -->
       <!-- /.content-wrapper -->
-
+	 </div>
     </div>
     <!-- /#wrapper -->
 

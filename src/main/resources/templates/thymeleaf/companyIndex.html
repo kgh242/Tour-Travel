@@ -29,12 +29,14 @@
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-      <a class="navbar-brand mr-1" href="/adminIndex">Go Travel!! 여행사 페이지</a>
+      <a class="navbar-brand mr-1" href="companyIndex">Go Travel!! 여행사 페이지</a>
 
       <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
       </button>
-
+      <div th:if="${session.LOGINID != null}">
+	   	<span th:text="${session.LOGINID}" style="color:white"> </span>
+		<span style="color:white">로그인 중	</span>
       <ul class="navbar-nav ml-auto ml-md-0">
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -48,7 +50,7 @@
           </div>
         </li>
       </ul>
-
+	 </div>
     </nav>
 
     <div id="wrapper">
@@ -56,7 +58,7 @@
       <!-- Sidebar -->
       <ul class="sidebar navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="companyIndex">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>여행사 메인페이지</span>
           </a>
@@ -68,8 +70,8 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <h6 class="dropdown-header">패키지관리</h6>
-            <a class="dropdown-item" href="/packAdd">패키지 등록</a>
-            <a class="dropdown-item" href="/packList">패키지 목록</a>
+            <a class="dropdown-item" href="packAdd">패키지 등록</a>
+            <a class="dropdown-item" href="packList">패키지 목록</a>
             <a class="dropdown-item" href="#">예비</a>
             <div class="dropdown-divider">예비</div>
             <h6 class="dropdown-header"></h6>
@@ -83,7 +85,7 @@
             <span>회원정보</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/index">
+          <a class="nav-link" href="index">
             <i class="fas fa-fw fa-table"></i>
             <span>사이트로 이동</span></a>
         </li>
@@ -181,20 +183,20 @@
       <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" th:fragment="adLogout">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <h5 class="modal-title" id="exampleModalLabel">로그아웃 하시겠습니까?</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-body">로그아웃 하시기 전 잊으신건 없습니까?</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="login">Logout</a>
           </div>
         </div>
       </div>

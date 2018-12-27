@@ -26,7 +26,7 @@ public class AdminController {
 	@RequestMapping(value = "/adminAdd", method = RequestMethod.GET)
 	public String adminAdd() {
 		System.out.println("AdminController.java.userAdd().GET");
-		return "member/adminAdd";
+		return "thymeleaf/member/admin/adminAdd";
 	}
 	// 관리자 회원가입
 	@RequestMapping(value = "/adminAdd", method = RequestMethod.POST)
@@ -35,10 +35,11 @@ public class AdminController {
 		int result = adminService.adminAdd(adminDTO);
 		if(result == 1) {
 			System.out.println("입력성공");
+			return "thymeleaf/login/admLogin";
 		}else {
 			System.out.println("입력실패");
+			return "thymeleaf/member/admin/adminAdd";
 		}
-		return "main/admin";
 	}
 	// 관리자 로그인화면
 	@RequestMapping(value= "/adminLogin", method = RequestMethod.GET)

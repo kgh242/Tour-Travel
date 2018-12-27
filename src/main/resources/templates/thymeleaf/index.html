@@ -64,7 +64,7 @@
                             <div th:if="${session.LOGINID == null}">
 	                            <!-- Admin Signin btn -->
 	                            <div class="dorne-signin-btn">
-	                                <a href="/admLogin">관리자</a>
+	                                <a href="admLogin">관리자</a>
 	                            </div>
 	                            <!-- user/company 통합 로그인  -->
 	                            <div class="dorne-add-listings-btn">
@@ -74,7 +74,7 @@
                             </div>
                             <div th:if="${session.LOGINID != null}">
                             	<div class="dorne-signout-btn">
-                            		<span th:text="${session.LOGINID}" style="color:yellow"></span>
+                            		<a th:href="userGetInfo" th:text="${session.LOGINID}" style="color:yellow"></a>
                             		<span style="color:white">님 로그인중</span>
                             			<a href="/Travel/userLogout">로그아웃</a>
                             	</div>

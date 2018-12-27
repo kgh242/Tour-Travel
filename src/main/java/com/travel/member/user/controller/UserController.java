@@ -82,14 +82,14 @@ public class UserController {
 		System.out.println("user 내정보 보기......UserController.java");
 		String user_id = session.getAttribute("LOGINID").toString();
 		model.addAttribute("userDTO", userService.userGetInfo(user_id));
-		return "member/userGetInfo";
+		return "thymeleaf/member/user/userGetInfo";
 	}
 		
 	@RequestMapping(value = "/userUpdate", method = RequestMethod.POST)
 	public String userUpdate(Model model, UserDTO userDTO) {
 		System.out.println("user 업데이트 이동......UserController.java");
 		model.addAttribute("userDTO", userDTO);
-		return "member/userUpdate";
+		return "thymeleaf/member/user/userUpdate";
 	}
 	
 	@RequestMapping(value = "/userUpdateAction", method = RequestMethod.POST)
