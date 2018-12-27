@@ -127,6 +127,8 @@ public class AdminController {
 		String userName = (String) session.getAttribute("LOGINID");
 		model.addAttribute("userName",userName);
 		model.addAttribute("planNum",planNum);
+		System.out.println(userName);
+		System.out.println(planNum);
 		return "thymeleaf/plan/planChat";
 	}
 }
