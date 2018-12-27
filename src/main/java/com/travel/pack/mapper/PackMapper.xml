@@ -50,9 +50,9 @@
     		#{pack_info_no},
     		#{pack_hotel_start_date},
     		#{pack_hotel_end_date},
-    		'20180101',
+    		'0',
     		'가상호텔코드쿼리수정',
-    		'가상호텔이름쿼리수정'
+    		#{pack_hotel_name}
     		)
     </insert>
     
@@ -143,15 +143,112 @@
     		#{imgDTO.imgSize}, 
     		now())
     </insert>
-    
+	
+	<insert id="packBeforeNotice" parameterType="Map">
+		INSERT INTO pack_notice_before (
+			pack_info_no,
+			pack_notice_before_contents)
+		VALUES (
+			#{pack_info_no},
+			#{pack_notice_before_contents}
+		)
+	</insert>
+	
+   	<insert id="packAfterNotice" parameterType="Map">
+   		INSERT INTO pack_notice_after (
+			pack_info_no,
+			pack_notice_after_contents)
+		VALUES (
+			#{pack_info_no},
+			#{pack_notice_after_contents}
+		)
+	</insert>
+	
+	<insert id="packPriceInfo" parameterType="com.travel.pack.dto.PackPriceDTO">
+		INSERT INTO pack_price (
+			pack_info_no,
+			pack_price_adult,
+			pack_price_child,
+			pack_price_baby
+			)
+		VALUES (
+			#{pack_info_no},
+			#{pack_price_adult},
+			#{pack_price_child},
+			#{pack_price_baby}
+			)
+	</insert>
 
+	<select id="packDeleteBookConfirmSelect" parameterType="int" resultType="int">
+		SELECT COUNT(pack_book_no) FROM pack_book WHERE pack_info_no=#{pack_info_no}
+	</select>
+	
+	<select id="packDeletePayConfirmSelect" parameterType="int" resultType="int">
+		SELECT COUNT(pack_pay_no) FROM pack_pay WHERE pack_book_no=#{pack_info_no}
+	</select>
 
-    <select id="packGetInfo" parameterType="int" resultType="com.travel.pack.dto.PackDTO">
+    <select id="packGetPackInfo" parameterType="int" resultType="com.travel.pack.dto.PackDTO">
     	SELECT * FROM pack_info WHERE pack_info_no = #{pack_info_no}
     </select>
     
+    <select id="packGetHotelInfo" parameterType="int" resultType="com.travel.pack.dto.PackHotelDTO">
+    	SELECT * FROM pack_hotel WHERE pack_info_no = #{pack_info_no}
+    </select>
+    
+    <select id="packGetLandmarkInfo" parameterType="int" resultType="com.travel.pack.dto.PackLandmarkDTO">
+    	SELECT * FROM pack_landmark WHERE pack_info_no = #{pack_info_no}
+    </select>
+    
+    <select id="packGetScheduleInfo" parameterType="int" resultType="com.travel.pack.dto.PackScheduleDTO">
+    	SELECT * FROM pack_schedule WHERE pack_info_no = #{pack_info_no}
+    </select>
+    
+    <select id="packGetPriceInfo" parameterType="int" resultType="com.travel.pack.dto.PackPriceDTO">
+    	SELECT * FROM pack_price WHERE pack_info_no = #{pack_info_no}
+    </select>
+    
+    <select id="packGetBeforeNoticeInfo" parameterType="int" resultType="String">
+    	SELECT pack_notice_before_contents FROM pack_notice_before WHERE pack_info_no = #{pack_info_no}
+    </select>
+    
+    <select id="packGetAfterNoticeInfo" parameterType="int" resultType="String">
+    	SELECT pack_notice_after_contents FROM pack_notice_after WHERE pack_info_no = #{pack_info_no}
+    </select>
+    
+    <select id="packHotelImgConfirmSelect" parameterType="int" resultType="com.travel.image.ImgDTO">
+    	SELECT 
+    		pack_hotel_img_path AS imgPath, 
+    		pack_hotel_img_true_name AS imgTrueName, 
+    		pack_hotel_img_false_name AS imgFalseName, 
+    		pack_hotel_img_ext as imgExt 
+    	FROM pack_hotel_img WHERE pack_info_no=#{pack_info_no}
+    </select>
+    
+    <select id="packLandmarkImgConfirmSelect" parameterType="int" resultType="com.travel.image.ImgDTO">
+        SELECT 
+    		pack_tour_img_path AS imgPath, 
+    		pack_tour_img_true_name AS imgTrueName, 
+    		pack_tour_img_false_name AS imgFalseName, 
+    		pack_tour_img_ext as imgExt 
+    	FROM pack_landmark_img WHERE pack_info_no=#{pack_info_no}
+    </select>
+    
+    <select id="packScheduleImgConfirmSelect" parameterType="int" resultType="com.travel.image.ImgDTO">
+        SELECT 
+    		pack_schedule_img_path AS imgPath, 
+    		pack_schedule_img_true_name AS imgTrueName, 
+    		pack_schedule_img_false_name AS imgFalseName, 
+    		pack_schedule_img_ext as imgExt 
+    	FROM pack_schedule_img WHERE pack_info_no=#{pack_info_no}
+    </select>
+    
+
     <select id="packList" resultType="com.travel.pack.dto.PackDTO">
     	SELECT * FROM pack_info
     </select>
+    
+    <delete id="packDelete" parameterType="int">
+    	DELETE FROM pack_info WHERE pack_info_no = #{pack_info_no}
+    </delete>
 
 </mapper>

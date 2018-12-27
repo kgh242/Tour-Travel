@@ -7,13 +7,28 @@ public class PackHotelDTO {
 	private String pack_hotel_end_date;
 	private String pack_hotel_day;
 	private String hotel_code;
-	private String hotel_name;
+	private String pack_hotel_name;
+	
+
+	@Override
+	public String toString() {
+		return "PackHotelDTO [pack_hotel_no=" + pack_hotel_no + ", pack_info_no=" + pack_info_no
+				+ ", pack_hotel_start_date=" + pack_hotel_start_date + ", pack_hotel_end_date=" + pack_hotel_end_date
+				+ ", pack_hotel_day=" + pack_hotel_day + ", hotel_code=" + hotel_code + ", pack_hotel_name="
+				+ pack_hotel_name + "]";
+	}
+
+	public String getPack_hotel_name() {
+		return pack_hotel_name;
+	}
+
+	public void setPack_hotel_name(String pack_hotel_name) {
+		this.pack_hotel_name = pack_hotel_name;
+	}
 
 	public String getPack_hotel_no() {
 		return pack_hotel_no;
 	}
-
-
 
 	public void setPack_hotel_no(String pack_hotel_no) {
 		this.pack_hotel_no = pack_hotel_no;
@@ -59,21 +74,6 @@ public class PackHotelDTO {
 		this.hotel_code = hotel_code;
 	}
 
-	public String getHotel_name() {
-		return hotel_name;
-	}
 
-	public void setHotel_name(String hotel_name) {
-		this.hotel_name = hotel_name;
-	}
-
-
-	@Override
-	public String toString() {
-		return "PackHotelDTO [pack_hotel_no=" + pack_hotel_no + ", pack_info_no=" + pack_info_no
-				+ ", pack_hotel_start_date=" + pack_hotel_start_date + ", pack_hotel_end_date=" + pack_hotel_end_date
-				+ ", pack_hotel_day=" + pack_hotel_day + ", hotel_code=" + hotel_code + ", hotel_name=" + hotel_name
-				+ "]";
-	}
 
 }

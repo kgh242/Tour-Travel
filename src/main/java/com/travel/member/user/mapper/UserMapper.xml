@@ -7,12 +7,8 @@
 
     <insert id="userInsert" parameterType="com.travel.member.user.dto.UserDTO">
 
-	       	<selectKey resultType="String" keyProperty="user_no" order="BEFORE">
-	   				SELECT IFNULL(MAX(CONVERT(SUBSTR((user_no), 5), UNSIGNED)+1), 0) FROM member_user
-	   		</selectKey>
-
-    			INSERT INTO member_user (user_no, user_id, user_pw, user_nickname, user_name, user_birth, user_gender, user_address, user_email, user_tell, user_join_date, user_email_check, user_sns_check, user_introduction, user_point, user_escape)
-				 VALUES (concat("user", #{user_no}), #{user_id}, #{user_pw}, #{user_nickname}, #{user_name}, #{user_birth}, #{user_gender}, #{user_address}, #{user_email}, #{user_tell}, now(), #{user_email_check}, #{user_sns_check}, #{user_introduction}, '100', '0');
+    			INSERT INTO member_user (user_id, user_pw, user_nickname, user_name, user_birth, user_gender, user_address, user_email, user_tell, user_join_date, user_email_check, user_sns_check, user_introduction, user_point, user_escape)
+				 VALUES (#{user_id}, #{user_pw}, #{user_nickname}, #{user_name}, #{user_birth}, #{user_gender}, #{user_address}, #{user_email}, #{user_tell}, now(), #{user_email_check}, #{user_sns_check}, #{user_introduction}, '100', '0');
 
     </insert>
     

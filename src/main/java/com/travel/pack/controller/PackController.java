@@ -1,5 +1,6 @@
 package com.travel.pack.controller;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class PackController {
 	@RequestMapping(value = "/packAdd", method = RequestMethod.POST)
 	public String packAdd(
 			PackDTO packDTO,
-			@RequestParam(value="pack_hotel_no",required=true) List<String> pack_hotel_no, 
+			@RequestParam(value="pack_hotel_name",required=true) List<String> pack_hotel_name, 
 			@RequestParam(value="pack_hotel_start_date",required=true) List<String> pack_hotel_start_date,
 			@RequestParam(value="pack_hotel_end_date",required=true) List<String> pack_hotel_end_date,
 			@RequestParam(value="pack_schedule_date",required=true) List<String> pack_schedule_date, 
@@ -47,6 +48,8 @@ public class PackController {
 			@RequestParam(value="pack_tour_date",required=true) List<String> pack_tour_date,
 			@RequestParam(value="pack_tour_contents",required=true) List<String> pack_tour_contents,		
 			PackPriceDTO packPriceDTO,
+			String pack_notice_before_contents,
+			String pack_notice_after_contents,
 			@RequestParam(value="hotelImgFileName",required=false) List<MultipartFile> hotelImgFileName,
 			@RequestParam(value="scheduleFileName",required=false) List<MultipartFile> scheduleFileName,
 			@RequestParam(value="landMarkFileName",required=false) List<MultipartFile> landMarkFileName
@@ -56,11 +59,13 @@ public class PackController {
 		List<PackHotelDTO> packHotelList = new ArrayList<PackHotelDTO>();
 		List<PackScheduleDTO> packScheduleList = new ArrayList<PackScheduleDTO>();
 		List<PackLandmarkDTO> packLandmakList = new ArrayList<PackLandmarkDTO>();
+		
 
 		// 다중정보 객체묶기
-		for(int i = 0; i<pack_hotel_no.size(); i++) {
+		for(int i = 0; i<pack_hotel_name.size(); i++) {
 			PackHotelDTO packHotelDTO = new PackHotelDTO();
-			packHotelDTO.setPack_hotel_no(pack_hotel_no.get(i));
+			System.out.println(pack_hotel_name.get(i) + "<<이름확인");
+			packHotelDTO.setPack_hotel_name(pack_hotel_name.get(i));
 			packHotelDTO.setPack_hotel_start_date(pack_hotel_start_date.get(i));
 			packHotelDTO.setPack_hotel_end_date(pack_hotel_end_date.get(i));
 			packHotelList.add(i, packHotelDTO);
@@ -82,13 +87,13 @@ public class PackController {
 		}
 		// 여기까지
 	
-		int result = packService.packAdd(packDTO, packHotelList, packScheduleList, packLandmakList, packPriceDTO, hotelImgFileName, scheduleFileName, landMarkFileName);
-		System.out.println(result + "<최종결과");
+		int result = packService.packAdd(packDTO, packHotelList, packScheduleList, packLandmakList, packPriceDTO, hotelImgFileName, scheduleFileName, landMarkFileName, pack_notice_before_contents, pack_notice_after_contents);
+		System.out.println(result + "<최종결과 1성공, 0실패");
 		if (result == 0) {
 			//입력실패시 0 리턴
 			return "";
 		}
-		return "";
+		return "redirect:/Travel/packList";
 	}
 	
 	@RequestMapping(value = "/packList", method = RequestMethod.GET)
@@ -100,10 +105,44 @@ public class PackController {
 
 	
 	@RequestMapping(value = "/packGetInfo", method = RequestMethod.GET)
-	public String packGetInfo(Model model, @RequestParam("pack_info_no") int pack_info_no) {
+	public String packGetInfo(Model model, @RequestParam("pack_info_no") int pack_info_no,
+			@RequestParam(value="status", required=false) String status) {
 		System.out.println("패키지선택정보 조회......PackController.java");
-		model.addAttribute("packDTO", packService.packGetInfo(pack_info_no));
+		model.addAttribute("packInfo", packService.packGetInfo(pack_info_no));
 		return "pack/packDetail";
 	}
+
+	@RequestMapping(value = "/packDelete", method = RequestMethod.GET)
+	public String packDelete(Model model, @RequestParam("pack_info_no") int pack_info_no) {
+		System.out.println("패키지 삭제......PackController.java");
+		int result=packService.packDelete(pack_info_no);
+		if(result==0) {
+			System.out.println("패키지 삭제 실패......PackController.java");
+			return "redirect:/Travel/packGetInfo?pack_info_no=" + pack_info_no;
+		}else if(result==1) {
+			System.out.println("패키지 삭제 성공......PackController.java");
+			return "redirect:/Travel/packList";
+		}else {
+			System.out.println("패키지 삭제 예외 번호 확인 .......PackCountroller.java ---->: " + result);
+			System.out.println("패키지 삭제 실패....예외발생......PackController.java");
+			return "redirect:/Travel/packGetInfo?pack_info_no="+pack_info_no;
+		}
+
+	}
+	
+	
+	
+	
+	
+	
+	public String packUpdate() {
+		System.out.println("패키지정보 수정(업데이트)......PackController.java");
+		
+		return "";
+	}
+	
+	
+	
+	
 	
 }

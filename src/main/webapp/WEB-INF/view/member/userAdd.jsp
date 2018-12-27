@@ -13,7 +13,7 @@
 
 	일반회원 회원 가입 창여
 
-	<form name = "addInfo" onsubmit="return addInfoSubmit()" action="/Travel/userAdd" method="post" enctype="multipart/form-data">
+	<form name = "addInfo" onsubmit="return checkpw()" action="/Travel/userAdd" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>아이디</td>
@@ -110,44 +110,19 @@
 
 </body>
 <script type = "text/javascript">
-function addInfoSubmit() {
-    var myform = document.forms['addInfo'];
-    if( myform['user_id'].value.length < 1) {
-        alert( '아이디를 입력하세요');
-        return false;
-    }
-    if( myform['user_pw'].value.length < 1) {
-        alert( '패스워드를 입력하세요');
-        return false;
-    }
-    if( myform['user_nickname'].value.length < 1) {
-    	alert( '닉네임을 입력하세요');
-    	return false;
-    }
-    if( myform['user_birth'].value.length < 1) {
-    	alret( '생년월일를 입력하세요');
-    	return false;
-    }	    
-    if( myform['user_gender'].value.length < 1) {
-    	alret( '성별을 입력하세요');
-    	return false;
-    }	
-    if( myform['user_address'].value.length < 1) {
-    	alret( '주소를 입력하세요');
-    	return false;
-    }	
-    if( myform['user_email'].value.length < 1) {
-    	alert( '이메일을 입력하세요');
-    	return false;
-    }
-    
-    if( myform['user_tell'].value.length < 1) {
-        alert( '연락처를 입력하세요');
-        return false;
-    }
 
-    return true;
+
+function checkpw() {
+    var pw = document.getElementById("user_pw").value;
+    var pwck = document.getElementById("user_pw_check").value;
+
+    if (pw != pwck) {
+        alert('비밀번호가 일치하지않습니다. 다시 입력해 주세요');
+        return false;
+    }
 }
+
+
 </script>
 
 </html>

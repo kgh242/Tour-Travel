@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>패키지 상품 등록</h1>
-<form id="packAdd" name="packAdd" method="post"  enctype="multipart/form-data"> 
+<form id="packAdd" name="packAdd" onsubmit="return addInfoSubmit()" method="post"  enctype="multipart/form-data"> 
 <input type="hidden" name="company_id" value="321">
 	<table border="1">
 		<tr>
@@ -48,20 +48,20 @@
 		</tr>
 		<tr><!-- packDTO -->
 			<td>여행시작일정</td>
-			<td><input type="datetime-local" id="pack_info_start_date" name="pack_info_start_date" value="2018-01-01T06:30"></td>
+			<td><input type="date" id="pack_info_start_date" name="pack_info_start_date"></td>
 		</tr>
 		<tr><!-- packDTO -->
 			<td>여행종료일정</td>
-			<td><input type="datetime-local" id="pack_info_end_date" name="pack_info_end_date" value="2018-12-31T18:30"></td>
+			<td><input type="date" id="pack_info_end_date" name="pack_info_end_date"></td>
 		</tr>
 		<tr><!-- packDTO -->
 			<td>이용항공</td>
-			<td><input type="text" id="pack_info_air" name="pack_info_air" value="항공정보 API 추가 예정"></td>
+			<td><input type="text" id="pack_info_air" name="pack_info_air"></td>
 		</tr>
 		<tr>
 			<td>숙소</td>
 			<td><!-- packHotelDTO -->
-				 <input type="text" name="pack_hotel_no"> <input type="date" name="pack_hotel_start_date">~<input type="date" name="pack_hotel_end_date">
+				 <input type="text" name="pack_hotel_name"> <input type="date" name="pack_hotel_start_date">~<input type="date" name="pack_hotel_end_date">
 				<input type="button" id="MulitHotel" name="MulitHotel" onclick="MulitHotelRow()" value="숙소 추가">
 				<table id="multiHotel"></table>	
 			</td>
@@ -116,13 +116,27 @@
 		</tr>
 		<tr><!-- packDTO -->
 			<td>모집인원</td>
-			<td><input type="number" id="pack_info_person_number" name="pack_info_person_number" min="1">명</td>
+			<td><input type="text" id="pack_info_person_number" name="pack_info_person_number">명</td>
 		</tr>
 		<tr><!-- packPriceDTO -->
 			<td>이용요금</td>
 			<td>성인 : <input type="text" id="pack_price_adult" name="pack_price_adult">
 				청소년 : <input type="text" id="pack_price_child" name="pack_price_child">
 				유아 : <input type="text" id="pack_price_baby" name="pack_price_baby">
+			</td>
+		</tr>
+		<tr>
+			<td>출발 전 참고사항</td>
+			<td>
+				출발 전 참고사항 내용 <br>
+				<textarea rows="4" cols="80" id="pack_notice_before_contents" name="pack_notice_before_contents"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>출발 후 참고사항</td>
+			<td>
+				출발 후 참고사항 내용 <br>
+				<textarea rows="4" cols="80" id="pack_notice_after_contents" name="pack_notice_after_contents"></textarea>
 			</td>
 		</tr>
 		<tr><!-- packDTO -->
@@ -162,7 +176,7 @@ var i = 0;
 
 			var oCell = oRow.insertCell();
 			//삽입될 Form Tag
-			var frmTag = "<input type=text name='pack_hotel_no'> <input type=date name='pack_hotel_start_date'>~<input type=date name='pack_hotel_end_date'>";
+			var frmTag = "<input type=text name='pack_hotel_name'> <input type=date name='pack_hotel_start_date'>~<input type=date name='pack_hotel_end_date'>";
 			frmTag += "<input type=button value='삭제' onClick='MulitHotelremoveRow()'>";
 			oCell.innerHTML = frmTag;
 		}
@@ -290,6 +304,81 @@ var i = 0;
 	str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
 	$('#pack_tour_contents').val(str);
 	
+	var str = $('#pack_notice_before_contents').val();
+	str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+	$('#pack_before_after_contents').val(str);
 	
+	var str = $('#pack_notice_after_contents').val();
+	str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+	$('#pack_notice_after_contents').val(str);
+	
+
+
+
+	function addInfoSubmit() {
+	    var myform = document.forms['packAdd'];
+	    {
+		    if( myform['pack_info_country'].value.length < 1) {
+		        alert( '여행 국가를 입력해주세요');
+		        return false;
+		    }
+		    if( myform['pack_info_title'].value.length < 1) {
+		        alert( '상품명을 입력하세요');
+		        return false;
+		    }
+		    if( myform['pack_info_start_date'].value.length < 1) {
+		        alert( '패키지 시작일을 입력하세요');
+		        return false;
+		    }	    
+		    if( myform['pack_info_end_date'].value.length < 1) {
+		        alert( '패키지 종료일을 입력하세요');
+		        return false;
+		    }	    
+		    if( myform['pack_info_air'].value.length < 1) {
+		    	alert( '이용항공을 입력하세요');
+		    	return false;
+		    }		    
+		    if( myform['pack_info_course'].value.length < 1) {
+		    	alert( '전체코스 안내를 입력하세요');
+		    	return false;
+		    }
+		    if( myform['pack_info_person_number'].value.length < 1) {
+		    	alert( '패키지상품 모집인원을 입력하세요');
+		    	return false;
+		    }
+		    if( myform['pack_price_adult'].value.length < 1) {
+		    	alert( '패키지상품 성인요금을 입력하세요');
+		    	return false;
+		    }
+		    
+		    if( myform['pack_price_child'].value.length < 1) {
+		    	alert( '패키지상품 청소년요금을 입력하세요');
+		    	return false;
+		    }
+		    
+		    if( myform['pack_price_baby'].value.length < 1) {
+		    	alert( '패키지상품 아동요금을 입력하세요');
+		    	return false;
+		    }
+		    
+		    if( myform['pack_notice_before_contents'].value.length < 1) {
+		    	alert( '여행 출발 전 필요 정보를 입력하세요');
+		    	return false;
+		    }
+		    
+		    if( myform['pack_notice_after_contents'].value.length < 1) {
+		    	alert( '여행 출발 후 필요 정보를 입력하세요');
+		    	return false;
+		    }
+		    
+		    if( myform['pack_info_closing_date'].value.length < 1) {
+		    	alert( '패키지상품 마감일을 입력하세요');
+		    	return false;
+		    }
+
+	    }
+
+	    return true;
+	}
 </script>
 </html>
