@@ -27,7 +27,7 @@ public class CompanyController {
 
 	@RequestMapping(value = "/companyAdd", method = RequestMethod.GET)
 	public String companyAdd() {
-		return "member/companyAdd";
+		return "thymeleaf/member/company/companyAdd";
 	}
 
 	@RequestMapping(value = "/companyAdd", method = RequestMethod.POST)
@@ -36,7 +36,7 @@ public class CompanyController {
 		if (result == 1) {
 			return "thymeleaf/login/login";
 		} else {
-			return "member/companyAdd";
+			return "thymeleaf/member/company/companyAdd";
 		}
 	}
 
