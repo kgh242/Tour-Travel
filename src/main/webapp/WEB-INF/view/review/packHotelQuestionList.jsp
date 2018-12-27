@@ -10,6 +10,7 @@
 <body>
 	숙박평가문항등록
 	<form action="/Travel/packHotelQuestionList" method="post">
+	<a href="/Travel/questionList">목록으로</a><br>
 		<table border="1">
 			<tr>
 				<td>문항</td>

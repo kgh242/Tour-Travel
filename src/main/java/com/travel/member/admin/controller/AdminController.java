@@ -131,4 +131,8 @@ public class AdminController {
 		System.out.println(planNum);
 		return "thymeleaf/plan/planChat";
 	}
+	@RequestMapping(value="/questionList", method = RequestMethod.GET)
+	public String questionList() {
+		return "review/questionList";
+	}
 }

@@ -10,6 +10,7 @@
 <body>
 	관광지평가문항등록(플랜)
 	<form action="/Travel/planLandmarkQuestionList" method="post">
+	<a href="/Travel/questionList">목록으로</a><br>
 		<table border="1">
 			<tr>
 				<td>문항</td>
