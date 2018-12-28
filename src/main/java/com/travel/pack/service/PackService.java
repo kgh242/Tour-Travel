@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.travel.image.ImgDTO;
 import com.travel.image.ImgHelper;
+import com.travel.pack.dto.PackBookDTO;
 import com.travel.pack.dto.PackDTO;
 import com.travel.pack.dto.PackHotelDTO;
 import com.travel.pack.dto.PackLandmarkDTO;
@@ -518,15 +519,41 @@ public class PackService {
 			System.out.println("에러발생 : " + e);
 		}
 		
-		
-		
-		
-		
-		
-		
-		
 		return 0;
 	}
-
+	
+	
+	public int packBook(PackBookDTO packBookDTO) {
+		System.out.println("패키지 예약......PackService.java");
+		int result = 0;
+		//중복예약방지. packOverBook 리턴값 0일 시 예약진행
+		if(packMapper.packOverBook(packBookDTO)==0) {
+			try {
+				result = packMapper.packBook(packBookDTO);
+			} catch (Exception e) {
+				System.out.println("에러발생 : " + e);
+			}
+		}
+		return result;
+	}
+	
+	public PackBookDTO packBookSelect(PackBookDTO packBookDTO) {
+		System.out.println("패키지 예약내역 조회......PackService.java");
+		return packMapper.packBookSelect(packBookDTO);
+	}
+	
+	@Transactional
+	public int packPay(PackBookDTO packBookDTO) {
+		System.out.println("패키지 결제......PackService.java");
+		int result = 0;
+		try {
+			packMapper.packPay(packBookDTO);
+			
+		} catch (Exception e) {
+			System.out.println("에러발생 : " + e);
+		}
+		
+		return result;
+	}
 
 }

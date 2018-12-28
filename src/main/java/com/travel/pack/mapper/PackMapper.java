@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.travel.image.ImgDTO;
+import com.travel.pack.dto.PackBookDTO;
 import com.travel.pack.dto.PackDTO;
 import com.travel.pack.dto.PackHotelDTO;
 import com.travel.pack.dto.PackLandmarkDTO;
@@ -28,6 +29,12 @@ public interface PackMapper {
 	int packBeforeNotice(Map<String, Object> map);
 	int packAfterNotice(Map<String, Object> map);
 	int packPriceInfo(PackPriceDTO packPriceDTO);
+	
+	int packOverBook(PackBookDTO packBookDTO);
+	int packBook(PackBookDTO packBookDTO);
+	PackBookDTO packBookSelect(PackBookDTO packBookDTO);
+	
+	int packPay(PackBookDTO packBookDTO);
 	
 	int packUpdate(PackDTO packDTO);
 	int packHotelUpdate(PackHotelDTO packHotelDTO);

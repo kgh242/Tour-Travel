@@ -9,7 +9,14 @@
 </head>
 
 <script type="text/javascript">
-
+var deleteResult ='<c:out value="${deleteResult}"/>';
+if(deleteResult=='fail'){
+	alert('예약/구매 진행중인 고객이 있는 상품입니다');
+}
+var bookResult = '<c:out value="${result}"/>'; 
+if(bookResult=='fail'){
+	alert('예약 진행중인 상품입니다');
+}
 	function update() {
 		if (confirm("상품을 수정하시겠습니까?")) {
 			location.href = "/Travel/packUpdate?pack_info_no=${packInfo.packInfo.pack_info_no}";
@@ -29,9 +36,21 @@
 		}
 	}
 	
+	function bookBtn() {
+
+		if (confirm("상품을 예약하시겠습니까?")) {
+			location.href = "/Travel/packBook?pack_info_no=${packInfo.packInfo.pack_info_no}";
+
+		} else {
+			alert('취소하셨습니다');
+		}
+	}
+	
 
 </script>
 <body>
+
+
 <h1>패키지 상세 정보 보기</h1>
 <table border="1">
 	<tr>
@@ -127,8 +146,11 @@
 		<td>${packInfo.packInfo.pack_info_apply_date}</td>
 	</tr>
 </table>
+<!-- 세션값 비교 후 해당 글 작성자일때만 노출시켜야함 -->
 <button id="updateBtn" onclick="update()">상품수정</button>
 <button id="deleteBtn" onclick="dlt();">상품삭제</button>
+<!-- 세션값 비교 후 고객 권한일때만 노출시켜야함 -->
+<button id="bookBtn" onclick="bookBtn()">상품 예약하기</button>
 </body>
 </html>
 

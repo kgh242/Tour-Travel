@@ -178,6 +178,57 @@
 			#{pack_price_baby}
 			)
 	</insert>
+	
+	<insert id="packBook" parameterType="com.travel.pack.dto.PackBookDTO">
+		INSERT INTO pack_book (
+			pack_info_no,
+			user_id,
+			pack_book_tell,
+			pack_book_adult,
+			pack_book_child,
+			pack_book_baby,
+			pack_book_price,
+			pack_book_date,
+			pack_book_states
+			)
+		VALUES (
+			#{pack_info_no},
+			#{user_id},
+			#{pack_book_tell},
+			#{pack_book_adult},
+			#{pack_book_child},
+			#{pack_book_baby},
+			#{pack_book_price},
+			now(),
+			'예약'
+			)
+	</insert>
+	
+	<insert id="packPay" parameterType="com.travel.pack.dto.PackBookDTO">
+		INSERT INTO pack_pay (
+			pack_book_no,
+			pack_book_price,
+			pack_pay_system,
+			pack_pay_date,
+			pack_pay_states
+			)
+		VALUES (
+			#{pack_book_no},
+			#{pack_book_price},
+			'테스트결제방식',
+			now(),
+			'결제성공'
+			)
+		
+	</insert>
+
+	<select id="packBookSelect" parameterType="com.travel.pack.dto.PackBookDTO" resultType="com.travel.pack.dto.PackBookDTO">
+		SELECT * FROM pack_book WHERE pack_info_no = #{pack_info_no} AND user_id = #{user_id}
+	</select>
+	
+	<select id="packOverBook" parameterType="com.travel.pack.dto.PackBookDTO" resultType="int">
+		SELECT COUNT(pack_book_no) FROM pack_book WHERE pack_info_no = #{pack_info_no} AND user_id = #{user_id}
+	</select>
 
 	<select id="packDeleteBookConfirmSelect" parameterType="int" resultType="int">
 		SELECT COUNT(pack_book_no) FROM pack_book WHERE pack_info_no=#{pack_info_no}

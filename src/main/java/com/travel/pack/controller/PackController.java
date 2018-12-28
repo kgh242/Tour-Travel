@@ -1,6 +1,5 @@
 package com.travel.pack.controller;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.annotation.JacksonInject.Value;
+import com.travel.pack.dto.PackBookDTO;
 import com.travel.pack.dto.PackDTO;
 import com.travel.pack.dto.PackHotelDTO;
 import com.travel.pack.dto.PackLandmarkDTO;
@@ -107,9 +106,12 @@ public class PackController {
 	
 	@RequestMapping(value = "/packGetInfo", method = RequestMethod.GET)
 	public String packGetInfo(Model model, @RequestParam("pack_info_no") int pack_info_no,
-			@RequestParam(value="status", required=false) String status) {
+			@RequestParam(value="result", defaultValue = "sucess") String result,
+			@RequestParam(value="deleteResult", defaultValue = "sucess") String deleteResult) {
 		System.out.println("패키지선택정보 조회......PackController.java");
 		model.addAttribute("packInfo", packService.packGetInfo(pack_info_no));
+		model.addAttribute("result", result);
+		model.addAttribute("deleteResult", deleteResult);
 		return "pack/packDetail";
 	}
 
@@ -119,7 +121,7 @@ public class PackController {
 		int result=packService.packDelete(pack_info_no);
 		if(result==0) {
 			System.out.println("패키지 삭제 실패......PackController.java");
-			return "redirect:/Travel/packGetInfo?pack_info_no=" + pack_info_no;
+			return "redirect:/Travel/packGetInfo?pack_info_no=" + pack_info_no + "&deleteResult=fail";
 		}else if(result==1) {
 			System.out.println("패키지 삭제 성공......PackController.java");
 			return "redirect:/Travel/packList";
@@ -192,6 +194,38 @@ public class PackController {
 		return "redirect:/Travel/packGetInfo?pack_info_no=" + pack_info_no;
 	}
 	
+	@RequestMapping(value = "/packBook", method = RequestMethod.GET)
+	public String packBook(
+			Model model
+			, @RequestParam("pack_info_no") int pack_info_no) {
+		System.out.println("예약 정보 입력 창으로 이동......PackController.java");
+		model.addAttribute("packInfo", packService.packGetInfo(pack_info_no));
+		return "pack/packBook";
+	}
 	
+	@RequestMapping(value = "/packBook", method = RequestMethod.POST)
+	public String packBook(Model model, PackBookDTO packBookDTO) {
+		System.out.println("예약 정보 입력 후 액션......PackController.java");
+
+		if(packService.packBook(packBookDTO)==1) {
+			System.out.println("예약 성공 ......PackController.java");
+			model.addAttribute("packInfo", packService.packGetInfo(packBookDTO.getPack_info_no()));
+			model.addAttribute("packBookSelect", packService.packBookSelect(packBookDTO));
+			return "pack/packBookInfo";
+		} else {
+			System.out.println("예약 실패 ......PackController.java");
+			return "redirect:/Travel/packGetInfo?pack_info_no=" + packBookDTO.getPack_info_no() + "&result=fail";
+		}
+		
+	}
+	
+	@RequestMapping(value = "/packPay", method = RequestMethod.POST)
+	public String packPay(PackBookDTO packBookDTO) {
+		System.out.println("예약 결제 ......PackController.java");
+		
+		packService.packPay(packBookDTO);
+		
+		return null;
+	}
 	
 }
