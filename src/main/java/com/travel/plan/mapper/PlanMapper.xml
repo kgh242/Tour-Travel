@@ -1,1 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.travel.plan.mapper.PlanMapper">
+ 
+ 	<insert id="insertPlan" parameterType="com.travel.plan.dto.PlanDTO">
+ 		INSERT INTO plan1_travel
+ 			(user_id
+ 			, plan1_user_ip
+ 			, plan1_country
+ 			, plan1_city
+ 			, plan1_info
+ 			, plan1_start_date
+ 			, plan1_end_date
+ 			, plan1_budget
+ 			, plan1_closing_date
+ 			, plan1_age
+ 			, plan1_person_number
+ 			, plan1_male
+ 			, plan1_female)
+ 		VALUES
+ 			(#{user_id}
+ 			, #{plan1_user_ip}
+ 			, #{plan1_country}
+ 			, #{plan1_city}
+ 			, #{plan1_info}
+ 			, #{plan1_start_date}
+ 			, #{plan1_end_date}
+ 			, #{plan1_budget}
+ 			, #{plan1_closing_date}
+ 			, #{plan1_age}
+ 			, #{plan1_person_number}
+ 			, #{plan1_male}
+ 			, #{plan1_female});
+ 	</insert>
+ 
+ </mapper>

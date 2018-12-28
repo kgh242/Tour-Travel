@@ -1,7 +1,10 @@
 package com.travel.plan.mapper;
 
-//플랜방 정보 Mapper Interface
+import org.apache.ibatis.annotations.Mapper;
 
+import com.travel.plan.dto.PlanDTO;
+
+@Mapper
 public interface PlanMapper {
-
+	int insertPlan(PlanDTO planDTO);
 }

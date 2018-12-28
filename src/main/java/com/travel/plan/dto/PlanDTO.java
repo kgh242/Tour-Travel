@@ -6,7 +6,7 @@ public class PlanDTO {
 	private String plan1_no;
 	private String user_id;
 	private String plan1_user_ip;
-	private String plan1_conutry;
+	private String plan1_country;
 	private String plan1_city;
 	private String plan1_info;
 	private String plan1_start_date;
@@ -14,16 +14,17 @@ public class PlanDTO {
 	private String plan1_budget;
 	private String plan1_closing_date;
 	private String plan1_age;
-	private String plan1_preson_number;
-	private String plan1_gender;
+	private int plan1_person_number;
+	private int plan1_male;
+	private int plan1_female; 
 	
 	@Override
 	public String toString() {
 		return "PlanDTO [plan1_no=" + plan1_no + ", user_id=" + user_id + ", plan1_user_ip=" + plan1_user_ip
-				+ ", plan1_conutry=" + plan1_conutry + ", plan1_city=" + plan1_city + ", plan1_info=" + plan1_info
+				+ ", plan1_country=" + plan1_country + ", plan1_city=" + plan1_city + ", plan1_info=" + plan1_info
 				+ ", plan1_start_date=" + plan1_start_date + ", plan1_end_date=" + plan1_end_date + ", plan1_budget="
 				+ plan1_budget + ", plan1_closing_date=" + plan1_closing_date + ", plan1_age=" + plan1_age
-				+ ", plan1_preson_number=" + plan1_preson_number + ", plan1_gender=" + plan1_gender + "]";
+				+ ", plan1_person_number=" + plan1_person_number + ", plan1_male=" + plan1_male + "]";
 	}
 	public PlanDTO() {
 		super();
@@ -47,11 +48,11 @@ public class PlanDTO {
 	public void setPlan1_user_ip(String plan1_user_ip) {
 		this.plan1_user_ip = plan1_user_ip;
 	}
-	public String getPlan1_conutry() {
-		return plan1_conutry;
+	public String getPlan1_country() {
+		return plan1_country;
 	}
-	public void setPlan1_conutry(String plan1_conutry) {
-		this.plan1_conutry = plan1_conutry;
+	public void setPlan1_country(String plan1_country) {
+		this.plan1_country = plan1_country;
 	}
 	public String getPlan1_city() {
 		return plan1_city;
@@ -95,17 +96,23 @@ public class PlanDTO {
 	public void setPlan1_age(String plan1_age) {
 		this.plan1_age = plan1_age;
 	}
-	public String getPlan1_preson_number() {
-		return plan1_preson_number;
+	public int getPlan1_person_number() {
+		return plan1_person_number;
 	}
-	public void setPlan1_preson_number(String plan1_preson_number) {
-		this.plan1_preson_number = plan1_preson_number;
+	public void setPlan1_person_number(int plan1_person_number) {
+		this.plan1_person_number = plan1_person_number;
 	}
-	public String getPlan1_gender() {
-		return plan1_gender;
+	public int getPlan1_male() {
+		return plan1_male;
 	}
-	public void setPlan1_gender(String plan1_gender) {
-		this.plan1_gender = plan1_gender;
+	public void setPlan1_male(int plan1_male) {
+		this.plan1_male = plan1_male;
+	}
+	public int getPlan1_female() {
+		return plan1_female;
+	}
+	public void setPlan1_female(int plan1_female) {
+		this.plan1_female = plan1_female;
 	}
 
 }
