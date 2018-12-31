@@ -33,7 +33,20 @@
  			, #{plan1_age}
  			, #{plan1_person_number}
  			, #{plan1_male}
- 			, #{plan1_female});
+ 			, #{plan1_female})
+ 			<selectKey resultType="integer" keyProperty="plan1_no" order="AFTER">
+   				SELECT LAST_INSERT_ID()
+			</selectKey>
+ 	</insert>
+ 	<insert id="insertPlanInterest" parameterType="com.travel.plan.dto.PlanInterestDTO">
+ 		INSERT INTO plan1_travel_concept
+ 			(plan1_concept_no
+ 			, plan1_no
+ 			, plan1_interest)
+ 		VALUES
+ 			(#{plan1_concept_no}
+ 			, #{plan1_no}
+ 			, #{plan1_interest})
  	</insert>
  
  </mapper>

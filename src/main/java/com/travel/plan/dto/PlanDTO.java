@@ -3,7 +3,7 @@ package com.travel.plan.dto;
 //플랜방 정보 DTO (1차정보)
 
 public class PlanDTO {
-	private String plan1_no;
+	private int plan1_no;
 	private String user_id;
 	private String plan1_user_ip;
 	private String plan1_country;
@@ -30,10 +30,10 @@ public class PlanDTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public String getPlan1_no() {
+	public int getPlan1_no() {
 		return plan1_no;
 	}
-	public void setPlan1_no(String plan1_no) {
+	public void setPlan1_no(int plan1_no) {
 		this.plan1_no = plan1_no;
 	}
 	public String getUser_id() {

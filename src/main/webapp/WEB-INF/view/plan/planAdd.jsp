@@ -63,15 +63,23 @@
 		</tr>
 		<tr>
 			<td>모집인원(성별무관시)</td>
-			<td><input type="number" id="plan1_person_number" name="plan1_person_number" min="0">명</td>
+			<td><input type="number" id="plan1_person_number" name="plan1_person_number" value=0 min="0">명</td>
 		</tr>
 		<tr>
 			<td>남성모집인원</td>
-			<td><input type="number" id="plan1_male" name="plan1_male" min="0">명</td>
+			<td><input type="number" id="plan1_male" name="plan1_male" value=0 min="0">명</td>
 		</tr>
 		<tr>
 			<td>여성모집인원</td>
-			<td><input type="number" id="plan1_female" name="plan1_female" min="0">명</td>
+			<td><input type="number" id="plan1_female" name="plan1_female" value=0 min="0">명</td>
+		</tr>
+		<tr>
+			<td>여행관심사</td>
+			<td>
+				<input type="text" name="plan1_interest">
+				<input type="button" id="MulitInterest" name="MulitInterest" onclick="MulitInterestRow()" value="관심사 추가">
+				<table id="multiInterest"></table>
+			</td>
 		</tr>
 		<tr>
 			<td>등록신청</td>
@@ -81,7 +89,26 @@
 </form>
 </body>
 <script type="text/javascript">
-
+var i = 0;
+	{
+		var oTbl;
+		function MulitInterestRow(){
+			oTbl = document.getElementById("multiInterest");
+			i++;
+			var oRow = oTbl.insertRow();
+			oRow.onmouseover = function(){
+				oTbl.clickedRowIndex = this.rowIndex
+			};
+			var oCell = oRow.insertCell();
+			var frmTag = "<input type=text name='plan1_interest'>";
+			frmTag += "<input type=button value='삭제' onClick='MulitInterestremoveRow()'>";
+			oCell.innerHTML = frmTag;
+		}
+		function MulitInterestremoveRow(){
+			i--;
+			oTbl.deleteRow(oTbl.clickedRowIndex);
+		}
+	}
 	function addInfoSubmit() {
 	    var myform = document.forms['planAdd'];
 	    {
@@ -121,12 +148,10 @@
 		    	alert( '모집인원을 입력하세요');
 		    	return false;
 		    }
-		    
 		    if( myform['plan1_male'].value.length < 1) {
 		    	alert( '남성모집인원을 입력하세요');
 		    	return false;
 		    }
-		    
 		    if( myform['plan1_female'].value.length < 1) {
 		    	alert( '여성모집인원을 입력하세요');
 		    	return false;
