@@ -62,16 +62,8 @@
 			<td><input type="text" id="plan1_age" name="plan1_age"></td>
 		</tr>
 		<tr>
-			<td>모집인원(성별무관시)</td>
+			<td>모집인원</td>
 			<td><input type="number" id="plan1_person_number" name="plan1_person_number" value=0 min="0">명</td>
-		</tr>
-		<tr>
-			<td>남성모집인원</td>
-			<td><input type="number" id="plan1_male" name="plan1_male" value=0 min="0">명</td>
-		</tr>
-		<tr>
-			<td>여성모집인원</td>
-			<td><input type="number" id="plan1_female" name="plan1_female" value=0 min="0">명</td>
 		</tr>
 		<tr>
 			<td>여행관심사</td>

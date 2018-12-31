@@ -17,9 +17,7 @@
  			, plan1_budget
  			, plan1_closing_date
  			, plan1_age
- 			, plan1_person_number
- 			, plan1_male
- 			, plan1_female)
+ 			, plan1_person_number)
  		VALUES
  			(#{user_id}
  			, #{plan1_user_ip}
@@ -31,9 +29,7 @@
  			, #{plan1_budget}
  			, #{plan1_closing_date}
  			, #{plan1_age}
- 			, #{plan1_person_number}
- 			, #{plan1_male}
- 			, #{plan1_female})
+ 			, #{plan1_person_number})
  			<selectKey resultType="integer" keyProperty="plan1_no" order="AFTER">
    				SELECT LAST_INSERT_ID()
 			</selectKey>
