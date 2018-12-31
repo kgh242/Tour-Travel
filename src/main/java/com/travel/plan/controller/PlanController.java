@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,4 +50,13 @@ public class PlanController {
 		planService.planAdd(planDTO, planInterestList);
 		return "thymeleaf/index";
 	}
+	
+	@RequestMapping(value = "/planList", method = RequestMethod.GET)
+	public String planList(Model model,PlanDTO planDTO) {
+		List<PlanDTO> planList = planService.planList(planDTO);
+		model.addAttribute("planList", planList);
+		return "thymeleaf/plan/planList";
+	}
+	
+	
 }

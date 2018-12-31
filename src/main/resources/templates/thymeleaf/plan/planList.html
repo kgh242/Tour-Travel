@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="mainLayout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -134,65 +134,37 @@
                         </div>
 
                         <div class="overview-content mt-50" id="overview">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac nibh sed mi ullamcorper rhoncus. Curabitur pulvinar vel augue sit amet vestibulum. Proin tempus lacus porta lorem blandit aliquam eget quis ipsum. Vivamus accumsan consequat ligula non volutpat. Sed mollis orci non cursus vestibulum. Pellentesque vitae est a augue laoreet venenatis sed eu felis. Sed cursus magna nec turpis ullamcorper, eget rutrum felis egestas. Nunc odio ex, fermentum efficitur nunc vitae, efficitur hendrerit diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac nibh sed mi ullamcorper rhoncus. Curabitur pulvinar vel augue sit amet vestibulum. Proin tempus lacus porta lorem blandit aliquam eget quis ipsum.</p>
-                            <div class="row mt-5">
-                                <div class="col-6">
-                                    <label class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-input">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Accepts Credit Cards</span>
-                                    </label>
-                                </div>
-                                <div class="col-6">
-                                    <label class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-input">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Bike Parking</span>
-                                    </label>
-                                </div>
-                                <div class="col-6">
-                                    <label class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-input">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Wireless Internet</span>
-                                    </label>
-                                </div>
-                                <div class="col-6">
-                                    <label class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-input">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Reservations</span>
-                                    </label>
-                                </div>
-                                <div class="col-6">
-                                    <label class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-input">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Privat Parking</span>
-                                    </label>
-                                </div>
-                                <div class="col-6">
-                                    <label class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-input">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Smoking Area</span>
-                                    </label>
-                                </div>
-                                <div class="col-6">
-                                    <label class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-input">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Wheelchair Accesible</span>
-                                    </label>
-                                </div>
-                                <div class="col-6">
-                                    <label class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-input">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Coupons</span>
-                                    </label>
-                                </div>
-                            </div>
+                            <h3>플랜리스트</h3>
+                            <table border="1">
+                            	<tr>
+                            		<td>등록자</td>
+                            		<td>목적국가</td>
+                            		<td>목적도시</td>
+                            		<td>플랜방정보</td>
+                            		<td>여행시작날짜</td>
+                            		<td>여행종료날짜</td>
+                            		<td>예산</td>
+                            		<td>신청마감날짜</td>
+                            		<td>연령대</td>
+                            		<td>모집인원</td>
+                            		<td>현재인원</td>
+                            	</tr>
+                            <tbody th:each="plan:${planList}">
+                            	<tr>
+                            		<td th:text="${plan.user_id}"></td>
+                            		<td th:text="${plan.plan1_country}"></td>
+                            		<td th:text="${plan.plan1_city}"></td>
+                            		<td th:text="${plan.plan1_info}"></td>
+                            		<td th:text="${plan.plan1_start_date}"></td>
+                            		<td th:text="${plan.plan1_end_date}"></td>
+                            		<td th:text="${plan.plan1_budget}"></td>
+                            		<td th:text="${plan.plan1_closing_date}"></td>
+                            		<td th:text="${plan.plan1_age}"></td>
+                            		<td th:text="${plan.plan1_person_number}"></td>
+                            		<td th:text="${plan.plan1_current_person}"></td>
+                            	</tr>
+                            </tbody>
+                            </table>
                         </div>
 
                         <div class="listing-menu-area mt-100" id="menu">

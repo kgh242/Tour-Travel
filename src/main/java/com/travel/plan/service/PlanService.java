@@ -11,12 +11,12 @@ import com.travel.plan.dto.PlanInterestDTO;
 import com.travel.plan.mapper.PlanMapper;
 
 @Service
+@Transactional
 public class PlanService {
 
 	@Autowired
 	private PlanMapper planMapper;
 	
-	@Transactional
 	public int planAdd(PlanDTO planDTO,List<PlanInterestDTO> planInterestList) {
 		int result;
 		result = planMapper.insertPlan(planDTO);
@@ -27,5 +27,9 @@ public class PlanService {
 			planMapper.insertPlanInterest(planInterestDTO);
 		}
 		return result;
+	}
+	
+	public List<PlanDTO> planList(PlanDTO planDTO){
+		return planMapper.planList(planDTO);
 	}
 }

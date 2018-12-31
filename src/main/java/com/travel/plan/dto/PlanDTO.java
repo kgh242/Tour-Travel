@@ -15,20 +15,15 @@ public class PlanDTO {
 	private String plan1_closing_date;
 	private String plan1_age;
 	private int plan1_person_number;
-	private int plan1_male;
-	private int plan1_female; 
-	
+	private int plan1_current_person;
 	@Override
 	public String toString() {
 		return "PlanDTO [plan1_no=" + plan1_no + ", user_id=" + user_id + ", plan1_user_ip=" + plan1_user_ip
 				+ ", plan1_country=" + plan1_country + ", plan1_city=" + plan1_city + ", plan1_info=" + plan1_info
 				+ ", plan1_start_date=" + plan1_start_date + ", plan1_end_date=" + plan1_end_date + ", plan1_budget="
 				+ plan1_budget + ", plan1_closing_date=" + plan1_closing_date + ", plan1_age=" + plan1_age
-				+ ", plan1_person_number=" + plan1_person_number + ", plan1_male=" + plan1_male + "]";
-	}
-	public PlanDTO() {
-		super();
-		// TODO Auto-generated constructor stub
+				+ ", plan1_person_number=" + plan1_person_number + ", plan1_current_person=" + plan1_current_person
+				+ "]";
 	}
 	public int getPlan1_no() {
 		return plan1_no;
@@ -102,17 +97,12 @@ public class PlanDTO {
 	public void setPlan1_person_number(int plan1_person_number) {
 		this.plan1_person_number = plan1_person_number;
 	}
-	public int getPlan1_male() {
-		return plan1_male;
+	public int getPlan1_current_person() {
+		return plan1_current_person;
 	}
-	public void setPlan1_male(int plan1_male) {
-		this.plan1_male = plan1_male;
+	public void setPlan1_current_person(int plan1_current_person) {
+		this.plan1_current_person = plan1_current_person;
 	}
-	public int getPlan1_female() {
-		return plan1_female;
-	}
-	public void setPlan1_female(int plan1_female) {
-		this.plan1_female = plan1_female;
-	}
+	
 
 }

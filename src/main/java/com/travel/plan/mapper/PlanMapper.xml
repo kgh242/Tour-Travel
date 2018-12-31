@@ -45,4 +45,9 @@
  			, #{plan1_interest})
  	</insert>
  
+ 	<select id="planList" parameterType="java.lang.String" resultType="com.travel.plan.dto.PlanDTO">
+ 		SELECT *
+ 		FROM plan1_travel
+ 	</select>
+ 	
  </mapper>
