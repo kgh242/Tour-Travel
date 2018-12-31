@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+<!-- Title -->
+<title>Go Travel</title>
+
+<!-- Favicon -->
+<link rel="icon" href="img/core-img/favicon.ico">
+
+<!-- Core Stylesheet -->
+<link href="style.css" rel="stylesheet">
+
+<!-- Responsive CSS -->
+<link href="css/responsive/responsive.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<!-- Preloader -->
+	<div id="preloader">
+		<div class="dorne-load"></div>
+	</div>
+
+	<!-- ***** Header Area Start ***** -->
+	<header class="header_area" id="header">
+		<div class="container-fluid h-100">
+			<div class="row h-100">
+				<div class="col-12 h-100">
+					<nav class="h-100 navbar navbar-expand-lg">
+						<a class="navbar-brand" href="index"><img
+							src="img/core-img/logo.png" alt=""></a>
+						<button class="navbar-toggler" type="button"
+							data-toggle="collapse" data-target="#dorneNav"
+							aria-controls="dorneNav" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="fa fa-bars"></span>
+						</button>
+						<!-- Nav -->
+						<div class="collapse navbar-collapse" id="dorneNav">
+							<ul class="navbar-nav mr-auto" id="dorneMenu">
+								<li class="nav-item active"><a class="nav-link"
+									href="index">메인 <span class="sr-only">(current)</span></a></li>
+								<li class="nav-item active dropdown"><a
+									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+									role="button" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">플랜 여행<i class="fa fa-angle-down"
+										aria-hidden="true"></i></a>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+										<a class="dropdown-item" href="planAdd">플랜등록</a> <a
+											class="dropdown-item" href="planList">플랜찾기</a> <a
+											class="dropdown-item" href="#">예비</a>
+									</div></li>
+								<li class="nav-item active dropdown"><a
+									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+									role="button" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">패키지 여행<i class="fa fa-angle-down"
+										aria-hidden="true"></i></a>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+										<a class="dropdown-item" href="packList">패키지 찾기</a> <a
+											class="dropdown-item" href="#">예비</a>
+									</div></li>
+								<li class="nav-item"><a class="nav-link" href="#">후기</a></li>
+							</ul>
+							<div th:if="${session.LOGINID == null}">
+								<!-- Admin Signin btn -->
+								<div class="dorne-signin-btn">
+									<a href="/adminLogin">관리자</a>
+								</div>
+								<!-- user/company 통합 로그인  -->
+								<div class="dorne-add-listings-btn">
+									<a href="login" class="btn dorne-btn">사용자 로그인</a>
+									<!-- <a href="/Travel/login" class="btn dorne-btn">사용자 로그인</a> -->
+								</div>
+							</div>
+							<div th:if="${session.LOGINID != null}">
+								<div class="dorne-signout-btn">
+									<span th:text="${session.LOGINID}" style="color: yellow"></span>
+									<span style="color: white">님 로그인중</span> <a
+										href="/Travel/userLogout">로그아웃</a>
+								</div>
+							</div>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- ***** Header Area End ***** -->
+
+	<!-- ***** Breadcumb Area Start ***** -->
+	<div class="breadcumb-area bg-img bg-overlay"
+		style="background-image: url(img/bg-img/hero-1.jpg)"></div>
+	<!-- ***** Breadcumb Area End ***** -->
+
+	<!-- ***** Listing Destinations Area Start ***** -->
+	<section class="dorne-listing-destinations-area section-padding-100-50">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="section-heading dark text-center">
+						<span></span>
+						<h4>상품 정보 수정</h4>
+					</div>
+				</div>
+			</div>
+			<div>
+			<h1>패키지 수정</h1>
+<form id="packUpdate" name="packUpdate" onsubmit="return updateInfoSubmit()" method="post"   action="/Travel/packUpdate" enctype="multipart/form-data"> 
+<input type="hidden" name="pack_info_no" th:value="${packInfo.packInfo.pack_info_no}">
+<input type="hidden" name="company_id" value="321"> <!-- 세션아이디 -->
+	<table border="1">
+		<tr>
+			<td>등록자(여행사)</td>
+			<td>321</td>
+		</tr>
+		<tr><!-- packDTO -->
+			<td>목적국가</td>
+			<td th:text="${packInfo.packInfo.pack_info_country}"></td>
+		</tr>
+		<tr><!-- packDTO -->
+			<td>안전정보</td>
+			<td th:text="${packInfo.packInfo.pack_info_safe}"></td>
+		</tr>
+		<tr><!-- packDTO -->
+			<td>상품명</td>
+			<td><input type="text" id="pack_info_title" name="pack_info_title" th:value="${packInfo.packInfo.pack_info_title}"></td>
+		</tr>
+		<tr><!-- packDTO -->
+			<td>여행시작일정</td>
+			<td><input type="date" id="pack_info_start_date" name="pack_info_start_date" th:value="${packInfo.packInfo.pack_info_start_date}"></td>
+		</tr>
+		<tr><!-- packDTO -->
+			<td>여행종료일정</td>
+			<td><input type="date" id="pack_info_end_date" name="pack_info_end_date" th:value="${packInfo.packInfo.pack_info_end_date}"></td>
+		</tr>
+		<tr><!-- packDTO -->
+			<td>이용항공</td>
+			<td><input type="text" id="pack_info_air" name="pack_info_air" th:value="${packInfo.packInfo.pack_info_air}"></td>
+		</tr>
+		<tr>
+			<td>숙소</td>
+			<td><!-- packHotelDTO -->
+			<span th:each="pack:${packInfo.packHotelInfo}">
+				<div>
+					<input type="text" name="pack_hotel_name" th:value="${pack.pack_hotel_name}">
+					<input type="date" name="pack_hotel_start_date" th:value="${pack.pack_hotel_start_date}">~
+					<input type="date" name="pack_hotel_end_date" th:value="${pack.pack_hotel_end_date}">
+					<button onclick="deleteLine(this);">삭제</button><br>
+				</div>
+			</span>
+				<input type="button" id="MulitHotel" name="MulitHotel" onclick="MulitHotelRow()" value="숙소 추가">
+				<table id="multiHotel"></table>	
+			</td>
+		</tr>
+		<tr>
+			<td>숙소이미지</td>
+			<td><!-- 배열 -->
+				<input type="file" name="hotelImgFileName" />
+				<input type="button" id="MulitHotelImg" name="MulitHotelImg" onclick="MulitHotelImgRow()" value="이미지 추가 업로드">
+				<table id="multiHotelImg"></table>	
+			</td>
+		</tr>
+
+		<tr><!-- packDTO -->
+			<td>전체 코스</td>
+			<td><textarea rows="4" cols="80" id="pack_info_course" name="pack_info_course" th:text="${packInfo.packInfo.pack_info_course}"></textarea></td>
+		</tr>
+		<tr>
+			<td>일별 상세 스케줄</td>
+			<td><!-- packScheduleDTO-->
+			<span th:each="pack:${packInfo.packScheduleInfo}">
+				<div>
+					<input type="date" id="pack_schedule_date" name="pack_schedule_date" th:value="${pack.pack_schedule_date}"><br>
+					<textarea rows="4" cols="65" id="pack_schedule_contents" name="pack_schedule_contents" th:text="${pack.pack_schedule_contents}"></textarea> 
+					<button onclick="deleteLine(this);">삭제</button><br>
+				</div>
+			</span>
+				<input type="button" id="MultiSchedule" name="MultiSchedule" onclick="MultiScheduleRow()" value="일정추가">
+				<table id="multiSchedule"></table>	
+			</td>
+		</tr>
+		<tr>
+			<td>상세스케줄이미지</td>
+			<td><!-- 배열 -->
+				<input type="file" name="scheduleFileName" />
+				<input type="button" id="MultiScheduleImg" name="MultiScheduleImg" onclick="MultiScheduleImgRow()" value="이미지 추가 업로드">
+				<table id="multiScheduleImg"></table>		
+			</td>
+		</tr>
+		<tr>
+			<td>방문관광지</td>
+			<td><!-- packLandmarkDTO -->
+				<span th:each="pack:${packInfo.packLandmarkInfo}">
+					<div>
+						<input type="text" id="pack_landmark_code" name="pack_landmark_code" th:value="${pack.pack_landmark_code}">
+						<input type="date" id="pack_tour_date" name="pack_tour_date" th:value="${pack.pack_tour_date}"><br>
+						<textarea rows="4" cols="65" id="pack_tour_contents" name="pack_tour_contents" th:text="${pack.pack_tour_contents}"></textarea> 
+						<button onclick="deleteLine(this);">삭제</button><br>
+					</div>
+				</span>
+				<input type="button" id="MultiLandmark" name="MultiLandmark" onclick="MultiLandmarkRow()" value="관광지추가">
+				<table id="multiLandmark"></table>	
+			</td>
+		</tr>
+		<tr>
+			<td>관광지이미지</td>
+			<td><!-- 배열 -->
+				<input type="file" name="landMarkFileName" />
+				<input type="button" id="MultiLandmarkImg" name="MultiLandmarkImg" onclick="MultiLandmarkImgRow()" value="이미지 추가 업로드">
+				<table id="multiLandmarkImg"></table>		
+			</td>
+		</tr>
+		<tr><!-- packDTO -->
+			<td>모집인원</td>
+			<td><input type="text" id="pack_info_person_number" name="pack_info_person_number" th:value="${packInfo.packInfo.pack_info_person_number}">명</td>
+		</tr>
+		<tr><!-- packPriceDTO -->
+			<td>이용요금</td>
+			<td>성인 : <input type="text" id="pack_price_adult" name="pack_price_adult" th:value="${packInfo.packPriceInfo.pack_price_adult}">
+				청소년 : <input type="text" id="pack_price_child" name="pack_price_child" th:value="${packInfo.packPriceInfo.pack_price_child}">
+				유아 : <input type="text" id="pack_price_baby" name="pack_price_baby" th:value="${packInfo.packPriceInfo.pack_price_baby}">
+			</td>
+		</tr>
+		<tr>
+			<td>출발 전 참고사항</td>
+			<td>
+				출발 전 참고사항 내용 <br>
+				<textarea rows="4" cols="80" id="pack_notice_before_contents" name="pack_notice_before_contents" th:text="${packInfo.PackBeforeNoticeInfo}"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>출발 후 참고사항</td>
+			<td>
+				출발 후 참고사항 내용 <br>
+				<textarea rows="4" cols="80" id="pack_notice_after_contents" name="pack_notice_after_contents" th:text="${packInfo.PackAfterNoticeInfo}"></textarea>
+			</td>
+		</tr>
+		<tr><!-- packDTO -->
+			<td>신청마감일자</td>
+			<td><input type="date" id="pack_info_closing_date" name="pack_info_closing_date" th:value="${packInfo.packInfo.pack_info_closing_date}"></td>
+		</tr>
+		<tr>
+			<td>광고신청</td>
+			<td><!-- packDTO -->
+				<!-- 이미지 단일값 -->
+				<input type="radio" name="pack_info_sale" value="true" onClick="this.form.adfile.disabled=false" checked>광고 신청<br>
+				<input type="file" name="adfile"><br>
+				<input type="radio" name="pack_info_sale" value="false" onClick="this.form.adfile.disabled=true">광고 신청하지않음
+			</td>
+		</tr>
+		<tr>
+			<td>등록신청</td>
+			<td><input type="submit" value="Submit"></td>
+		</tr>
+	</table>
+</form>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- ****** Footer Area Start ****** -->
+	<footer class="dorne-footer-area">
+		<div class="container-fluid">
+			<div class="row">
+				<div
+					class="col-12 d-md-flex align-items-center justify-content-between">
+					<div class="footer-text">
+						<p>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							Copyright &copy;
+							<script>document.write(new Date().getFullYear());</script>
+							All rights reserved | This template is made with <i
+								class="fa fa-heart-o" aria-hidden="true"></i> by <a
+								href="https://colorlib.com" target="_blank">Colorlib</a>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						</p>
+					</div>
+					<div class="footer-social-btns">
+						<a href="#"><i class="fa fa-linkedin" aria-haspopup="true"></i></a>
+						<a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a> <a
+							href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a> <a
+							href="#"><i class="fa fa-twitter" aria-haspopup="true"></i></a> <a
+							href="#"><i class="fa fa-facebook" aria-haspopup="true"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- ****** Footer Area End ****** -->
+
+	<!-- jQuery-2.2.4 js -->
+	<script src="js/jquery/jquery-2.2.4.min.js"></script>
+	<!-- Popper js -->
+	<script src="js/bootstrap/popper.min.js"></script>
+	<!-- Bootstrap-4 js -->
+	<script src="js/bootstrap/bootstrap.min.js"></script>
+	<!-- All Plugins js -->
+	<script src="js/others/plugins.js"></script>
+	<!-- Active JS -->
+	<script src="js/active.js"></script>
+
+</body>
+
+<script type="text/javascript" th:inline="javascript">
+/* <![CDATA[ */
+
+{
+	var oTbl;
+	
+	function MulitHotelRow() {
+		oTbl = document.getElementById("multiHotel");
+		var oRow = oTbl.insertRow();
+		oRow.onmouseover = function() {
+			oTbl.clickedRowIndex = this.rowIndex
+		}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
+
+		var oCell = oRow.insertCell();
+		//삽입될 Form Tag
+		var frmTag = "<input type=text name='pack_hotel_name'> <input type=date name='pack_hotel_start_date'>~<input type=date name='pack_hotel_end_date'>";
+		frmTag += "<input type=button value='삭제' onClick='MulitHotelremoveRow()'>";
+		oCell.innerHTML = frmTag;
+	}
+
+	function MulitHotelremoveRow() {
+
+		oTbl.deleteRow(oTbl.clickedRowIndex);
+	}
+}
+{
+	var oTb2;
+	function MulitHotelImgRow() {
+		oTb2 = document.getElementById("multiHotelImg");
+		
+		var oRow = oTb2.insertRow();
+		oRow.onmouseover = function() {
+			oTb2.clickedRowIndex = this.rowIndex
+		}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
+
+		var oCell = oRow.insertCell();
+		//삽입될 Form Tag
+		var frmTag = "<input type=file name='hotelImgFileName' />";
+		frmTag += "<input type=button value='삭제' onClick='MultiHotelImgremoveRow()'>";
+		oCell.innerHTML = frmTag;
+	}
+
+	function MultiHotelImgremoveRow() {
+		oTb2.deleteRow(oTb2.clickedRowIndex);
+	}
+}
+
+{
+	var oTbl3;
+	function MultiScheduleRow() {
+		oTbl3 = document.getElementById("multiSchedule");
+		var oRow = oTbl3.insertRow();
+		oRow.onmouseover = function() {
+			oTbl3.clickedRowIndex = this.rowIndex
+		}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
+
+		var oCell = oRow.insertCell();
+		//삽입될 Form Tag
+		var frmTag = "<input type=date id='pack_schedule_date' name='pack_schedule_date'><br><textarea rows=4 cols=65 id='pack_schedule_contents' name='pack_schedule_contents'></textarea>";
+		frmTag += "<input type=button value='삭제' onClick='MultiScheduleremoveRow()'>";
+		oCell.innerHTML = frmTag;
+	}
+
+	function MultiScheduleremoveRow() {
+		oTbl3.deleteRow(oTbl3.clickedRowIndex);
+	}
+}
+
+{
+	var oTbl4;
+	function MultiScheduleImgRow() {
+		oTbl4 = document.getElementById("multiScheduleImg");
+		var oRow = oTbl4.insertRow();
+		oRow.onmouseover = function() {
+			oTbl4.clickedRowIndex = this.rowIndex
+		}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
+
+		var oCell = oRow.insertCell();
+		//삽입될 Form Tag
+		var frmTag = "<input type=file name='scheduleFileName' />";
+		frmTag += "<input type=button value='삭제' onClick='MultiScheduleImgremoveRow()'>";
+		oCell.innerHTML = frmTag;
+	}
+
+	function MultiScheduleImgremoveRow() {
+		oTbl4.deleteRow(oTbl4.clickedRowIndex);
+	}
+}
+
+{
+	var oTbl5;
+	function MultiLandmarkRow() {
+		oTbl5 = document.getElementById("multiLandmark");
+		var oRow = oTbl5.insertRow();
+		oRow.onmouseover = function() {
+			oTbl5.clickedRowIndex = this.rowIndex
+		}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
+
+		var oCell = oRow.insertCell();
+		//삽입될 Form Tag
+		var frmTag = "<input type=text id='pack_landmark_code' name='pack_landmark_code' placeholder='관광지이름입력'><input type='date' id='pack_tour_date' name='pack_tour_date'><br><textarea rows=4 cols=65 id='pack_tour_contents' name='pack_tour_contents'></textarea>";
+		frmTag += "<input type=button value='삭제' onClick='MultiLandmarkremoveRow()'>";
+		oCell.innerHTML = frmTag;
+	}
+
+	function MultiLandmarkremoveRow() {
+		oTbl5.deleteRow(oTbl5.clickedRowIndex);
+	}
+}
+
+{
+	var oTbl6;
+	function MultiLandmarkImgRow() {
+		oTbl6 = document.getElementById("multiLandmarkImg");
+		var oRow = oTbl6.insertRow();
+		oRow.onmouseover = function() {
+			oTbl6.clickedRowIndex = this.rowIndex
+		}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
+
+		var oCell = oRow.insertCell();
+		//삽입될 Form Tag
+		var frmTag = "<input type=file name='landMarkFileName' />";
+		frmTag += "<input type=button value='삭제' onClick='MultiLandmarkImgremoveRow()'>";
+		oCell.innerHTML = frmTag;
+	}
+
+	function MultiLandmarkImgremoveRow() {
+		oTbl6.deleteRow(oTbl6.clickedRowIndex);
+	}
+}
+
+
+function updateInfoSubmit() {
+
+    var myform = document.forms['packUpdate'];
+    {
+
+
+	    if( myform['pack_info_title'].value.length < 1) {
+	        alert( '상품명을 입력하세요');
+	        return false;
+	    }
+	    if( myform['pack_info_start_date'].value.length < 1) {
+	        alert( '패키지 시작일을 입력하세요');
+	        return false;
+	    }	    
+	    if( myform['pack_info_end_date'].value.length < 1) {
+	        alert( '패키지 종료일을 입력하세요');
+	        return false;
+	    }	    
+	    if( myform['pack_info_air'].value.length < 1) {
+	    	alert( '이용항공을 입력하세요');
+	    	return false;
+	    }		    
+	    if( myform['pack_info_course'].value.length < 1) {
+	    	alert( '전체코스 안내를 입력하세요');
+	    	return false;
+	    }
+	    if( myform['pack_info_person_number'].value.length < 1) {
+	    	alert( '패키지상품 모집인원을 입력하세요');
+	    	return false;
+	    }
+	    if( myform['pack_price_adult'].value.length < 1) {
+	    	alert( '패키지상품 성인요금을 입력하세요');
+	    	return false;
+	    }
+	    
+	    if( myform['pack_price_child'].value.length < 1) {
+	    	alert( '패키지상품 청소년요금을 입력하세요');
+	    	return false;
+	    }
+	    
+	    if( myform['pack_price_baby'].value.length < 1) {
+	    	alert( '패키지상품 아동요금을 입력하세요');
+	    	return false;
+	    }
+	    
+	    if( myform['pack_notice_before_contents'].value.length < 1) {
+	    	alert( '여행 출발 전 필요 정보를 입력하세요');
+	    	return false;
+	    }
+	    
+	    if( myform['pack_notice_after_contents'].value.length < 1) {
+	    	alert( '여행 출발 후 필요 정보를 입력하세요');
+	    	return false;
+	    }
+	    
+	    if( myform['pack_info_closing_date'].value.length < 1) {
+	    	alert( '패키지상품 마감일을 입력하세요');
+	    	return false;
+	    }
+
+    }
+
+    return true;
+}
+
+function deleteLine(obj) {
+    var div = $(obj).parent();
+ 
+    //라인 삭제
+    div.remove();
+}
+
+
+/* ]]> */
+</script>
+
+</html>

@@ -33,7 +33,7 @@ public class PackController {
 	@RequestMapping(value = "/packAdd", method = RequestMethod.GET)
 	public String packAdd() {
 		System.out.println("패키지등록 창으로 이동......PackController.java");
-		return "pack/packAdd";
+		return "thymeleaf/pack/packAdd";
 	}
 	
 	//pack_info_course
@@ -123,7 +123,7 @@ public class PackController {
         model.addAttribute("nextPage", pageMaker.isNextPage());
 		model.addAttribute("packSearchCountry",packSearchCountry);
 		model.addAttribute("packStartDate",packStartDate);
-		return "pack/packList";
+		return "thymeleaf/pack/packList";
 	}
 
 	
@@ -135,7 +135,7 @@ public class PackController {
 		model.addAttribute("packInfo", packService.packGetInfo(pack_info_no));
 		model.addAttribute("result", result);
 		model.addAttribute("deleteResult", deleteResult);
-		return "pack/packDetail";
+		return "thymeleaf/pack/packDetail";
 	}
 
 	@RequestMapping(value = "/packDelete", method = RequestMethod.GET)
@@ -160,7 +160,7 @@ public class PackController {
 	public String packUpdate(Model model, @RequestParam("pack_info_no") int pack_info_no) {
 		System.out.println("패키지정보 수정(업데이트) 창으로 이동......PackController.java");
 		model.addAttribute("packInfo", packService.packGetInfo(pack_info_no));
-		return "pack/packUpdate";
+		return "thymeleaf/pack/packUpdate";
 	}
 	
 	@RequestMapping(value = "/packUpdate", method = RequestMethod.POST)
@@ -223,7 +223,7 @@ public class PackController {
 			, @RequestParam("pack_info_no") int pack_info_no) {
 		System.out.println("예약 정보 입력 창으로 이동......PackController.java");
 		model.addAttribute("packInfo", packService.packGetInfo(pack_info_no));
-		return "pack/packBook";
+		return "thymeleaf/pack/packBook";
 	}
 	
 	@RequestMapping(value = "/packBook", method = RequestMethod.POST)

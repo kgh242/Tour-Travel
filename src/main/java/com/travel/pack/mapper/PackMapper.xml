@@ -300,6 +300,7 @@
    <select id="packList" parameterType="map" resultType="com.travel.pack.dto.PackDTO">
     	SELECT pack_info_no
     		  ,company_id
+    		  ,pack_info_title
     		  ,pack_info_country
     		  ,pack_info_no
     		  ,pack_info_start_date
@@ -322,6 +323,7 @@
      <select id="packList1" resultType="com.travel.pack.dto.PackDTO">
     	SELECT pack_info_no
     		  ,company_id
+    		  ,pack_info_title
     		  ,pack_info_country
     		  ,pack_info_no
     		  ,pack_info_start_date
@@ -336,6 +338,7 @@
      <select id="packList2" parameterType="map" resultType="com.travel.pack.dto.PackDTO">
     	SELECT pack_info_no
     		  ,company_id
+    		  ,pack_info_title
     		  ,pack_info_country
     		  ,pack_info_no
     		  ,pack_info_start_date
@@ -356,6 +359,7 @@
      <select id="packList3" parameterType="map" resultType="com.travel.pack.dto.PackDTO">
     	SELECT pack_info_no
     		  ,company_id
+    		  ,pack_info_title
     		  ,pack_info_country
     		  ,pack_info_no
     		  ,pack_info_start_date
