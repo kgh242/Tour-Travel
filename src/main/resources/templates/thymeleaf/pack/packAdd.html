@@ -1,111 +1,58 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="">
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <!-- Title -->
-    <title>Go Travel</title>
+    <title>여행사 관리 페이지</title>
 
-    <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Core Stylesheet -->
-    <link href="style.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
-    <!-- Responsive CSS -->
-    <link href="css/responsive/responsive.css" rel="stylesheet">
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
-</head>
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
 
-<body>
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="dorne-load"></div>
-    </div>
+  </head>
 
-    <!-- ***** Header Area Start ***** -->
-    <header class="header_area" id="header">
-        <div class="container-fluid h-100">
-            <div class="row h-100">
-                <div class="col-12 h-100">
-                    <nav class="h-100 navbar navbar-expand-lg">
-                        <a class="navbar-brand" href="index"><img src="img/core-img/logo.png" alt=""></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dorneNav" aria-controls="dorneNav" aria-expanded="false" aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>
-                        <!-- Nav -->
-                        <div class="collapse navbar-collapse" id="dorneNav">
-                            <ul class="navbar-nav mr-auto" id="dorneMenu">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="index">메인 <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item active dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">플랜 여행<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="planAdd">플랜등록</a>
-                                        <a class="dropdown-item" href="planList">플랜찾기</a>
-                                        <a class="dropdown-item" href="#">예비</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item active dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">패키지 여행<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="packList">패키지 찾기</a>
-                                        <a class="dropdown-item" href="#">예비</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">후기</a>
-                                </li>
-                            </ul>
-                            <div th:if="${session.LOGINID == null}">
-	                            <!-- Admin Signin btn -->
-	                            <div class="dorne-signin-btn">
-	                                <a href="/adminLogin">관리자</a>
-	                            </div>
-	                            <!-- user/company 통합 로그인  -->
-	                            <div class="dorne-add-listings-btn">
-	                            	<a href="login" class="btn dorne-btn">사용자 로그인</a>
-	                                <!-- <a href="/Travel/login" class="btn dorne-btn">사용자 로그인</a> -->
-	                            </div>
-                            </div>
-                            <div th:if="${session.LOGINID != null}">
-                            	<div class="dorne-signout-btn">
-                            		<span th:text="${session.LOGINID}" style="color:yellow"></span>
-                            		<span style="color:white">님 로그인중</span>
-                            			<a href="/Travel/userLogout">로그아웃</a>
-                            	</div>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- ***** Header Area End ***** -->
-    
-    <!-- ***** Breadcumb Area Start ***** -->
-    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/hero-1.jpg)"></div>
-    <!-- ***** Breadcumb Area End ***** -->
-
-	<!-- ***** Listing Destinations Area Start ***** -->
-	<section class="dorne-listing-destinations-area section-padding-100-50">
+<!-- Header Start -->
+  <body id="page-top">
+ 	<div th:replace="thymeleaf/comHeader :: header"></div>
+<!-- Header End -->
+<!-- Sidebar Start --> 	
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div th:replace="thymeleaf/comHeader :: sidebar"></div>
+<!-- Sidebar End -->
+      <div id="content-wrapper">
+       <div class="container-fluid">
+         <!-- Breadcrumbs-->
+         <ol class="breadcrumb">
+           <li class="breadcrumb-item">
+             <a href="companyIndex">메인페이지</a>
+           </li>
+           <li class="breadcrumb-item active">패키지 등록</li>
+         </ol>
+	<!-- Page Content -->
 		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<div class="section-heading dark text-center">
-						<span></span>
-						<h4>상품추가</h4>
-					</div>
-				</div>
-			</div>
-			<div>
-				<form id="packAdd" name="packAdd" onsubmit="return addInfoSubmit()"
-					method="post" enctype="multipart/form-data">
+		 <div class="card mb-3">
+		  <div class="card-header">
+			패키지 상품추가
+		 <div class="card-body">
+		  <div class="table-responsive">
+				<form id="packAdd" name="packAdd" onsubmit="return addInfoSubmit()" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="company_id" value="321">
-					<table border="1">
+					<table class="table table-bordered" id="packAddTable" width="100%" cellspacing="0">
 						<tr>
 							<td>등록자(여행사)</td>
 							<td>321</td>
@@ -285,273 +232,250 @@
 						</tr>
 					</table>
 				</form>
-			</div>
+				</div>
+			   </div>
+			  </div>
+	        </div>
+	      </div>
 		</div>
-	</section>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+	
+   <!-- Logout Modal-->
+	<div th:replace="thymeleaf/comHeader :: modal"></div>
+    
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-				<!-- ****** Footer Area Start ****** -->
-				<footer class="dorne-footer-area">
-					<div class="container-fluid">
-						<div class="row">
-							<div
-								class="col-12 d-md-flex align-items-center justify-content-between">
-								<div class="footer-text">
-									<p>
-										<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-										Copyright &copy;
-										<script>document.write(new Date().getFullYear());</script>
-										All rights reserved | This template is made with <i
-											class="fa fa-heart-o" aria-hidden="true"></i> by <a
-											href="https://colorlib.com" target="_blank">Colorlib</a>
-										<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-									</p>
-								</div>
-								<div class="footer-social-btns">
-									<a href="#"><i class="fa fa-linkedin" aria-haspopup="true"></i></a>
-									<a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-									<a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-									<a href="#"><i class="fa fa-twitter" aria-haspopup="true"></i></a>
-									<a href="#"><i class="fa fa-facebook" aria-haspopup="true"></i></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</footer>
-				<!-- ****** Footer Area End ****** -->
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-				<!-- jQuery-2.2.4 js -->
-				<script src="js/jquery/jquery-2.2.4.min.js"></script>
-				<!-- Popper js -->
-				<script src="js/bootstrap/popper.min.js"></script>
-				<!-- Bootstrap-4 js -->
-				<script src="js/bootstrap/bootstrap.min.js"></script>
-				<!-- All Plugins js -->
-				<script src="js/others/plugins.js"></script>
-				<!-- Active JS -->
-				<script src="js/active.js"></script>
-</body>
-
-
-<script type="text/javascript">
-
-var i = 0;
-
-	{
-		var oTbl;
-		
-		function MulitHotelRow() {
-			oTbl = document.getElementById("multiHotel");
-			i++;
-			var oRow = oTbl.insertRow();
-			oRow.onmouseover = function() {
-				oTbl.clickedRowIndex = this.rowIndex
-			}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
-
-			var oCell = oRow.insertCell();
-			//삽입될 Form Tag
-			var frmTag = "<input type=text name='pack_hotel_name'> <input type=date name='pack_hotel_start_date'>~<input type=date name='pack_hotel_end_date'>";
-			frmTag += "<input type=button value='삭제' onClick='MulitHotelremoveRow()'>";
-			oCell.innerHTML = frmTag;
-		}
-
-		function MulitHotelremoveRow() {
-			i--;
-			oTbl.deleteRow(oTbl.clickedRowIndex);
-		}
-	}
-	{
-		var oTb2;
-		function MulitHotelImgRow() {
-			oTb2 = document.getElementById("multiHotelImg");
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin.min.js"></script>
+	<script type="text/javascript">
+	
+	var i = 0;
+	
+		{
+			var oTbl;
 			
-			var oRow = oTb2.insertRow();
-			oRow.onmouseover = function() {
-				oTb2.clickedRowIndex = this.rowIndex
-			}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
-
-			var oCell = oRow.insertCell();
-			//삽입될 Form Tag
-			var frmTag = "<input type=file name='hotelImgFileName' />";
-			frmTag += "<input type=button value='삭제' onClick='MultiHotelImgremoveRow()'>";
-			oCell.innerHTML = frmTag;
-		}
-
-		function MultiHotelImgremoveRow() {
-			oTb2.deleteRow(oTb2.clickedRowIndex);
-		}
-	}
+			function MulitHotelRow() {
+				oTbl = document.getElementById("multiHotel");
+				i++;
+				var oRow = oTbl.insertRow();
+				oRow.onmouseover = function() {
+					oTbl.clickedRowIndex = this.rowIndex
+				}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
 	
-	{
-		var oTbl3;
-		function MultiScheduleRow() {
-			oTbl3 = document.getElementById("multiSchedule");
-			var oRow = oTbl3.insertRow();
-			oRow.onmouseover = function() {
-				oTbl3.clickedRowIndex = this.rowIndex
-			}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
-
-			var oCell = oRow.insertCell();
-			//삽입될 Form Tag
-			var frmTag = "<input type=date id='pack_schedule_date' name='pack_schedule_date'><br><textarea rows=4 cols=65 id='pack_schedule_contents' name='pack_schedule_contents'></textarea>";
-			frmTag += "<input type=button value='삭제' onClick='MultiScheduleremoveRow()'>";
-			oCell.innerHTML = frmTag;
-		}
-
-		function MultiScheduleremoveRow() {
-			oTbl3.deleteRow(oTbl3.clickedRowIndex);
-		}
-	}
-
-	{
-		var oTbl4;
-		function MultiScheduleImgRow() {
-			oTbl4 = document.getElementById("multiScheduleImg");
-			var oRow = oTbl4.insertRow();
-			oRow.onmouseover = function() {
-				oTbl4.clickedRowIndex = this.rowIndex
-			}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
-
-			var oCell = oRow.insertCell();
-			//삽입될 Form Tag
-			var frmTag = "<input type=file name='scheduleFileName' />";
-			frmTag += "<input type=button value='삭제' onClick='MultiScheduleImgremoveRow()'>";
-			oCell.innerHTML = frmTag;
-		}
-
-		function MultiScheduleImgremoveRow() {
-			oTbl4.deleteRow(oTbl4.clickedRowIndex);
-		}
-	}
+				var oCell = oRow.insertCell();
+				//삽입될 Form Tag
+				var frmTag = "<input type=text name='pack_hotel_name'> <input type=date name='pack_hotel_start_date'>~<input type=date name='pack_hotel_end_date'>";
+				frmTag += "<input type=button value='삭제' onClick='MulitHotelremoveRow()'>";
+				oCell.innerHTML = frmTag;
+			}
 	
-	{
-		var oTbl5;
-		function MultiLandmarkRow() {
-			oTbl5 = document.getElementById("multiLandmark");
-			var oRow = oTbl5.insertRow();
-			oRow.onmouseover = function() {
-				oTbl5.clickedRowIndex = this.rowIndex
-			}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
-
-			var oCell = oRow.insertCell();
-			//삽입될 Form Tag
-			var frmTag = "<input type=text id='pack_landmark_code' name='pack_landmark_code' placeholder='관광지이름입력'><input type='date' id='pack_tour_date' name='pack_tour_date'><br><textarea rows=4 cols=65 id='pack_tour_contents' name='pack_tour_contents'></textarea>";
-			frmTag += "<input type=button value='삭제' onClick='MultiLandmarkremoveRow()'>";
-			oCell.innerHTML = frmTag;
+			function MulitHotelremoveRow() {
+				i--;
+				oTbl.deleteRow(oTbl.clickedRowIndex);
+			}
 		}
-
-		function MultiLandmarkremoveRow() {
-			oTbl5.deleteRow(oTbl5.clickedRowIndex);
+		{
+			var oTb2;
+			function MulitHotelImgRow() {
+				oTb2 = document.getElementById("multiHotelImg");
+				
+				var oRow = oTb2.insertRow();
+				oRow.onmouseover = function() {
+					oTb2.clickedRowIndex = this.rowIndex
+				}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
+	
+				var oCell = oRow.insertCell();
+				//삽입될 Form Tag
+				var frmTag = "<input type=file name='hotelImgFileName' />";
+				frmTag += "<input type=button value='삭제' onClick='MultiHotelImgremoveRow()'>";
+				oCell.innerHTML = frmTag;
+			}
+	
+			function MultiHotelImgremoveRow() {
+				oTb2.deleteRow(oTb2.clickedRowIndex);
+			}
 		}
-	}
-
-	{
-		var oTbl6;
-		function MultiLandmarkImgRow() {
-			oTbl6 = document.getElementById("multiLandmarkImg");
-			var oRow = oTbl6.insertRow();
-			oRow.onmouseover = function() {
-				oTbl6.clickedRowIndex = this.rowIndex
-			}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
-
-			var oCell = oRow.insertCell();
-			//삽입될 Form Tag
-			var frmTag = "<input type=file name='landMarkFileName' />";
-			frmTag += "<input type=button value='삭제' onClick='MultiLandmarkImgremoveRow()'>";
-			oCell.innerHTML = frmTag;
+		
+		{
+			var oTbl3;
+			function MultiScheduleRow() {
+				oTbl3 = document.getElementById("multiSchedule");
+				var oRow = oTbl3.insertRow();
+				oRow.onmouseover = function() {
+					oTbl3.clickedRowIndex = this.rowIndex
+				}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
+	
+				var oCell = oRow.insertCell();
+				//삽입될 Form Tag
+				var frmTag = "<input type=date id='pack_schedule_date' name='pack_schedule_date'><br><textarea rows=4 cols=65 id='pack_schedule_contents' name='pack_schedule_contents'></textarea>";
+				frmTag += "<input type=button value='삭제' onClick='MultiScheduleremoveRow()'>";
+				oCell.innerHTML = frmTag;
+			}
+	
+			function MultiScheduleremoveRow() {
+				oTbl3.deleteRow(oTbl3.clickedRowIndex);
+			}
 		}
-
-		function MultiLandmarkImgremoveRow() {
-			oTbl6.deleteRow(oTbl6.clickedRowIndex);
+	
+		{
+			var oTbl4;
+			function MultiScheduleImgRow() {
+				oTbl4 = document.getElementById("multiScheduleImg");
+				var oRow = oTbl4.insertRow();
+				oRow.onmouseover = function() {
+					oTbl4.clickedRowIndex = this.rowIndex
+				}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
+	
+				var oCell = oRow.insertCell();
+				//삽입될 Form Tag
+				var frmTag = "<input type=file name='scheduleFileName' />";
+				frmTag += "<input type=button value='삭제' onClick='MultiScheduleImgremoveRow()'>";
+				oCell.innerHTML = frmTag;
+			}
+	
+			function MultiScheduleImgremoveRow() {
+				oTbl4.deleteRow(oTbl4.clickedRowIndex);
+			}
 		}
-	}
-
-	var str = $('#pack_info_course').val();
-	str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-	$('#pack_info_course').val(str);
+		
+		{
+			var oTbl5;
+			function MultiLandmarkRow() {
+				oTbl5 = document.getElementById("multiLandmark");
+				var oRow = oTbl5.insertRow();
+				oRow.onmouseover = function() {
+					oTbl5.clickedRowIndex = this.rowIndex
+				}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
 	
-	var str = $('#pack_schedule_contents').val();
-	str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-	$('#pack_schedule_contents').val(str);
+				var oCell = oRow.insertCell();
+				//삽입될 Form Tag
+				var frmTag = "<input type=text id='pack_landmark_code' name='pack_landmark_code' placeholder='관광지이름입력'><input type='date' id='pack_tour_date' name='pack_tour_date'><br><textarea rows=4 cols=65 id='pack_tour_contents' name='pack_tour_contents'></textarea>";
+				frmTag += "<input type=button value='삭제' onClick='MultiLandmarkremoveRow()'>";
+				oCell.innerHTML = frmTag;
+			}
 	
-	var str = $('#pack_tour_contents').val();
-	str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-	$('#pack_tour_contents').val(str);
+			function MultiLandmarkremoveRow() {
+				oTbl5.deleteRow(oTbl5.clickedRowIndex);
+			}
+		}
 	
-	var str = $('#pack_notice_before_contents').val();
-	str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-	$('#pack_before_after_contents').val(str);
+		{
+			var oTbl6;
+			function MultiLandmarkImgRow() {
+				oTbl6 = document.getElementById("multiLandmarkImg");
+				var oRow = oTbl6.insertRow();
+				oRow.onmouseover = function() {
+					oTbl6.clickedRowIndex = this.rowIndex
+				}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
 	
-	var str = $('#pack_notice_after_contents').val();
-	str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-	$('#pack_notice_after_contents').val(str);
+				var oCell = oRow.insertCell();
+				//삽입될 Form Tag
+				var frmTag = "<input type=file name='landMarkFileName' />";
+				frmTag += "<input type=button value='삭제' onClick='MultiLandmarkImgremoveRow()'>";
+				oCell.innerHTML = frmTag;
+			}
 	
-
-
-
-	function addInfoSubmit() {
-	    var myform = document.forms['packAdd'];
-	    {
-		    if( myform['pack_info_country'].value.length < 1) {
-		        alert( '여행 국가를 입력해주세요');
-		        return false;
+			function MultiLandmarkImgremoveRow() {
+				oTbl6.deleteRow(oTbl6.clickedRowIndex);
+			}
+		}
+	
+		var str = $('#pack_info_course').val();
+		str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+		$('#pack_info_course').val(str);
+		
+		var str = $('#pack_schedule_contents').val();
+		str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+		$('#pack_schedule_contents').val(str);
+		
+		var str = $('#pack_tour_contents').val();
+		str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+		$('#pack_tour_contents').val(str);
+		
+		var str = $('#pack_notice_before_contents').val();
+		str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+		$('#pack_before_after_contents').val(str);
+		
+		var str = $('#pack_notice_after_contents').val();
+		str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+		$('#pack_notice_after_contents').val(str);
+		
+	
+	
+	
+		function addInfoSubmit() {
+		    var myform = document.forms['packAdd'];
+		    {
+			    if( myform['pack_info_country'].value.length < 1) {
+			        alert( '여행 국가를 입력해주세요');
+			        return false;
+			    }
+			    if( myform['pack_info_title'].value.length < 1) {
+			        alert( '상품명을 입력하세요');
+			        return false;
+			    }
+			    if( myform['pack_info_start_date'].value.length < 1) {
+			        alert( '패키지 시작일을 입력하세요');
+			        return false;
+			    }	    
+			    if( myform['pack_info_end_date'].value.length < 1) {
+			        alert( '패키지 종료일을 입력하세요');
+			        return false;
+			    }	    
+			    if( myform['pack_info_air'].value.length < 1) {
+			    	alert( '이용항공을 입력하세요');
+			    	return false;
+			    }		    
+			    if( myform['pack_info_course'].value.length < 1) {
+			    	alert( '전체코스 안내를 입력하세요');
+			    	return false;
+			    }
+			    if( myform['pack_info_person_number'].value.length < 1) {
+			    	alert( '패키지상품 모집인원을 입력하세요');
+			    	return false;
+			    }
+			    if( myform['pack_price_adult'].value.length < 1) {
+			    	alert( '패키지상품 성인요금을 입력하세요');
+			    	return false;
+			    }
+			    
+			    if( myform['pack_price_child'].value.length < 1) {
+			    	alert( '패키지상품 청소년요금을 입력하세요');
+			    	return false;
+			    }
+			    
+			    if( myform['pack_price_baby'].value.length < 1) {
+			    	alert( '패키지상품 아동요금을 입력하세요');
+			    	return false;
+			    }
+			    
+			    if( myform['pack_notice_before_contents'].value.length < 1) {
+			    	alert( '여행 출발 전 필요 정보를 입력하세요');
+			    	return false;
+			    }
+			    
+			    if( myform['pack_notice_after_contents'].value.length < 1) {
+			    	alert( '여행 출발 후 필요 정보를 입력하세요');
+			    	return false;
+			    }
+			    
+			    if( myform['pack_info_closing_date'].value.length < 1) {
+			    	alert( '패키지상품 마감일을 입력하세요');
+			    	return false;
+			    }
+	
 		    }
-		    if( myform['pack_info_title'].value.length < 1) {
-		        alert( '상품명을 입력하세요');
-		        return false;
-		    }
-		    if( myform['pack_info_start_date'].value.length < 1) {
-		        alert( '패키지 시작일을 입력하세요');
-		        return false;
-		    }	    
-		    if( myform['pack_info_end_date'].value.length < 1) {
-		        alert( '패키지 종료일을 입력하세요');
-		        return false;
-		    }	    
-		    if( myform['pack_info_air'].value.length < 1) {
-		    	alert( '이용항공을 입력하세요');
-		    	return false;
-		    }		    
-		    if( myform['pack_info_course'].value.length < 1) {
-		    	alert( '전체코스 안내를 입력하세요');
-		    	return false;
-		    }
-		    if( myform['pack_info_person_number'].value.length < 1) {
-		    	alert( '패키지상품 모집인원을 입력하세요');
-		    	return false;
-		    }
-		    if( myform['pack_price_adult'].value.length < 1) {
-		    	alert( '패키지상품 성인요금을 입력하세요');
-		    	return false;
-		    }
-		    
-		    if( myform['pack_price_child'].value.length < 1) {
-		    	alert( '패키지상품 청소년요금을 입력하세요');
-		    	return false;
-		    }
-		    
-		    if( myform['pack_price_baby'].value.length < 1) {
-		    	alert( '패키지상품 아동요금을 입력하세요');
-		    	return false;
-		    }
-		    
-		    if( myform['pack_notice_before_contents'].value.length < 1) {
-		    	alert( '여행 출발 전 필요 정보를 입력하세요');
-		    	return false;
-		    }
-		    
-		    if( myform['pack_notice_after_contents'].value.length < 1) {
-		    	alert( '여행 출발 후 필요 정보를 입력하세요');
-		    	return false;
-		    }
-		    
-		    if( myform['pack_info_closing_date'].value.length < 1) {
-		    	alert( '패키지상품 마감일을 입력하세요');
-		    	return false;
-		    }
-
-	    }
-
-	    return true;
-	}
-</script>
+	
+		    return true;
+		}
+	</script>
+  </body>
 </html>

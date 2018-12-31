@@ -86,9 +86,10 @@ public class UserController {
 	}
 		
 	@RequestMapping(value = "/userUpdate", method = RequestMethod.POST)
-	public String userUpdate(Model model, UserDTO userDTO) {
+	public String userUpdate(Model model,HttpSession session) {
 		System.out.println("user 업데이트 이동......UserController.java");
-		model.addAttribute("userDTO", userDTO);
+		String user_id = session.getAttribute("LOGINID").toString();
+		model.addAttribute("userDTO", userService.userGetInfo(user_id));
 		return "thymeleaf/member/user/userUpdate";
 	}
 	
@@ -101,7 +102,7 @@ public class UserController {
 		}else {
 			System.out.println("user 업데이트실패 ......UserController.java");
 		}
-		return "member/userGetInfo";
+		return "thymeleaf/member/user/userGetInfo";
 	}
 	
 	@RequestMapping(value = "/userAuth", method = RequestMethod.GET)
