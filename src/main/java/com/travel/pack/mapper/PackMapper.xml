@@ -368,7 +368,7 @@
     	 DESC
     	LIMIT #{pageMaker.startRow},#{pageMaker.rowPerPage} 
     </select>   
-    <select id="packList3Count" parameterType="map" resultType="com.travel.pack.dto.PackDTO">
+    <select id="packList3Count" parameterType="map" resultType="int">
     	SELECT count(*)
     	 FROM pack_info
     	WHERE pack_info_start_date=#{packSearchDTO.PackStartDate}
