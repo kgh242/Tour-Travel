@@ -1,10 +1,156 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="mainLayout">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>Go Travel</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link href="style.css" rel="stylesheet">
+
+    <!-- Responsive CSS -->
+    <link href="css/responsive/responsive.css" rel="stylesheet">
+    
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+</head>
+
+<body>
+    <div th:replace="thymeleaf/header :: header"></div>
+    <!-- ***** Header Area End ***** -->
+    
+    <!-- ***** Breadcumb Area Start ***** -->
+   <div class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/hero-1.jpg)">
+   </div>
+
+    <!-- ***** Listing Destinations Area Start ***** -->
+ 	<section class="dorne-listing-destinations-area section-padding-100-50">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="section-heading dark text-center">
+					<span></span>
+					<h2>마이페이지</h2>
+					<p>회원 정보 수정</p>
+	            </div>
+				<form name = "updateInfo" onsubmit="return updateInfoSubmit()" action = "/Travel/userUpdateAction" method = "post" enctype="multipart/form-data">
+					<table>
+						<tr>
+							<td>아이디</td>
+							<td>
+								<input type = "text" id = "user_id" name = "user_id" th:value="${userDTO.user_id}" readonly="readonly">
+							</td>
+						</tr>
+						<tr>
+							<td>비밀번호</td>
+							<td><input type = "password" id = "user_pw" name = "user_pw"></td>
+						</tr>
+						<tr>
+							<td>비밀번호 확인</td>
+							<td><input type = "password" id = "user_pw_check" name = "user_pw_check"></td>
+						</tr>
+						<tr>
+							<td>닉네임</td>
+							<td>
+								<input type = "text" id = "user_nickname" name = "user_nickname" th:value="${userDTO.user_nickname}">
+<!-- 								<input type = "button" id = "user_nickname_check" name = "user_nickname_check" value="중복확인">
+								${nickname_helpler} -->
+							</td>
+					
+						</tr>
+						<tr>
+							<td>이름</td>
+							<td><input type = "text" id = "user_name" name = "user_name" th:value="${userDTO.user_name}"></td>
+						</tr>
+					
+						<tr>
+							<td>주소</td>
+							<td><input type = "text" id = "user_address" name = "user_address" th:value="${userDTO.user_address}"></td>
+						</tr>
+						<tr>
+							<td>이메일</td>
+							<td><input type = "email" id = "user_email" name = "user_email" th:value="${userDTO.user_email}"></td>
+						</tr>
+						<tr>
+							<td>연락처</td>
+							<td><input type = "text" id = "user_tell" name = "user_tell" th:value="${userDTO.user_tell}"></td>
+						</tr>
+						<tr>
+							<td>자기소개</td>
+							<td><input type = "text" id = "user_introduction" name = "user_introduction" th:value="${userDTO.user_introduction}"></td>
+						</tr>
+						<tr>
+							<td>이미지</td>
+							<td><input type = "file" id = "user_img" name = "user_img"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type = "submit" id = "updateBtn" value = "입력완료"></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+		</div>
+		</section>
+    <!-- ****** Footer Area Start ****** -->
+	<div th:replace="thymeleaf/footer :: footer"></div>
+    <!-- ****** Footer Area End ****** -->
+
+    <!-- jQuery-2.2.4 js -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap-4 js -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="js/others/plugins.js"></script>
+    <!-- Active JS -->
+    <script src="js/active.js"></script>
+    <script type = "text/javascript" th:inline="javascript">
+    /* <![CDATA[ */
+	if(/*[[${result==0}]]*/){
+		alert("수정실패");
+	}
+	/* ]]> */
+	</script>
+	<script type = "text/javascript" th:inline="javascript">>
+		function updateInfoSubmit() {
+		    var myform = document.forms['updateInfo'];
+		
+		    if( myform['user_pw'].value.length < 1) {
+		        alert( '패스워드를 입력하세요');
+		        return false;
+		    }
+		    if( myform['user_nickname'].value.length < 1) {
+		    	alert( '닉네임을 입력하세요');
+		    	return false;
+		    }
+		    if( myform['user_address'].value.length < 1) {
+		    	alret( '주소를 입력하세요');
+		    	return false;
+		    }	
+		    if( myform['user_email'].value.length < 1) {
+		    	alert( '이메일을 입력하세요');
+		    	return false;
+		    }
+		    
+		    if( myform['user_tell'].value.length < 1) {
+		        alert( '연락처를 입력하세요');
+		        return false;
+		    }
+		
+		    return true;
+		}
+	</script>
 </body>
 </html>
