@@ -22,7 +22,9 @@ import com.travel.pack.dto.PackHotelDTO;
 import com.travel.pack.dto.PackLandmarkDTO;
 import com.travel.pack.dto.PackPriceDTO;
 import com.travel.pack.dto.PackScheduleDTO;
+import com.travel.pack.dto.PackSearchDTO;
 import com.travel.pack.mapper.PackMapper;
+import com.travel.paging.PageMaker;
 
 //패키지 정보 Service
 
@@ -297,17 +299,74 @@ public class PackService {
 		return result;
 	}
 	
-	public List<PackDTO> packList() {
+	public List<PackDTO> packList(PageMaker pageMaker,PackSearchDTO packSearchDTO) {
 		System.out.println("패키지리스트 조회......PackService.java");
 		List<PackDTO> result = new ArrayList<PackDTO>();
-		try {
-			result = packMapper.packList();
-		} catch (Error e) {
-			System.out.println("패키지리스트 조회 에러발생 ......Packservice.java : " + e);
+		Map<String, Object> map = new HashMap<String, Object>();
+		pageMaker.setRowPerPage(10);
+		pageMaker.setPagePerBlock(10);
+		pageMaker.setStartRow();
+        
+        if(packSearchDTO.getPackSearchCountry().equals("1")) {
+        	packSearchDTO.setPackSearchCountry(null);
+        }
+        if(packSearchDTO.getPackStartDate().equals("1")) {
+        	packSearchDTO.setPackStartDate(null);
+        }
+    	map.put("pageMaker", pageMaker);
+		map.put("packSearchDTO", packSearchDTO);
+		if(packSearchDTO.getPackSearchCountry() == null) {
+			if(packSearchDTO.getPackStartDate() == null) {
+				System.out.println("둘다널");
+				 pageMaker.setAllCount(packMapper.packSelectCount());
+				 System.out.println(pageMaker.getAllCount()+"<- allCount");
+				result = packMapper.packList1(pageMaker);
+			}else {
+				System.out.println("나라명 널");
+				pageMaker.setAllCount(packMapper.packList3Count(map));
+				System.out.println(pageMaker.getAllCount()+"<- allCount");
+				result = packMapper.packList3(map);
+			}
 		}
 		
+		if(packSearchDTO.getPackStartDate() == null) {
+			if(packSearchDTO.getPackSearchCountry() != null) {
+				System.out.println("날짜만 널");
+				pageMaker.setAllCount(packMapper.packList2Count(map));
+				System.out.println(pageMaker.getAllCount()+"<- allCount");
+				result = packMapper.packList2(map);
+			}
+		}else if(packSearchDTO.getPackStartDate() != null) {
+			if(packSearchDTO.getPackSearchCountry() != null) {
+				System.out.println("둘다 널아님");
+				pageMaker.setAllCount(packMapper.packListCount(map));
+				System.out.println(pageMaker.getAllCount()+"<- allCount");
+				result = packMapper.packList(map);
+			}
+		}
+   
+        // 페이징에 필요한 값 계산하여 설정
+	
+        pageMaker.setLastPage();
+        pageMaker.setCurrentBlock();
+        pageMaker.setLastBlock();
+        pageMaker.setStartPage();
+        pageMaker.setEndPage();
+        // 이전 페이지와 다음 페이지를 컨트롤하는 조건문
+        if(pageMaker.getCurrentBlock() != pageMaker.getLastBlock() && pageMaker.getCurrentBlock() >1){
+        	pageMaker.setPrevPage(true);
+            pageMaker.setNextPage(true);
+        }else  if(pageMaker.getCurrentBlock() != pageMaker.getLastBlock() && pageMaker.getLastBlock() != 1) {
+        	pageMaker.setPrevPage(false);
+            pageMaker.setNextPage(true);
+        }else if(pageMaker.getCurrentBlock() <= pageMaker.getLastBlock() && pageMaker.getCurrentBlock() != 1){
+        	pageMaker.setPrevPage(true);
+            pageMaker.setNextPage(false);   
+        }else if(pageMaker.getLastBlock() == 1) {
+        	pageMaker.setPrevPage(false);
+            pageMaker.setNextPage(false); 
+        }
 		return result;
-		
 	}
 	
 	public Map<String, Object> packGetInfo(int pack_info_no) {

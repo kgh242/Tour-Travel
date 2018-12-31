@@ -292,10 +292,86 @@
     		pack_schedule_img_ext as imgExt 
     	FROM pack_schedule_img WHERE pack_info_no=#{pack_info_no}
     </select>
-    
+     <select id="packSelectCount" resultType="int">
+        SELECT count(*)
+    	  FROM pack_info
+    </select>
 
-    <select id="packList" resultType="com.travel.pack.dto.PackDTO">
-    	SELECT * FROM pack_info
+   <select id="packList" parameterType="map" resultType="com.travel.pack.dto.PackDTO">
+    	SELECT pack_info_no
+    		  ,company_id
+    		  ,pack_info_country
+    		  ,pack_info_no
+    		  ,pack_info_start_date
+    		  ,pack_info_end_date
+    		  ,pack_info_person_number
+    		  ,pack_info_closing_date
+    	 FROM pack_info
+    	WHERE pack_info_country=#{packSearchDTO.packSearchCountry} 
+    	  AND pack_info_start_date=#{packSearchDTO.PackStartDate}
+    	 ORDER BY pack_info_no
+    	  DESC
+    	 LIMIT #{pageMaker.startRow},#{pageMaker.rowPerPage} 
+    </select>
+       <select id="packListCount" parameterType="map" resultType="int">
+    	SELECT count(*)
+    	 FROM pack_info
+    	WHERE pack_info_country=#{packSearchDTO.packSearchCountry} 
+    	  AND pack_info_start_date=#{packSearchDTO.PackStartDate}
+    </select>
+     <select id="packList1" resultType="com.travel.pack.dto.PackDTO">
+    	SELECT pack_info_no
+    		  ,company_id
+    		  ,pack_info_country
+    		  ,pack_info_no
+    		  ,pack_info_start_date
+    		  ,pack_info_end_date
+    		  ,pack_info_person_number
+    		  ,pack_info_closing_date
+    	 FROM pack_info
+    	 ORDER BY pack_info_no
+    	  DESC
+    	 LIMIT #{startRow},#{rowPerPage} 
+ 	</select>
+     <select id="packList2" parameterType="map" resultType="com.travel.pack.dto.PackDTO">
+    	SELECT pack_info_no
+    		  ,company_id
+    		  ,pack_info_country
+    		  ,pack_info_no
+    		  ,pack_info_start_date
+    		  ,pack_info_end_date
+    		  ,pack_info_person_number
+    		  ,pack_info_closing_date
+    	 FROM pack_info
+    	WHERE pack_info_country=#{packSearchDTO.packSearchCountry}
+    	 ORDER BY pack_info_no
+    	  DESC
+    	 LIMIT #{pageMaker.startRow},#{pageMaker.rowPerPage} 
+    </select>
+     <select id="packList2Count" parameterType="map" resultType="int">
+    	SELECT count(*)
+    	 FROM pack_info
+    	WHERE pack_info_country=#{packSearchDTO.packSearchCountry}
+    </select>
+     <select id="packList3" parameterType="map" resultType="com.travel.pack.dto.PackDTO">
+    	SELECT pack_info_no
+    		  ,company_id
+    		  ,pack_info_country
+    		  ,pack_info_no
+    		  ,pack_info_start_date
+    		  ,pack_info_end_date
+    		  ,pack_info_person_number
+    		  ,pack_info_closing_date
+    	 FROM pack_info
+    	WHERE pack_info_start_date=#{packSearchDTO.PackStartDate}
+        ORDER BY pack_info_no
+    	 DESC
+    	LIMIT #{pageMaker.startRow},#{pageMaker.rowPerPage} 
+    </select>   
+    <select id="packList3Count" parameterType="map" resultType="com.travel.pack.dto.PackDTO">
+    	SELECT count(*)
+    	 FROM pack_info
+    	WHERE pack_info_start_date=#{packSearchDTO.PackStartDate}
     </select>
     
     <delete id="packDelete" parameterType="int">

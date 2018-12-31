@@ -17,7 +17,9 @@ import com.travel.pack.dto.PackHotelDTO;
 import com.travel.pack.dto.PackLandmarkDTO;
 import com.travel.pack.dto.PackPriceDTO;
 import com.travel.pack.dto.PackScheduleDTO;
+import com.travel.pack.dto.PackSearchDTO;
 import com.travel.pack.service.PackService;
+import com.travel.paging.PageMaker;
 
 //패키지 기능 분배 컨트롤러
 
@@ -97,9 +99,30 @@ public class PackController {
 	}
 	
 	@RequestMapping(value = "/packList", method = RequestMethod.GET)
-	public String packList(Model model) {
+	public String packList(@RequestParam(value="currentPage", required=false, defaultValue = "1") int currentPage
+			,Model model
+			,PageMaker pageMaker
+			,@RequestParam(value="packSearchCountry", required=false, defaultValue = "1") String packSearchCountry
+			,@RequestParam(value="PackStartDate", required=false, defaultValue = "1") String packStartDate) {
+		PackSearchDTO packSearchDTO = new PackSearchDTO();
+		packSearchDTO.setPackSearchCountry(packSearchCountry);
+		packSearchDTO.setPackStartDate(packStartDate);
+		System.out.println(packSearchCountry+"<-packSearchCountry");
+		System.out.println(packStartDate+"<-packStartDate");
 		System.out.println("패키지 리스트......PackController.java");
-		model.addAttribute("packList", packService.packList());
+		System.out.println(currentPage+"currentPage");
+		pageMaker.setCurrentPage(currentPage);
+		List<PackDTO> packList = packService.packList(pageMaker,packSearchDTO);
+		model.addAttribute("packList", packList);
+		model.addAttribute("currentPage", currentPage);
+        model.addAttribute("pagePerBlock", pageMaker.getPagePerBlock());
+        model.addAttribute("currentBlock", pageMaker.getCurrentBlock());
+        model.addAttribute("startPage", pageMaker.getStartPage());
+        model.addAttribute("endPage", pageMaker.getEndPage());
+        model.addAttribute("prevPage", pageMaker.isPrevPage());
+        model.addAttribute("nextPage", pageMaker.isNextPage());
+		model.addAttribute("packSearchCountry",packSearchCountry);
+		model.addAttribute("packStartDate",packStartDate);
 		return "pack/packList";
 	}
 

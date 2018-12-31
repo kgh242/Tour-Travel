@@ -13,6 +13,7 @@ import com.travel.pack.dto.PackLandmarkDTO;
 import com.travel.pack.dto.PackPriceDTO;
 import com.travel.pack.dto.PackScheduleDTO;
 import com.travel.pack.service.PackService;
+import com.travel.paging.PageMaker;
 
 //패키지 정보 Mapper Interface
 
@@ -62,6 +63,14 @@ public interface PackMapper {
 	PackPriceDTO packGetPriceInfo(int pack_info_no);
 	String packGetBeforeNoticeInfo(int pack_info_no);
 	String packGetAfterNoticeInfo(int pack_info_no);
-	List<PackDTO> packList();
+	
+	List<PackDTO> packList(Map<String, Object> map);
+	List<PackDTO> packList1(PageMaker pageMaker);
+	List<PackDTO> packList2(Map<String, Object> map);
+	List<PackDTO> packList3(Map<String, Object> map);
+	int packSelectCount();
+	int packListCount(Map<String, Object> map);
+	int packList2Count(Map<String, Object> map);
+	int packList3Count(Map<String, Object> map);
 	
 }
