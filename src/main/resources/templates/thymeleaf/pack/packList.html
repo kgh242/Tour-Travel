@@ -157,21 +157,11 @@
 </table>
       <div class="text-center">
         <ul class="pagination justify-content-center">
-            <span th:if="${prevPage}">
-                <li class="page-item"><a class="page-link" th:href="@{${pageContext.request.contextPath}+'/Travel/packList?packSearchCountry='+${packSearchCountry}+'&packStartDate='+${packStartDate}+'&currentPage='+${(currentBlock - 1) * pagePerBlock}">< 이전</a></li>
-            </span>
-            
-            <c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
-                <c:if test="${currentPage == i}">
-                    <li class="page-item"><a class="page-link" href="#">${i}</a></li>
-                </c:if>
-                <c:if test="${currentPage != i}">
-                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/Travel/packList?packSearchCountry=${packSearchCountry}&packStartDate=${packStartDate}&currentPage=${i}">${i}</a></li>
-                </c:if>
-            </c:forEach>
-            <c:if test="${nextPage}">
-                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/Travel/packList?packSearchCountry=${packSearchCountry}&packStartDate=${packStartDate}&currentPage=${currentBlock * pagePerBlock + 1}">다음 ></a></li>
-            </c:if>
+        	<nav>
+            	<!-- <li class="page-item" th:if="${prevPage}"><a class="page-link" th:href="@{${pageContext.request.contextPath}+'/Travel/packList?packSearchCountry='+${packSearchCountry}+'&packStartDate='+${packStartDate}+'&currentPage='+${(currentBlock - 1) * pagePerBlock}">< 이전</a></li> -->  
+      			<!-- <li class="page-item" th:each="i : ${#numbers.sequence(startPage, endPage)}" th:classappend="${currentPage} == ${i} ? active : null"><a class="page-link" th:href="@{${pageContext.request.contextPath}+'/Travel/packList?packSearchCountry='+${packSearchCountry}+'&packStartDate='+${packStartDate}+'&currentPage='+${i}" th:text="${i}"></a></li> -->  
+      		    <!-- <li class="page-item" th:if="${nextPage}"><a class="page-link" th:href="@{${pageContext.request.contextPath}+'/Travel/packList?packSearchCountry='+${packSearchCountry}+'&packStartDate='+${packStartDate}+'&currentPage='+${(currentBlock + 1) * pagePerBlock}">다음</a></li>  -->  
+		    </nav>
         </ul>
     </div>
 </div>
