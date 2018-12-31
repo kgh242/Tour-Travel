@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+<!-- Title -->
+<title>Go Travel</title>
+
+<!-- Favicon -->
+<link rel="icon" href="img/core-img/favicon.ico">
+
+<!-- Core Stylesheet -->
+<link href="style.css" rel="stylesheet">
+
+<!-- Responsive CSS -->
+<link href="css/responsive/responsive.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<!-- Preloader -->
+	<div id="preloader">
+		<div class="dorne-load"></div>
+	</div>
+
+	<!-- ***** Header Area Start ***** -->
+	<header class="header_area" id="header">
+		<div class="container-fluid h-100">
+			<div class="row h-100">
+				<div class="col-12 h-100">
+					<nav class="h-100 navbar navbar-expand-lg">
+						<a class="navbar-brand" href="index"><img
+							src="img/core-img/logo.png" alt=""></a>
+						<button class="navbar-toggler" type="button"
+							data-toggle="collapse" data-target="#dorneNav"
+							aria-controls="dorneNav" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="fa fa-bars"></span>
+						</button>
+						<!-- Nav -->
+						<div class="collapse navbar-collapse" id="dorneNav">
+							<ul class="navbar-nav mr-auto" id="dorneMenu">
+								<li class="nav-item active"><a class="nav-link"
+									href="index">메인 <span class="sr-only">(current)</span></a></li>
+								<li class="nav-item active dropdown"><a
+									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+									role="button" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">플랜 여행<i class="fa fa-angle-down"
+										aria-hidden="true"></i></a>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+										<a class="dropdown-item" href="planAdd">플랜등록</a> <a
+											class="dropdown-item" href="planList">플랜찾기</a> <a
+											class="dropdown-item" href="#">예비</a>
+									</div></li>
+								<li class="nav-item active dropdown"><a
+									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+									role="button" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">패키지 여행<i class="fa fa-angle-down"
+										aria-hidden="true"></i></a>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+										<a class="dropdown-item" href="packList">패키지 찾기</a> <a
+											class="dropdown-item" href="#">예비</a>
+									</div></li>
+								<li class="nav-item"><a class="nav-link" href="#">후기</a></li>
+							</ul>
+							<div th:if="${session.LOGINID == null}">
+								<!-- Admin Signin btn -->
+								<div class="dorne-signin-btn">
+									<a href="/adminLogin">관리자</a>
+								</div>
+								<!-- user/company 통합 로그인  -->
+								<div class="dorne-add-listings-btn">
+									<a href="login" class="btn dorne-btn">사용자 로그인</a>
+									<!-- <a href="/Travel/login" class="btn dorne-btn">사용자 로그인</a> -->
+								</div>
+							</div>
+							<div th:if="${session.LOGINID != null}">
+								<div class="dorne-signout-btn">
+									<span th:text="${session.LOGINID}" style="color: yellow"></span>
+									<span style="color: white">님 로그인중</span> <a
+										href="/Travel/userLogout">로그아웃</a>
+								</div>
+							</div>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- ***** Header Area End ***** -->
+
+	<!-- ***** Breadcumb Area Start ***** -->
+	<div class="breadcumb-area bg-img bg-overlay"
+		style="background-image: url(img/bg-img/hero-1.jpg)"></div>
+	<!-- ***** Breadcumb Area End ***** -->
+
+	<!-- ***** Listing Destinations Area Start ***** -->
+	<section class="dorne-listing-destinations-area section-padding-100-50">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="section-heading dark text-center">
+						<span></span>
+						<h4>상품상세보기</h4>
+					</div>
+				</div>
+			</div>
+			<div>
+				<h1>패키지 상세 정보 보기</h1>
+				<table border="1">
+					<tr>
+						<td>목적국가</td>
+						<td th:text="${packInfo.packInfo.pack_info_country}"></td>
+					</tr>
+					<tr>
+						<td>여행안전정보</td>
+						<td th:text="${packInfo.packInfo.pack_info_safe}"></td>
+					</tr>
+					<tr>
+						<td>상품명</td>
+						<td th:text="${packInfo.packInfo.pack_info_title}"></td>
+					</tr>
+					<tr>
+						<td>여행일정</td>
+						<td th:text="${packInfo.packInfo.pack_info_start_date} + '~' + ${packInfo.packInfo.pack_info_end_date}"></td>
+					</tr>
+					<tr>
+						<td>이용항공사</td>
+						<td th:text="${packInfo.packInfo.pack_info_air}"></td>
+					</tr>
+					<tr>
+						<td>전체코스안내</td>
+						<td th:text="${packInfo.packInfo.pack_info_course}"></td>
+					</tr>
+					<tr>
+						<td>숙소정보</td>
+						<td>
+							<span th:each="pack:${packInfo.packHotelInfo}">
+								<span th:text="${pack.pack_hotel_name}+'  '+ ${pack.pack_hotel_start_date} + '~' + ${pack.pack_hotel_end_date}"></span><br>
+							</span>
+						</td>
+					</tr>
+
+					<tr>
+						<td>숙소이미지</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>일별상세스케줄정보</td>
+						<td>
+							<span th:each="pack:${packInfo.packScheduleInfo}">
+								<span th:text="${pack.pack_schedule_date}"></span><br>
+								<span th:text="${pack.pack_schedule_contents}"></span><br>
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td>일별상세스케줄이미지</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>방문관광지정보</td>
+						<td>
+							<span th:each="pack:${packInfo.packLandmarkInfo}">
+								<span th:text="${pack.pack_tour_date}"></span><br>
+								<span th:text="${pack.pack_landmark_code}"></span><br>
+								<span th:text="${pack.pack_tour_contents}"></span><br>
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td>방문관광지이미지</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>모집인원</td>
+						<td th:text="${packInfo.packInfo.pack_info_person_number}"></td>
+					</tr>
+					<tr>
+						<td>이용요금</td>
+						<td>성인 : <span th:text="${packInfo.packPriceInfo.pack_price_adult}"></span><br>
+							초중고학생 : <span th:text="${packInfo.packPriceInfo.pack_price_child}"></span><br> 
+							아동 : <span th:text="${packInfo.packPriceInfo.pack_price_baby}"></span><br>
+						</td>
+					</tr>
+					<tr>
+						<td>출발 전 참고사항</td>
+						<td th:text="${packInfo.PackBeforeNoticeInfo}"></td>
+					</tr>
+					<tr>
+						<td>출발 후 참고사항</td>
+						<td th:text="${packInfo.PackAfterNoticeInfo}"></td>
+					</tr>
+					<tr>
+						<td>신청마감일자</td>
+						<td th:text="${packInfo.packInfo.pack_info_closing_date}"></td>
+					</tr>
+					<tr>
+						<td>상품등록일</td>
+						<td th:text="${packInfo.packInfo.pack_info_apply_date}"></td>
+					</tr>
+				</table>
+				<!-- 세션값 비교 후 해당 글 작성자일때만 노출시켜야함 -->
+				<button id="updateBtn" onclick="update()">상품수정</button>
+				<button id="deleteBtn" onclick="dlt();">상품삭제</button>
+				<!-- 세션값 비교 후 고객 권한일때만 노출시켜야함 -->
+				<button id="bookBtn" onclick="bookBtn()">상품 예약하기</button>
+
+			</div>
+		</div>
+	</section>
+
+
+	<!-- ****** Footer Area Start ****** -->
+	<footer class="dorne-footer-area">
+		<div class="container-fluid">
+			<div class="row">
+				<div
+					class="col-12 d-md-flex align-items-center justify-content-between">
+					<div class="footer-text">
+						<p>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							Copyright &copy;
+							<script>document.write(new Date().getFullYear());</script>
+							All rights reserved | This template is made with <i
+								class="fa fa-heart-o" aria-hidden="true"></i> by <a
+								href="https://colorlib.com" target="_blank">Colorlib</a>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						</p>
+					</div>
+					<div class="footer-social-btns">
+						<a href="#"><i class="fa fa-linkedin" aria-haspopup="true"></i></a>
+						<a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a> <a
+							href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a> <a
+							href="#"><i class="fa fa-twitter" aria-haspopup="true"></i></a> <a
+							href="#"><i class="fa fa-facebook" aria-haspopup="true"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- ****** Footer Area End ****** -->
+
+	<!-- jQuery-2.2.4 js -->
+	<script src="js/jquery/jquery-2.2.4.min.js"></script>
+	<!-- Popper js -->
+	<script src="js/bootstrap/popper.min.js"></script>
+	<!-- Bootstrap-4 js -->
+	<script src="js/bootstrap/bootstrap.min.js"></script>
+	<!-- All Plugins js -->
+	<script src="js/others/plugins.js"></script>
+	<!-- Active JS -->
+	<script src="js/active.js"></script>
+
+</body>
+
+<script type="text/javascript" th:inline="javascript">
+/* <![CDATA[ */
+var deleteResult ='<c:out value="${deleteResult}"/>';
+if(deleteResult=='fail'){
+	alert('예약/구매 진행중인 고객이 있는 상품입니다');
+}
+var bookResult = '<c:out value="${result}"/>'; 
+if(bookResult=='fail'){
+	alert('예약 진행중인 상품입니다');
+}
+	function update() {
+		if (confirm("상품을 수정하시겠습니까?")) {
+			location.href = "/Travel/packUpdate?pack_info_no="+/*[[${packInfo.packInfo.pack_info_no}]]*/;
+
+		} else {
+			alert('취소하셨습니다');
+		}
+	}
+	
+	function dlt() {
+
+		if (confirm("상품 구매 진행중인 고객이 있을 시 삭제가 불가합니다. \n상품을 삭제하시겠습니까??")) {
+			location.href = "/Travel/packDelete?pack_info_no="+/*[[${packInfo.packInfo.pack_info_no}]]*/;
+
+		} else {
+			alert('취소하셨습니다');
+		}
+	}
+	
+	function bookBtn() {
+
+		if (confirm("상품을 예약하시겠습니까?")) {
+			location.href = "/Travel/packBook?pack_info_no="+/*[[${packInfo.packInfo.pack_info_no}]]*/;
+
+		} else {
+			alert('취소하셨습니다');
+		}
+	}
+	
+/* ]]> */
+</script>
+
+
+</html>
+
+

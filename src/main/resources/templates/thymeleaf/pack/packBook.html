@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+<!-- Title -->
+<title>Go Travel</title>
+
+<!-- Favicon -->
+<link rel="icon" href="img/core-img/favicon.ico">
+
+<!-- Core Stylesheet -->
+<link href="style.css" rel="stylesheet">
+
+<!-- Responsive CSS -->
+<link href="css/responsive/responsive.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<!-- Preloader -->
+	<div id="preloader">
+		<div class="dorne-load"></div>
+	</div>
+
+	<!-- ***** Header Area Start ***** -->
+	<header class="header_area" id="header">
+		<div class="container-fluid h-100">
+			<div class="row h-100">
+				<div class="col-12 h-100">
+					<nav class="h-100 navbar navbar-expand-lg">
+						<a class="navbar-brand" href="index"><img
+							src="img/core-img/logo.png" alt=""></a>
+						<button class="navbar-toggler" type="button"
+							data-toggle="collapse" data-target="#dorneNav"
+							aria-controls="dorneNav" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="fa fa-bars"></span>
+						</button>
+						<!-- Nav -->
+						<div class="collapse navbar-collapse" id="dorneNav">
+							<ul class="navbar-nav mr-auto" id="dorneMenu">
+								<li class="nav-item active"><a class="nav-link"
+									href="index">메인 <span class="sr-only">(current)</span></a></li>
+								<li class="nav-item active dropdown"><a
+									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+									role="button" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">플랜 여행<i class="fa fa-angle-down"
+										aria-hidden="true"></i></a>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+										<a class="dropdown-item" href="planAdd">플랜등록</a> <a
+											class="dropdown-item" href="planList">플랜찾기</a> <a
+											class="dropdown-item" href="#">예비</a>
+									</div></li>
+								<li class="nav-item active dropdown"><a
+									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+									role="button" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">패키지 여행<i class="fa fa-angle-down"
+										aria-hidden="true"></i></a>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+										<a class="dropdown-item" href="packList">패키지 찾기</a> <a
+											class="dropdown-item" href="#">예비</a>
+									</div></li>
+								<li class="nav-item"><a class="nav-link" href="#">후기</a></li>
+							</ul>
+							<div th:if="${session.LOGINID == null}">
+								<!-- Admin Signin btn -->
+								<div class="dorne-signin-btn">
+									<a href="/adminLogin">관리자</a>
+								</div>
+								<!-- user/company 통합 로그인  -->
+								<div class="dorne-add-listings-btn">
+									<a href="login" class="btn dorne-btn">사용자 로그인</a>
+									<!-- <a href="/Travel/login" class="btn dorne-btn">사용자 로그인</a> -->
+								</div>
+							</div>
+							<div th:if="${session.LOGINID != null}">
+								<div class="dorne-signout-btn">
+									<span th:text="${session.LOGINID}" style="color: yellow"></span>
+									<span style="color: white">님 로그인중</span> <a
+										href="/Travel/userLogout">로그아웃</a>
+								</div>
+							</div>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- ***** Header Area End ***** -->
+
+	<!-- ***** Breadcumb Area Start ***** -->
+	<div class="breadcumb-area bg-img bg-overlay"
+		style="background-image: url(img/bg-img/hero-1.jpg)"></div>
+	<!-- ***** Breadcumb Area End ***** -->
+
+	<!-- ***** Listing Destinations Area Start ***** -->
+	<section class="dorne-listing-destinations-area section-padding-100-50">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="section-heading dark text-center">
+						<span></span>
+						<h4>상품 예약 정보 입력</h4>
+					</div>
+				</div>
+			</div>
+			<div>
+<form id="packBook" name="packBook" action="" method="post" onsubmit="return bookInfoSubmit()">
+<input type="hidden" name="user_id" value="${LOGINID}">
+<input type="hidden" name="pack_info_no" value="${packInfo.packInfo.pack_info_no}">
+
+	<table border="1">
+		<tr>
+			<td>신청자</td>
+			<td>${LOGINID}</td>
+		</tr>
+		<tr>
+			<td>신청자 연락처</td>
+			<td><input type="text" id="pack_book_tell" name="pack_book_tell" placeholder="-는 빼고 입력해주세요"></td>
+		</tr>
+		<tr>
+			<td>신청상품번호</td>
+			<td th:value="${packInfo.packInfo.pack_info_no}"></td>
+		</tr>
+		<tr>
+			<td>신청상품명</td>
+			<td th:value="${packInfo.packInfo.pack_info_title}"></td>
+		</tr>
+		<tr>
+			<td>여행일정</td>
+			<td>${packInfo.packInfo.pack_info_start_date} ~ ${packInfo.packInfo.pack_info_end_date}</td>
+		</tr>
+		<tr>
+			<td>모집인원</td>
+			<td>${packInfo.packInfo.pack_info_person_number}</td>
+		</tr>	
+		<tr>
+			<td>가격</td>
+			<td>
+				성인 :  ${packInfo.packPriceInfo.pack_price_adult}<br>
+				초중고학생 : ${packInfo.packPriceInfo.pack_price_child} <br>
+				아동 : ${packInfo.packPriceInfo.pack_price_baby}<br>
+			</td>
+		</tr>
+		<tr>
+			<td>성인</td>
+			<td><input type="number" class="form-control num_only num_comma num_sum" id="pack_book_adult" name="pack_book_adult" value="0">명</td>
+		</tr>
+		<tr>
+			<td>초중고학생</td>
+			<td><input type="number" class="form-control num_only num_comma num_sum" id="pack_book_child" name="pack_book_child" value="0">명</td>
+		</tr>
+		<tr>
+			<td>아동</td>
+			<td><input type="number" class="form-control num_only num_comma num_sum" id="pack_book_baby" name="pack_book_baby" value="0">명</td>
+		</tr>
+		<tr>
+			<td>전체인원</td>
+		   	<td class="pl-4" colspan="2">
+		    	<input type="text" class="form-control text-right font-weight-bold num_only num_comma num_sum" id="total" name="total" readonly>
+		    </td>
+		</tr>
+		<tr>
+			<td>결제금액</td>
+		   	<td class="pl-4" colspan="2">
+		    	<input type="text" class="form-control text-right font-weight-bold num_only num_comma num_sum" id="pack_book_price" name="pack_book_price" readonly>
+		    </td>
+		</tr>		
+		<tr>
+			<td>예약신청</td>
+			<td><input type="submit" value="Submit"></td>
+		</tr>
+	</table>
+</form>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- ****** Footer Area Start ****** -->
+	<footer class="dorne-footer-area">
+		<div class="container-fluid">
+			<div class="row">
+				<div
+					class="col-12 d-md-flex align-items-center justify-content-between">
+					<div class="footer-text">
+						<p>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							Copyright &copy;
+							<script>document.write(new Date().getFullYear());</script>
+							All rights reserved | This template is made with <i
+								class="fa fa-heart-o" aria-hidden="true"></i> by <a
+								href="https://colorlib.com" target="_blank">Colorlib</a>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						</p>
+					</div>
+					<div class="footer-social-btns">
+						<a href="#"><i class="fa fa-linkedin" aria-haspopup="true"></i></a>
+						<a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a> <a
+							href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a> <a
+							href="#"><i class="fa fa-twitter" aria-haspopup="true"></i></a> <a
+							href="#"><i class="fa fa-facebook" aria-haspopup="true"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- ****** Footer Area End ****** -->
+
+	<!-- jQuery-2.2.4 js -->
+	<script src="js/jquery/jquery-2.2.4.min.js"></script>
+	<!-- Popper js -->
+	<script src="js/bootstrap/popper.min.js"></script>
+	<!-- Bootstrap-4 js -->
+	<script src="js/bootstrap/bootstrap.min.js"></script>
+	<!-- All Plugins js -->
+	<script src="js/others/plugins.js"></script>
+	<!-- Active JS -->
+	<script src="js/active.js"></script>
+
+</body>
+
+<script type="text/javascript">
+
+$(function(){
+
+	$('input.num_only').on('keyup',function(){
+	          var cnt = $(".exam input.num_sum").length;     
+	          console.log(cnt);
+	          
+	          var adultPrice = '<c:out value="${packInfo.packPriceInfo.pack_price_adult}"/>'; 
+	          var childPrice = '<c:out value="${packInfo.packPriceInfo.pack_price_child}"/>'; 
+	          var babyPrice = '<c:out value="${packInfo.packPriceInfo.pack_price_baby}"/>'; 
+        
+	  for( var i=1; i< cnt; i++){
+	     var sum = parseInt($(this).val() || 0 );
+	     sum++
+	    console.log(sum);
+	  }
+	  
+	            var sum1 = parseInt($("#pack_book_adult").val() || 0 ); // input 값을 가져오며 계산하지만 값이 없을경우 0이 대입된다  뒷부분에 ( || 0 ) 없을경우 합계에 오류가 생겨 NaN 값이 떨어진다
+	            var sum2 = parseInt($("#pack_book_child").val() || 0);
+	            var sum3 = parseInt($("#pack_book_baby").val() || 0);
+
+
+	            var sum = sum1 + sum2 + sum3;
+	            var sumPrice = (sum1*adultPrice) + (sum2*childPrice) + (sum3*babyPrice);
+	            console.log(sum);
+	            $("#total").val(sum);
+	            $("#pack_book_price").val(sumPrice);
+	        });
+
+	});
+	
+function bookInfoSubmit() {
+	var totalPerson = '<c:out value="${packInfo.packInfo.pack_info_person_number}"/>'; 
+    var myform = document.forms['packBook'];
+
+    {
+	    if( myform['pack_book_tell'].value.length < 1) {
+	        alert( '예약 신청자 연락처를 입력해주세요');
+	        return false;
+	    }
+
+	    if( myform['pack_book_price'].value.length < 1) {
+	        alert( '인원 수를 확인해주세요');
+	        return false;
+	    }
+
+	    if( parseInt(myform['total'].value) > parseInt(totalPerson)) {
+	        alert( '패키지 모집 인원보다 더 신청할 수 없습니다');
+	        return false;
+	    }
+    }
+
+    return true;
+}
+</script>
+
+</html>
