@@ -16,7 +16,7 @@ public interface UserMapper {
 	int userImgUpdate(UserDTO userDTO);
 	int userLogin(UserDTO userDTO);
 	int userUpdate(UserDTO userDTO);
-	int userAuth(String user_id);
+	int userAuth(String user_id,String admin_id);
 	int userDelete(String user_id);
 	List<UserDTO> userList(PageMaker pageMaker);
 	// 페이징처리를위한

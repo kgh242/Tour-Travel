@@ -44,6 +44,7 @@ public class CompanyController {
 	public String companyList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model, PageMaker pageMaker) {
 		pageMaker.setCurrentPage(currentPage);
 		List<CompanyDTO> companyList = companyService.companyList(pageMaker);
+		System.out.println(companyList);
 		model.addAttribute("companyList", companyList);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("pagePerBlock", pageMaker.getPagePerBlock());
@@ -68,7 +69,7 @@ public class CompanyController {
 		companyDTO.setAdmin_id(session.getAttribute("LOGINID").toString());
 		System.out.println(companyDTO.getAdmin_id() + "<<<LOGINID");
 		companyService.companyAuth(companyDTO);
-		return "redirect:/thymeleaf/list/companyList";
+		return "redirect:/Travel/companyList";
 	}
 	
 	@RequestMapping(value = "/companyLogin", method = RequestMethod.GET)

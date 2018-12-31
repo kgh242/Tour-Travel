@@ -40,8 +40,8 @@
 					<a href="${pageContext.request.contextPath}/Travel/companyAuthInfo?company_id=${company.company_id}">승인</a>
 				</td>
 				<td>
-					<c:if test="${company.company_auth eq 'true'}">승인됨</c:if>
-					<c:if test="${company.company_auth eq 'false'}">미승인</c:if>
+					<c:if test="${company.company_auth}">승인</c:if>
+					<c:if test="${company.company_auth}">미승인</c:if>
 				</td>
 			</tr>
 		</c:forEach>

@@ -46,7 +46,10 @@
     </update>
 
 	<update id="userAuth" parameterType="java.lang.String">
-		UPDATE member_user SET user_auth_date = now(), user_auth = '0'
+		UPDATE member_user 
+		   SET user_auth_date = now()
+			 , user_auth = '1'
+		     , admin_id = #{admin_id}
 		 WHERE user_id = #{user_id}
 	</update>
 	

@@ -131,6 +131,7 @@
 					<td>승인자아이디</td>
 					<td>보유포인트</td>
 					<td>탈주이력</td>
+					<td>인증버튼</td>
 				</tr>
 			   </thead>
 			   <tbody th:each="user:${userList}">
@@ -179,10 +180,15 @@
 						<span th:if="${user.admin_id == null}">
 							승인자정보없음
 						</span>
-						<span th:if="${user.admin_id != null}" th:text="${user.user_auth_date}"></span>
+						<span th:if="${user.admin_id != null}" th:text="${user.admin_id}"></span>
 					</td>
 					<td th:text="${user.user_point}"></td>
 					<td th:text="${user.user_escape}"></td>
+					<td>
+						<span th:if="${user.user_auth.toString().equals('false')}">
+							<button><a th:href="@{'/Travel/userAuth?user_id=' + ${user.user_id}}">승인</a></button>
+						</span>
+					</td>
 				</tr>
 			   </tbody>
 			</table>

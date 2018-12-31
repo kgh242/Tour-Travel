@@ -216,11 +216,11 @@ public class UserService {
 	}
 	
 	// 유저 인증신청
-	public int userAuth(String user_id) {
+	public int userAuth(String user_id,String admin_id) {
 		System.out.println("userAuth 서비스 계층......UserService.java");
 		int result = 0;
 		try {
-			result = userMapper.userAuth(user_id);
+			result = userMapper.userAuth(user_id, admin_id);
 		} catch (Error e) {
 			System.out.println("userAuth 서비스 계층 에러발생......UserService.java : " + e);
 		}

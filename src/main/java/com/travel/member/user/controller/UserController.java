@@ -105,15 +105,17 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/userAuth", method = RequestMethod.GET)
-	public String userAuth(@RequestParam(value = "user_id") String user_id) {
+	public String userAuth(@RequestParam(value = "user_id") String user_id,HttpSession session) {
 		System.out.println("user 인증신청......UserController.java");
-		int result = userService.userAuth(user_id);
+		String admin_id = (String) session.getAttribute("LOGINID");
+		
+		int result = userService.userAuth(user_id, admin_id);
 		if(result==1) {
 			System.out.println("user 인증신청성공 ......UserController.java");
 		}else {
 			System.out.println("user 인증신청실패 ......UserController.java");
 		}
-		return "redirect:/userGetInfo";
+		return "redirect:/Travel/userList";
 	}
 
 	@RequestMapping(value = "/userDelete", method = RequestMethod.GET)

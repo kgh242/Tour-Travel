@@ -143,8 +143,8 @@
 							<a th:href="@{'/Travel/companyAuthInfo?company_id=' + ${company.company_id}}">승인</a>
 						</td>
 						<td>
-							<span th:if="${company.company_auth eq 'true'}">승인됨</span>
-							<span th:if="${company.company_auth eq 'false'}">미승인</span>
+							<span th:if="${company.company_auth.toString().equals('true')}">승인됨</span>
+							<span th:if="${company.company_auth.toString().equals('false')}">미승인</span>
 						</td>
 					</tr>
 				</tbody>
