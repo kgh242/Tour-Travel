@@ -4,6 +4,8 @@ package com.travel.plan.dto;
 
 public class PlanDTO {
 	private int plan1_no;
+	private String plan1_air;
+	private String plan1_title;
 	private String user_id;
 	private String plan1_user_ip;
 	private String plan1_country;
@@ -18,13 +20,35 @@ public class PlanDTO {
 	private int plan1_current_person;
 	@Override
 	public String toString() {
-		return "PlanDTO [plan1_no=" + plan1_no + ", user_id=" + user_id + ", plan1_user_ip=" + plan1_user_ip
+		return "PlanDTO [plan1_no=" + plan1_no + ", plan1_air=" + plan1_air + ", plan1_title=" + plan1_title + ",user_id=" + user_id + ", plan1_user_ip=" + plan1_user_ip
 				+ ", plan1_country=" + plan1_country + ", plan1_city=" + plan1_city + ", plan1_info=" + plan1_info
 				+ ", plan1_start_date=" + plan1_start_date + ", plan1_end_date=" + plan1_end_date + ", plan1_budget="
 				+ plan1_budget + ", plan1_closing_date=" + plan1_closing_date + ", plan1_age=" + plan1_age
 				+ ", plan1_person_number=" + plan1_person_number + ", plan1_current_person=" + plan1_current_person
 				+ "]";
 	}
+	
+	
+	public String getPlan1_air() {
+		return plan1_air;
+	}
+
+
+	public void setPlan1_air(String plan1_air) {
+		this.plan1_air = plan1_air;
+	}
+
+
+	public String getPlan1_title() {
+		return plan1_title;
+	}
+
+
+	public void setPlan1_title(String plan1_title) {
+		this.plan1_title = plan1_title;
+	}
+
+
 	public int getPlan1_no() {
 		return plan1_no;
 	}

@@ -113,19 +113,16 @@
 							<td>숙소</td>
 							<td>
 								<!-- packHotelDTO --> <input type="text" name="pack_hotel_name">
-								<input type="date" name="pack_hotel_start_date">~<input
-								type="date" name="pack_hotel_end_date"> <input
-								type="button" id="MulitHotel" name="MulitHotel"
-								onclick="MulitHotelRow()" value="숙소 추가">
+								<input type="date" name="pack_hotel_start_date">~<input type="date" name="pack_hotel_end_date"> 
+								<input type="button" id="MulitHotel" name="MulitHotel" onclick="MulitHotelRow()" value="숙소 추가">
 								<table id="multiHotel"></table>
 							</td>
 						</tr>
 						<tr>
 							<td>숙소이미지</td>
 							<td>
-								<!-- 배열 --> <input type="file" name="hotelImgFileName" /> <input
-								type="button" id="MulitHotelImg" name="MulitHotelImg"
-								onclick="MulitHotelImgRow()" value="이미지 추가 업로드">
+								<!-- 배열 --> <input type="file" name="hotelImgFileName" /> 
+								<input type="button" id="MulitHotelImg" name="MulitHotelImg" onclick="MulitHotelImgRow()" value="이미지 추가 업로드">
 								<table id="multiHotelImg"></table>
 							</td>
 						</tr>
@@ -133,97 +130,78 @@
 						<tr>
 							<!-- packDTO -->
 							<td>전체 코스</td>
-							<td><textarea rows="4" cols="80" id="pack_info_course"
-									name="pack_info_course"></textarea></td>
+							<td><textarea rows="4" cols="80" id="pack_info_course" name="pack_info_course"></textarea></td>
 						</tr>
 						<tr>
 							<td>일별 상세 스케줄</td>
 							<td>
-								<!-- packScheduleDTO--> <input type="date"
-								id="pack_schedule_date" name="pack_schedule_date"><br>
-								<textarea rows="4" cols="65" id="pack_schedule_contents"
-									name="pack_schedule_contents"></textarea> <input type="button"
-								id="MultiSchedule" name="MultiSchedule"
-								onclick="MultiScheduleRow()" value="일정추가">
+								<!-- packScheduleDTO--> <input type="date" id="pack_schedule_date" name="pack_schedule_date"><br>
+								<textarea rows="4" cols="65" id="pack_schedule_contents" name="pack_schedule_contents"></textarea> 
+								<input type="button" id="MultiSchedule" name="MultiSchedule" onclick="MultiScheduleRow()" value="일정추가">
 								<table id="multiSchedule"></table>
 							</td>
 						</tr>
 						<tr>
 							<td>상세스케줄이미지</td>
 							<td>
-								<!-- 배열 --> <input type="file" name="scheduleFileName" /> <input
-								type="button" id="MultiScheduleImg" name="MultiScheduleImg"
-								onclick="MultiScheduleImgRow()" value="이미지 추가 업로드">
+								<!-- 배열 --> <input type="file" name="scheduleFileName" /> 
+								<input type="button" id="MultiScheduleImg" name="MultiScheduleImg" onclick="MultiScheduleImgRow()" value="이미지 추가 업로드">
 								<table id="multiScheduleImg"></table>
 							</td>
 						</tr>
 						<tr>
 							<td>방문관광지</td>
 							<td>
-								<!-- packLandmarkDTO --> <input type="text"
-								id="pack_landmark_code" name="pack_landmark_code"
-								placeholder="관광지이름입력"> <input type="date"
-								id="pack_tour_date" name="pack_tour_date"><br> <textarea
-									rows="4" cols="65" id="pack_tour_contents"
-									name="pack_tour_contents"></textarea> <input type="button"
-								id="MultiLandmark" name="MultiLandmark"
-								onclick="MultiLandmarkRow()" value="관광지추가">
+								<!-- packLandmarkDTO --> <input type="text" id="pack_landmark_code" name="pack_landmark_code" placeholder="관광지이름입력"> 
+								<input type="date" id="pack_tour_date" name="pack_tour_date"><br> 
+								<textarea rows="4" cols="65" id="pack_tour_contents" name="pack_tour_contents"></textarea> 
+								<input type="button" id="MultiLandmark" name="MultiLandmark" onclick="MultiLandmarkRow()" value="관광지추가">
 								<table id="multiLandmark"></table>
 							</td>
 						</tr>
 						<tr>
 							<td>관광지이미지</td>
 							<td>
-								<!-- 배열 --> <input type="file" name="landMarkFileName" /> <input
-								type="button" id="MultiLandmarkImg" name="MultiLandmarkImg"
-								onclick="MultiLandmarkImgRow()" value="이미지 추가 업로드">
+								<!-- 배열 --> <input type="file" name="landMarkFileName" /> 
+								<input type="button" id="MultiLandmarkImg" name="MultiLandmarkImg" onclick="MultiLandmarkImgRow()" value="이미지 추가 업로드">
 								<table id="multiLandmarkImg"></table>
 							</td>
 						</tr>
 						<tr>
 							<!-- packDTO -->
 							<td>모집인원</td>
-							<td><input type="text" id="pack_info_person_number"
-								name="pack_info_person_number">명</td>
+							<td><input type="text" id="pack_info_person_number" name="pack_info_person_number">명</td>
 						</tr>
 						<tr>
 							<!-- packPriceDTO -->
 							<td>이용요금</td>
-							<td>성인 : <input type="text" id="pack_price_adult"
-								name="pack_price_adult"> 청소년 : <input type="text"
-								id="pack_price_child" name="pack_price_child"> 유아 : <input
-								type="text" id="pack_price_baby" name="pack_price_baby">
+							<td>
+								성인 : <input type="text" id="pack_price_adult" name="pack_price_adult"> 청소년 : <input type="text" id="pack_price_child" name="pack_price_child"> 
+								유아 : <input type="text" id="pack_price_baby" name="pack_price_baby">
 							</td>
 						</tr>
 						<tr>
 							<td>출발 전 참고사항</td>
-							<td>출발 전 참고사항 내용 <br> <textarea rows="4" cols="80"
-									id="pack_notice_before_contents"
-									name="pack_notice_before_contents"></textarea>
+							<td>출발 전 참고사항 내용 <br> <textarea rows="4" cols="80" id="pack_notice_before_contents" name="pack_notice_before_contents"></textarea>
 							</td>
 						</tr>
 						<tr>
 							<td>출발 후 참고사항</td>
-							<td>출발 후 참고사항 내용 <br> <textarea rows="4" cols="80"
-									id="pack_notice_after_contents"
-									name="pack_notice_after_contents"></textarea>
+							<td>출발 후 참고사항 내용 <br> 
+								<textarea rows="4" cols="80" id="pack_notice_after_contents" name="pack_notice_after_contents"></textarea>
 							</td>
 						</tr>
 						<tr>
 							<!-- packDTO -->
 							<td>신청마감일자</td>
-							<td><input type="datetime-local" id="pack_info_closing_date"
-								name="pack_info_closing_date" value="2018-01-01T06:30"></td>
+							<td><input type="datetime-local" id="pack_info_closing_date" name="pack_info_closing_date" value="2018-01-01T06:30"></td>
 						</tr>
 						<tr>
 							<td>광고신청</td>
 							<td>
-								<!-- packDTO --> <!-- 이미지 단일값 --> <input type="radio"
-								name="pack_info_sale" value="true"
-								onClick="this.form.adfile.disabled=false" checked>광고 신청<br>
-								<input type="file" name="adfile"><br> <input
-								type="radio" name="pack_info_sale" value="false"
-								onClick="this.form.adfile.disabled=true">광고 신청하지않음
+								<!-- packDTO --> <!-- 이미지 단일값 --> <input type="radio" name="pack_info_sale" value="true" onClick="this.form.adfile.disabled=false" checked>광고 신청<br>
+								<input type="file" name="adfile"><br> 
+								<input type="radio" name="pack_info_sale" value="false" onClick="this.form.adfile.disabled=true">광고 신청하지않음
 							</td>
 						</tr>
 						<tr>

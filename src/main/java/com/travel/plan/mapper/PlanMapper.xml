@@ -12,6 +12,7 @@
  			, plan1_country
  			, plan1_city
  			, plan1_info
+ 			, plan1_air
  			, plan1_start_date
  			, plan1_end_date
  			, plan1_budget
@@ -24,6 +25,7 @@
  			, #{plan1_country}
  			, #{plan1_city}
  			, #{plan1_info}
+ 			, '입력받지않음'
  			, #{plan1_start_date}
  			, #{plan1_end_date}
  			, #{plan1_budget}
@@ -44,10 +46,104 @@
  			, #{plan1_no}
  			, #{plan1_interest})
  	</insert>
- 
+ 	
+ 	<insert id="planHotelAdd" parameterType="com.travel.plan.dto.PlanHotelDTO">
+ 		INSERT INTO plan2_travel_hotel
+ 			(plan1_no,
+ 			plan2_hotel_date,
+ 			plan2_hotel_check_in,
+ 			plan2_hotel_check_out,
+ 			plan2_hotel_name,
+ 			plan2_hotel_address,
+ 			plan2_hotel_price)
+ 		VALUES
+ 			(#{plan1_no},
+ 			now(),
+ 			#{plan2_hotel_check_in},
+ 			#{plan2_hotel_check_out},
+ 			#{plan2_hotel_name},
+ 			#{plan2_hotel_address},
+ 			#{plan2_hotel_price})
+ 	</insert>
+ 	
+ 	<insert id="planLandmarkAdd" parameterType="com.travel.plan.dto.PlanLandmarkDTO">
+ 	 	INSERT INTO plan2_travel_landmark
+ 			(plan1_no,
+ 			plan2_landmark_date,
+ 			plan2_landmark_day,
+ 			plan2_landmark_address,
+ 			plan2_landmark_contents,
+ 			landmark_code,
+ 			plan2_landmark_price
+ 			)
+ 		VALUES
+ 			(#{plan1_no},
+ 			now(),
+ 			#{plan2_landmark_day},
+ 			#{plan2_landmark_address},
+ 			#{plan2_landmark_contents},
+ 			#{landmark_code},
+ 			#{plan2_landmark_price}
+ 			)
+ 	</insert>
+ 	
+ 	<insert id="planScheduleAdd" parameterType="com.travel.plan.dto.PlanScheduleDTO">
+ 	 	INSERT INTO plan2_travel_schedule
+ 			(plan1_no,
+ 			plan2_schedule_date,
+ 			plan2_schedule_day,
+ 			plan2_schedule_contents
+ 			)
+ 		VALUES
+ 			(#{plan1_no},
+ 			now(),
+ 			#{plan2_schedule_day},
+ 			#{plan2_schedule_contents}
+ 			)
+ 	</insert>
+ 	
+ 	<update id="planAirUpdate" parameterType="Map">
+ 		UPDATE plan1_travel SET plan1_air=#{plan1_air} WHERE plan1_no=#{plan1_no}
+ 	</update>
+ 	
+ 	<select id="planGetInfo" parameterType="java.lang.String" resultType="com.travel.plan.dto.PlanDTO">
+ 		SELECT * FROM plan1_travel WHERE plan1_no = #{plan1_no}
+ 	</select>
+ 	
+ 	<select id="planGetHotelInfo" parameterType="java.lang.String" resultType="com.travel.plan.dto.PlanHotelDTO">
+ 		SELECT * FROM plan2_travel_hotel WHERE plan1_no = #{plan1_no}
+ 	</select>
+
+ 	<select id="planGetLandmarkInfo" parameterType="java.lang.String" resultType="com.travel.plan.dto.PlanLandmarkDTO">
+ 		SELECT * FROM plan2_travel_landmark WHERE plan1_no = #{plan1_no}
+ 	</select>
+ 	
+  	<select id="planGetScheduleInfo" parameterType="java.lang.String" resultType="com.travel.plan.dto.PlanScheduleDTO">
+  		SELECT * FROM plan2_travel_schedule WHERE plan1_no = #{plan1_no}
+ 	</select>
+ 	 
  	<select id="planList" parameterType="java.lang.String" resultType="com.travel.plan.dto.PlanDTO">
  		SELECT *
  		FROM plan1_travel
  	</select>
+ 	
+ 	<delete id="planDeleteScheduleInfo" parameterType="java.lang.String">
+ 		DELETE FROM plan2_travel_schedule WHERE plan1_no = #{plan1_no}
+ 	</delete>
+ 	
+ 	<delete id="planDeleteLandmarkInfo" parameterType="java.lang.String">
+ 		DELETE FROM plan2_travel_landmark WHERE plan1_no = #{plan1_no}
+ 	</delete>
+ 	
+ 	<delete id="planDeleteHotelInfo" parameterType="java.lang.String">
+ 		DELETE FROM plan2_travel_hotel WHERE plan1_no = #{plan1_no}
+ 	</delete>
+ 	
+ 	
+
+
+
+	  
+
  	
  </mapper>
