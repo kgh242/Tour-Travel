@@ -135,6 +135,7 @@
 
                         <div class="overview-content mt-50" id="overview">
                             <h3>플랜리스트</h3>
+                            <form action="/planApply" method="POST">
                             <table border="1">
                             	<tr>
                             		<td>등록자</td>
@@ -148,6 +149,7 @@
                             		<td>연령대</td>
                             		<td>모집인원</td>
                             		<td>현재인원</td>
+                            		<td>신청</td>
                             	</tr>
                             <tbody th:each="plan:${planList}">
                             	<tr>
@@ -162,9 +164,11 @@
                             		<td th:text="${plan.plan1_age}"></td>
                             		<td th:text="${plan.plan1_person_number}"></td>
                             		<td th:text="${plan.plan1_current_person}"></td>
+                            		<td><input class="btn btn-primary btn-block" type="submit" value="신청"></td>
                             	</tr>
                             </tbody>
                             </table>
+                            </form>
                         </div>
 
                         <div class="listing-menu-area mt-100" id="menu">

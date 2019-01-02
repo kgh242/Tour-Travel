@@ -58,5 +58,7 @@ public class PlanController {
 		return "thymeleaf/plan/planList";
 	}
 	
+/*	@RequestMapping(value = "/planApply", method =RequestMethod.POST)
+	public String*/
 	
 }
