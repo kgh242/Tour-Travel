@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-
+import com.travel.plan.dto.PlanApplyDTO;
 import com.travel.plan.dto.PlanDTO;
 import com.travel.plan.dto.PlanHotelDTO;
 import com.travel.plan.dto.PlanInterestDTO;
@@ -17,6 +17,8 @@ public interface PlanMapper {
 	int insertPlan(PlanDTO planDTO);
 	int insertPlanInterest(PlanInterestDTO planInterestDTO);
 	List<PlanDTO> planList(PlanDTO planDTO);
+	int applyPlan(PlanApplyDTO planApplyDTO);
+	
 	PlanDTO planGetInfo(String plan1_no);
 	List<PlanHotelDTO> planGetHotelInfo(String plan1_no);
 	List<PlanLandmarkDTO> planGetLandmarkInfo(String plan1_no);

@@ -7,8 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.travel.plan.dto.PlanApplyDTO;
 import com.travel.plan.dto.PlanDTO;
 import com.travel.plan.dto.PlanHotelDTO;
 import com.travel.plan.dto.PlanInterestDTO;
@@ -38,6 +38,10 @@ public class PlanService {
 	
 	public List<PlanDTO> planList(PlanDTO planDTO){
 		return planMapper.planList(planDTO);
+	}
+	
+	public int planApply(PlanApplyDTO planApplyDTO) {
+		return planMapper.applyPlan(planApplyDTO);
 	}
 	
 	public Map<String, Object> planGetInfo(String plan1_no) {

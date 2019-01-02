@@ -14,11 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.travel.pack.dto.PackHotelDTO;
-import com.travel.pack.dto.PackLandmarkDTO;
-import com.travel.pack.dto.PackScheduleDTO;
+import com.travel.plan.dto.PlanApplyDTO;
 import com.travel.plan.dto.PlanDTO;
 import com.travel.plan.dto.PlanHotelDTO;
 import com.travel.plan.dto.PlanInterestDTO;
@@ -63,6 +60,15 @@ public class PlanController {
 		List<PlanDTO> planList = planService.planList(planDTO);
 		model.addAttribute("planList", planList);
 		return "thymeleaf/plan/planList";
+	}
+	
+	@RequestMapping(value = "/planApply", method =RequestMethod.GET)
+	public String planApply(@RequestParam(value="plan1_no") int plan1_no,HttpSession session, PlanApplyDTO planApplyDTO) {
+		planApplyDTO.setUser_id(session.getAttribute("LOGINID").toString());
+		planApplyDTO.setPlan1_no(plan1_no);
+		System.out.println(planApplyDTO.getPlan1_no() +"<<plan1_no");
+		planService.planApply(planApplyDTO);
+		return "redirect:/Travel/planList";
 	}
 	
 

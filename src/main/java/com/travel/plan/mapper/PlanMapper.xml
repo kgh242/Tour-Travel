@@ -139,7 +139,18 @@
  		DELETE FROM plan2_travel_hotel WHERE plan1_no = #{plan1_no}
  	</delete>
  	
- 	
+ 	<insert id="applyPlan" parameterType="com.travel.plan.dto.PlanApplyDTO">
+ 		INSERT INTO plan_apply
+ 			(plan1_no
+ 			, user_id
+ 			, plan_apply_date
+ 			, plan_apply_state)
+ 		VALUES
+ 			(#{plan1_no}
+ 			, #{user_id}
+ 			, now()
+ 			, false);
+ 	</insert>
 
 
 

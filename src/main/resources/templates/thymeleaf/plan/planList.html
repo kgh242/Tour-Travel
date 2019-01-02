@@ -2,427 +2,162 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta charset="UTF-8">
+<meta name="description" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <!-- Title -->
-    <title>Go Travel</title>
+<!-- Title -->
+<title>Go Travel</title>
 
-    <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+<!-- Favicon -->
+<link rel="icon" href="img/core-img/favicon.ico">
 
-    <!-- Core Stylesheet -->
-    <link href="style.css" rel="stylesheet">
+<!-- Core Stylesheet -->
+<link href="style.css" rel="stylesheet">
 
-    <!-- Responsive CSS -->
-    <link href="css/responsive/responsive.css" rel="stylesheet">
+<!-- Responsive CSS -->
+<link href="css/responsive/responsive.css" rel="stylesheet">
 
 </head>
 
 <body>
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="dorne-load"></div>
-    </div>
+	<!-- ***** Header Area Start ***** -->
+	<div th:replace="thymeleaf/header :: header"></div>
+	<!-- ***** Header Area End ***** -->
+</body>
+</html>
 
-    <!-- ***** Header Area Start ***** -->
-   <div th:fragment="header">
-    <header class="header_area" id="header">
-        <div class="container-fluid h-100">
-            <div class="row h-100">
-                <div class="col-12 h-100">
-                    <nav class="h-100 navbar navbar-expand-lg">
-                        <a class="navbar-brand" href="index"><img src="img/core-img/logo.png" alt=""></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dorneNav" aria-controls="dorneNav" aria-expanded="false" aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>
-                        <!-- Nav -->
-                        <div class="collapse navbar-collapse" id="dorneNav">
-                            <ul class="navbar-nav mr-auto" id="dorneMenu">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="index">메인 <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item active dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">플랜 여행<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="planAdd">플랜등록</a>
-                                        <a class="dropdown-item" href="planList">플랜찾기</a>
-                                        <a class="dropdown-item" href="#">예비</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item active dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">패키지 여행<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="companyList">패키지 찾기</a>
-                                        <a class="dropdown-item" href="#">예비</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">후기</a>
-                                </li>
-                            </ul>
-                            <div th:if="${session.LOGINID == null}">
-	                            <!-- Admin Signin btn -->
-	                            <div class="dorne-signin-btn">
-	                                <a href="/adminLogin">관리자</a>
-	                            </div>
-	                            <!-- user/company 통합 로그인  -->
-	                            <div class="dorne-add-listings-btn">
-	                            	<a href="login" class="btn dorne-btn">사용자 로그인</a>
-	                                <!-- <a href="/Travel/login" class="btn dorne-btn">사용자 로그인</a> -->
-	                            </div>
-                            </div>
-                            <div th:if="${session.LOGINID != null}">
-                            	<div class="dorne-signout-btn">
-                            		<span th:text="${session.LOGINID}" style="color:yellow"></span>
-                            		<span style="color:white">님 로그인중</span>
-                            			<a href="/Travel/userLogout">로그아웃</a>
-                            	</div>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>      
-      </header>
-    </div>
-    <!-- ***** Header Area End ***** -->
-    </body>
-    </html>
+<!-- ***** Breadcumb Area Start ***** -->
+<div class="breadcumb-area height-700 bg-img bg-overlay"
+	style="background-image: url(img/bg-img/breadcumb.jpg)"></div>
+</div>
+<!-- ***** Breadcumb Area End ***** -->
 
-    <!-- ***** Breadcumb Area Start ***** -->
-    <div class="breadcumb-area height-700 bg-img bg-overlay" style="background-image: url(img/bg-img/breadcumb.jpg)">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcumb-content">
-                        <div class="map-ratings-review-area d-flex">
-                            <a href="#" class="d-flex align-items-center justify-content-center"><img src="img/core-img/map.png" alt=""></a>
-                            <a href="#">8.7</a>
-                            <a href="#">Write a review</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ***** Breadcumb Area End ***** -->
+<!-- ***** Single Listing Area Start ***** -->
+<section class="dorne-single-listing-area section-padding-100">
+	<div class="container">
+		<div class="row justify-content-center">
+			<!-- Single Listing Content -->
+			<h3>플랜리스트</h3>
+			<table border="1">
+				<tr>
+					<td>등록자</td>
+					<td>목적국가</td>
+					<td>목적도시</td>
+					<td>플랜방정보</td>
+					<td>여행시작날짜</td>
+					<td>여행종료날짜</td>
+					<td>예산</td>
+					<td>신청마감날짜</td>
+					<td>연령대</td>
+					<td>모집인원</td>
+					<td>신청</td>
+				</tr>
+				<tbody th:each="plan:${planList}">
+					<tr>
+						<td th:hidden="${plan.plan1_no}"></td>
+						<td th:text="${plan.user_id}"></td>
+						<td th:text="${plan.plan1_country}"></td>
+						<td th:text="${plan.plan1_city}"></td>
+						<td th:text="${plan.plan1_info}"></td>
+						<td th:text="${plan.plan1_start_date}"></td>
+						<td th:text="${plan.plan1_end_date}"></td>
+						<td th:text="${plan.plan1_budget}"></td>
+						<td th:text="${plan.plan1_closing_date}"></td>
+						<td th:text="${plan.plan1_age}"></td>
+						<td th:text="${plan.plan1_person_number}"></td>
+						<td><a
+							th:href="@{'/Travel/planApply?plan1_no=' + ${plan.plan1_no}}">신청</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</form>
+		</div>
+	</div>
 
-    <!-- ***** Single Listing Area Start ***** -->
-    <section class="dorne-single-listing-area section-padding-100">
-        <div class="container">
-            <div class="row justify-content-center">
-                <!-- Single Listing Content -->
-                <div class="col-12 col-lg-8">
-                    <div class="single-listing-content">
+	<!-- Listing Sidebar -->
+	<!-- 			<div class="col-12 col-md-8 col-lg-4">
+				<div class="listing-sidebar">
 
-                        <div class="listing-title">
-                            <h4>Burger House soho</h4>
-                            <h6>First Avenue no 83</h6>
-                        </div>
+					Listing Verify
+					<div class="listing-verify">
+						<a href="#" class="btn dorne-btn w-100"><i
+							class="fa fa-check pr-3"></i> Verified Listing</a>
+					</div>
 
-                        <div class="single-listing-nav">
-                            <nav>
-                                <ul id="listingNav">
-                                    <li class="active"><a href="#overview">Overview</a></li>
-                                    <li><a href="#menu">Menu</a></li>
-                                    <li><a href="#review">Reviews</a></li>
-                                    <li><a href="#lomap">Location on map</a></li>
-                                </ul>
-                            </nav>
-                        </div>
+					Book A Table Widget
+					<div class="book-a-table-widget mt-50">
+						<h6>Book A Table</h6>
+						<form action="#" method="get">
+							<select class="custom-select" id="destinations">
+								<option selected>Who will be arriving</option>
+								<option value="1">New York</option>
+								<option value="2">Latvia</option>
+								<option value="3">Dhaka</option>
+								<option value="4">Melbourne</option>
+								<option value="5">London</option>
+							</select> <select class="custom-select" id="catagories">
+								<option selected>Guest 1</option>
+								<option value="1">Guest 2</option>
+								<option value="3">Guest 3</option>
+								<option value="3">Guest 4</option>
+							</select>
+							<button type="submit" class="btn dorne-btn bg-white text-dark">
+								<i class="fa fa-search pr-2" aria-hidden="true"></i> Search
+							</button>
+						</form>
+					</div>
+				</div>
+			</div> -->
+</section>
+<!-- ***** Single Listing Area End ***** -->
 
-                        <div class="overview-content mt-50" id="overview">
-                            <h3>플랜리스트</h3>
-                            <form action="/planApply" method="POST">
-                            <table border="1">
-                            	<tr>
-                            		<td>등록자</td>
-                            		<td>목적국가</td>
-                            		<td>목적도시</td>
-                            		<td>플랜방정보</td>
-                            		<td>여행시작날짜</td>
-                            		<td>여행종료날짜</td>
-                            		<td>예산</td>
-                            		<td>신청마감날짜</td>
-                            		<td>연령대</td>
-                            		<td>모집인원</td>
-                            		<td>현재인원</td>
-                            		<td>신청</td>
-                            	</tr>
-                            <tbody th:each="plan:${planList}">
-                            	<tr>
-                            		<td th:text="${plan.user_id}"></td>
-                            		<td th:text="${plan.plan1_country}"></td>
-                            		<td th:text="${plan.plan1_city}"></td>
-                            		<td th:text="${plan.plan1_info}"></td>
-                            		<td th:text="${plan.plan1_start_date}"></td>
-                            		<td th:text="${plan.plan1_end_date}"></td>
-                            		<td th:text="${plan.plan1_budget}"></td>
-                            		<td th:text="${plan.plan1_closing_date}"></td>
-                            		<td th:text="${plan.plan1_age}"></td>
-                            		<td th:text="${plan.plan1_person_number}"></td>
-                            		<td th:text="${plan.plan1_current_person}"></td>
-                            		<td><input class="btn btn-primary btn-block" type="submit" value="신청"></td>
-                            	</tr>
-                            </tbody>
-                            </table>
-                            </form>
-                        </div>
+<!-- ****** Footer Area Start ****** -->
+<footer class="dorne-footer-area">
+	<div class="container-fluid">
+		<div class="row">
+			<div
+				class="col-12 d-md-flex align-items-center justify-content-between">
+				<div class="footer-text">
+					<p>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Copyright &copy;
+						<script>
+							document.write(new Date().getFullYear());
+						</script>
+						All rights reserved | This template is made with <i
+							class="fa fa-heart-o" aria-hidden="true"></i> by <a
+							href="https://colorlib.com" target="_blank">Colorlib</a>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					</p>
+				</div>
+				<div class="footer-social-btns">
+					<a href="#"><i class="fa fa-linkedin" aria-haspopup="true"></i></a>
+					<a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a> <a
+						href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a> <a
+						href="#"><i class="fa fa-twitter" aria-haspopup="true"></i></a> <a
+						href="#"><i class="fa fa-facebook" aria-haspopup="true"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- ****** Footer Area End ****** -->
 
-                        <div class="listing-menu-area mt-100" id="menu">
-                            <h4>Menu</h4>
-                            <!-- Single Listing Menu -->
-                            <div class="single-listing-menu d-flex justify-content-between">
-                                <!-- Listing Menu Title -->
-                                <div class="listing-menu-title">
-                                    <h6>Classic Burger</h6>
-                                    <p>Beef, salad, mustard, bacon, mayonnaise, spicey relish, cheese</p>
-                                </div>
-                                <!-- Listing Menu Price -->
-                                <div class="listing-menu-price">
-                                    <h6>$9,90</h6>
-                                </div>
-                            </div>
-                            <!-- Single Listing Menu -->
-                            <div class="single-listing-menu d-flex justify-content-between">
-                                <!-- Listing Menu Title -->
-                                <div class="listing-menu-title">
-                                    <h6>House Special Burger</h6>
-                                    <p>Beef, salad, mustard, bacon, mayonnaise, spicey relish, cheese</p>
-                                </div>
-                                <!-- Listing Menu Price -->
-                                <div class="listing-menu-price">
-                                    <h6>$9,90</h6>
-                                </div>
-                            </div>
-                            <!-- Single Listing Menu -->
-                            <div class="single-listing-menu d-flex justify-content-between">
-                                <!-- Listing Menu Title -->
-                                <div class="listing-menu-title">
-                                    <h6>Classic Burger</h6>
-                                    <p>Beef, salad, mustard, bacon, mayonnaise, spicey relish, cheese</p>
-                                </div>
-                                <!-- Listing Menu Price -->
-                                <div class="listing-menu-price">
-                                    <h6>$9,90</h6>
-                                </div>
-                            </div>
-                            <!-- Single Listing Menu -->
-                            <div class="single-listing-menu d-flex justify-content-between">
-                                <!-- Listing Menu Title -->
-                                <div class="listing-menu-title">
-                                    <h6>House Special Burger</h6>
-                                    <p>Beef, salad, mustard, bacon, mayonnaise, spicey relish, cheese</p>
-                                </div>
-                                <!-- Listing Menu Price -->
-                                <div class="listing-menu-price">
-                                    <h6>$9,90</h6>
-                                </div>
-                            </div>
-                            <a href="#" class="btn dorne-btn mt-50">+ See The Menu</a>
-                        </div>
-
-                        <div class="listing-reviews-area mt-100" id="review">
-                            <h4>reviews</h4>
-                            <div class="single-review-area">
-                                <div class="reviewer-meta d-flex align-items-center">
-                                    <img src="img/clients-img/1.jpg" alt="">
-                                    <div class="reviewer-content">
-                                        <div class="review-title-ratings d-flex justify-content-between">
-                                            <h5>“The best Burger in town”</h5>
-                                            <div class="ratings">
-                                                <img src="img/clients-img/star-fill.png" alt="">
-                                                <img src="img/clients-img/star-fill.png" alt="">
-                                                <img src="img/clients-img/star-fill.png" alt="">
-                                                <img src="img/clients-img/star-fill.png" alt="">
-                                                <img src="img/clients-img/star-fill.png" alt="">
-                                            </div>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac nibh sed mi ullamcorper rhoncus. Curabitur pulvinar vel augue sit amet vestibulum. Proin tempus lacus porta lorem blandit aliquam eget quis ipsum. Vivamus accumsan consequat ligula non volutpat.</p>
-                                    </div>
-                                </div>
-                                <div class="reviewer-name">
-                                    <h6>Christinne Smith</h6>
-                                    <p>12 November 2017</p>
-                                </div>
-                            </div>
-                            <div class="single-review-area">
-                                <div class="reviewer-meta d-flex align-items-center">
-                                    <img src="img/clients-img/1.jpg" alt="">
-                                    <div class="reviewer-content">
-                                        <div class="review-title-ratings d-flex justify-content-between">
-                                            <h5>“Quality ingredients”</h5>
-                                            <div class="ratings">
-                                                <img src="img/clients-img/star-fill.png" alt="">
-                                                <img src="img/clients-img/star-fill.png" alt="">
-                                                <img src="img/clients-img/star-fill.png" alt="">
-                                                <img src="img/clients-img/star-fill.png" alt="">
-                                                <img src="img/clients-img/star-unfill.png" alt="">
-                                            </div>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac nibh sed mi ullamcorper rhoncus. Curabitur pulvinar vel augue sit amet vestibulum. Proin tempus lacus porta lorem blandit aliquam eget quis ipsum. Vivamus accumsan consequat ligula non volutpat.</p>
-                                    </div>
-                                </div>
-                                <div class="reviewer-name">
-                                    <h6>Michael Brown</h6>
-                                    <p>12 November 2017</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="location-on-map mt-50" id="lomap">
-                            <h4>Location on map</h4>
-                            <div class="location-map">
-                                <div id="locationMap"></div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Listing Sidebar -->
-                <div class="col-12 col-md-8 col-lg-4">
-                    <div class="listing-sidebar">
-
-                        <!-- Listing Verify -->
-                        <div class="listing-verify">
-                            <a href="#" class="btn dorne-btn w-100"><i class="fa fa-check pr-3"></i> Verified Listing</a>
-                        </div>
-
-                        <!-- Book A Table Widget -->
-                        <div class="book-a-table-widget mt-50">
-                            <h6>Book A Table</h6>
-                            <form action="#" method="get">
-                                <select class="custom-select" id="destinations">
-                                <option selected>Who will be arriving</option>
-                                <option value="1">New York</option>
-                                <option value="2">Latvia</option>
-                                <option value="3">Dhaka</option>
-                                <option value="4">Melbourne</option>
-                                <option value="5">London</option>
-                            </select>
-                                <select class="custom-select" id="catagories">
-                                <option selected>Guest 1</option>
-                                <option value="1">Guest 2</option>
-                                <option value="3">Guest 3</option>
-                                <option value="3">Guest 4</option>
-                            </select>
-                                <button type="submit" class="btn dorne-btn bg-white text-dark"><i class="fa fa-search pr-2" aria-hidden="true"></i> Search</button>
-                            </form>
-                        </div>
-
-                        <!-- Opening Hours Widget -->
-                        <div class="opening-hours-widget mt-50">
-                            <h6>Opening Hours</h6>
-                            <ul class="opening-hours">
-                                <li>
-                                    <p>Monday</p>
-                                    <p>Closed</p>
-                                </li>
-                                <li>
-                                    <p>Tuesday</p>
-                                    <p>9 AM - 1 PM</p>
-                                </li>
-                                <li>
-                                    <p>Wednesday</p>
-                                    <p>9 AM - 1 PM</p>
-                                </li>
-                                <li>
-                                    <p>Thursday</p>
-                                    <p>9 AM - 1 PM</p>
-                                </li>
-                                <li>
-                                    <p>Friday</p>
-                                    <p>9 AM - 1 PM</p>
-                                </li>
-                                <li>
-                                    <p>Saturday</p>
-                                    <p>9 AM - 1 PM</p>
-                                </li>
-                                <li>
-                                    <p>Sunday</p>
-                                    <p>9 AM - 1 PM</p>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!-- Author Widget -->
-                        <div class="author-widget mt-50 d-flex align-items-center">
-                            <img src="img/clients-img/1.jpg" alt="">
-                            <div class="authors-name">
-                                <a href="#">James Smith</a>
-                                <p>The Author</p>
-                            </div>
-                        </div>
-
-                        <!-- Contact Form -->
-                        <div class="contact-form contact-form-widget mt-50">
-                            <h6>Contact Business</h6>
-                            <form action="#">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <input type="text" name="name" class="form-control" placeholder="Your Name">
-                                    </div>
-                                    <div class="col-12">
-                                        <input type="email" name="email" class="form-control" placeholder="Email Address">
-                                    </div>
-                                    <div class="col-12">
-                                        <textarea name="message" class="form-control" id="Message" cols="30" rows="10" placeholder="Your Message"></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <button type="submit" class="btn dorne-btn">Send</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ***** Single Listing Area End ***** -->
-
-    <!-- ****** Footer Area Start ****** -->
-    <footer class="dorne-footer-area">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 d-md-flex align-items-center justify-content-between">
-                    <div class="footer-text">
-                        <p>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </p>
-                    </div>
-                    <div class="footer-social-btns">
-                        <a href="#"><i class="fa fa-linkedin" aria-haspopup="true"></i></a>
-                        <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-twitter" aria-haspopup="true"></i></a>
-                        <a href="#"><i class="fa fa-facebook" aria-haspopup="true"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- ****** Footer Area End ****** -->
-
-    <!-- jQuery-2.2.4 js -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
-    <!-- Bootstrap-4 js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="js/others/plugins.js"></script>
-    <!-- Google Maps js -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk9KNSL1jTv4MY9Pza6w8DJkpI_nHyCnk"></script>
-    <script src="js/google-map/location-map-active.js"></script>
-    <!-- Active JS -->
-    <script src="js/active.js"></script>
+<!-- jQuery-2.2.4 js -->
+<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<!-- Popper js -->
+<script src="js/bootstrap/popper.min.js"></script>
+<!-- Bootstrap-4 js -->
+<script src="js/bootstrap/bootstrap.min.js"></script>
+<!-- All Plugins js -->
+<script src="js/others/plugins.js"></script>
+<!-- Active JS -->
+<script src="js/active.js"></script>
 </body>
 
 </html>
