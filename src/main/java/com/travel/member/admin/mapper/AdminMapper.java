@@ -24,4 +24,6 @@ public interface AdminMapper {
 	int adminSelectCount();
 	// 관리자 삭제
 	int adminDelete(AdminDTO adminDTO);
+	// 내정보 보기
+	AdminDTO adminInfo(String admin_id);
 }

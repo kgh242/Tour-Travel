@@ -1,10 +1,118 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
 
-</body>
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>관리자 페이지</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+  </head>
+
+<!-- Header Start -->
+  <body id="page-top">
+ 	<div th:replace="thymeleaf/adHeader :: header"></div>
+<!-- Header End -->
+<!-- Sidebar Start --> 	
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div th:replace="thymeleaf/adHeader :: sidebar"></div>
+<!-- Sidebar End -->
+      <div id="content-wrapper">
+       <div class="container-fluid">
+         <!-- Breadcrumbs-->
+         <ol class="breadcrumb">
+           <li class="breadcrumb-item">
+             <a href="companyIndex">메인페이지</a>
+           </li>
+           <li class="breadcrumb-item active">My Page</li>
+         </ol>
+	<!-- Page Content -->
+		<div class="container">
+		 <div class="card mb-3">
+		  <div class="card-header">
+			정보수정
+		 <div class="card-body">
+		  <div class="table-responsive">
+		   <form action = "/Travel/adminUpdate" method = "post" >
+		    <table class="table table-bordered" id="packAddTable" width="100%" cellspacing="0">
+			     <tr>
+					<td>아이디</td>
+					<td>
+						<input type = "text" id = "admin_id" name = "admin_id" th:value="${admin.admin_id}" readonly="readonly">
+					</td>
+				</tr>
+				<tr>
+					<td>비밀번호</td>
+					<td><input type = "password" id = "admin_pw" name = "admin_pw"></td>
+				</tr>
+				<tr>
+					<td>비밀번호 확인</td>
+					<td><input type = "password" id = "admin_pw_check" name = "admin_pw_check"></td>
+				</tr>
+				<tr>
+					<td>권한</td>
+					<td><input type = "text" id = "admin_level" name = "admin_level" th:value="${admin.admin_level}"></td>
+				</tr>
+				<tr>
+					<td>담당부서</td>
+					<td><input type = "text" id = "admin_team" name = "admin_team" th:value="${admin.admin_team}"></td>
+				</tr>
+				<tr>
+					<td>사원번호</td>
+					<td><input type = "text" id = "admin_employee_no" name = "admin_employee_no" th:value="${admin.admin_employee_no}"></td>
+				</tr>
+				<tr>
+					<td>연락처</td>
+					<td><input type = "text" id = "admin_employee_tell" name = "admin_employee_tell" th:value="${admin.admin_employee_tell}"></td>
+				</tr>
+				<tr>
+					<td colspan="1"><input type = "submit" value = "입력완료"></td>
+				</tr>
+			</table>
+		   </form>
+		  </div>
+	     </div>
+	    </div>
+       </div>
+	  </div>
+     </div>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+	
+   <!-- Logout Modal-->
+	<div th:replace="thymeleaf/adHeader :: modal"></div>
+    
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin.min.js"></script>
+	<script type="text/javascript">
+	</script>
+   </div>
+  </div>
+ </body>
 </html>

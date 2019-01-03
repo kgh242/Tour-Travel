@@ -68,4 +68,14 @@
     	  FROM member_admin
     	 WHERE admin_id= #{admin_id}
     </delete>
+    
+    <select id="adminInfo" parameterType="java.lang.String" resultType="com.travel.member.admin.dto.AdminDTO">
+    	SELECT admin_id 
+    		,admin_level 
+    		,admin_team 
+    		,admin_employee_no 
+    		,admin_employee_tell
+    	FROM member_admin
+    	WHERE admin_id = #{admin_id}
+    </select>
 </mapper>
