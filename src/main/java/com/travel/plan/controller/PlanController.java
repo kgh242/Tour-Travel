@@ -28,6 +28,7 @@ import com.travel.plan.dto.PlanSearchDTO;
 import com.travel.plan.service.PlanService;
 
 @Controller
+@RequestMapping(value= "/Travel")
 public class PlanController {
 	
 	@Autowired
@@ -180,6 +181,17 @@ public class PlanController {
 		planService.planDetailAdd(plan1_no, plan1_air, planHotelList, planLandmarkList, planScheduleList);
 		
 		return "redirect:/Travel/planDetailAdd?plan1_no="+plan1_no;
+	}
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/planDetailAdd.do", method=RequestMethod.GET)
+	public void test(@RequestParam(value="plan1_air") String plan1_air) {
+		System.out.println(plan1_air);
+		
 	}
 	
 }

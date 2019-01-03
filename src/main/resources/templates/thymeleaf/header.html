@@ -42,14 +42,18 @@
                                 <li class="nav-item active">
                                     <a class="nav-link" href="index">메인 <span class="sr-only">(current)</span></a>
                                 </li>
-                                <li class="nav-item active dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">플랜 여행<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="planAdd">플랜등록</a>
-                                        <a class="dropdown-item" href="planList">플랜찾기</a>
-                                        <a class="dropdown-item" href="#">예비</a>
-                                    </div>
-                                </li>
+                                <div th:if="${session.LOGINID != null}">	
+		                                <li class="nav-item active dropdown">
+		                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">플랜 여행<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+		                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		                                    <div th:if="${session.LOGINLEVEL.equals('user')}">
+		                                        <a class="dropdown-item" href="planAdd">플랜등록</a>
+		                                    </div>
+		                                        <a class="dropdown-item" href="planList">플랜찾기</a>
+		                                        <a class="dropdown-item" href="#">예비</a>
+		                                    </div>
+		                                </li>  				
+                            	</div>
                                 <li class="nav-item active dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">패키지 여행<i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -74,7 +78,12 @@
                             </div>
                             <div th:if="${session.LOGINID != null}">
                             	<div class="dorne-signout-btn">
+                            	<div th:if="${session.LOGINLEVEL.equals('user')}">
                             		<a th:href="userGetInfo" th:text="${session.LOGINID}" style="color:yellow"></a>
+                            	</div>
+                            	<div th:if="${session.LOGINLEVEL.equals('company')}">
+                            		<a th:href="companyIndex" th:text="${session.LOGINID}" style="color:yellow"></a>
+                            	</div>
                             		<span style="color:white">님 로그인중</span>
                             			<a href="/Travel/userLogout">로그아웃</a>
                             	</div>

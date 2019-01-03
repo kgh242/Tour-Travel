@@ -13,9 +13,8 @@ import com.travel.member.user.dto.UserDTO;
 
 public class IndexController {
 	@RequestMapping("index")
-	public String index(HttpSession session, UserDTO userDTO) {
+	public String index(HttpSession session) {
 		System.out.println("Index 나타남");
-		session.setAttribute("LOGINID", userDTO.getUser_id());
 		return "thymeleaf/index";
 	}
 	
