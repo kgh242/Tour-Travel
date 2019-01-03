@@ -122,10 +122,99 @@
   		SELECT * FROM plan2_travel_schedule WHERE plan1_no = #{plan1_no}
  	</select>
  	 
- 	<select id="planList" parameterType="java.lang.String" resultType="com.travel.plan.dto.PlanDTO">
- 		SELECT *
- 		FROM plan1_travel
+ 	 <select id="planSelectCount" resultType="int">
+        SELECT count(*)
+    	  FROM plan1_travel
+    </select>
+
+   <select id="planList" parameterType="map" resultType="com.travel.plan.dto.PlanDTO">
+    	SELECT plan1_no
+    		  ,user_id
+    		  ,plan1_title
+    		  ,plan1_country
+    		  ,plan1_city
+    		  ,plan1_start_date
+    		  ,plan1_end_date
+    		  ,plan1_budget
+    		  ,plan1_closing_date
+    		  ,plan1_age
+    		  ,plan1_person_number
+    	 FROM plan1_travel
+    	WHERE plan1_country=#{planSearchDTO.planSearchCountry} 
+    	  AND plan1_start_date=#{planSearchDTO.planStartDate}
+    	 ORDER BY plan1_no
+    	  DESC
+    	 LIMIT #{pageMaker.startRow},#{pageMaker.rowPerPage} 
+    </select>
+       <select id="planListCount" parameterType="map" resultType="int">
+    	SELECT count(*)
+    	 FROM plan1_travel
+    	WHERE plan1_country=#{planSearchDTO.planSearchCountry} 
+    	  AND plan1_start_date=#{planSearchDTO.planStartDate}
+    </select>
+     <select id="planList1" resultType="com.travel.plan.dto.PlanDTO">
+    	SELECT plan1_no
+    		  ,user_id
+    		  ,plan1_title
+    		  ,plan1_country
+    		  ,plan1_city
+    		  ,plan1_start_date
+    		  ,plan1_end_date
+    		  ,plan1_budget
+    		  ,plan1_closing_date
+    		  ,plan1_age
+    		  ,plan1_person_number
+    	 FROM plan1_travel
+    	 ORDER BY plan1_no
+    	  DESC
+    	 LIMIT #{startRow},#{rowPerPage} 
  	</select>
+     <select id="planList2" parameterType="map" resultType="com.travel.plan.dto.PlanDTO">
+    	SELECT plan1_no
+    		  ,user_id
+    		  ,plan1_title
+    		  ,plan1_country
+    		  ,plan1_city
+    		  ,plan1_start_date
+    		  ,plan1_end_date
+    		  ,plan1_budget
+    		  ,plan1_closing_date
+    		  ,plan1_age
+    		  ,plan1_person_number
+    	 FROM plan1_travel
+    	WHERE plan1_country=#{planSearchDTO.planSearchCountry}
+    	 ORDER BY plan1_no
+    	  DESC
+    	 LIMIT #{pageMaker.startRow},#{pageMaker.rowPerPage} 
+    </select>
+     <select id="planList2Count" parameterType="map" resultType="int">
+    	SELECT count(*)
+    	 FROM plan1_travel
+    	WHERE plan1_country=#{planSearchDTO.planSearchCountry}
+    </select>
+     <select id="planList3" parameterType="map" resultType="com.travel.plan.dto.PlanDTO">
+    	SELECT plan1_no
+    		  ,user_id
+    		  ,plan1_title
+    		  ,plan1_country
+    		  ,plan1_city
+    		  ,plan1_start_date
+    		  ,plan1_end_date
+    		  ,plan1_budget
+    		  ,plan1_closing_date
+    		  ,plan1_age
+    		  ,plan1_person_number
+    	 FROM plan1_travel
+    	WHERE plan1_start_date LIKE #{planSearchDTO.planStartDate}
+        ORDER BY plan1_no
+    	 DESC
+    	LIMIT #{pageMaker.startRow},#{pageMaker.rowPerPage} 
+    </select>   
+    <select id="planList3Count" parameterType="map" resultType="int">
+    	SELECT count(*)
+    	 FROM plan1_travel
+    	WHERE plan1_start_date=#{planSearchDTO.planStartDate}
+    </select>
  	
  	<delete id="planDeleteScheduleInfo" parameterType="java.lang.String">
  		DELETE FROM plan2_travel_schedule WHERE plan1_no = #{plan1_no}

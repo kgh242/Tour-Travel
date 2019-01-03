@@ -1,5 +1,6 @@
 package com.travel.plan.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,12 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.travel.pack.dto.PackDTO;
+import com.travel.pack.dto.PackSearchDTO;
+import com.travel.paging.PageMaker;
 import com.travel.plan.dto.PlanApplyDTO;
 import com.travel.plan.dto.PlanDTO;
 import com.travel.plan.dto.PlanHotelDTO;
 import com.travel.plan.dto.PlanInterestDTO;
 import com.travel.plan.dto.PlanLandmarkDTO;
 import com.travel.plan.dto.PlanScheduleDTO;
+import com.travel.plan.dto.PlanSearchDTO;
 import com.travel.plan.mapper.PlanMapper;
 
 @Service
@@ -38,6 +43,77 @@ public class PlanService {
 	
 	public List<PlanDTO> planList(PlanDTO planDTO){
 		return planMapper.planList(planDTO);
+	}
+	
+	
+	public List<PlanDTO> planList(PageMaker pageMaker,PlanSearchDTO planSearchDTO) {
+		System.out.println("패키지리스트 조회......PlanService.java");
+		List<PlanDTO> result = new ArrayList<PlanDTO>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		pageMaker.setRowPerPage(10);
+		pageMaker.setPagePerBlock(10);
+		pageMaker.setStartRow();
+        
+        if(planSearchDTO.getPlanSearchCountry().equals("1")) {
+        	planSearchDTO.setPlanSearchCountry(null);
+        }
+        if(planSearchDTO.getPlanStartDate().equals("1")) {
+        	planSearchDTO.setPlanStartDate(null);
+        }
+    	map.put("pageMaker", pageMaker);
+		map.put("planSearchDTO", planSearchDTO);
+		if(planSearchDTO.getPlanSearchCountry() == null) {
+			if(planSearchDTO.getPlanStartDate() == null) {
+				System.out.println("둘다널");
+				 pageMaker.setAllCount(planMapper.planSelectCount());
+				 System.out.println(pageMaker.getAllCount()+"<- allCount");
+				result = planMapper.planList1(pageMaker);
+			}else {
+				System.out.println("나라명 널");
+				pageMaker.setAllCount(planMapper.planList3Count(map));
+				System.out.println(pageMaker.getAllCount()+"<- allCount");
+				result = planMapper.planList3(map);
+			}
+		}
+		
+		if(planSearchDTO.getPlanStartDate() == null) {
+			if(planSearchDTO.getPlanSearchCountry() != null) {
+				System.out.println("날짜만 널");
+				pageMaker.setAllCount(planMapper.planList2Count(map));
+				System.out.println(pageMaker.getAllCount()+"<- allCount");
+				result = planMapper.planList2(map);
+			}
+		}else if(planSearchDTO.getPlanStartDate() != null) {
+			if(planSearchDTO.getPlanSearchCountry() != null) {
+				System.out.println("둘다 널아님");
+				pageMaker.setAllCount(planMapper.planListCount(map));
+				System.out.println(pageMaker.getAllCount()+"<- allCount");
+				result = planMapper.planList(map);
+			}
+		}
+   
+        // 페이징에 필요한 값 계산하여 설정
+	
+        pageMaker.setLastPage();
+        pageMaker.setCurrentBlock();
+        pageMaker.setLastBlock();
+        pageMaker.setStartPage();
+        pageMaker.setEndPage();
+        // 이전 페이지와 다음 페이지를 컨트롤하는 조건문
+        if(pageMaker.getCurrentBlock() != pageMaker.getLastBlock() && pageMaker.getCurrentBlock() >1){
+        	pageMaker.setPrevPage(true);
+            pageMaker.setNextPage(true);
+        }else  if(pageMaker.getCurrentBlock() != pageMaker.getLastBlock() && pageMaker.getLastBlock() != 1) {
+        	pageMaker.setPrevPage(false);
+            pageMaker.setNextPage(true);
+        }else if(pageMaker.getCurrentBlock() <= pageMaker.getLastBlock() && pageMaker.getCurrentBlock() != 1){
+        	pageMaker.setPrevPage(true);
+            pageMaker.setNextPage(false);   
+        }else if(pageMaker.getLastBlock() == 1) {
+        	pageMaker.setPrevPage(false);
+            pageMaker.setNextPage(false); 
+        }
+		return result;
 	}
 	
 	public int planApply(PlanApplyDTO planApplyDTO) {

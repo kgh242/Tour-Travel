@@ -15,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.travel.pack.dto.PackDTO;
+import com.travel.pack.dto.PackSearchDTO;
+import com.travel.paging.PageMaker;
 import com.travel.plan.dto.PlanApplyDTO;
 import com.travel.plan.dto.PlanDTO;
 import com.travel.plan.dto.PlanHotelDTO;
 import com.travel.plan.dto.PlanInterestDTO;
 import com.travel.plan.dto.PlanLandmarkDTO;
 import com.travel.plan.dto.PlanScheduleDTO;
+import com.travel.plan.dto.PlanSearchDTO;
 import com.travel.plan.service.PlanService;
 
 @Controller
@@ -55,10 +59,30 @@ public class PlanController {
 		return "redirect:/Travel/planDetailAdd?plan1_no="+planNum;
 	}
 	
+
 	@RequestMapping(value = "/planList", method = RequestMethod.GET)
-	public String planList(Model model,PlanDTO planDTO) {
-		List<PlanDTO> planList = planService.planList(planDTO);
+	public String planList(@RequestParam(value="currentPage", required=false, defaultValue = "1") int currentPage
+			,Model model
+			,PageMaker pageMaker
+			,@RequestParam(value="planSearchCountry", required=false, defaultValue = "1") String planSearchCountry
+			,@RequestParam(value="planStartDate", required=false, defaultValue = "1") String planStartDate) {
+		System.out.println(planSearchCountry+"<- 나라명");
+		PlanSearchDTO planSearchDTO = new PlanSearchDTO();
+		planSearchDTO.setPlanSearchCountry(planSearchCountry);
+		planSearchDTO.setPlanStartDate(planStartDate);
+		System.out.println(currentPage+"currentPage");
+		pageMaker.setCurrentPage(currentPage);
+		List<PlanDTO> planList = planService.planList(pageMaker,planSearchDTO);
 		model.addAttribute("planList", planList);
+		model.addAttribute("currentPage", currentPage);
+        model.addAttribute("pagePerBlock", pageMaker.getPagePerBlock());
+        model.addAttribute("currentBlock", pageMaker.getCurrentBlock());
+        model.addAttribute("startPage", pageMaker.getStartPage());
+        model.addAttribute("endPage", pageMaker.getEndPage());
+        model.addAttribute("prevPage", pageMaker.isPrevPage());
+        model.addAttribute("nextPage", pageMaker.isNextPage());
+		model.addAttribute("packSearchCountry",planSearchCountry);
+		model.addAttribute("packStartDate",planStartDate);
 		return "thymeleaf/plan/planList";
 	}
 	

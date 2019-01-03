@@ -21,7 +21,7 @@ body {
     height: 100%;
 }
 
-body:before {
+/* body:before {
     height: 50%;
     width: 100%;
     position: absolute;
@@ -30,7 +30,7 @@ body:before {
     background: #128ff2;
     content: "";
     z-index: 0;
-}
+} */
 
 .clearfix:after {
     display: block;
@@ -254,9 +254,9 @@ button.accent {
 @media screen and (max-width: 730px) {
 
     .chat-container {
-        margin-left: 10px;
-        margin-right: 10px;
-        margin-top: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 20px;
     }
 }
 

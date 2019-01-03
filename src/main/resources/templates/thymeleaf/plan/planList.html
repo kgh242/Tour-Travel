@@ -41,41 +41,89 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<!-- Single Listing Content -->
-			<h3>플랜리스트</h3>
-			<table border="1">
-				<tr>
-					<td>등록자</td>
-					<td>목적국가</td>
-					<td>목적도시</td>
-					<td>플랜방정보</td>
-					<td>여행시작날짜</td>
-					<td>여행종료날짜</td>
-					<td>예산</td>
-					<td>신청마감날짜</td>
-					<td>연령대</td>
-					<td>모집인원</td>
-					<td>신청</td>
-				</tr>
-				<tbody th:each="plan:${planList}">
-					<tr>
-						<td th:hidden="${plan.plan1_no}"></td>
-						<td th:text="${plan.user_id}"></td>
-						<td th:text="${plan.plan1_country}"></td>
-						<td th:text="${plan.plan1_city}"></td>
-						<td th:text="${plan.plan1_info}"></td>
-						<td th:text="${plan.plan1_start_date}"></td>
-						<td th:text="${plan.plan1_end_date}"></td>
-						<td th:text="${plan.plan1_budget}"></td>
-						<td th:text="${plan.plan1_closing_date}"></td>
-						<td th:text="${plan.plan1_age}"></td>
-						<td th:text="${plan.plan1_person_number}"></td>
-						<td><a
-							th:href="@{'/Travel/planApply?plan1_no=' + ${plan.plan1_no}}">신청</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			</form>
+			<h2>플랜리스트</h2>
+<form id="searchForm" action="/Travel/planList">
+   	여행지:
+   	<input list="countryselect" id="planSearchCountry" name="planSearchCountry" placeholder="국가를 선택해 주세요" >
+		<datalist id="countryselect">
+			<option value="Japan">일본</option>
+			<option value="China">중국</option>
+			<option value="USA">미국</option>
+			<option value="Philippines">필리핀</option>
+			<option value="HongKong">홍콩</option>
+			<option value="Thailand">태국</option>
+			<option value="Vietnam">베트남</option>
+			<option value="Singapore">싱가포르</option>
+			<option value="Germany">독일</option>
+			<option value="England">영국</option>
+			<option value="Swiss">스위스</option>
+			<option value="France">프랑스</option>
+			<option value="Italy">이탈리아</option>
+			<option value="Netherlands">네덜란드</option>
+		</datalist>
+        여행시작일정 검색:
+     <input list="monthselect" id="planStartDate" name="planStartDate" placeholder="여행 출발 월을 입력해주세요" >
+		<datalist id="monthselect">
+						<option value="2019-01-%">1월</option>
+						<option value="2019-02-%">2월</option>
+						<option value="2019-03-%">3월</option>
+						<option value="2019-04-%">4월</option>
+						<option value="2019-05-%">5월</option>
+						<option value="2019-06-%">6월</option>
+						<option value="2019-07-%">7월</option>
+						<option value="2019-08-%">8월</option>
+						<option value="2019-09-%">9월</option>
+						<option value="2019-10-%">10월</option>
+						<option value="2019-11-%">11월</option>
+						<option value="2019-12-%">12월</option>
+		</datalist>    
+    <input type="submit" value="검색">
+</form>			
+	<table class="table" align="center">
+		<tr>
+			<td>플랜번호</td>
+			<td>플랜제목</td>
+			<td>등록자</td>
+			<td>목적국가</td>
+			<td>목적도시</td>
+			<td>플랜방정보</td>
+			<td>여행시작날짜</td>
+			<td>여행종료날짜</td>
+			<td>예산</td>
+			<td>신청마감날짜</td>
+			<td>연령대</td>
+			<td>모집인원</td>
+			<td>신청</td>
+		</tr>
+		<tbody th:each="plan:${planList}">
+			<tr>
+				<td th:text="${plan.plan1_no}"></td>
+				<td th:text="${plan.plan1_title}"></td>
+				<td th:text="${plan.user_id}"></td>
+				<td th:text="${plan.plan1_country}"></td>
+				<td th:text="${plan.plan1_city}"></td>
+				<td th:text="${plan.plan1_info}"></td>
+				<td th:text="${plan.plan1_start_date}"></td>
+				<td th:text="${plan.plan1_end_date}"></td>
+				<td th:text="${plan.plan1_budget}"></td>
+				<td th:text="${plan.plan1_closing_date}"></td>
+				<td th:text="${plan.plan1_age}"></td>
+				<td th:text="${plan.plan1_person_number}"></td>
+				<td><a
+					th:href="@{'/Travel/planApply?plan1_no=' + ${plan.plan1_no}}">신청</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	    <div class="pagination-area wow fadeInUp" data-wow-delay="100ms">
+        <nav>
+            <ul class="pagination">
+                <li class="page-item" th:if="${prevPage}"><a class="page-link" th:href="@{planList(currentPage=${(currentBlock - 1) * pagePerBlock})}">이전</a></li>
+                <li class="page-item" th:each="i : ${#numbers.sequence(startPage, endPage)}" th:classappend="${currentPage} == ${i} ? active : null"><a class="page-link" th:href="@{planList(currentPage=${i})}" th:text="${i}"></a></li>
+                <li class="page-item" th:if="${nextPage}"><a class="page-link" th:href="@{planList(currentPage=${currentBlock * pagePerBlock + 1})}">다음</a></li>
+            </ul>
+        </nav>
+    	</div>
 		</div>
 	</div>
 
