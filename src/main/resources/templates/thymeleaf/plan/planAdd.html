@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>Go Travel</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link href="style.css" rel="stylesheet">
+
+    <!-- Responsive CSS -->
+    <link href="css/responsive/responsive.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- ***** Header Area Start ***** -->
+	<div th:replace="thymeleaf/header :: header"></div>
+    <!-- ***** Header Area End ***** -->
+    
+    <!-- ***** Breadcumb Area Start ***** -->
+    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/hero-1.jpg)"></div>
+    <!-- ***** Breadcumb Area End ***** -->
+
+	
+<form id="planAdd" name="planAdd" onsubmit="return addInfoSubmit()" method="post"> 
+	<table border="1">
+		<tr>
+			<td>목적국가</td>
+			<td>
+				<input list="countryselect" id="plan1_country" name="plan1_country" onkeyup="countryFunction()" placeholder="국가를 선택해 주세요" >
+				<datalist id="countryselect">
+					<option value="Japan">일본</option>
+					<option value="China">중국</option>
+					<option value="USA">미국</option>
+					<option value="Philippines">필리핀</option>
+					<option value="HongKong">홍콩</option>
+					<option value="Thailand">태국</option>
+					<option value="Vietnam">베트남</option>
+					<option value="Singapore">싱가포르</option>
+					<option value="Germany">독일</option>
+					<option value="England">영국</option>
+					<option value="Swiss">스위스</option>
+					<option value="France">프랑스</option>
+					<option value="Italy">이탈리아</option>
+					<option value="Netherlands">네덜란드</option>
+				</datalist>
+			</td>
+		</tr>
+		<tr>
+			<td>목적도시</td>
+			<td><input type="text" id="plan1_city" name="plan1_city" placeholder="도시를 입력해주세요"></td>
+		</tr>
+		<tr>
+			<td>플랜방소개</td>
+			<td><input type="text" id="plan1_info" name="plan1_info"></td>
+		</tr>
+		<tr>
+			<td>예상출발일자</td>
+			<td><input type="date" id="plan1_start_date" name="plan1_start_date"  value="2018-01-01"></td>
+		</tr>
+		<tr>
+			<td>예상종료일자</td>
+			<td><input type="date" id="plan1_end_date" name="plan1_end_date"  value="2018-01-02"></td>
+		</tr>
+		<tr>
+			<td>예상예산(개인별)</td>
+			<td><input type="text" id="plan1_budget" name="plan1_budget">원</td>
+		</tr>
+		<tr>
+			<td>신청마감일자</td>
+			<td><input type="datetime-local" id="plan1_closing_date" name="plan1_closing_date" value="2018-01-01T06:30"></td>
+		</tr>
+		<tr>
+			<td>모집연령대</td>
+			<td><input type="text" id="plan1_age" name="plan1_age"></td>
+		</tr>
+		<tr>
+			<td>모집인원</td>
+			<td><input type="number" id="plan1_person_number" name="plan1_person_number" value=0 min="0">명</td>
+		</tr>
+		<tr>
+			<td>여행관심사</td>
+			<td>
+				<input type="text" name="plan1_interest">
+				<input type="button" id="MulitInterest" name="MulitInterest" onclick="MulitInterestRow()" value="관심사 추가">
+				<table id="multiInterest"></table>
+			</td>
+		</tr>
+		<tr>
+			<td>등록신청</td>
+			<td><input type="submit" value="Submit"></td>
+		</tr>
+	</table>
+</form>
+
+
+
+				<!-- ****** Footer Area Start ****** -->
+				<div th:replace="thymeleaf/footer :: footer"></div>
+				<!-- ****** Footer Area End ****** -->
+
+				<!-- jQuery-2.2.4 js -->
+				<script src="js/jquery/jquery-2.2.4.min.js"></script>
+				<!-- Popper js -->
+				<script src="js/bootstrap/popper.min.js"></script>
+				<!-- Bootstrap-4 js -->
+				<script src="js/bootstrap/bootstrap.min.js"></script>
+				<!-- All Plugins js -->
+				<script src="js/others/plugins.js"></script>
+				<!-- Active JS -->
+				<script src="js/active.js"></script>
+<script type="text/javascript">
+var i = 0;
+	{
+		var oTbl;
+		function MulitInterestRow(){
+			oTbl = document.getElementById("multiInterest");
+			i++;
+			var oRow = oTbl.insertRow();
+			oRow.onmouseover = function(){
+				oTbl.clickedRowIndex = this.rowIndex
+			};
+			var oCell = oRow.insertCell();
+			var frmTag = "<input type=text name='plan1_interest'>";
+			frmTag += "<input type=button value='삭제' onClick='MulitInterestremoveRow()'>";
+			oCell.innerHTML = frmTag;
+		}
+		function MulitInterestremoveRow(){
+			i--;
+			oTbl.deleteRow(oTbl.clickedRowIndex);
+		}
+	}
+	function addInfoSubmit() {
+	    var myform = document.forms['planAdd'];
+	    {
+		    if( myform['plan1_country'].value.length < 1) {
+		        alert( '여행 국가를 입력해주세요');
+		        return false;
+		    }
+		    if( myform['plan1_city'].value.length < 1) {
+		        alert( '여행 도시를 입력해주세요');
+		        return false;
+		    }
+		    if( myform['plan1_info'].value.length < 1) {
+		        alert( '플랜방소개를 입력하세요');
+		        return false;
+		    }
+		    if( myform['plan1_start_date'].value.length < 1) {
+		        alert( '예상출발일자를 입력하세요');
+		        return false;
+		    }	    
+		    if( myform['plan1_end_date'].value.length < 1) {
+		        alert( '예상종료일자를 입력하세요');
+		        return false;
+		    }	    
+		    if( myform['plan1_budget'].value.length < 1) {
+		    	alert( '예상예산(개인별)을 입력하세요');
+		    	return false;
+		    }		    
+		    if( myform['plan1_closing_date'].value.length < 1) {
+		    	alert( '마감일을 입력하세요');
+		    	return false;
+		    }
+		    if( myform['plan1_age'].value.length < 1) {
+		    	alert( '모집연령대를 입력하세요');
+		    	return false;
+		    }
+		    if( myform['plan1_person_number'].value.length < 1) {
+		    	alert( '모집인원을 입력하세요');
+		    	return false;
+		    }
+		    if( myform['plan1_male'].value.length < 1) {
+		    	alert( '남성모집인원을 입력하세요');
+		    	return false;
+		    }
+		    if( myform['plan1_female'].value.length < 1) {
+		    	alert( '여성모집인원을 입력하세요');
+		    	return false;
+		    }
+	    }
+	    return true;
+	}
+</script>
+
+</body>
+
+</html>

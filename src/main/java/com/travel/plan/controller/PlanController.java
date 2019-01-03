@@ -37,7 +37,7 @@ public class PlanController {
 	@RequestMapping(value = "/planAdd", method = RequestMethod.GET)
 	public String planAdd() {
 		System.out.println("Plan Controller - planAdd.GET");
-		return "plan/planAdd";
+		return "thymeleaf/plan/planAdd";
 	}
 	
 	@RequestMapping(value = "/planAdd", method = RequestMethod.POST)
