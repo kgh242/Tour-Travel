@@ -169,21 +169,18 @@ public class PackService {
 						int hotelImgResult = packMapper.packHotelImgAdd(map);
 
 						if (hotelImgResult == 1) {
-							File file = new File(hotelImgDTO.getImgPath() + File.separator + "uploads" + File.separator
-									+ "hotelImg");
+							File file = new File(hotelImgDTO.getImgPath() + File.separator +"src" +File.separator + "main" +File.separator + "resources" + File.separator + "static" + File.separator+ "hotelImg");
 							if (file.exists()) {
-
+								
 								hotelImgFileName.get(i)
-										.transferTo(new File(hotelImgDTO.getImgPath() + File.separator + "uploads"
-												+ File.separator + "hotelImg" + File.separator
+										.transferTo(new File(hotelImgDTO.getImgPath() + File.separator + "src" +File.separator + "main" +File.separator + "resources" + File.separator + "static" + File.separator+ "hotelImg" + File.separator
 												+ hotelImgDTO.getImgFalseName() + "." + hotelImgDTO.getImgExt()));
 
 							} else {
 								file.mkdirs();
 
 								hotelImgFileName.get(i)
-										.transferTo(new File(hotelImgDTO.getImgPath() + File.separator + "uploads"
-												+ File.separator + "hotelImg" + File.separator
+										.transferTo(new File(hotelImgDTO.getImgPath() + File.separator + "src" +File.separator + "main" +File.separator + "resources" + File.separator + "static" + File.separator+ "hotelImg" + File.separator
 												+ hotelImgDTO.getImgFalseName() + "." + hotelImgDTO.getImgExt()));
 
 							}
@@ -216,21 +213,19 @@ public class PackService {
 						int scheduleImgResult = packMapper.packScheduleImgAdd(map);
 
 						if (scheduleImgResult == 1) {
-							File file = new File(scheduleImgDTO.getImgPath() + File.separator + "uploads"
-									+ File.separator + "scheduleImg");
+							File file = new File(scheduleImgDTO.getImgPath() + File.separator +"src" +File.separator + "main" +File.separator + "resources" + File.separator + "static" +File.separator + "scheduleImg");
 							if (file.exists()) {
 
 								scheduleFileName.get(i)
-										.transferTo(new File(scheduleImgDTO.getImgPath() + File.separator + "uploads"
-												+ File.separator + "scheduleImg" + File.separator
+										.transferTo(new File(scheduleImgDTO.getImgPath() + File.separator + "src" +File.separator + "main" +File.separator + "resources" + File.separator + "static" +File.separator 
+												+ "scheduleImg" + File.separator
 												+ scheduleImgDTO.getImgFalseName() + "." + scheduleImgDTO.getImgExt()));
 
 							} else {
 								file.mkdirs();
 
 								scheduleFileName.get(i)
-										.transferTo(new File(scheduleImgDTO.getImgPath() + File.separator + "uploads"
-												+ File.separator + "scheduleImg" + File.separator
+										.transferTo(new File(scheduleImgDTO.getImgPath() + File.separator +"src" +File.separator + "main" +File.separator + "resources" + File.separator + "static" +File.separator + "scheduleImg" + File.separator
 												+ scheduleImgDTO.getImgFalseName() + "." + scheduleImgDTO.getImgExt()));
 							}
 						}
@@ -262,15 +257,13 @@ public class PackService {
 						int landmarkImgResult = packMapper.packLandmarkImgAdd(map);
 
 						if (landmarkImgResult == 1) {
-							File file = new File(landmarkImgDTO.getImgPath() + File.separator + "uploads"
-									+ File.separator + "landmarkImg");
+							File file = new File(landmarkImgDTO.getImgPath() + File.separator + "src" +File.separator + "main" +File.separator + "resources" + File.separator + "static" + File.separator+ "landmarkImg");
 							if (file.exists()) {
 								System.out
 										.println("transferTo" + landmarkImgDTO.getImgPath() + "......PackService.java");
 
 								landMarkFileName.get(i)
-										.transferTo(new File(landmarkImgDTO.getImgPath() + File.separator + "uploads"
-												+ File.separator + "landmarkImg" + File.separator
+										.transferTo(new File(landmarkImgDTO.getImgPath() + File.separator + "src" +File.separator + "main" +File.separator + "resources" + File.separator + "static" + File.separator+ "landmarkImg" + File.separator
 												+ landmarkImgDTO.getImgFalseName() + "." + landmarkImgDTO.getImgExt()));
 
 							} else {
@@ -278,8 +271,7 @@ public class PackService {
 										.println("transferTo" + landmarkImgDTO.getImgPath() + "......PackService.java");
 								file.mkdirs();
 								landMarkFileName.get(i)
-										.transferTo(new File(landmarkImgDTO.getImgPath() + File.separator + "uploads"
-												+ File.separator + "landmarkImg" + File.separator
+										.transferTo(new File(landmarkImgDTO.getImgPath() + File.separator + "src" +File.separator + "main" +File.separator + "resources" + File.separator + "static" + File.separator+ "landmarkImg" + File.separator
 												+ landmarkImgDTO.getImgFalseName() + "." + landmarkImgDTO.getImgExt()));
 							}
 						}
@@ -382,13 +374,21 @@ public class PackService {
 			map.put("packPriceInfo", packMapper.packGetPriceInfo(pack_info_no));
 			map.put("PackBeforeNoticeInfo", packMapper.packGetBeforeNoticeInfo(pack_info_no));
 			map.put("PackAfterNoticeInfo", packMapper.packGetAfterNoticeInfo(pack_info_no));
+			map.put("hotelImg", packMapper.packHotelImgConfirmSelect(pack_info_no));
+			map.put("landmarkImg", packMapper.packLandmarkImgConfirmSelect(pack_info_no));
+			map.put("scheduleImg", packMapper.packScheduleImgConfirmSelect(pack_info_no));
+			
+			System.out.println(map.get("hotelImg"));
+			System.out.println(map.get("landmarkImg"));
+			System.out.println(map.get("scheduleImg"));
+			
+			
 		} catch (Error e) {
 			System.out.println("패키지선택정보 조회 에러발생 ......Packservice.java : " + e);
 		}
 		return map;
 		
 	}
-	
 	public int packDelete(int pack_info_no) {
 		System.out.println("패키지 삭제......PackService.java");
 		int result=0;
@@ -401,7 +401,7 @@ public class PackService {
 				if(packMapper.packDelete(pack_info_no)==1) {
 					// 호텔이미지 실제 파일 삭제
 					for(int i = 0; i<packHotelImg.size(); i++) {
-						File file = new File(packHotelImg.get(i).getImgPath() + File.separator + "uploads" + File.separator + "hotelImg" + File.separator + packHotelImg.get(i).getImgFalseName() + "." + packHotelImg.get(i).getImgExt());
+						File file = new File(packHotelImg.get(i).getImgPath() + File.separator + "src" +File.separator + "main" +File.separator + "resources" + File.separator + "static" + File.separator+ "hotelImg" + File.separator + packHotelImg.get(i).getImgFalseName() + "." + packHotelImg.get(i).getImgExt());
 						if(file.exists()) {
 							if(file.delete()) {
 								System.out.println(file.getName() + " <- 호텔 이미지 파일 삭제 성공......PackService.java");
@@ -414,7 +414,7 @@ public class PackService {
 					}
 					// 스케줄 이미지 실제 파일 삭제
 					for(int i = 0; i<packScheduleImg.size(); i++) {
-						File file = new File(packScheduleImg.get(i).getImgPath() + File.separator + "uploads" + File.separator + "scheduleImg" + File.separator + packScheduleImg.get(i).getImgFalseName() + "." + packScheduleImg.get(i).getImgExt());
+						File file = new File(packScheduleImg.get(i).getImgPath() + File.separator + "src" +File.separator + "main" +File.separator + "resources" + File.separator + "static" + File.separator+ "scheduleImg" + File.separator + packScheduleImg.get(i).getImgFalseName() + "." + packScheduleImg.get(i).getImgExt());
 						if(file.exists()) {
 							if(file.delete()) {
 								System.out.println(file.getName() + " <- 스케줄 이미지 파일 삭제 성공......PackService.java");
@@ -427,7 +427,7 @@ public class PackService {
 					}
 					// 관광지 이미지 실제 파일 삭제
 					for(int i = 0; i<packLandmarkImg.size(); i++) {
-						File file = new File(packLandmarkImg.get(i).getImgPath() + File.separator + "uploads" + File.separator + "landmarkImg" + File.separator + packLandmarkImg.get(i).getImgFalseName() + "." + packLandmarkImg.get(i).getImgExt());
+						File file = new File(packLandmarkImg.get(i).getImgPath() + File.separator + "src" +File.separator + "main" +File.separator + "resources" + File.separator + "static" + File.separator+ "landmarkImg" + File.separator + packLandmarkImg.get(i).getImgFalseName() + "." + packLandmarkImg.get(i).getImgExt());
 						if(file.exists()) {
 							if(file.delete()) {
 								System.out.println(file.getName() + " <- 관광지 이미지 파일 삭제 성공......PackService.java");

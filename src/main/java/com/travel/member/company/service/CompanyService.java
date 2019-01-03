@@ -47,10 +47,10 @@ public class CompanyService {
 
 		companyMapper.insertCompanyImg(companyImgDTO);
 
-		File file = new File(path + File.separator + "uploads" + File.separator + "companyImg");
+		File file = new File(path + File.separator +"src" +File.separator + "main" +File.separator + "resources" + File.separator + "static" +File.separator +"companyImg");
 		if (file.exists()) {
 			try {
-				multipartFile.transferTo(new File(path + File.separator + "uploads" + File.separator + "companyImg" + File.separator + fileName + "." + ext));
+				multipartFile.transferTo(new File(path + File.separator +"src" +File.separator + "main" +File.separator + "resources" + File.separator + "static" +File.separator + "companyImg" + File.separator + fileName + "." + ext));
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -59,7 +59,7 @@ public class CompanyService {
 		} else {
 			file.mkdirs();
 			try {
-				multipartFile.transferTo(new File(path + File.separator + "uploads" + File.separator + "companyImg" + File.separator + fileName + "." + ext));
+				multipartFile.transferTo(new File(path + File.separator +"src" +File.separator + "main" +File.separator + "resources" + File.separator + "static" +File.separator + "companyImg" + File.separator + fileName + "." + ext));
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {

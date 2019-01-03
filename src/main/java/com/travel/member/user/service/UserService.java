@@ -152,12 +152,12 @@ public class UserService {
 				//파일 이동을 위한 경로 설정
 				if(imgresult==1) 
 				{
-					File file = new File(userImgDTO.getUser_img_path() + File.separator + "uploads" + File.separator + "userImg");
+					File file = new File(userImgDTO.getUser_img_path() + File.separator + "src" +File.separator + "main" +File.separator + "resources" + File.separator + "static" +File.separator + "userImg");
 					if (file.exists()) {
 						System.out.println("transferTo" + userImgDTO.getUser_img_path() + "......UserService.java");
 						try {
 							multipartFile.transferTo(
-									new File(userImgDTO.getUser_img_path() + File.separator + "uploads" + File.separator + "userImg" + File.separator + userImgDTO.getUser_img_false_name() + "." + userImgDTO.getUser_img_ext()));
+									new File(userImgDTO.getUser_img_path() + File.separator + "src" +File.separator + "main" +File.separator + "resources" + File.separator + "static" +File.separator + "userImg"+ File.separator + userImgDTO.getUser_img_false_name() + "." + userImgDTO.getUser_img_ext()));
 						} catch (IllegalStateException e) {
 							e.printStackTrace();
 						} catch (IOException e) {
@@ -168,7 +168,7 @@ public class UserService {
 						file.mkdirs();
 						try {
 							multipartFile.transferTo(
-									new File(userImgDTO.getUser_img_path() + File.separator + "uploads" + File.separator + "userImg" + File.separator + userImgDTO.getUser_img_false_name() + "." + userImgDTO.getUser_img_ext()));
+									new File(userImgDTO.getUser_img_path() + File.separator + "src" +File.separator + "main" +File.separator + "resources" + File.separator + "static" +File.separator + "userImg" +File.separator + userImgDTO.getUser_img_false_name() + "." + userImgDTO.getUser_img_ext()));
 						} catch (IllegalStateException e) {
 							e.printStackTrace();
 						} catch (IOException e) {
@@ -244,7 +244,7 @@ public class UserService {
 				System.out.println("userDelete 서비스 계층, 삭제할 이미지 없음......UserService.java");	
 			} else if(userDTO.getUser_img_true_name()!=null) {
 				System.out.println("userDelete 서비스 계층, 이미지 삭제 실행......UserService.java");
-				File file = new File(userDTO.getUser_img_path()+File.separator+"uploads"+File.separator+"userImg"+File.separator+userDTO.getUser_img_false_name()+"."+userDTO.getUser_img_ext());
+				File file = new File(userDTO.getUser_img_path()+File.separator+ "src" +File.separator + "main" +File.separator + "resources" + File.separator + "static" +File.separator + "userImg"+File.separator+userDTO.getUser_img_false_name()+"."+userDTO.getUser_img_ext());
 				if(file.exists()) {
 					try {
 						System.out.println("userDelete 서비스계층 파일삭제성공");

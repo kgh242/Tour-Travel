@@ -101,7 +101,7 @@
 
 	<!-- ***** Listing Destinations Area Start ***** -->
 	<section class="dorne-listing-destinations-area section-padding-100-50">
-		<div class="container">
+		<div class="table table-bordered">
 			<div class="row">
 				<div class="col-12">
 					<div class="section-heading dark text-center">
@@ -111,8 +111,8 @@
 				</div>
 			</div>
 			<div>
-				<h1>패키지 상세 정보 보기</h1>
-				<table border="1">
+				<h1 align="center">패키지 상세 정보 보기</h1>
+				<table class="container">
 					<tr>
 						<td>목적국가</td>
 						<td th:text="${packInfo.packInfo.pack_info_country}"></td>
@@ -148,7 +148,9 @@
 
 					<tr>
 						<td>숙소이미지</td>
-						<td></td>
+						<td>	
+							<img th:src="'/hotelImg/'+${packInfo.hotelImg[0].imgFalseName}+'.'+${packInfo.hotelImg[0].imgExt}">		
+						</td>
 					</tr>
 					<tr>
 						<td>일별상세스케줄정보</td>
@@ -161,7 +163,11 @@
 					</tr>
 					<tr>
 						<td>일별상세스케줄이미지</td>
-						<td></td>
+						<td>
+							
+							<img th:src="'/scheduleImg/'+${packInfo.scheduleImg[0].imgFalseName}+'.'+${packInfo.scheduleImg[0].imgExt}">
+							
+						</td>
 					</tr>
 					<tr>
 						<td>방문관광지정보</td>
@@ -175,7 +181,11 @@
 					</tr>
 					<tr>
 						<td>방문관광지이미지</td>
-						<td></td>
+						<td>
+							
+							<img th:src="'/landmarkImg/'+${packInfo.landmarkImg[0].imgFalseName}+'.'+${packInfo.landmarkImg[0].imgExt}"> -->
+		
+						</td>
 					</tr>
 					<tr>
 						<td>모집인원</td>
@@ -206,10 +216,10 @@
 					</tr>
 				</table>
 				<!-- 세션값 비교 후 해당 글 작성자일때만 노출시켜야함 -->
-				<button id="updateBtn" onclick="update()">상품수정</button>
-				<button id="deleteBtn" onclick="dlt();">상품삭제</button>
+				<button type="button" class="btn btn-primary" id="updateBtn" onclick="update()">상품수정</button>
+				<button type="button" class="btn btn-primary" id="deleteBtn" onclick="dlt();">상품삭제</button>
 				<!-- 세션값 비교 후 고객 권한일때만 노출시켜야함 -->
-				<button id="bookBtn" onclick="bookBtn()">상품 예약하기</button>
+				<button type="button" class="btn btn-primary" id="bookBtn" onclick="bookBtn()">상품 예약하기</button>
 
 			</div>
 		</div>

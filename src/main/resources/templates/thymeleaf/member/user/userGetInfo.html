@@ -49,6 +49,10 @@
 	        </div>
 	    </div>
 	    <div>
+	    
+	    <!-- 이미지파일입니다 -->
+		<img th:src="'/userImg/'+${userDTO.user_img_false_name}+'.'+${userDTO.user_img_ext}">	
+		<!-- 이미지 종료 -->
 		<table border=1>
 		<thead>
 			<tr>
@@ -59,7 +63,6 @@
 				<td>이메일</td>
 				<td>연락처</td>
 				<td>자기소개</td>
-				<td>회원프로필사진</td>
 				<td>인증신청</td>
 				<td>수정</td>
 				<td>탈퇴</td>
@@ -75,7 +78,6 @@
 				<td th:text="${userDTO.user_email}"></td>
 				<td th:text="${userDTO.user_tell}"></td>
 				<td th:text="${userDTO.user_introduction}"></td>
-				<td></td>
 				<td>
 					<a href="#" onclick="auth();">회원인증신청</a>
 				</td>
