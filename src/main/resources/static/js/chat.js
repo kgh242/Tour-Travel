@@ -1,6 +1,6 @@
 'use strict';
 
-var nameInput = $('#name');
+var nameInput = $('#roomName');
 var roomInput = $('#room-id');
 var usernamePage = document.querySelector('#username-page');
 var chatPage = document.querySelector('#chat-page');
@@ -139,7 +139,7 @@ function getAvatarColor(messageSender) {
 }
 
 $(document).ready(function() {
-  var savedName = Cookies.get('name');
+/*  var savedName = Cookies.get('roomName');
   if (savedName) {
     nameInput.val(savedName);
   }
@@ -149,7 +149,7 @@ $(document).ready(function() {
     roomInput.val(savedRoom);
   }
   console.log(savedName+'<- savedName');
-  console.log(savedRoom+'<-savedRoom');
+  console.log(savedRoom+'<-savedRoom');*/
   usernamePage.classList.remove('hidden');
   usernameForm.addEventListener('submit', connect, true);
   messageForm.addEventListener('submit', sendMessage, true);

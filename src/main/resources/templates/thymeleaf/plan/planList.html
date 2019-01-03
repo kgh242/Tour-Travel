@@ -94,6 +94,7 @@
 			<td>연령대</td>
 			<td>모집인원</td>
 			<td>신청</td>
+			<td>채팅참여</td>
 		</tr>
 		<tbody th:each="plan:${planList}">
 			<tr>
@@ -109,8 +110,10 @@
 				<td th:text="${plan.plan1_closing_date}"></td>
 				<td th:text="${plan.plan1_age}"></td>
 				<td th:text="${plan.plan1_person_number}"></td>
-				<td><a
-					th:href="@{'/Travel/planApply?plan1_no=' + ${plan.plan1_no}}">신청</a>
+				<td><a th:href="@{'/Travel/planApply?plan1_no=' + ${plan.plan1_no}}">신청</a>
+				</td>
+				<td>
+				 <a	th:href="@{'/Travel/adminChat?planNum='+${plan.plan1_no}}">플랜참여</a>
 				</td>
 			</tr>
 		</tbody>

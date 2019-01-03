@@ -17,6 +17,7 @@ import com.travel.member.admin.service.AdminService;
 import com.travel.paging.PageMaker;
 
 @Controller
+@RequestMapping(value= "/Travel")
 public class AdminController {
 	
 	@Autowired
@@ -44,7 +45,7 @@ public class AdminController {
 	@RequestMapping(value= "/adminLogin", method = RequestMethod.GET)
 	public String adminLogin() {
 		System.out.println("AdminController.java.adminLogin().GET");
-		return "member/adminLogin";
+		return "thymeleaf/adminLogin";
 	}
 	//관리자 로그인
 	@RequestMapping(value= "/adminLogin", method = RequestMethod.POST)
@@ -124,6 +125,7 @@ public class AdminController {
 	public String adminChat(Model model,@RequestParam(value="planNum", defaultValue = "") String planNum,HttpSession session) {
 		System.out.println("AdminController.java.adminChat().GET");
 		String userName = (String) session.getAttribute("LOGINID");
+		
 		model.addAttribute("userName",userName);
 		model.addAttribute("planNum",planNum);
 		System.out.println(userName);
