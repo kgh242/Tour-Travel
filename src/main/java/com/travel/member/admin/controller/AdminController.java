@@ -58,6 +58,7 @@ public class AdminController {
 			System.out.println(adminDTO.getAdmin_level()+"<- admin level");
 			session.setAttribute("LOGINID", adminDTO.getAdmin_id());
 			session.setAttribute("LEVEL", adminDTO.getAdmin_level());
+			session.setAttribute("LOGINLEVEL", "admin");
 			return "thymeleaf/adminIndex"; 
 		}else {
 			System.out.println("로그인 실패");

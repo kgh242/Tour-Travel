@@ -82,6 +82,7 @@ public class CompanyController {
 	public String companyLogin(HttpSession session, CompanyDTO companyDTO, HttpServletResponse response) throws IOException {
 		System.out.println("companyLogin.POST");
 		session.setAttribute("LOGINID", companyDTO.getCompany_id());
+		session.setAttribute("LOGINLEVEL", "company");
 		int result = companyService.companyLogin(companyDTO);
 		System.out.println(companyDTO.getCompany_id() + "<--LOGINID");
 		boolean auth = companyService.companyLoginCheck(companyDTO);
