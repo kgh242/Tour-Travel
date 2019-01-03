@@ -367,7 +367,7 @@
     		  ,pack_info_person_number
     		  ,pack_info_closing_date
     	 FROM pack_info
-    	WHERE pack_info_start_date=#{packSearchDTO.PackStartDate}
+    	WHERE pack_info_start_date LIKE #{packSearchDTO.PackStartDate}
         ORDER BY pack_info_no
     	 DESC
     	LIMIT #{pageMaker.startRow},#{pageMaker.rowPerPage} 
