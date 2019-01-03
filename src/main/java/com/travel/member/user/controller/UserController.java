@@ -63,6 +63,7 @@ public class UserController {
 		if(result == 1) {
 			System.out.println("로그인 성공......UserController.java");
 			session.setAttribute("LOGINID", userDTO.getUser_id());
+			session.setAttribute("LOGINLEVEL", "user");
 			return "thymeleaf/index"; 
 		}else {
 			System.out.println("로그인 실패");

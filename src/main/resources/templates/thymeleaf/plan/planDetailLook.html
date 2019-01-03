@@ -22,68 +22,8 @@
 </head>
 
 <body>
-    <!-- Preloader -->
-<!--     <div id="preloader">
-        <div class="dorne-load"></div>
-    </div> -->
-
     <!-- ***** Header Area Start ***** -->
-    <header class="header_area" id="header">
-        <div class="container-fluid h-100">
-            <div class="row h-100">
-                <div class="col-12 h-100">
-                    <nav class="h-100 navbar navbar-expand-lg">
-                        <a class="navbar-brand" href="index"><img src="img/core-img/logo.png" alt=""></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dorneNav" aria-controls="dorneNav" aria-expanded="false" aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>
-                        <!-- Nav -->
-                        <div class="collapse navbar-collapse" id="dorneNav">
-                            <ul class="navbar-nav mr-auto" id="dorneMenu">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="index">메인 <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item active dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">플랜 여행<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="planAdd">플랜등록</a>
-                                        <a class="dropdown-item" href="planList">플랜찾기</a>
-                                        <a class="dropdown-item" href="#">예비</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item active dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">패키지 여행<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="packList">패키지 찾기</a>
-                                        <a class="dropdown-item" href="#">예비</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">후기</a>
-                                </li>
-                            </ul>
-                            <div th:if="${session.LOGINID == null}">
-	                            <!-- Admin Signin btn -->
-	                            <div class="dorne-signin-btn">
-	                                <a href="/adminLogin">관리자</a>
-	                            </div>
-	                            <!-- user/company 통합 로그인  -->
-	                            <div class="dorne-add-listings-btn">
-	                            	<a href="login" class="btn dorne-btn">사용자 로그인</a>
-	                                <!-- <a href="/Travel/login" class="btn dorne-btn">사용자 로그인</a> -->
-	                            </div>
-                            </div>
-                            <div th:if="${session.LOGINID != null}">
-                            	<div class="dorne-signout-btn">
-                            		<span th:text="${session.LOGINID}" style="color:yellow"></span>
-                            		<span style="color:white">님 로그인중</span>
-                            			<a href="/Travel/userLogout">로그아웃</a>
-                            	</div>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
+	<div th:replace="thymeleaf/header :: header"></div>
     <!-- ***** Header Area End ***** -->
     
     <!-- ***** Breadcumb Area Start ***** -->
@@ -185,34 +125,9 @@
 				</form>
 
 
+
 				<!-- ****** Footer Area Start ****** -->
-				<footer class="dorne-footer-area">
-					<div class="container-fluid">
-						<div class="row">
-							<div
-								class="col-12 d-md-flex align-items-center justify-content-between">
-								<div class="footer-text">
-									<p>
-										<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-										Copyright &copy;
-										<script>document.write(new Date().getFullYear());</script>
-										All rights reserved | This template is made with <i
-											class="fa fa-heart-o" aria-hidden="true"></i> by <a
-											href="https://colorlib.com" target="_blank">Colorlib</a>
-										<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-									</p>
-								</div>
-								<div class="footer-social-btns">
-									<a href="#"><i class="fa fa-linkedin" aria-haspopup="true"></i></a>
-									<a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-									<a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-									<a href="#"><i class="fa fa-twitter" aria-haspopup="true"></i></a>
-									<a href="#"><i class="fa fa-facebook" aria-haspopup="true"></i></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</footer>
+				<div th:replace="thymeleaf/footer :: footer"></div>
 				<!-- ****** Footer Area End ****** -->
 
 				<!-- jQuery-2.2.4 js -->
