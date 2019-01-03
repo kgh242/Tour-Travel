@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.travel.member.admin.dto.AdminDTO;
 import com.travel.member.admin.mapper.AdminMapper;
+import com.travel.member.company.dto.CompanyDTO;
 import com.travel.paging.PageMaker;
 
 
@@ -82,5 +83,9 @@ public class AdminService {
 	public int adminDelete(AdminDTO adminDTO) {
 		System.out.println("AdminService.java.adminDelete()");
 		return adminMapper.adminDelete(adminDTO);
+	}
+	//내정보 보기
+	public AdminDTO adminInfo(String admin_id) {
+		return adminMapper.adminInfo(admin_id);
 	}
 }

@@ -61,17 +61,16 @@ public class AdminController {
 			return "thymeleaf/adminIndex"; 
 		}else {
 			System.out.println("로그인 실패");
-			return "thymeleaf/adminLogin";
+			return "thymeleaf/login/adminLogin";
 		}
 	}
 	// 관리자 수정화면
 	@RequestMapping(value= "/adminUpdate", method = RequestMethod.GET)
-	public String adminUpdate(Model model,AdminDTO adminDTO) {
+	public String adminUpdate(Model model, HttpSession session) {
 		System.out.println("AdminController.java.adminUpdate().GET");
-		adminDTO = adminService.adminSelectOne(adminDTO);
-		System.out.println(adminDTO);
-		model.addAttribute("admin",adminDTO);
-		return "member/adminUpdate";
+		String admin_id = session.getAttribute("LOGINID").toString();
+		model.addAttribute("admin", adminService.adminInfo(admin_id));
+		return "thymeleaf/member/admin/adminUpdate";
 	}
 	// 관리자 수정
 	@RequestMapping(value = "/adminUpdate", method = RequestMethod.POST)
@@ -83,7 +82,7 @@ public class AdminController {
 		}else {
 			System.out.println("수정실패");
 		}
-		return "main/admin";
+		return "thymeleaf/member/admin/adminInfo";
 	}
 	//관리자 리스트
 	@RequestMapping(value= "/adminList", method = RequestMethod.GET)
@@ -134,5 +133,12 @@ public class AdminController {
 	@RequestMapping(value="/questionList", method = RequestMethod.GET)
 	public String questionList() {
 		return "review/questionList";
+	}
+	//관리자 마이페이지
+	@RequestMapping(value = "/adminInfo", method = RequestMethod.GET)
+	public String companyInfo(HttpSession session, Model model) {
+		String admin_id = session.getAttribute("LOGINID").toString();
+		model.addAttribute("adminDTO", adminService.adminInfo(admin_id));
+		return "thymeleaf/member/admin/adminInfo";
 	}
 }

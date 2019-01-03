@@ -96,11 +96,11 @@ public class CompanyController {
 				PrintWriter out = response.getWriter();
 				out.println("<script>alert('계정이 미승인 상태입니다');</script>");
 				out.flush();
-				return "member/companyLogin";
+				return "thymeleaf/login/login";
 			}
 		} else {
 			System.out.println("여행사 로그인 실패");
-			return "member/companyLogin";
+			return "thymeleaf/login/login";
 		}
 	}
 	
@@ -114,6 +114,6 @@ public class CompanyController {
 	public String companyInfo(HttpSession session, Model model) {
 		String company_id = session.getAttribute("LOGINID").toString();
 		model.addAttribute("companyDTO", companyService.companyInfo(company_id));
-		return "member/companyInfo";
+		return "thymeleaf/member/company/companyInfo";
 	}
 }
