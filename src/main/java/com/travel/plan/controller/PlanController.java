@@ -125,7 +125,7 @@ public class PlanController {
 		model.addAttribute("planInfo", planService.planGetInfo(plan1_no));
 		return "thymeleaf/plan/planDetailLook";
 	}
-	
+
 	@RequestMapping(value = "/planDetailAdd", method = RequestMethod.POST)
 	public String planDetailAdd(
 			@RequestParam(value="plan1_no",required=true) String plan1_no,
@@ -182,16 +182,11 @@ public class PlanController {
 		
 		return "redirect:/Travel/planDetailAdd?plan1_no="+plan1_no;
 	}
+
 	
 	
 	
 	
 	
-	
-	@RequestMapping(value = "/planDetailAdd.do", method=RequestMethod.GET)
-	public void test(@RequestParam(value="plan1_air") String plan1_air) {
-		System.out.println(plan1_air);
-		
-	}
-	
+
 }

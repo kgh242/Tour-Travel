@@ -32,7 +32,6 @@
 
 	<!-- ***** Listing Destinations Area Start ***** -->
 <h4>상세 플랜 생성!</h4>
-<form id="planAdd" name="planAdd" method="post" enctype="multipart/form-data">
 <input type="hidden" id= "plan1_no" name="plan1_no" th:value = "${planInfo.planInfo.plan1_no}">
 					<table class="table table-bordered" id="packAddTable" width="100%" cellspacing="0">
 						<tr>
@@ -112,7 +111,7 @@
 						</tr>
 						<tr>
 							<td>방문관광지</td>
-							<td>
+							<td> 
 								<span th:each="plan:${planInfo.planLandmarkInfo}">
 									<div>
 										<input type="text" id="landmark_code" name="landmark_code" th:value="${plan.landmark_code}"> 
@@ -127,13 +126,12 @@
 								<table id="multiLandmark"></table>
 							</td>
 						</tr>
-
+<!--" -->	
 						<tr>
 							<td>입력</td>
-							<td><button onclick="return addInfoSubmit()">입력</button>
+							<td><button onclick="addInfoSubmit()">입력</button>
 						</tr>
 					</table>
-				</form>
 
 
 
@@ -225,26 +223,103 @@
 			}
 		}
 
-		function addInfoSubmit() {
+ 		function addInfoSubmit() {
 		    //var myform = document.forms['planAdd'];
 		    {
 			    
-		        // 사용자 ID를 갖고 온다.
+		        
 		        var plan1_air = $("#plan1_air").val();
-		         
+		        var plan1_no = $("#plan1_no").val();
+		        
+		     // 숙소정보 가져옴
+		        var plan2_hotel_name = [];
+		        var plan2_hotel_check_in = [];
+		        var plan2_hotel_check_out = [];
+		        var plan2_hotel_address = [];
+		        var plan2_hotel_price = [];
+
+		        $("input[name='plan2_hotel_name']").each(function(i) {
+		        	plan2_hotel_name.push($(this).val());
+		        });
+		        $("input[name='plan2_hotel_check_in']").each(function(i) {
+		        	plan2_hotel_check_in.push($(this).val());
+		        });
+		        $("input[name='plan2_hotel_check_out']").each(function(i) {
+		        	plan2_hotel_check_out.push($(this).val());
+		        });
+		        $("input[name='plan2_hotel_address']").each(function(i) {
+		        	plan2_hotel_address.push($(this).val());
+		        });
+		        $("input[name='plan2_hotel_price']").each(function(i) {
+		        	plan2_hotel_price.push($(this).val());
+		        });
+		        
+
+		        //상세 스케줄 정보 가져옴
+		        var plan2_schedule_day = [];
+		        var plan2_schedule_contents = [];
+		        $("input[name='plan2_schedule_day']").each(function(i) {
+		        	plan2_schedule_day.push($(this).val());
+		        });
+		        
+		        $("textarea[name='plan2_schedule_contents']").each(function(i) {
+		        	plan2_schedule_contents.push($(this).val());
+		        });
+		        
+		        // 관광지 정보 가져옴
+		        var landmark_code = [];
+		        var plan2_landmark_day = [];
+		        var plan2_landmark_address = [];
+		        var plan2_landmark_price = [];
+		        var plan2_landmark_contents= [];
+		        $("input[name='landmark_code']").each(function(i) {
+		        	landmark_code.push($(this).val());
+		        });
+		        $("input[name='plan2_landmark_day']").each(function(i) {
+		        	plan2_landmark_day.push($(this).val());
+		        });
+		        $("input[name='plan2_landmark_address']").each(function(i) {
+		        	plan2_landmark_address.push($(this).val());
+		        });
+		        $("input[name='plan2_landmark_price']").each(function(i) {
+		        	plan2_landmark_price.push($(this).val());
+		        });
+		        $("textarea[name='plan2_landmark_contents']").each(function(i) {
+		        	plan2_landmark_contents.push($(this).val());
+		        });
+		        
 		        // 사용자 ID(문자열)와 체크박스 값들(배열)을 name/value 형태로 담는다.
-		        var allData = {"plan1_air": plan1_air};
+		        var allData = {
+		        	"plan1_no": plan1_no,
+		        	"plan1_air": plan1_air,
+		        	"plan2_hotel_name_Array": plan2_hotel_name,
+			        "plan2_hotel_check_in_Array" : plan2_hotel_check_in,
+			        "plan2_hotel_check_out_Array" : plan2_hotel_check_out,
+			        "plan2_hotel_address_Array" : plan2_hotel_address,
+			        "plan2_hotel_price_Array" : plan2_hotel_price,
+			        "plan2_schedule_day_Array" : plan2_schedule_day,
+			        "plan2_schedule_contents_Array" : plan2_schedule_contents,
+			        "landmark_code_Array" : landmark_code,
+			        "plan2_landmark_day_Array" : plan2_landmark_day,
+			        "plan2_landmark_address_Array" : plan2_landmark_address,
+			        "plan2_landmark_price_Array" : plan2_landmark_price,
+			        "plan2_landmark_contents_Array" : plan2_landmark_contents
+		        	};
 		         
 		        $.ajax({
-		            url:"/Travel/planDetailAdd.do",
+		        	contentType : "application/json; charset=utf-8",
+		        	dataType : "json",
+		            url:"planDetailAjax.do",
 		            type:'GET',
 		            data: allData,
 		            success:function(data){
-		                alert("완료!");
+		                alert("입력완료!");
 		                self.close();
 		            },
-		            error:function(jqXHR, textStatus, errorThrown){
-		                alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+		            error:function(request,status,error) {
+
+		            	alert("에러발생!");
+		                
 		                self.close();
 		            }
 		        });
