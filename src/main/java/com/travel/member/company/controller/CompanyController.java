@@ -20,7 +20,6 @@ import com.travel.member.company.service.CompanyService;
 import com.travel.paging.PageMaker;
 
 @Controller
-@RequestMapping(value = "/Travel")
 public class CompanyController {
 	@Autowired
 	private CompanyService companyService;
@@ -115,6 +114,26 @@ public class CompanyController {
 	public String companyInfo(HttpSession session, Model model) {
 		String company_id = session.getAttribute("LOGINID").toString();
 		model.addAttribute("companyDTO", companyService.companyInfo(company_id));
+		return "thymeleaf/member/company/companyInfo";
+	}
+	
+	@RequestMapping(value="/companyUpdate", method = RequestMethod.GET)
+	public String companyUpdate(Model model, HttpSession session) {
+		System.out.println("company 계정 수정");
+		String company_id = session.getAttribute("LOGINID").toString();
+		model.addAttribute("companyDTO", companyService.companyInfo(company_id));
+		return "thymeleaf/member/company/companyUpdate";
+	}
+	
+	@RequestMapping(value="/comapnyUpdate", method = RequestMethod.POST)
+	public String companyUpdate(CompanyDTO companyDTO) {
+		System.out.println("companyController POST companyUpdate()");
+		int result = companyService.companyUpdate(companyDTO);
+		if(result == 1) {
+			System.out.println("여행사 수정완료");
+		}else {
+			System.out.println("여행사 수정실패");
+		}
 		return "thymeleaf/member/company/companyInfo";
 	}
 }

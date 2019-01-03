@@ -99,4 +99,8 @@
  		WHERE company_id = #{company_id}
  	</select>
  	
+ 	<update id="companyUpdate" parameterType="com.travel.member.company.dto.CompanyDTO">
+ 		UPDATE member_company SET company_pw = #{company_pw}, company_name = #{company_name}, company_ceo = #{company_ceo}, company_tell1 = #{company_tell1}, company_tell2 = #{company_tell2}, company_address = #{company_address}, company_business_no = #{company_business_no}, company_branch_tell = #{company_branch_tell}, company_head_tell = #{company_head_tell}
+ 		WHERE company_id = #{company_id}
+ 	</update>
  </mapper>

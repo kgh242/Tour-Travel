@@ -118,4 +118,17 @@ public class CompanyService {
 	public CompanyDTO companyInfo(String company_id) {
 		return companyMapper.companyInfo(company_id);
 	}
+	
+	public int companyUpdate(CompanyDTO companyDTO) {
+		System.out.println("companyUpdate 서비스 계층");
+		int result = 0;
+		try {
+			result = companyMapper.companyUpdate(companyDTO);
+		} catch(Error e) {
+			System.out.println("companyUpdate 서비스 계층 에러");
+		} finally {
+		}
+		return result;
+		
+	}
 }

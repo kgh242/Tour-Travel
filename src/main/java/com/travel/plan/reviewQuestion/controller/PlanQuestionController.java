@@ -14,7 +14,6 @@ import com.travel.plan.reviewQuestion.dto.*;
 import com.travel.plan.reviewQuestion.service.PlanReviewQuestionService;
 
 @Controller
-@RequestMapping(value = "/Travel")
 public class PlanQuestionController {
 	@Autowired
 	private PlanReviewQuestionService planReviewQuestionService;

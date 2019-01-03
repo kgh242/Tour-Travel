@@ -16,7 +16,6 @@ import com.travel.member.user.service.UserService;
 import com.travel.paging.PageMaker;
 
 @Controller
-@RequestMapping(value = "/Travel")
 public class UserController {
 	
 	@Autowired

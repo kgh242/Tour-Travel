@@ -14,7 +14,6 @@ import com.travel.pack.reviewQuestion.dto.*;
 import com.travel.pack.reviewQuestion.service.PackReviewQuestionService;
 
 @Controller
-@RequestMapping(value = "/Travel")
 public class PackQuestionController {
 	@Autowired
 	private PackReviewQuestionService packReviewQuestionService;
