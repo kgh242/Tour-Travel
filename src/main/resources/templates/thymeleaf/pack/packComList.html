@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>여행사 페이지</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+  </head>
+
+<!-- Header Start -->
+  <body id="page-top">
+ 	<div th:replace="thymeleaf/comHeader :: header"></div>
+<!-- Header End -->
+<!-- Sidebar Start --> 	
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div th:replace="thymeleaf/comHeader :: sidebar"></div>
+<!-- Sidebar End -->
+
+
+     <div id="content-wrapper">
+      <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="companyIndex">메인페이지</a>
+          </li>
+          <li class="breadcrumb-item active">여행사 패키지 관리</li>
+        </ol>
+       	   <div class="card mb-3">
+	     <div class="card-header">
+         	 여행사 등록 패키지 리스트
+		   <div class="card-body">
+		    <div class="table-responsive">
+		     <table class="table table-bordered" id="companyTable" width="100%" cellspacing="0">
+		       <thead>
+				 <tr>
+					<td>패키지 번호</td>
+					<td>등록자</td>
+					<td>목적국가</td>
+					<td>제목</td>
+					<td>여행시작일정</td>
+					<td>여행종료일정</td>
+					<td>모집인원</td>
+					<td>신청마감일자</td>
+			      </tr>
+			  	</thead>
+				<tbody>
+			     <span th:each="pack:${packList}">
+	   			  <tr>
+					<td th:text="${pack.pack_info_no}"></td>
+					<td th:text="${pack.company_id}"></td>
+					<td th:text="${pack.pack_info_country}"></td>
+					<td><a th:href="@{'/Travel/packGetInfo?pack_info_no=' + ${pack.pack_info_no}}" th:text="${pack.pack_info_title}"></a></td>
+					<td th:text="${pack.pack_info_start_date}"></td>
+					<td th:text="${pack.pack_info_end_date}"></td>
+					<td th:text="${pack.pack_info_person_number}"></td>
+					<td th:text="${pack.pack_info_closing_date}"></td>
+			      </tr>	
+			      </span>		
+				</tbody> 
+			   </table>
+			   </div>
+			 </div>
+			</div>
+		   </div>
+	      </div>
+        <!-- /.container-fluid -->
+      </div>
+      <!-- /.content-wrapper -->
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+   <!-- Logout Modal-->
+	<div th:replace="thymeleaf/comHeader :: modal"></div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin.min.js"></script>
+
+  </body>
+
+</html>

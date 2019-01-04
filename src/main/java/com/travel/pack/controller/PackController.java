@@ -3,6 +3,8 @@ package com.travel.pack.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -251,4 +253,11 @@ public class PackController {
 		return null;
 	}
 	
+	@RequestMapping(value = "/packComList", method = RequestMethod.GET)
+	public String packComList(HttpSession session, Model model) {
+		System.out.println("packComList 컨트롤러 계층");
+		String company_id = session.getAttribute("LOGINID").toString();
+		model.addAttribute("packDTO", packService.packComList(company_id));
+		return "thymeleaf/pack/packComList";
+	}
 }

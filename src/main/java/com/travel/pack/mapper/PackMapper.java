@@ -73,4 +73,5 @@ public interface PackMapper {
 	int packList2Count(Map<String, Object> map);
 	int packList3Count(Map<String, Object> map);
 	
+	PackDTO packComList(String company_id);
 }

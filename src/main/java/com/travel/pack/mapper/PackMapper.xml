@@ -431,5 +431,10 @@
     		WHERE
     			pack_info_no=#{pack_info_no};
     </update>
-
+	
+	<select id="packComList" parameterType="java.lang.String" resultType="com.travel.pack.dto.PackDTO">
+ 		SELECT pack_info_no, company_id, pack_info_country, pack_info_title, pack_info_start_date, pack_info_end_date, pack_info_person_number, pack_info_closing_date
+ 		FROM pack_info
+ 		WHERE company_id=#{company_id}
+ 	</select>
 </mapper>

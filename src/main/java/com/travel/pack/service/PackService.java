@@ -614,5 +614,9 @@ public class PackService {
 		
 		return result;
 	}
-
+	
+	public PackDTO packComList(String company_id) {
+		System.out.println("packComList 서비스 계층");
+		return packMapper.packComList(company_id);
+	}
 }
