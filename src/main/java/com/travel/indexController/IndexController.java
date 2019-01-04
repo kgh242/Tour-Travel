@@ -10,7 +10,6 @@ import com.travel.member.user.dto.UserDTO;
 //인덱스 컨트롤러
 
 @Controller
-
 public class IndexController {
 	@RequestMapping("index")
 	public String index(HttpSession session) {

@@ -17,7 +17,7 @@ import com.travel.member.admin.service.AdminService;
 import com.travel.paging.PageMaker;
 
 @Controller
-@RequestMapping(value= "/Travel")
+//@RequestMapping(value= "/Travel")
 public class AdminController {
 	
 	@Autowired
