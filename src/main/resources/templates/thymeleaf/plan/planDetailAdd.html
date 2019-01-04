@@ -48,7 +48,11 @@
 <input type="hidden" id= "plan1_no" name="plan1_no" th:value = "${planInfo.planInfo.plan1_no}">
 					<table class="table table-bordered" id="packAddTable" width="100%" cellspacing="0">
 						<tr>
-							<td>지도api</td>
+							<td>
+							<div class="explore-map-area" style="width: 100%; height: 340px">
+				            	<div id="exploreGoogleMap"></div>
+							</div>
+							</td>
 							<td>
 							<div id="username-page">
 							  <div class="username-page-container">
@@ -401,6 +405,50 @@
 		    div.remove();
 		}
 	</script>
+		<!-- Google Maps js -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0S862v9VyDqhlL-6vy6PjC51r99EmbzM"></script>
+    <script type="text/javascript">
+    var map;
+    var latlng = new google.maps.LatLng(35.840892, 127.128173);
+    var stylez = [{
+        featureType: "all",
+        elementType: "all",
+        stylers: [{
+            saturation: -50
+                }]
+            }];
+    var mapOptions = {
+        zoom: 17,
+        center: latlng,
+        scrollwheel: false,
+        scaleControl: false,
+        disableDefaultUI: true,
+        mapTypeControlOptions: {
+            mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'gMap']
+        }
+    };
+    map = new google.maps.Map(document.getElementById("exploreGoogleMap"), mapOptions);
+    var geocoder_map = new google.maps.Geocoder();
+    var address = 'seoul';
+    geocoder_map.geocode({
+        'address': address
+    }, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+                map: map,
+                position: map.getCenter()
+            });
+        } else {
+            alert("Geocode was not successful for the following reason: " + status);
+        }
+    });
+    var mapType = new google.maps.StyledMapType(stylez, {
+        name: "Grayscale"
+    });
+    map.mapTypes.set('gMap', mapType);
+    map.setMapTypeId('gMap');
+    </script>
 </body>
 
 </html>
