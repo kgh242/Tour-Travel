@@ -26,4 +26,6 @@ public interface UserMapper {
 	int userLocationInsert(String user_id, String user_location);	
 	UserDTO userGetInfo(String user_id);
 	
+	// 아이디 중복 확인
+	int idChecker(String inputId);
 }

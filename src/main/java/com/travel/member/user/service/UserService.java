@@ -297,4 +297,11 @@ public class UserService {
 		System.out.println("UserService.java.userSelectCount()");
 		return userMapper.userSelectCount();
 	}
+	
+	// 아이디 중복 확인
+	public int idChecker(String inputId) {
+		System.out.println("idChecker 서비스 계층......UserService.java");
+		return userMapper.idChecker(inputId);
+	}
+	
 }

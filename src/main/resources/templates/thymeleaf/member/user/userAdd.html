@@ -37,13 +37,11 @@
         <div class="tab-pane fade show active" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
         <div class="card-header">사용자 회원가입</div>
         <div class="card-body">
-		 <form name = "addInfo" onsubmit="return addInfoSubmit()" action="/Travel/userAdd" method="post" enctype="multipart/form-data">
+		 <form id = "addInfo" name = "addInfo" onsubmit="return addInfoSubmit()" action="/Travel/userAdd" method="post" enctype="multipart/form-data">
 		 	<table class="form-group">
 			<tr>
 				<td>ID</td>
-				<td class="form-group"><input type="text" id="user_id" name="user_id" class="form-control" required="required" autofocus="autofocus">
-<!-- 				<input type="button" id="user_id_check" name="user_id_check" value="중복확인">
-					/*[[${id_hepler}]]*/ </td> -->
+				<td class="form-group"><input type="text" id="user_id" name="user_id" class="form-control" required="required" autofocus="autofocus"><button onclick="idChecker()">중복확인</button><span id="idCheckHepler"></span><span id="idCheckResult" th:value="0"></span></td>
 			</tr>
 			<tr>
 				<td>PW</td>
@@ -145,46 +143,88 @@
 	<!-- 회원가입 JavaScript -->
 	<script type = "text/javascript" th:inline="javascript">
 	/* <![CDATA[ */
+
+		//아이디 중복 확인 AJAX
+		function idChecker() {
+			var inputId = $("#user_id").val();
+			var allData = {
+				"inputId" : inputId
+			};
+
+			$.ajax({
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				url : "idChecker.do",
+				type : 'GET',
+				data : allData,
+				success : function(data) {
+					if (data == 0) {
+						$('#user_id').blur();
+						$('#idCheckResult').value("1");
+						$("#idCheckHepler").text("사용가능한 아이디입니다");
+					} else {
+						$('#user_id').focus();
+						$("#idCheckHepler").text("이미 존재하는 아이디입니다");
+					}
+					self.close();
+				},
+				error : function(request, status, error) {
+
+					alert("에러발생!");
+
+					self.close();
+				}
+			});
+
+		}
+
 		function addInfoSubmit() {
-		    var myform = document.forms['addInfo'];
-		    if( myform['user_id'].value.length < 1) {
-		        alert( '아이디를 입력하세요');
-		        return false;
-		    }
-		    if( myform['user_pw'].value.length < 1) {
-		        alert( '패스워드를 입력하세요');
-		        return false;
-		    }
-		    if( myform['user_nickname'].value.length < 1) {
-		    	alert( '닉네임을 입력하세요');
-		    	return false;
-		    }
-		    if( myform['user_birth'].value.length < 1) {
-		    	alret( '생년월일를 입력하세요');
-		    	return false;
-		    }	    
-		    if( myform['user_gender'].value.length < 1) {
-		    	alret( '성별을 입력하세요');
-		    	return false;
-		    }	
-		    if( myform['user_address'].value.length < 1) {
-		    	alret( '주소를 입력하세요');
-		    	return false;
-		    }	
-		    if( myform['user_email'].value.length < 1) {
-		    	alert( '이메일을 입력하세요');
-		    	return false;
-		    }
-		    
-		    if( myform['user_tell'].value.length < 1) {
-		        alert( '연락처를 입력하세요');
-		        return false;
-		    }
-		
-		    return true;
+
+			var myform = document.forms['addInfo'];
+			alert($("#idCheckResult").val());
+			if ($("#idCheckResult").val()=="0") {
+				alert('아이디를 중복확인을 해주세요');
+				return false;
+			}
+
+			if (myform['user_id'].value.length < 1) {
+				alert('아이디를 입력하세요');
+				return false;
+			}
+			if (myform['user_pw'].value.length < 1) {
+				alert('패스워드를 입력하세요');
+				return false;
+			}
+			if (myform['user_nickname'].value.length < 1) {
+				alert('닉네임을 입력하세요');
+				return false;
+			}
+			if (myform['user_birth'].value.length < 1) {
+				alret('생년월일를 입력하세요');
+				return false;
+			}
+			if (myform['user_gender'].value.length < 1) {
+				alret('성별을 입력하세요');
+				return false;
+			}
+			if (myform['user_address'].value.length < 1) {
+				alret('주소를 입력하세요');
+				return false;
+			}
+			if (myform['user_email'].value.length < 1) {
+				alert('이메일을 입력하세요');
+				return false;
+			}
+
+			if (myform['user_tell'].value.length < 1) {
+				alert('연락처를 입력하세요');
+				return false;
+			}
+
+			return true;
 		}
 		/* ]]> */
-		</script>
+	</script>
   </body>
 
 </html>
