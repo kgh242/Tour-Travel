@@ -28,7 +28,7 @@ import com.travel.plan.dto.PlanSearchDTO;
 import com.travel.plan.service.PlanService;
 
 @Controller
-//@RequestMapping(value= "/Travel")
+@RequestMapping(value= "/Travel")
 public class PlanController {
 	
 	@Autowired
@@ -111,9 +111,12 @@ public class PlanController {
 	@RequestMapping(value = "/planDetailAdd", method = RequestMethod.GET)
 	public String planDetailAdd(
 			Model model,
+			HttpSession session,
 			@RequestParam(value="plan1_no",required=true) String plan1_no) {
 		System.out.println("플랜2차정보입력 화면이동");
+		String userName = (String) session.getAttribute("LOGINID");
 		model.addAttribute("planInfo", planService.planGetInfo(plan1_no));
+		model.addAttribute("userName",userName);
 		return "thymeleaf/plan/planDetailAdd";
 	}
 	
@@ -121,8 +124,11 @@ public class PlanController {
 	@RequestMapping(value= "/planDetailLook", method = RequestMethod.GET)
 	public String planDetailLook(
 			Model model,
+			HttpSession session,
 			@RequestParam(value="plan1_no",required=true) String plan1_no) {
+		String userName = (String) session.getAttribute("LOGINID");
 		model.addAttribute("planInfo", planService.planGetInfo(plan1_no));
+		model.addAttribute("userName",userName);
 		return "thymeleaf/plan/planDetailLook";
 	}
 

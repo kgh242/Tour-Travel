@@ -25,6 +25,16 @@
     margin: 0;
     padding: 0;
 }
+	.messageArea{ 
+      bottom: 36px; 
+      height: calc(50vh - 180px); 
+      resize: none; 
+      overFlow-x:scroll; 
+      overFlow-y:scroll; 
+     } 
+     .keyword{ 
+      color:red; 
+     }
 
 #preloader {
     overflow: hidden;
