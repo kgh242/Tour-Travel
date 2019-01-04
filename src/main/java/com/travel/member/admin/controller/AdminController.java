@@ -1,6 +1,5 @@
 package com.travel.member.admin.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,7 +16,7 @@ import com.travel.member.admin.service.AdminService;
 import com.travel.paging.PageMaker;
 
 @Controller
-//@RequestMapping(value= "/Travel")
+@RequestMapping(value= "/Travel")
 public class AdminController {
 	
 	@Autowired
