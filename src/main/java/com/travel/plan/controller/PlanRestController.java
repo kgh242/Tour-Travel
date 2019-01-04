@@ -18,7 +18,7 @@ import com.travel.plan.dto.PlanScheduleDTO;
 import com.travel.plan.service.PlanService;
 
 @RestController
-//@RequestMapping("/Travel")
+@RequestMapping("/Travel")
 public class PlanRestController {
 	
 	@Autowired
