@@ -6,7 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
+    <style type="text/css">
+	.messageArea{ 
+      bottom: 36px; 
+      height: calc(50vh - 180px); 
+      resize: none; 
+      overFlow-x:scroll; 
+      overFlow-y:scroll; 
+     } 
+     .keyword{ 
+      color:red; 
+     }
+     
+    </style>
     <!-- Title -->
     <title>Go Travel</title>
 
@@ -14,8 +26,9 @@
     <link rel="icon" href="img/core-img/favicon.ico">
 
     <!-- Core Stylesheet -->
-    <link href="style.css" rel="stylesheet">
 
+    <link href="style.css" rel="stylesheet">
+ 
     <!-- Responsive CSS -->
     <link href="css/responsive/responsive.css" rel="stylesheet">
 
@@ -34,6 +47,44 @@
 <h4>상세 플랜 생성!</h4>
 <input type="hidden" id= "plan1_no" name="plan1_no" th:value = "${planInfo.planInfo.plan1_no}">
 					<table class="table table-bordered" id="packAddTable" width="100%" cellspacing="0">
+						<tr>
+							<td>지도api</td>
+							<td>
+							<div id="username-page">
+							  <div class="username-page-container">
+							    <form id="usernameForm" name="usernameForm">
+							      <div class="form-group">
+							        <input type="hidden" id="roomName"  placeholder="Username" autocomplete="off" class="form-control" />
+							      </div>
+							      <div class="form-group">
+							        <input type="hidden" id="room-id"  placeholder="Room ID" autocomplete="off" class="form-control" />
+							      </div>
+							      <div class="form-group">
+							        <button type="submit" class="accent username-submit">PLAN 채팅 입장</button>
+							      </div>
+							    </form>
+							  </div>
+							</div>
+								<div id="chat-page" class="hidden">
+							  <div class="chat-container">
+							    <div class="chat-header">
+							      <h2>Chatroom [<span id="room-id-display"></span>]</h2>
+							    </div>
+							    <ul id="messageArea" class="messageArea">
+								
+							    </ul> 
+							    <form id="messageForm" name="messageForm" nameForm="messageForm">
+							      <div class="form-group">
+							        <div class="input-group clearfix">
+							          <input type="text" id="message" autocomplete="off" class="form-control"/>
+							          <button type="submit" class="primary">Send</button>
+							        </div>
+							      </div>
+							    </form>
+							  </div>
+							</div>
+							</td>
+						</tr>
 						<tr>
 							<td>플랜방번호</td>
 							<td th:text="${planInfo.planInfo.plan1_no}"></td>
@@ -133,7 +184,20 @@
 						</tr>
 					</table>
 
-
+<script src="/webjars/jquery/3.2.1/dist/jquery.min.js"></script>
+<script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/2.3.3/stomp.min.js"></script>
+<script src="/webjars/js-cookie/2.1.4/src/js.cookie.js"></script>
+<script src="/js/chat.js"></script>
+<script th:inline="javascript">
+	$(function() {
+		
+		var userName = [[${userName}]];
+		var planNum = [[${planInfo.planInfo.plan1_no}]];
+		$("#roomName").val(userName);
+		$("#room-id").val(planNum);
+	});
+</script>
 
 
 				<!-- ****** Footer Area Start ****** -->
