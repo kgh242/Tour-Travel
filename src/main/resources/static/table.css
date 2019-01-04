@@ -1,0 +1,23 @@
+h3 {
+	color: #fff;
+	text-align: center;
+}
+
+body {
+	background: linear-gradient(45deg, #49a09d, #5f2c82);
+	color: #fff;
+}
+
+table.table-type {
+	margin: auto;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+table.table-type th {
+	padding: 5px;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+table.table-type td {
+	background-color: rgba(255, 255, 255, 0.1);
+}
