@@ -26,7 +26,7 @@ import com.travel.paging.PageMaker;
 //패키지 기능 분배 컨트롤러
 
 @Controller
-@RequestMapping(value= "/Travel")
+//@RequestMapping(value= "/Travel")
 public class PackController {
 	
 	@Autowired

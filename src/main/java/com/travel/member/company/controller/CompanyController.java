@@ -20,7 +20,7 @@ import com.travel.member.company.service.CompanyService;
 import com.travel.paging.PageMaker;
 
 @Controller
-@RequestMapping(value= "/Travel")
+//@RequestMapping(value= "/Travel")
 public class CompanyController {
 	@Autowired
 	private CompanyService companyService;

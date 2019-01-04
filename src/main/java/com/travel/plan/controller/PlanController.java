@@ -28,7 +28,7 @@ import com.travel.plan.dto.PlanSearchDTO;
 import com.travel.plan.service.PlanService;
 
 @Controller
-@RequestMapping(value= "/Travel")
+//@RequestMapping(value= "/Travel")
 public class PlanController {
 	
 	@Autowired
