@@ -43,7 +43,7 @@ public class PlanRestController {
 			@RequestParam(value="plan2_landmark_contents_Array[]", required=false) List<String> plan2_landmark_contents_list
 			
 			) {
-		System.out.println("플랜2차상세정보 입력");
+		System.out.println("플랜2차상세정보 AJAX 입력");
 		List<PlanHotelDTO> planHotelList = new ArrayList<PlanHotelDTO>();
 		List<PlanLandmarkDTO> planLandmarkList = new ArrayList<PlanLandmarkDTO>();
 		List<PlanScheduleDTO> planScheduleList = new ArrayList<PlanScheduleDTO>();
@@ -80,6 +80,16 @@ public class PlanRestController {
 		}
 		
 		planService.planDetailAdd(plan1_no, plan1_air, planHotelList, planLandmarkList, planScheduleList);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("planInfo", planService.planGetInfo(plan1_no));
+		
+		return map;
+	}
+	
+	@RequestMapping(value = "/planDetailLookAjax.do", method=RequestMethod.GET)
+	public Map<String, Object> PlanDetailLookAjax(@RequestParam(value="plan1_no") String plan1_no) {
+		System.out.println("플랜2차상세정보 AJAX 조회");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("planInfo", planService.planGetInfo(plan1_no));

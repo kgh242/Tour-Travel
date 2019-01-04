@@ -77,46 +77,50 @@
 						</tr>
 						<tr>
 							<td>이용항공</td>
-							<td th:text="${planInfo.planInfo.plan1_air}"></td>
+							<td th:text="${planInfo.planInfo.plan1_air}" id="plan1_air"></td>
 						</tr>
 						<tr>
 							<td>숙소</td>
  							<td>
-								<span th:each="plan:${planInfo.planHotelInfo}">
-									<div>
-										호텔 이름 : <span th:text="${plan.plan2_hotel_name}"></span>
-										숙박 기간 :<span th:text="${plan.plan2_hotel_check_in}"></span>~<span th:text="${plan.plan2_hotel_check_out}"></span> <br>
-										호텔 주소 : <span th:text="${plan.plan2_hotel_address}"></span>
-										숙박 비용 : <span th:text="${plan.plan2_hotel_price}"></span>
-									</div>
+ 								<span id="hotelInfo">
+									<span th:each="plan:${planInfo.planHotelInfo}">
+										<div>
+											호텔 이름 : <span th:text="${plan.plan2_hotel_name}"></span>
+											숙박 기간 :<span th:text="${plan.plan2_hotel_check_in}"></span>~<span th:text="${plan.plan2_hotel_check_out}"></span> <br>
+											호텔 주소 : <span th:text="${plan.plan2_hotel_address}"></span>
+											숙박 비용 : <span th:text="${plan.plan2_hotel_price}"></span>
+										</div>
+									</span>
 								</span>
-
 							</td>
 						</tr>
 						<tr>
 							<td>일별 상세 스케줄</td>
 							
 							<td>
-								<span th:each="plan:${planInfo.planScheduleInfo}">
-									<div>
-										<span th:text="${plan.plan2_schedule_day}"></span><br>
-										<span th:text="${plan.plan2_schedule_contents}"></span> 
-									</div>
+								<span id="scheduleInfo">
+									<span th:each="plan:${planInfo.planScheduleInfo}">
+										<div>
+											<span th:text="${plan.plan2_schedule_day}"></span><br>
+											<span th:text="${plan.plan2_schedule_contents}"></span> 
+										</div>
+									</span>
 								</span>
-
 							</td>
 						</tr>
 						<tr>
 							<td>방문관광지</td>
 							<td>
-								<span th:each="plan:${planInfo.planLandmarkInfo}">
-									<div>
-										관광지 이름 : <span th:text="${plan.landmark_code}"></span>
-										관광지 방문일 : <span th:text="${plan.plan2_landmark_day}"></span><br>
-										관광지 주소 : <span th:text="${plan.plan2_landmark_address}"></span>
-										관광지 경비 : <span th:text="${plan.plan2_landmark_price}"></span><br> 
-										관광지 설명 : <span th:text="${plan.plan2_landmark_contents}"></span> 
-									</div>
+								<span id="landmarkInfo">
+									<span th:each="plan:${planInfo.planLandmarkInfo}">
+										<div>
+											관광지 이름 : <span th:text="${plan.landmark_code}"></span>
+											관광지 방문일 : <span th:text="${plan.plan2_landmark_day}"></span><br>
+											관광지 주소 : <span th:text="${plan.plan2_landmark_address}"></span>
+											관광지 경비 : <span th:text="${plan.plan2_landmark_price}"></span><br> 
+											관광지 설명 : <span th:text="${plan.plan2_landmark_contents}"></span> 
+										</div>
+									</span>
 								</span>
 							</td>
 						</tr>
@@ -143,7 +147,50 @@
 				   <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
 	<script type="text/javascript">
-	setTimeout("location.reload()",6000);
+	setInterval(function() {
+		
+		var plan1_no = $("#plan1_no").val();
+		var allData = {"plan1_no": plan1_no}
+		
+        $.ajax({
+        	contentType : "application/json; charset=utf-8",
+        	dataType : "json",
+            url:"planDetailLookAjax.do",
+            type:'GET',
+            data: allData,
+            success:function(data){
+            	$("#hotelInfo").empty();
+            	$("#scheduleInfo").empty();
+            	$("#landmarkInfo").empty();
+            	
+                $('#plan1_air').text(data.planInfo.planInfo.plan1_air);
+
+                 for(var i=0; i<data.planInfo.planHotelInfo.length; i++) {
+                	$("#hotelInfo").append("호텔이름 : " + data.planInfo.planHotelInfo[i].plan2_hotel_name + " 숙박 기간 : " + data.planInfo.planHotelInfo[i].plan2_hotel_check_in + "~" + data.planInfo.planHotelInfo[i].plan2_hotel_check_out + "<br>");
+  					$("#hotelInfo").append("호텔 주소 : " + data.planInfo.planHotelInfo[i].plan2_hotel_address + " 숙박 비용 : " + data.planInfo.planHotelInfo[i].plan2_hotel_price + "<br>");
+                	
+                 }
+
+                 for(var i=0; i<data.planInfo.planScheduleInfo.length; i++) {
+                	 $("#scheduleInfo").append(data.planInfo.planScheduleInfo[i].plan2_schedule_day + "<br>");
+                	 $("#scheduleInfo").append(data.planInfo.planScheduleInfo[i].plan2_schedule_contents);
+                 } 
+                     
+                 for(var i=0; i<data.planInfo.planLandmarkInfo.length; i++) {
+                	 console.log(data.planInfo.planLandmarkInfo[i].plan2_landmark_contents);
+                	 $("#landmarkInfo").append("관광지 이름 : " + data.planInfo.planLandmarkInfo[i].landmark_code + " 관광지 방문일 : " + data.planInfo.planLandmarkInfo[i].plan2_landmark_day + "<br>");
+                	 $("#landmarkInfo").append("관광지 주소 : " + data.planInfo.planLandmarkInfo[i].plan2_landmark_address + " 관광지 경비 : " +  data.planInfo.planLandmarkInfo[i].plan2_landmark_price + "<br>");
+                	 $("#landmarkInfo").append("관광지 설명 : " + data.planInfo.planLandmarkInfo[i].plan2_landmark_contents + "<br>");
+                 }
+ 
+            },
+            error:function(request,status,error) {
+				console.log(error);
+            }
+        });
+		
+		
+	}, 1000);
 	</script>
 </body>
 
