@@ -238,7 +238,7 @@
  			(#{plan1_no}
  			, #{user_id}
  			, now()
- 			, false);
+ 			, 1);
  	</insert>
 
 
