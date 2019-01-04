@@ -51,7 +51,7 @@
 	<table border="1">
 		<tr>
 			<td>신청자</td>
-			<td>${LOGINID}</td>
+			<td th:text="${session.LOGINID}"></td>
 		</tr>
 		<tr>
 			<td>신청자 연락처</td>
@@ -59,26 +59,26 @@
 		</tr>
 		<tr>
 			<td>신청상품번호</td>
-			<td th:value="${packInfo.packInfo.pack_info_no}"></td>
+			<td th:text="${packInfo.packInfo.pack_info_no}"></td>
 		</tr>
 		<tr>
 			<td>신청상품명</td>
-			<td th:value="${packInfo.packInfo.pack_info_title}"></td>
+			<td th:text="${packInfo.packInfo.pack_info_title}"></td>
 		</tr>
 		<tr>
 			<td>여행일정</td>
-			<td>${packInfo.packInfo.pack_info_start_date} ~ ${packInfo.packInfo.pack_info_end_date}</td>
+			<td th:text="${packInfo.packInfo.pack_info_start_date} +'  ~  '+ ${packInfo.packInfo.pack_info_end_date}"></td>
 		</tr>
 		<tr>
 			<td>모집인원</td>
-			<td>${packInfo.packInfo.pack_info_person_number}</td>
+			<td th:text="${packInfo.packInfo.pack_info_person_number}"></td>
 		</tr>	
 		<tr>
 			<td>가격</td>
 			<td>
-				성인 :  ${packInfo.packPriceInfo.pack_price_adult}<br>
-				초중고학생 : ${packInfo.packPriceInfo.pack_price_child} <br>
-				아동 : ${packInfo.packPriceInfo.pack_price_baby}<br>
+				성인 : <span th:text="${packInfo.packPriceInfo.pack_price_adult}"> </span> <br>
+				초중고학생 : <span th:text="${packInfo.packPriceInfo.pack_price_child}"> </span> <br>
+				아동 : <span th:text="${packInfo.packPriceInfo.pack_price_baby}"></span><br>
 			</td>
 		</tr>
 		<tr>
@@ -142,9 +142,9 @@ $(function(){
 	          var cnt = $(".exam input.num_sum").length;     
 	          console.log(cnt);
 	          
-	          var adultPrice = '<c:out value="${packInfo.packPriceInfo.pack_price_adult}"/>'; 
-	          var childPrice = '<c:out value="${packInfo.packPriceInfo.pack_price_child}"/>'; 
-	          var babyPrice = '<c:out value="${packInfo.packPriceInfo.pack_price_baby}"/>'; 
+	          var adultPrice = '<c:out th:value="${packInfo.packPriceInfo.pack_price_adult}"/>'; 
+	          var childPrice = '<c:out th:value="${packInfo.packPriceInfo.pack_price_child}"/>'; 
+	          var babyPrice = '<c:out th:value="${packInfo.packPriceInfo.pack_price_baby}"/>'; 
         
 	  for( var i=1; i< cnt; i++){
 	     var sum = parseInt($(this).val() || 0 );
@@ -167,7 +167,7 @@ $(function(){
 	});
 	
 function bookInfoSubmit() {
-	var totalPerson = '<c:out value="${packInfo.packInfo.pack_info_person_number}"/>'; 
+	var totalPerson = '<c:out th:value="${packInfo.packInfo.pack_info_person_number}"/>'; 
     var myform = document.forms['packBook'];
 
     {
